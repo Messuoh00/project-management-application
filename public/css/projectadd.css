@@ -1,0 +1,46 @@
+.note
+{
+    text-align:center;
+    height: 80px;
+    background: -webkit-linear-gradient(left, orange, rgb(170, 152, 152));
+    color: #fff;
+    font-weight: bold;
+    line-height: 80px;
+}
+.form-content
+{
+    padding: 5%;
+    border: 1px solid #ced4da;
+    margin-bottom: 2%;
+}
+.form-control{
+    border-radius:1.5rem;
+}
+.btnSubmit
+{
+    border:none;
+    border-radius:1.5rem;
+    padding: 1%;
+    width: 20%;
+    cursor: pointer;
+    background: orange;
+    color: #fff;
+}
+
+.form{
+    width: 80%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+
+
+
+@media only screen and (max-width: 990px) {
+ .form{
+    width: 100%;
+    margin: 0px;
+}   
+}
+
+

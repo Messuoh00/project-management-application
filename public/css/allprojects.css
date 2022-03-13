@@ -1,0 +1,52 @@
+table.table-bordered{
+    border-color: orange;
+    
+  }
+table.table-bordered > thead > tr > th{
+    border-color: orange;
+    border-width: 3px;
+}
+table.table-bordered > tbody > tr > td{
+    border-color: orange;
+    border-width: 3px;
+}
+
+
+.icon{
+
+        position: relative;
+        left: 50%;
+        transform: translate(-50%); 
+}
+
+
+
+
+@media only screen and (max-width: 990px) {
+    
+    .content {
+  
+        max-width: 100%;
+       
+       
+      
+       
+      }
+  
+
+    .icon1{
+
+        
+        margin-bottom: 90%;
+        
+}
+.icon2{
+
+        
+    margin-top: 90%;
+    
+}
+    
+  }
+
+ 

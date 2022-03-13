@@ -1,0 +1,82 @@
+
+
+@media only screen and (min-width: 990px) {
+
+    .info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+    
+    .editerbtn{
+        width: 120px;
+    }
+    .conten_project_view {
+        width: 80%;
+      
+       
+      
+    }
+
+}
+
+
+.conten_project_view {
+  
+    max-width: 100%;
+    margin: auto;
+    margin-top: 20px;
+    border: 1px solid #ced4da;
+    overflow:hidden ;
+   margin-top: 50px;
+   margin-bottom: 50px;
+
+    
+  }
+
+.box{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+
+
+.editerbtn{
+   
+    
+    
+    border:none;
+    border-radius:1.5rem; 
+    text-align: center;
+    cursor: pointer;
+    background: orange;
+    color: #fff;
+    width: 100px;
+    float:right;
+   margin-left:20px;
+   margin-bottom: 20px;
+   margin-right: 3px;
+}
+
+a{
+    color: black;
+}
+
+
+
+
+.N1{
+    padding-top: 20px;
+    text-align: center;
+    
+    background: -webkit-linear-gradient(left, orange, rgb(170, 152, 152));
+}
+
+hr{
+    color: rgb(255, 153, 0);
+}
+
+.text-secondary{
+    color: black;
+}
+
