@@ -20,7 +20,7 @@ class ProjectController extends Controller
         $projects=Project::latest()->get();
         
 
-        return view('projects', ['projects'=>$projects]);
+        return view('projets/index', ['projects'=>$projects]);
 
 
     }
@@ -33,7 +33,7 @@ class ProjectController extends Controller
     public function create()
     {
         
-        return view('projectadd');
+        return view('projets/create');
     }
 
     /**
@@ -44,11 +44,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        
         $proje=new Project();
      
       $proje->description= $request->input('Description');
       $proje->save();
-      
+        
+      return redirect('projet');
+    
     }
 
     /**
@@ -62,11 +65,11 @@ class ProjectController extends Controller
         $project=Project::find($id);
         
         if ($project==null) {
-            $this->all();
+            return redirect('projet');
             
         }else{
         
-        return view('projectview', ['project'=>$project]);
+        return view('projets/show', ['project'=>$project]);
         }
     }
 
@@ -78,7 +81,15 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project=Project::find($id);
+        
+        if ($project==null) {
+            return redirect('projet');
+            
+        }else{
+        
+        return view('projets/edit', ['project'=>$project]);
+        }
     }
 
     /**
@@ -90,7 +101,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Project::where('id',$id)->update(
+            [
+                'description'=> $request->input('Description'),
+            ]
+            );
+            return redirect('projet');
     }
 
     /**
@@ -101,6 +117,10 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project=Project::find($id);
+       
+        $project->delete();
+
+        return redirect('projet');
     }
 }

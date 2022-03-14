@@ -18,7 +18,7 @@
   <label for="fname">email:</label><br>
   <input type="email" id="email" name="email" ><br>
   <label for="lname">password:</label><br>
-  {{$hach= Hash::make('admin');}}
+ 
   <input type="password" id="password" name="password" ><br><br>
   <input type="submit" value="Submit">
 </form> 
@@ -28,11 +28,7 @@
 {{$error}}
 @endforeach
 
-
-
 @endif
-
-
 
 </body>
 </html>

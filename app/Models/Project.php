@@ -33,8 +33,10 @@ class Project extends Model
 
         'etude_echo'  ,
          
-         
-
+                
+        'visibilite',
+        'reactivite',
+        'avancement',
 
         'description',
 

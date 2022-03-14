@@ -10,7 +10,7 @@
 
 <div class="conten_project_view">
   <div class="N1">
-    <h1>INFO PROJET</h1>
+    <h1>INFO PROJET N:      {{$project->id}}</h1>
   </div>
 
    
@@ -182,15 +182,22 @@
    
 
     <div class="editerbtn"  >
-      <button type="button" class="btn ">
-    <a href="" ><h3></h3> <img src="{{url('/img/delete.png')}}" height="20" alt=""></a>   
+
+<form action="/projet/{{$project->id}}" method="POST">
+  @csrf
+  @method('delete')
+
+      <button type="button submit" class="btn ">
+     <img src="{{url('/img/delete.png')}}" height="20" alt="">  
       </button>
+
+</form>
     </div>
 
     <div class="editerbtn" >  
-      <button type="button" class="btn ">
-    <a href=""><h3></h3> <img src="{{url('/img/edit.png')}}" alt=""></a>    
-      </button>
+     
+    <a href="/projet/ {{$project->id}}/edit"> <button type="button" class="btn "> <img src="{{url('/img/edit.png')}}" alt="">       </button>  </a>    
+
     </div>
    
    </div>

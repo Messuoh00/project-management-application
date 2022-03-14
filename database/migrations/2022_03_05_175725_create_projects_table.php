@@ -16,28 +16,28 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
            
             $table->id('id');
-            $table->String('nom_projet');
-            $table->String('abreviation');
-            $table->String('thematique');
-            $table->String('structure_pilote');
-            $table->String('phase');
+            $table->String('nom_projet')->nullable();
+            $table->String('abreviation')->nullable();
+            $table->String('thematique')->nullable();
+            $table->String('structure_pilote')->nullable();
+            $table->String('phase')->nullable();
            
-            $table->String('region_test');
-            $table->String('region_implementation');
-            $table->String('region_exploitation');
+            $table->String('region_test')->nullable();
+            $table->String('region_implementation')->nullable();
+            $table->String('region_exploitation')->nullable();
            
-            $table->unsignedDecimal('budget');
+            $table->unsignedDecimal('budget')->nullable();
           
             $table->timestamp('date_deb')->nullable()->useCurrentOnUpdate();
 
             $table->timestamp('date_fin')->nullable()->useCurrentOnUpdate();
 
 
-            $table->String('chef_projet');
-            $table->String('equipe');
-            $table->String('representant_EP');
+            $table->String('chef_projet')->nullable();
+            $table->String('equipe')->nullable();
+            $table->String('representant_EP')->nullable();
 
-            $table->String('etude_echo'); //oui non na
+            $table->String('etude_echo')->nullable(); //oui non na
             
             $value=0.0;
 

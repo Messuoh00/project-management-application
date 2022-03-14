@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('layout.main')
+
+@section('content')
+    
+
   @if(isset(Auth::user()->email))
   <h1>   {{Auth::user()->id}}     </h1>  
   <h1>   <a href="{{ url('/logout')}}"> se deconnecter </a>                   </h1>
@@ -16,5 +12,8 @@
 
   <script> window.location="/login";      </script>
   @endif
-</body>
-</html>
+
+
+
+
+@endsection
