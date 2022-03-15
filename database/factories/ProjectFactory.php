@@ -36,9 +36,7 @@ class ProjectFactory extends Factory
                'date_deb'=> now(),
                'date_fin'=>  now(),
     
-               'chef_projet'=> $this->faker->name(),
-               'equipe' => $this->faker->name(),
-               'representant_EP' => $this->faker->name(),
+               
     
                'etude_echo' => $this->faker->name() ,
                 

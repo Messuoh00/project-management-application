@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+    
+    public function user(){
 
+        return  $this->belongsToMany(User::class);
+
+    }
 
 
     protected $fillable = [

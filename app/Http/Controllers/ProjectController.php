@@ -63,6 +63,8 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project=Project::find($id);
+
+        dd($project->user);
         
         if ($project==null) {
             return redirect('projet');

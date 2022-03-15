@@ -16,6 +16,7 @@
 <form method="post" action="{{url('/login')}}" >
     {{csrf_field()}}
   <label for="fname">email:</label><br>
+  {{Hash::make('admin');}}
   <input type="email" id="email" name="email" ><br>
   <label for="lname">password:</label><br>
  
@@ -28,7 +29,11 @@
 {{$error}}
 @endforeach
 
+
+
 @endif
+
+
 
 </body>
 </html>

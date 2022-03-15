@@ -33,9 +33,12 @@ return new class extends Migration
             $table->timestamp('date_fin')->nullable()->useCurrentOnUpdate();
 
 
-            $table->String('chef_projet')->nullable();
-            $table->String('equipe')->nullable();
-            $table->String('representant_EP')->nullable();
+          
+            $table->foreignId('chef_projet')->unsigned()->nullable();
+            $table->foreign('chef_projet')->references('id')->on('users');
+            
+            $table->foreignId('representant_EP')->unsigned()->nullable();
+            $table->foreign('representant_EP')->references('id')->on('users');
 
             $table->String('etude_echo')->nullable(); //oui non na
             
