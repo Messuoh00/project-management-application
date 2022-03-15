@@ -10,7 +10,7 @@
 
 <div class="conten_project_view">
   <div class="N1">
-    <h1>INFO PROJET N:      {{$project->id}}</h1>
+    <h1 style="color: aliceblue">INFO PROJET N:{{$project->id}}</h1>
   </div>
 
    
@@ -158,11 +158,11 @@
         <div class="progress mb-3" style="height: 5px">
           <div class="progress-bar bg-primary" role="progressbar" style="width:{{$project->visibilite}}%" aria-valuenow="{{$project->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <small>Reactivite{{$project->reactivite}}%</small>
+        <small>Reactivite:{{$project->reactivite}}%</small>
         <div class="progress mb-3" style="height: 5px">
           <div class="progress-bar bg-primary" role="progressbar" style="width: {{$project->reactivite}}%" aria-valuenow="{{$project->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <small>Avancement{{$project->avancement}}%</small>
+        <small>Avancement:{{$project->avancement}}%</small>
         <div class="progress mb-3" style="height: 5px">
           <div class="progress-bar bg-primary" role="progressbar" style="width: {{$project->avancement}}%" aria-valuenow="{{$project->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
         </div>

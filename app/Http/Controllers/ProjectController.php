@@ -64,7 +64,7 @@ class ProjectController extends Controller
     {
         $project=Project::find($id);
 
-        dd($project->user);
+       
         
         if ($project==null) {
             return redirect('projet');

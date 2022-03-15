@@ -130,6 +130,18 @@
                 <textarea class="form-control" rows="5"name="Description"></textarea>
               </div>
 
+              <label>Visibilite:</label>
+              <input type="range"  name="Visibilite" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%' ">
+              <output>0%</output>
+
+              <label>Reactivite:</label>
+              <input type="range"  name="Reactivite" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%'">
+              <output>0%</output>
+              
+              <label>Avancement:</label>
+              <input type="range"  name="Avancement" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%'">
+              <output>0%</output>
+
             <button type="submit" class="btnSubmit">Submit</button>
             </form>
         </div>
