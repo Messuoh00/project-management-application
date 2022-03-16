@@ -16,11 +16,13 @@
   <thead>
     <tr style="text-align: center">
   
-      <th scope="col" style="width: 10% " data-sortable="true">Nom Projet</th>
-      <th scope="col" style="width: 60% "data-sortable="true">Structure Pilote</th>
-      <th scope="col" style="width: 5%"data-sortable="true">description </th>
-      
-      <th scope="col" style="width: 20%">options</th>
+      <th scope="col" data-sortable="true">Nom Projet</th>
+      <th scope="col" data-sortable="true">Structure Pilote</th>
+      <th scope="col" data-sortable="true">Chef Projet </th>
+      <th scope="col" data-sortable="true">Phase</th>
+      <th scope="col" data-width="1" data-width-unit="%"  data-searchable="false">options</th>
+
+
     </tr>
   </thead>
   <tbody>
@@ -29,9 +31,10 @@
    
     <tr >
      
-      <th scope="row" style="text-align: center" >   <a href="/projet/ {{$project->id}}"> {{$project->nom_projet}} </a> </th>
-      <td style="padding: 25px" >{{$project->structure_pilote}}</td>
-      <td >{{$project->description}} </td>
+      <th scope="row" style="text-align: center">  <a href="/projet/ {{$project->id}}"> {{$project->nom_projet}} </a> </th>
+      <td style="text-align: center">{{$project->structure_pilote}}</td>
+      <td style="text-align: center">{{$project->chef_projet}} </td>
+      <td style="text-align: center">{{$project->phase}} </td>
       <td class="delete_edit"> 
         
         <a href="/projet/ {{$project->id}}/edit">
