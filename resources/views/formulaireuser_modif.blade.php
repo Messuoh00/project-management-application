@@ -2,49 +2,75 @@
 
 @section('content')
        
-
-<form method="post" action="/users/{{$user->id}}/" >
+<link href="{{asset('css/formulaire.css')}}" rel="stylesheet">
+<div class="container">
+ <h3> modification d'un utilisateur</h3>
+ 
+	<hr>
+ 
+ <form method="post" action="/users/{{$user->id}}/" >
     {{csrf_field()}}
-    {{ method_field('PUT') }}
-    <label for="fnom">nom:</label><br>
-  <input type="text" id="nom" name="nom" value=" {{ $user->nom}}"><br>
-  <label for="fprenom">prenom:</label><br>
-  <input type="text" id="prenom" name="prenom" value=" {{ $user->prenom}}">
-  <label for="femail">email:</label><br>
-  <input type="email" id="email" name="email" value=" {{ $user->email}}" ><br>
-  
-  
+	{{ method_field('PUT') }}
+    <div class="form-group input-group">
+		
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input id="nom" name="nom" class="form-control" value=" {{ $user->nom}}" type="text">
+	
+    </div>
+    <div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input id="prenom" name="prenom" class="form-control" value=" {{ $user->prenom}}" type="text">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 </div>
+        <input id="email" name="email" class="form-control" value=" {{ $user->email}}" type="email">
+    </div>
 
+   
 
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
+		</div>
+		<select class="form-control form-select" name="poste" id="poste">
+			<option value="{{ $user->poste}}" selected  hidden>{{ $user->poste}}</option>
+			<option value="vice president">vice president</option>
+			<option value="manager">manager</option>
+			<option value="employé">employé</option>
+		</select>
+	</div>
 
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+		</div>
+		<select class="form-control form-select" name="division" id="division">
+			<option value="{{ $user->division}}" selected  hidden>{{ $user->division}}</option>	
+			<option value="ep">ep</option>
+			<option value="ped">ped</option>
+			<option value="exp">exp</option>
+			<option value="dp">dp</option>
+			<option value="ast">ast</option>
+			<option value="for">for</option>
+		</select>
+	</div>
+				  @if(count($errors) >0)
 
-    <label for="select1">choix poste:</label>
-<select name="poste" id="poste" >
-<option value="{{ $user->poste}}" selected  hidden>{{ $user->poste}}</option>
-    
-    <option value="vice president">vice president</option>
-    <option value="manager">manager</option>
-    <option value="employé">employé</option>
-    </select>
-    <label for="select2">choix division:</label>
+			@foreach($errors->all() as $error)
+			{{$error}}
+			@endforeach
 
-    <select name="division" id="division">
-    <option value="{{ $user->division}}" selected  hidden>{{ $user->division}}</option>
-    <option value="ep">ep</option>
-    <option value="ped">ped</option>
-    <option value="exp">exp</option>
-    <option value="dp">dp</option>
-    <option value="ast">ast</option>
-    <option value="for">for</option>
-    </select>
-    <input type="submit" value="enregistrement">
-    </form> 
-    @if(count($errors) >0)
+			@endif
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
 
-@foreach($errors->all() as $error)
-{{$error}}
-@endforeach
+</form> 
 
-@endif
+</div>
 
 @endsection

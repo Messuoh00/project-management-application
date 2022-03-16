@@ -2,45 +2,79 @@
 
 @section('content')
     
-
-<form method="post" action="{{url('/users')}}" >
+<link href="{{asset('css/formulaire.css')}}" rel="stylesheet">
+<div class="container">
+ <h3> Creation d'un utilisateur</h3>
+ 
+	<hr>
+ 
+ <form method="post" action="{{url('/users')}}" >
     {{csrf_field()}}
-    <label for="fnom">nom:</label><br>
-  <input type="text" id="nom" name="nom"><br>
-  <label for="fprenom">prenom:</label><br>
-  <input type="text" id="prenom" name="prenom">
-  <label for="femail">email:</label><br>
-  <input type="email" id="email" name="email" ><br>
-  <label for="fpassword">password:</label><br>
-  <input type="password" id="password" name="password" ><br><br>
-  
+    <div class="form-group input-group">
+		
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input id="nom" name="nom" class="form-control" placeholder="nom" type="text">
+	
+    </div>
+    <div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input id="prenom" name="prenom" class="form-control" placeholder="prenom" type="text">
+    </div>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 </div>
+        <input id="email" name="email" class="form-control" placeholder="adresse email" type="email">
+    </div>
 
-    <label for="select1">choix poste:</label>
-<select name="poste" id="poste"  >
-    
-    <option value="vice president">vice president</option>
-    <option value="manager">manager</option>
-    <option value="employé">employé</option>
-    </select>
-    <label for="select2">choix division:</label>
-    <select name="division" id="division" >
-    
-    <option value="ep">ep</option>
-    <option value="ped">ped</option>
-    <option value="exp">exp</option>
-    <option value="dp">dp</option>
-    <option value="ast">ast</option>
-    <option value="for">for</option>
-    </select>
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-key"></i> </span>
+		 </div>
+        <input id="password" name="password" class="form-control" placeholder="mot de passe " type="password">
+    </div>
 
-    <input type="submit" value="enregistrement">
-    </form> 
-    @if(count($errors) >0)
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
+		</div>
+		<select class="form-control form-select" name="poste" id="poste">
+			<option value="" selected disabled hidden>veuillez selectionner un poste</option>
+			<option value="vice president">vice president</option>
+			<option value="manager">manager</option>
+			<option value="employé">employé</option>
+		</select>
+	</div>
 
-@foreach($errors->all() as $error)
-{{$error}}
-@endforeach
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+		</div>
+		<select class="form-control form-select" name="division" id="division">
+			<option value="" selected disabled hidden>veuillez selectionner une division</option>
+			<option value="ep">ep</option>
+			<option value="ped">ped</option>
+			<option value="exp">exp</option>
+			<option value="dp">dp</option>
+			<option value="ast">ast</option>
+			<option value="for">for</option>
+		</select>
+	</div>
+				  @if(count($errors) >0)
 
-@endif
+			@foreach($errors->all() as $error)
+			{{$error}}
+			@endforeach
+
+			@endif
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+</form> 
+
+</div>
 
 @endsection
