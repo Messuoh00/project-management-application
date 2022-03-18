@@ -112,7 +112,7 @@
                         <input type="hidden"  id="chefid" class="form-control " placeholder="ChefProjet" name="Chefid" />
                         
                       
-                        <a data-toggle="modal" href="#myModal"  class="btn btn-warning btn-sm " style="margin: 10px">Choisir Chef Projet</a>
+                        <a data-toggle="modal" href="#myModal"  class="btn btn-warning btn-sm " style="margin:10px">Choisir Chef Projet</a>
 
                         <div class="modal" tabindex="-1" role="dialog" id="myModal">
                             <div class="modal-dialog" role="document">
@@ -160,7 +160,7 @@
                                                         </table>           
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" >Feremr</button>
+                                  <button type="button" class="btn btn-secondary"data-dismiss="modal" >Feremr</button>
                                
                                 </div>
                               </div>
@@ -228,7 +228,7 @@
                                                         </table>           
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" >Feremr</button>
+                                  <button type="button" class="btn btn-secondary"data-dismiss="modal" >Feremr</button>
                                
                                 </div>
                               </div>
@@ -245,7 +245,7 @@
                         <h6 class="mb-0"> Equipe:</h6>
 
                         <input type="text" id="equipe"class="form-control" placeholder="Equipe" name="Equipe" disabled/>
-                        <input type="hidden" id="equipeid"  class="form-control"  name="equipeid"/>
+                        <input type="hidden" id="equipeid"  class="form-control"  name="equipeid[]"/>
                        
                        
                         
@@ -296,7 +296,7 @@
                                                             <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                            
-                                                            <td><input type="button"value="submit"onclick="show3()"data-dismiss="modal" /> </td>
+                                                            <td><input type="button"value="submit"onclick="show3()" /> </td>
                                                             
                                                             </tr>
                                                             
@@ -309,7 +309,7 @@
 
 
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" >Feremr</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Feremr</button>
                                
                                 </div>
                               </div>
@@ -376,7 +376,7 @@
 
 let a=[];
 let b=[];
-let i=0;
+
     function show3() {
         var rowId = 
             event.target.parentNode.parentNode.id;
@@ -388,22 +388,28 @@ let i=0;
       
         nom = data[0].innerHTML;
         pre = data[1].innerHTML;
-        a[i]=nom+'\xa0'+pre
-        b[i]=rowId;
-        i=i+1;
+       x=nom+'\xa0'+pre;
+        a.push(x);
+        b.push(rowId);
+
+       alert(b);
+     
+   
       
         document.getElementById("equipe").value =a;
       
         document.getElementById("equipeid").value =b;
       
- 
+        
       
     }
 
 
 
   function clearf(){
-     a=[];
+    
+   
+    a=[];
      b=[];
      document.getElementById("equipe").value ='';
       

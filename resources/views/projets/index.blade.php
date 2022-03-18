@@ -26,7 +26,8 @@
       <th scope="col" data-sortable="true">Nom Projet</th>
       <th scope="col" data-sortable="true">Structure Pilote</th>
       <th scope="col" data-sortable="true">Chef Projet </th>
-      <th scope="col" data-sortable="true">Phase</th>
+   {{-- @if ($ur=='jet')    @endif  --}}
+   <th scope="col" data-sortable="true">Phase</th>
       <th scope="col" data-width="1" data-width-unit="%"  data-searchable="false">options</th>
 
 
@@ -37,14 +38,17 @@
     @foreach ($projects as $project)
    
 
-        
+    @if ( ($project->phase==$ur)||($ur=='jet') )
+            
+    
    
     <tr id={{$project->id}}>
      
       <th scope="row" style="text-align: center">  <a href="/projet/ {{$project->id}}"> {{$project->nom_projet}} </a> </th>
       <td style="text-align: center">{{$project->structure_pilote}}</td>
       <td style="text-align: center">{{$project->chef_projet}} </td>
-      <td style="text-align: center">{{$project->phase}} </td>
+      {{-- @if ($ur=='jet')   @endif  --}}
+      <td style="text-align: center">{{$project->phase}} </td> 
       <td class="delete_edit"> 
         
         <a href="/projet/ {{$project->id}}/edit">
@@ -70,7 +74,11 @@
 
       </td>
     </tr>
-  
+
+
+    @endif
+
+
     @endforeach
 
   </tbody>

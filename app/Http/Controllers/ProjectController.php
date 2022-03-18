@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\UserProject;
 
 
 class ProjectController extends Controller
@@ -31,7 +32,8 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { $users=User::latest()->get();
+    {   
+        $users=User::latest()->get();
        
         return view('projets/create',['users'=>$users]);
     }
@@ -57,15 +59,32 @@ class ProjectController extends Controller
         $proje->region_exploitation= $request->input('RegionTest');
         $proje->budget= $request->input('budget');
         $proje->date_deb= $request->input('DateDebut');
-        $proje->date_fin= $request->input('DateDebut');
-        $proje->chef_projet= $request->input('ChefProjet');
-        $proje->representant_EP= $request->input('RepresentantE&P');
-        
+        $proje->date_fin= $request->input('DateFin');
+        $proje->chef_projet= $request->input('Chefid');
+        $proje->representant_EP= $request->input('RepresentantE&Pid');
+ 
         $proje->etude_echo= $request->input('inlineRadioOptions');
 
         $proje->description= $request->input('Description');
         
         $proje->save();
+       
+
+        
+      $xs= $request->input('equipeid');
+      $array = explode(',',$xs[0]);
+
+       
+
+        foreach ($array as $x) { 
+            $equipe=new UserProject();
+            $equipe->project_id= $proje->id;
+            $equipe->user_id=$x;
+            $equipe->save();
+        }
+       
+       
+       
         
       return redirect('projet');
     
@@ -123,9 +142,48 @@ class ProjectController extends Controller
     {
         Project::where('id',$id)->update(
             [
+                'nom_projet' =>  $request->input('NomProjet'),
+                'abreviation'=> $request->input('Abreviation'),
+                'thematique'=> $request->input('Thematique'),
+                'structure_pilote'=> $request->input('StructurePilote'),
+                'phase'=> $request->input('Description'),
+        
+                'region_test'=> $request->input('RegionTest'),
+                'region_implementation'=> $request->input('RegionTest'),
+                'region_exploitation'=> $request->input('RegionTest'),
+                'budget'=> $request->input('budget'),
+                'date_deb'=> $request->input('DateDebut'),
+                'date_fin'=> $request->input('DateFin'),
+                'chef_projet'=> $request->input('Chefid'),
+                'representant_EP'=> $request->input('RepresentantE&Pid'),
+         
+                'etude_echo'=> $request->input('inlineRadioOptions'),
+        
+                
                 'description'=> $request->input('Description'),
+                
+                'visibilite'=> $request->input('Visibilite'),
+                
+                'reactivite'=> $request->input('Reactivite'),
+                
+                'avancement'=> $request->input('Avancement'),
             ]
             );
+
+            DB::table('project_user')->where('project_id', $id)->delete();
+               
+      $xs= $request->input('equipeid');
+      $array = explode(',',$xs[0]);
+       
+        foreach ($array as $x) { 
+            $equipe=new UserProject();
+            $equipe->project_id= $id;
+            $equipe->user_id=$x;
+            $equipe->save();
+        }
+       
+
+
             return redirect('projet');
     }
 

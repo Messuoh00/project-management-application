@@ -167,7 +167,7 @@
                                                        </table>           
                                </div>
                                <div class="modal-footer">
-                                 <button type="button" class="btn btn-secondary" >Feremr</button>
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Feremr</button>
                               
                                </div>
                              </div>
@@ -236,7 +236,7 @@
                                                         </table>           
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" >Feremr</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Feremr</button>
                                
                                 </div>
                               </div>
@@ -249,8 +249,81 @@
                     </div>
 
                     <div class="form-group">
-                        <h6 class="mb-0"> Equipe:</h6>
+                            {{-- Equipe --}}
 
+                            <h6 class="mb-0"> Equipe:</h6>
+
+                            <input type="text" id="equipe"class="form-control" placeholder="Equipe" name="Equipe" disabled/>
+                            <input type="hidden" id="equipeid"  class="form-control"  name="equipeid[]"/>
+
+
+
+
+
+                            <div class="clear">
+                            <a data-toggle="modal" href="#myModal3"  class="btn btn-warning btn-sm " style="margin: 10px">Choisir Equipe</a>
+                              
+
+
+
+                            <button type="button"  class="btn btn-warning btn-sm " onclick="clearf()">Clear input field</button>
+
+                            </div>
+
+                            <div class="modal" tabindex="-1" role="dialog" id="myModal3">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">Equipe</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                                                                            
+                                                            <table id="table"class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
+                                                            
+                                                            <thead>
+                                                                <tr style="text-align: center">
+                                                                
+                                                                <th scope="col" data-sortable="true">Nom</th>
+                                                                <th scope="col" data-sortable="true">Prenom</th>
+                                                                <th scope="col" data-sortable="true">Post</th>
+                                                              
+                                                                <th scope="col">select</th>
+
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            
+                                                                @foreach ($users as $user)
+                                                            
+                                                                <tr id={{$user->id}}>
+                                                                
+                                                                <th scope="row" style="text-align: center" class="rowdata">  {{$user->nom}}  </th>
+                                                                <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
+                                                                <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
+                                                              
+                                                                <td><input type="button"value="submit"onclick="show3()" /> </td>
+                                                                
+                                                                </tr>
+                                                                
+                                                                @endforeach
+
+                                                            </tbody>
+
+                                                            </table>           
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Feremr</button>
+                                  
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                       
                     </div>
 
@@ -326,9 +399,9 @@
         document.getElementById("RepresentantE&Pid").value = rowId;
     }
 
-let a=[];
+    let a=[];
 let b=[];
-let i=0;
+
     function show3() {
         var rowId = 
             event.target.parentNode.parentNode.id;
@@ -340,22 +413,28 @@ let i=0;
       
         nom = data[0].innerHTML;
         pre = data[1].innerHTML;
-        a[i]=nom+'\xa0'+pre
-        b[i]=rowId;
-        i=i+1;
+       x=nom+'\xa0'+pre;
+        a.push(x);
+        b.push(rowId);
+
+       alert(b);
+     
+   
       
         document.getElementById("equipe").value =a;
       
         document.getElementById("equipeid").value =b;
-        alert(document.getElementById("equipeid").value);
- 
+      
+        
       
     }
 
 
 
   function clearf(){
-     a=[];
+    
+   
+    a=[];
      b=[];
      document.getElementById("equipe").value ='';
       
