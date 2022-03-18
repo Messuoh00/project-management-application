@@ -42,11 +42,11 @@
               PHASE 1
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Idee RD</a></li>
+              <li><a class="dropdown-item" href="/projet?phase=1.1">Idee RD</a></li>
              
               <li><hr class="dropdown-divider"></li>
 
-              <li><a class="dropdown-item" href="#">Maturation</a></li>
+              <li><a class="dropdown-item" href="/projet?phase=1.2">Maturation</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown  ">
@@ -54,12 +54,16 @@
               PHASE 2
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Recherche </a></li>
+              <li><a class="dropdown-item" href="/projet?phase=2.1">Recherche </a></li>
               
               <li><hr class="dropdown-divider"></li>
 
-              <li><a class="dropdown-item" href="#">Test Pilote</a></li>
+              <li><a class="dropdown-item" href="/projet?phase=2.2">Test Pilote</a></li>
             </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/projet?phase=3.0">Phase 3</a>
           </li>
 
           <li class="nav-item">

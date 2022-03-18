@@ -395,7 +395,7 @@ let i=0;
         document.getElementById("equipe").value =a;
       
         document.getElementById("equipeid").value =b;
-        alert(document.getElementById("equipeid").value);
+      
  
       
     }
