@@ -8,6 +8,13 @@
 @section('content')
 
 
+@php
+    $ur=Request::fullUrl();
+  $ur=substr($ur,-3);
+    
+@endphp
+
+
 
 <table class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
   
@@ -28,6 +35,9 @@
   <tbody>
    
     @foreach ($projects as $project)
+   
+
+        
    
     <tr id={{$project->id}}>
      
@@ -60,7 +70,7 @@
 
       </td>
     </tr>
-    
+  
     @endforeach
 
   </tbody>
