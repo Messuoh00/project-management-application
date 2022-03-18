@@ -29,7 +29,7 @@
    
     @foreach ($projects as $project)
    
-    <tr >
+    <tr id={{$project->id}}>
      
       <th scope="row" style="text-align: center">  <a href="/projet/ {{$project->id}}"> {{$project->nom_projet}} </a> </th>
       <td style="text-align: center">{{$project->structure_pilote}}</td>

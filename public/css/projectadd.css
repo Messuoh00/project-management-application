@@ -1,3 +1,18 @@
+table.table-bordered{
+    border-color: orange;
+    
+  }
+table.table-bordered > thead > tr > th{
+    border-color: orange;
+    border-width: 3px;
+}
+table.table-bordered > tbody > tr > td{
+    border-color: orange;
+    border-width: 3px;
+}
+
+
+
 .note
 {
     text-align:center;
@@ -42,5 +57,6 @@
     margin: 0px;
 }   
 }
+
 
 
