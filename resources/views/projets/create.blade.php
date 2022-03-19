@@ -1,8 +1,11 @@
 @extends('layout.main')
 
 @section('styles')
+
 <link href="{{ asset('css/projectadd.css') }}" rel="stylesheet" type="text/css"  >
 <link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
+
+
 @endsection
 
 
@@ -16,7 +19,7 @@
         </div>
 
         <div class="form-content">
-            <form action="{{route('projet.store')}}" method="POST">
+            <form action="{{route('projet.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -330,6 +333,10 @@
                 <textarea class="form-control" rows="5"name="Description"></textarea>
               </div>
 
+
+              <input type="file" name="file" id="file">
+
+
               <button type="submit" class="btnSubmit">Submit</button>
             </form>
         </div>
@@ -392,7 +399,7 @@ let b=[];
         a.push(x);
         b.push(rowId);
 
-       alert(b);
+    
      
    
       

@@ -417,7 +417,7 @@ let b=[];
         a.push(x);
         b.push(rowId);
 
-       alert(b);
+     
      
    
       

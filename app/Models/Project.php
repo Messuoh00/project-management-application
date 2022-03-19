@@ -22,7 +22,7 @@ class Project extends Model
         'thematique',
         'structure_pilote',
         'phase',
-        
+        'files',
         'region_test',
         'region_implementation',
         'region_exploitation',

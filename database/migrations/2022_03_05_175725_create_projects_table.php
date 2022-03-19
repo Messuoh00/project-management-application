@@ -50,7 +50,7 @@ return new class extends Migration
 
 
             $table->text('description')->default('ADD TEXT HERE');
-
+            $table->String('files')->nullable();
             
             $table->timestamps();
             

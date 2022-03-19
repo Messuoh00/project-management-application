@@ -46,7 +46,10 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        
+       $x= DB::table('projects')->latest('created_at')->first();
+        $id=$x->id;
+        $id++;
+
         $proje=new Project();
         $proje->nom_projet= $request->input('NomProjet');
         $proje->abreviation= $request->input('Abreviation');
@@ -67,6 +70,13 @@ class ProjectController extends Controller
 
         $proje->description= $request->input('Description');
         
+
+       
+
+        request()->file(key:'file')->storeAs(path:'fileprojet',name:$id.'_files/testing',options:'');
+
+        $proje->files='/fileprojet/'.$id.'_files/testing';
+       
         $proje->save();
        
 
