@@ -329,15 +329,35 @@
             </div>
 
             <div class="form-group">
-                <label for="comment">Description:</label>
+               <h6 class="mb-0"> Description:</h6>
                 <textarea class="form-control" rows="5"name="Description"></textarea>
               </div>
 
 
-              <input type="file" name="file" id="file">
+            
+              <h6 class="mb-0" style=> Ajouter Fichier:</h6>
+              <div class="box">
+               
+                <div class="behinde"> 
+                   <input type="file" name="file" id="file" class="file">
+                 </div>
+            
+                <div class="front">
+                <label  for="file" class="lab">
+                    <br>
+                    <img src="{{url('/img/pdf-icon.jpg')}}" style="width:70px">
+                    <br>
+                  <p  class="file-name">Aucun fichier</p>
+                  </label>
+                </div>
+                
+            </div>
+            
 
+             <br>
+             <br>
 
-              <button type="submit" class="btnSubmit">Submit</button>
+              <button type="submit" class="btnSubmit" >Submit</button>
             </form>
         </div>
  
@@ -416,7 +436,7 @@ let b=[];
   function clearf(){
     
    
-    a=[];
+     a=[];
      b=[];
      document.getElementById("equipe").value ='';
       
@@ -427,6 +447,18 @@ let b=[];
 
 
 
+  const file = document.querySelector('#file');
+file.addEventListener('change', (e) => {
+  // Get the selected file
+  const [file] = e.target.files;
+  // Get the file name and size
+  const { name: fileName, size } = file;
+  // Convert size in bytes to kilo bytes
+  const fileSize = (size / 1000).toFixed(2);
+  // Set the text content
+  const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+  document.querySelector('.file-name').textContent = fileNameAndSize+'\xa0 \xa0 ✓';
+});
 
 
 </script>
