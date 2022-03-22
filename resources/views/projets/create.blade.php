@@ -43,17 +43,29 @@
                         <input type="text" class="form-control" placeholder="RegionTest" name="RegionTest"/>
                     </div>
 
+                  <div class="form-group">
+                    <h6 class="mb-0"> Region Implementation:</h6>
+
+                    <input type="text" class="form-control" value="Region Implementation"  name="RegionImp"/>
+                </div>
+                <div class="form-group">
+                    <h6 class="mb-0"> Region Exploitation:</h6>
+
+                    <input type="text" class="form-control" value="Region Exploitation"  name="RegionExp"/>
+                </div>
+
+
                     <div class="form-group">
                         <h6 class="mb-0"> Date Debut:</h6>
 
-                        <input type="date"  class="form-control" id="birthday" name="DateDebut">
+                        <input type="date"  class="form-control" id="birthday" name="DateDebut" onkeydown="return false">
                     </div>
      
                    
                     <div class="form-group">
                         <h6 class="mb-0"> Date Fin:</h6>
 
-                        <input type="date"  class="form-control" id="birthday" name="DateFin">
+                        <input type="date"  class="form-control" id="birthday" name="DateFin" onkeydown="return false">
                     </div>
 
                     <div class="form-group radio" style="    text-align:center ;">
@@ -148,7 +160,7 @@
                                                         
                                                             <tr id={{$user->id}}>
                                                             
-                                                            <th scope="row" style="text-align: center" class="rowdata">  {{$user->nom}}  </th>
+                                                          <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                             <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
@@ -216,7 +228,7 @@
                                                         
                                                             <tr id={{$user->id}}>
                                                             
-                                                            <th scope="row" style="text-align: center" class="rowdata">  {{$user->nom}}  </th>
+                                                            <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                             <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                            
@@ -247,7 +259,8 @@
 
                         <h6 class="mb-0"> Equipe:</h6>
 
-                        <input type="text" id="equipe"class="form-control" placeholder="Equipe" name="Equipe" disabled/>
+                        <div  style="overflow-y: scroll; height:140px;"  id="equipe"class="form-control"  name="Equipe" placeholder="Equipe"type="text" ></div>
+                        
                         <input type="hidden" id="equipeid"  class="form-control"  name="equipeid[]"/>
                        
                        
@@ -295,7 +308,7 @@
                                                         
                                                             <tr id={{$user->id}}>
                                                             
-                                                            <th scope="row" style="text-align: center" class="rowdata">  {{$user->nom}}  </th>
+                                                              <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                             <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                            
@@ -335,29 +348,37 @@
 
 
             
-              <h6 class="mb-0" style=> Ajouter Fichier:</h6>
+              {{-- <h6 class="mb-0" style=> Ajouter Fichier:</h6>
               <div class="box">
                
                 <div class="behinde"> 
-                   <input type="file" name="file" id="file" class="file">
+                   <input type="file" name="file" id="file" class="file" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                  </div>
             
                 <div class="front">
                 <label  for="file" class="lab">
+                  <div style="border: 1px dashed black ;width:40% ;margin:auto;"> 
+                  <br>
+                    <img id="pdfimg" src="{{url('/img/pdf-icon.jpg')}}" style="width:70px" >
                     <br>
-                    <img src="{{url('/img/pdf-icon.jpg')}}" style="width:70px">
-                    <br>
-                  <p  class="file-name">Aucun fichier</p>
+                  <span  class="file-name">Aucun fichier</span>
+                  </div>
+                  
                   </label>
                 </div>
+                </div> --}}
                 
             </div>
             
 
              <br>
              <br>
-
-              <button type="submit" class="btnSubmit" >Submit</button>
+              <div style="display: grid; grid; grid-template-columns: 1fr 1fr;">
+                <div></div>
+                <div style="text-align:right;">
+              <button type="submit" class="btnSubmit">Confirmer</button>
+               </div>
+            </div>
             </form>
         </div>
  
@@ -379,6 +400,7 @@
       "row-data" class within the row with given id*/
      
         var nom = data[0].innerHTML;
+        nom=nom.substring(19, nom.length-4);
         var pre = data[1].innerHTML;
    
         document.getElementById("chef").value = nom+'\xa0\xa0'+pre;
@@ -395,6 +417,7 @@
       "row-data" class within the row with given id*/
      
         var nom = data[0].innerHTML;
+        nom=nom.substring(19, nom.length-4);
         var pre = data[1].innerHTML;
    
         document.getElementById("RepresentantE&P").value = nom+'\xa0\xa0'+pre;
@@ -414,16 +437,21 @@ let b=[];
       "row-data" class within the row with given id*/
       
         nom = data[0].innerHTML;
+        nom=nom.substring(19, nom.length-4);
         pre = data[1].innerHTML;
-       x=nom+'\xa0'+pre;
+       x=nom+' '+pre;
         a.push(x);
         b.push(rowId);
 
-    
-     
-   
+        var memberequipe = document.createElement('p')
       
-        document.getElementById("equipe").value =a;
+        var text = document.createTextNode(x);
+      memberequipe.appendChild(text); 
+      var daddy=document.getElementById("equipe")
+   
+     
+      daddy.appendChild(memberequipe);
+      
       
         document.getElementById("equipeid").value =b;
       
@@ -438,6 +466,8 @@ let b=[];
    
      a=[];
      b=[];
+     const myNode = document.getElementById("equipe");
+      myNode.innerHTML = '';
      document.getElementById("equipe").value ='';
       
       document.getElementById("equipeid").value ='';
@@ -447,18 +477,19 @@ let b=[];
 
 
 
-  const file = document.querySelector('#file');
-file.addEventListener('change', (e) => {
-  // Get the selected file
-  const [file] = e.target.files;
-  // Get the file name and size
-  const { name: fileName, size } = file;
-  // Convert size in bytes to kilo bytes
-  const fileSize = (size / 1000).toFixed(2);
-  // Set the text content
-  const fileNameAndSize = `${fileName} - ${fileSize}KB`;
-  document.querySelector('.file-name').textContent = fileNameAndSize+'\xa0 \xa0 ✓';
-});
+  //   const file = document.querySelector('#file');
+  // file.addEventListener('change', (e) => {
+  //   // Get the selected file
+  //   const [file] = e.target.files;
+  //   // Get the file name and size
+  //   const { name: fileName, size } = file;
+  //   // Convert size in bytes to kilo bytes
+  //   const fileSize = (size / 1000).toFixed(2);
+  //   // Set the text content
+  //   const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+
+  //   document.querySelector('.file-name').textContent = fileNameAndSize+'\xa0 \xa0 ✓';
+  // });
 
 
 </script>

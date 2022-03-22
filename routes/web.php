@@ -19,7 +19,7 @@ use App\Http\Controllers\Authcontroller;
 //route houssem
 //hello
 //hello
-    
+
 Route::resource('/projet', ProjectController::class);
 
 

@@ -8,6 +8,36 @@
 @section('content')
 
 
+@php
+         $phase1=$project->phase;
+         
+         $phasenom='';
+         switch ($phase1) {
+             
+        case 1.1:
+            $phase1=1.2;   $phasenom1=' Maturation ';$phasenom='Idee R/D  ';
+        break;
+        
+        case 1.2:
+            $phase1=2.1;   $phasenom1='Recherche(En cours)';$phasenom='Maturation ';
+        break;
+        
+        case 2.1:
+            $phase1=2.2;   $phasenom1='Recherche(En TEST)';$phasenom='Recherche(En cours) ';
+        break;
+        
+        case 2.2:
+            $phase1=3.1;   $phasenom1='Archivage ';$phasenom='Recherche(En TEST) ';
+         
+            
+        break;
+
+    
+       
+}
+         
+@endphp
+
 <div class="conten_project_view">
   <div class="N1">
     <h1 style="color: aliceblue">INFO PROJET N:{{$project->id}}</h1>
@@ -194,19 +224,27 @@
 </form>
     </div>
 
-    <div class="editerbtn" >  
-     
-    <a href="/projet/ {{$project->id}}/edit"> <button type="button" class="btn "> <img src="{{url('/img/edit.png')}}" alt="">       </button>  </a>    
-
-    </div>
-   
-   </div>
-   
-    
  
 
+    <div class="editerbtn" >  
+      <a href="/projet/ {{$project->id}}/passage">
+        <button type="button submit" class="btn" style="text-align: center">
+          <img src="{{url('/img/next.png')}}" height="20"  alt="">  
+           </button>
+          </a>
+    </div>
+
+    <div class="editerbtn" >  
+     
+      <a href="/projet/ {{$project->id}}/edit"> <button type="button" class="btn "> <img src="{{url('/img/edit.png')}}" alt="">       </button>  </a>    
+  
+    </div>
 
 
+
+   </div>
+   
+   
 
   </div>
 

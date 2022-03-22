@@ -37,9 +37,10 @@
           <li class="nav-item">
             <a class="nav-link" href="/projet">Tous les projets</a>
           </li>
+
           <li class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              PHASE 1
+              Phase avant projet et planification
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/projet?phase=1.1">Idee RD</a></li>
@@ -49,9 +50,11 @@
               <li><a class="dropdown-item" href="/projet?phase=1.2">Maturation</a></li>
             </ul>
           </li>
+
+        
           <li class="nav-item dropdown  ">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              PHASE 2
+              Phase exécution et suivi évaluation
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/projet?phase=2.1">Recherche </a></li>
@@ -63,7 +66,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/projet?phase=3.0">Phase 3</a>
+            <a class="nav-link" href="/projet?phase=3.1"> Phase  clôture et valorisation </a>
           </li>
 
           <li class="nav-item">

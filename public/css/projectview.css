@@ -63,7 +63,18 @@ a{
 }
 
 
-
+.btnSubmit
+{
+    border:none;
+    border-radius:1.5rem;
+    padding: 1%;
+    width: 50%;
+    height: 65px;
+    cursor: pointer;
+    background: orange;
+    color: #fff;
+  
+}
 
 .N1{
     padding-top: 20px;

@@ -25,7 +25,7 @@ class ProjectFactory extends Factory
                'abreviation' => $this->faker->title,
                'thematique'=> $this->faker->name(),
                'structure_pilote'=> $this->faker->name(),
-               'phase'=> $this->faker->randomElement(['1.1', '1.2', '2.1', '2.2', '3.0']),
+               'phase'=> $this->faker->randomElement(['1.1', '1.2', '2.1', '2.2', '3.1']),
                
                'region_test'=> $this->faker->name(),
                'region_implementation'=> $this->faker->name(),

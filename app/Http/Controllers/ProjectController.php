@@ -19,9 +19,11 @@ class ProjectController extends Controller
     {
        
         $projects=Project::latest()->get();
+        $user=User::latest()->get();
+        
         
 
-        return view('projets/index', ['projects'=>$projects]);
+        return view('projets/index', ['projects'=>$projects,'user'=>$user]);
 
 
     }
@@ -47,6 +49,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
        $x= DB::table('projects')->latest('created_at')->first();
+        
         $id=$x->id;
         $id++;
 
@@ -55,11 +58,11 @@ class ProjectController extends Controller
         $proje->abreviation= $request->input('Abreviation');
         $proje->thematique= $request->input('Thematique');
         $proje->structure_pilote= $request->input('StructurePilote');
-        $proje->phase= $request->input('Description');
+        $proje->phase='1.1';
 
         $proje->region_test= $request->input('RegionTest');
-        $proje->region_implementation= $request->input('RegionTest');
-        $proje->region_exploitation= $request->input('RegionTest');
+        $proje->region_implementation= $request->input('RegionImp');
+        $proje->region_exploitation= $request->input('RegionExp');
         $proje->budget= $request->input('budget');
         $proje->date_deb= $request->input('DateDebut');
         $proje->date_fin= $request->input('DateFin');
@@ -71,11 +74,8 @@ class ProjectController extends Controller
         $proje->description= $request->input('Description');
         
 
+        $proje->files='/fichier-projet/fichier-projet-'.$id;
        
-
-        request()->file(key:'file')->storeAs(path:'fileprojet',name:$id.'_files/testing',options:'');
-
-        $proje->files='/fileprojet/'.$id.'_files/testing';
        
         $proje->save();
        
@@ -130,14 +130,58 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project=Project::find($id);
-        $users=User::latest()->get();
-        
+       
+
         if ($project==null) {
             return redirect('projet');
             
         }else{
+
+            $chef="";
+            $rep="";
+            $eq=array();
+            $ei=array();
+
+
+            $users=User::latest()->get();
+            $chef0= DB::table('users')->find($project->chef_projet);
+            if ($chef0!=null) {
+                $chef=$chef0->nom.' '.$chef0->prenom;
+            }
+
+            $rep0= DB::table('users')->find($project->representant_EP);
+            
+            if ($rep0!=null) {
+                $rep=$rep0->nom.' '.$rep0->prenom;
+            }
+
+
+            $equipe=DB::select("
+            
+            select nom,prenom,id from users where  id IN 
+            
+            (
+                select user_id from project_user
+                where project_id='".$id."'
+            )
+            
+            ");
+            
+            if ($equipe!=null) {
+              
+            
+
+            
+            foreach ($equipe as $x) {
+
+                $eq[]=$x->nom.' '.$x->prenom;
+                $ei[]=$x->id;
+              
+            }
         
-        return view('projets/edit', ['project'=>$project ,'users'=>$users]);
+            }
+        
+        return view('projets/edit', ['project'=>$project ,'users'=>$users,'chef'=>$chef,'rep'=>$rep,'equipe'=>$eq,'ei'=>$ei]);
         }
     }
 
@@ -150,17 +194,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->has('updatephase')) {
+           
+           $project= Project::find($id);
+
+           $project->phase=$request->input('updatephase');
+           $project->save();
+            return redirect('projet');
+      
+        }else{
         Project::where('id',$id)->update(
             [
                 'nom_projet' =>  $request->input('NomProjet'),
                 'abreviation'=> $request->input('Abreviation'),
                 'thematique'=> $request->input('Thematique'),
                 'structure_pilote'=> $request->input('StructurePilote'),
-                'phase'=> $request->input('Description'),
+               
         
                 'region_test'=> $request->input('RegionTest'),
-                'region_implementation'=> $request->input('RegionTest'),
-                'region_exploitation'=> $request->input('RegionTest'),
+                'region_implementation'=> $request->input('RegionImp'),
+                'region_exploitation'=> $request->input('RegionExp'),
                 'budget'=> $request->input('budget'),
                 'date_deb'=> $request->input('DateDebut'),
                 'date_fin'=> $request->input('DateFin'),
@@ -177,11 +230,21 @@ class ProjectController extends Controller
                 'reactivite'=> $request->input('Reactivite'),
                 
                 'avancement'=> $request->input('Avancement'),
+
+               
+        
             ]
             );
 
             DB::table('project_user')->where('project_id', $id)->delete();
+
+            
                
+            if ($request->hasFile(key:'note') ) {request()->file(key:'note')->storeAs(path:'fichier-projet/fichier-projet-'.$id,name:'note-p'.$id.'.pdf',options:'');   }
+
+            if ($request->hasFile(key:'fiche') ) {request()->file(key:'fiche')->storeAs(path:'fichier-projet/fichier-projet-'.$id,name:'fiche-p'.$id.'.pdf',options:'');   }
+
+
       $xs= $request->input('equipeid');
       $array = explode(',',$xs[0]);
        
@@ -190,6 +253,9 @@ class ProjectController extends Controller
             $equipe->project_id= $id;
             $equipe->user_id=$x;
             $equipe->save();
+        }
+
+    
         }
        
 
@@ -211,4 +277,19 @@ class ProjectController extends Controller
 
         return redirect('projet');
     }
+
+
+
+    
+
+
+
+
+
+
 }
+
+
+
+
+
