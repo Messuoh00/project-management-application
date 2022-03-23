@@ -96,7 +96,7 @@
   </nav>
 
   {{-- navbarscript --}} 
-  <script src="{{ asset('js/main.js') }}"></script>
+  <script src="{{ asset('js/mainnav.js') }}"></script>
 
       {{-- content here --}}
 
