@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\UserProject;
-
+use App\Mail\SendEmail;
 
 class ProjectController extends Controller
 {
@@ -200,7 +201,30 @@ class ProjectController extends Controller
 
            $project->phase=$request->input('updatephase');
            $project->save();
+           
+           $equipe=DB::select("
+            
+           select email from users where  id IN 
+           
+           (
+               select user_id from project_user
+               where project_id='".$id."'
+           )
+           
+           ");
+           
+           $c=User::find($project->chef_projet);
+           $r=User::find($project->representant_EP);
+
+           Mail::to($c->email)->send(new SendEmail());
+           Mail::to($r->email)->send(new SendEmail());
+
+           foreach ( $equipe as  $membre) {
+            Mail::to($membre->email)->send(new SendEmail());
+           }
+        
             return redirect('projet');
+
       
         }else{
         Project::where('id',$id)->update(
@@ -244,6 +268,8 @@ class ProjectController extends Controller
 
             if ($request->hasFile(key:'fiche') ) {request()->file(key:'fiche')->storeAs(path:'fichier-projet/fichier-projet-'.$id,name:'fiche-p'.$id.'.pdf',options:'');   }
 
+            if ($request->hasFile(key:'misc') ) {request()->file(key:'misc')->storeAs(path:'fichier-projet/fichier-projet-'.$id,name:'misc-p'.$id.'.pdf',options:'');   }
+
 
       $xs= $request->input('equipeid');
       $array = explode(',',$xs[0]);
@@ -286,7 +312,7 @@ class ProjectController extends Controller
 
 
 
-
+    
 }
 
 

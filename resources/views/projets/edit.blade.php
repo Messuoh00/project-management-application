@@ -467,22 +467,26 @@ break;
                           
                          @case(1.2)
                          <label class="form-label">note</label>
-                         <input class="form-control form-control-sm" id="note"  name="note"  type="file" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf">
+                         <input class="form-control form-control-sm" id="misc"  name="note"  type="file" accept= " application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf">
                          <br>
                          <label  class="form-label">fiche projet</label>
-                         <input class="form-control form-control-sm" id="fiche"  name="fiche"  type="file" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf">
+                         <input class="form-control form-control-sm" id="fiche"  name="fiche"  type="file" accept= "application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf">
                              @break 
                              
                          @case(2.1)
+                         <span>Aucun fichier a metre ajour dans la phase {{$phasenom}}</span>
                              
                              @break 
                              
                          @case(2.2)
-                             
+                         <label class="form-label">misc</label>
+                         <input  class="form-control form-control-sm" id="misc"  name="misc"  type="file" accept= " application/vnd.ms-excel, application/vnd.ms-powerpoint, application/pdf">
+                        
                              @break 
                              
                          @case(3.1)
                         
+                         <span>Aucun fichier a metre ajour dans la phase {{$phasenom}}</span>
                          
                       
                              @break

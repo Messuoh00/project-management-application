@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Authcontroller;
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +25,9 @@ use App\Http\Controllers\Authcontroller;
 Route::resource('/projet', ProjectController::class);
 
 
-
+Route::get('/mail', function () {
+    return new SendEmail();
+});
 
 // routes walid
 

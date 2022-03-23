@@ -132,11 +132,12 @@ break;
           }
         
           @endphp
-
+       
+         @if (strcmp($phasenom,"Archivage"))
           <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}">
             <img src="{{url('/img/next.png')}}" height="20"  alt="">  
           </button>
-          
+          @endif
           <!-- Modal -->
           <div class="modal fade" id="exampleModal{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe" aria-hidden="true">
             <div class="modal-dialog" role="document">
