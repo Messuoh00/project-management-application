@@ -25,9 +25,26 @@ use Illuminate\Support\Facades\Mail;
 Route::resource('/projet', ProjectController::class);
 
 
-Route::get('/mail', function () {
-    return new SendEmail();
-});
+
+Route::get('/download/{id}/{filename}', function($id,$filename)
+{
+    // Check if file exists in app/storage/file folder
+    $file_path =storage_path('app\fichier-projet\fichier-projet-'.$id.'\\'.$filename.'-p'.$id.'.pdf' );
+    if (file_exists($file_path))
+    {
+        // Send Download
+        return Response::download($file_path, $filename, [
+            'Content-Length: '. filesize($file_path)
+        ]);
+    }
+    else
+    {
+        // Error
+        exit('Requested file does not exist on our server!');
+    }
+})->where('filename', '[A-Za-z0-9\-\_\.]+')->where('id','[0-9]+');
+
+
 
 // routes walid
 

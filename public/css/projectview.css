@@ -91,3 +91,10 @@ hr{
     color: black;
 }
 
+p{
+    border: 1px solid #ced4da;
+    border-radius:1.5rem;
+    background: orange;
+    color: black;
+    text-align: center;
+}

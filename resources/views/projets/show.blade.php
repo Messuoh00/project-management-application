@@ -8,14 +8,16 @@
 @section('content')
 
 
+
 @php
          $phase1=$project->phase;
          
          $phasenom='';
+        
          switch ($phase1) {
              
         case 1.1:
-            $phase1=1.2;   $phasenom1=' Maturation ';$phasenom='Idee R/D  ';
+            $phase1=1.2;   $phasenom1='Maturation'; $phasenom='Idee R/D  ';
         break;
         
         case 1.2:
@@ -31,7 +33,11 @@
          
             
         break;
+        case 3.1:
+   $phase1=3.1;   $phasenom1='Archivage';$phasenom='Archivage';
 
+   
+break;
     
        
 }
@@ -77,7 +83,29 @@
                   </div>
                 </div>
                 <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Region implementation</h6>
+                  </div>
+                  <div class="col-sm-9 ">
+                    {{$project->region_implementation}}
+                  </div>
+                </div>
+                <hr>
                 
+                
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Region Exploitation</h6>
+                  </div>
+                  <div class="col-sm-9 ">
+                    {{$project->region_exploitation}}
+                  </div>
+                </div>
+                <hr>
+
+
                 <div class="row">
                   <div class="col-sm-3">
                     <h6 class="mb-0">Date Debut</h6>
@@ -105,6 +133,16 @@
                   </div>
                   <div class="col-sm-9 ">
                     {{$project->etude_echo}}
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Phase</h6>
+                  </div>
+                  <div class="col-sm-9 ">
+                    {{$phasenom}}
                   </div>
                 </div>
                 <hr>
@@ -141,12 +179,13 @@
         </div>
         <hr>
         
+        
         <div class="row">
           <div class="col-sm-3">
             <h6 class="mb-0">Chef Projet</h6>
           </div>
           <div class="col-sm-9 ">
-            {{$project->chef_projet}}
+            <a href="/users/{{$project->chef_projet}}"><p>{{$chef}}</p></a>
           </div>
         </div>
 
@@ -158,7 +197,7 @@
             <h6 class="mb-0">Representant E&P</h6>
           </div>
           <div class="col-sm-9 ">
-            {{$project->representant_EP}}
+            <a href="/users/{{$project->representant_EP}}"><p>{{$rep}}</p></a>
           </div>
         </div>
         <hr>
@@ -167,16 +206,81 @@
           <div class="col-sm-3">
             <h6 class="mb-0">Equipe</h6>
           </div>
-          <div class="col-sm-9 ">
-            <a href="">List</a>
+          <div class="col-sm-9 "style="overflow-y: scroll; height:117px;" >
+           @foreach ($equipe as $eq)
+              <a href="users/{{$eq->id}}"><p>{{$eq->nom}}  {{$eq->prenom}}</p></a>
+           @endforeach
           </div>
         </div>
         <hr>
         
+
+        @php 
+        switch ($project->phase) {
+  
+            case '1.1':
+            $bol=true;
+            break;
+  
+            case '1.2':
+            $bol=file_exists(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\note-p'.$project->id.'.pdf' ));
+            $bol1=file_exists(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\fiche-p'.$project->id.'.pdf' ));
+            $bol=$bol and $bol1;
+            break;
+  
+  
+            case '2.1':
+            $bol=true;
+            break;
+  
+  
+            case '2.2':
+           $bol=file_exists(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\misc-p'.$project->id.'.pdf' ) );
+            break;
+          
+            case '3.0':
+            $bol=false;
+            break;
+            
+          default:
+            $bol=true;
+            break;
+  
+        }
+      
+        @endphp
+
+            <div class="row">
+            <div class="col-sm-3">
+            <h6 class="mb-0">Fichier</h6>
+            </div>
+            <div class="col-sm-9 ">
+
+            <a href="/download/{{$project->id}}/note">download</a>
+           
+             
+                
+        
+            </div>
+        </div>
+
+
+        <hr>
+
+
       </div>
       
-    
+      
+
+        
+
+
+
+
     </div>
+
+
+
 
   
   
@@ -203,36 +307,117 @@
          
     <div class="card-body status gutters-sm ">
       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"> Description:</i></h6>
-      <p class="box"> {{$project->description}}</p>
+      <span class="box"> {{$project->description}}</span>
      
     </div>
-  
+
+
+
   <div class="editer">
   
    
 
     <div class="editerbtn"  >
-
-<form action="/projet/{{$project->id}}" method="POST">
-  @csrf
-  @method('delete')
-
-      <button type="button submit" class="btn ">
-     <img src="{{url('/img/delete.png')}}" height="20" alt="">  
+ 
+      <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}supp">
+        <img src="{{url('/img/delete.png')}}" height="20"  alt=""> 
       </button>
-
-</form>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal{{$project->id}}supp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style="color: black"> Supprimer le projet n:{{$project->id}}?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+         
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              
+              <form action="/projet/{{$project->id}}" method="POST">
+                @csrf
+                @method('delete')
+                <button type="button submit" class="btn btn-danger" >supprime</button>
+              </form>
+      
+            </div>
+          </div>
+        </div>
+      </div>  
+      
     </div>
 
- 
+
 
     <div class="editerbtn" >  
-      <a href="/projet/ {{$project->id}}/passage">
-        <button type="button submit" class="btn" style="text-align: center">
-          <img src="{{url('/img/next.png')}}" height="20"  alt="">  
-           </button>
-          </a>
+      
+  
+   
+     @if (strcmp($phasenom,"Archivage"))
+      <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}">
+        <img src="{{url('/img/next.png')}}" height="20"  alt="">  
+      </button>
+      @endif
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style="color:black">Passer a la phase {{$phasenom1}} ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+         
+            @if (!$bol)
+                
+            <div class="modal-body">
+           <span style="color: black">   Passage impossible il manque des document !</span>
+            </div>
+            @endif
+
+            <div class="modal-footer">
+
+
+
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+             
+
+
+                @if($bol)
+               
+              <form action="/projet/{{$project->id}}" method="POST">
+                @csrf
+                @method('PUT')
+                     
+              <input type="text" value="{{$phase1}}" name="updatephase" hidden>    
+              <button type="button submit" class="btn btn-warning" style="text-align: center">Confirme </button>
+           
+              </form>
+
+           
+              @endif
+      
+            </div>
+          </div>
+        </div>
+      </div>  
+
+
+
+      
     </div>
+
+
+
+
+
+
+
+
 
     <div class="editerbtn" >  
      

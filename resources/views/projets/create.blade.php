@@ -123,7 +123,8 @@
                       {{-- Chef Projet: --}}
                         <h6 class="mb-0"> Chef Projet:</h6>
 
-                        <input type="text"  id="chef" class="form-control " placeholder="Chef Projet" name="ChefProjet" disabled/>
+                     
+                        <div  type="text" id="chef"class="form-control"  name="ChefProjet"  > </div>
                         <input type="hidden"  id="chefid" class="form-control " placeholder="ChefProjet" name="Chefid" />
                         
                       
@@ -160,7 +161,7 @@
                                                         
                                                             <tr id={{$user->id}}>
                                                             
-                                                          <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
+                                                          <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                             <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
@@ -189,7 +190,7 @@
                       {{-- Representant E&P --}}
                         <h6 class="mb-0"> Representant E&P:</h6>
 
-                        <input type="text"  id="RepresentantE&P"  class="form-control" placeholder="Representant E&P" name="Representant E&P" disabled/>
+                        <div   type="text"   id="RepresentantE&P"  class="form-control"  name="Representant E&P" placeholder="Representant E&P" > </div>
                         <input type="hidden" id="RepresentantE&Pid"  class="form-control" name="RepresentantE&Pid"  />
 
                     
@@ -228,7 +229,7 @@
                                                         
                                                             <tr id={{$user->id}}>
                                                             
-                                                            <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
+                                                            <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                             <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                            
@@ -296,7 +297,7 @@
                                                             <th scope="col" data-sortable="true">Nom</th>
                                                             <th scope="col" data-sortable="true">Prenom</th>
                                                             <th scope="col" data-sortable="true">Post</th>
-                                                           
+                                                            <th scope="col" data-sortable="true">Division</th>
                                                             <th scope="col">select</th>
 
 
@@ -308,10 +309,10 @@
                                                         
                                                             <tr id={{$user->id}}>
                                                             
-                                                              <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
+                                                              <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                             <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
-                                                           
+                                                            <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
                                                             <td><input type="button"value="submit"onclick="show3()" /> </td>
                                                             
                                                             </tr>
@@ -391,6 +392,15 @@
    
 <script>
     function show() {
+     
+     
+       
+     
+      
+   
+      
+        var daddy=document.getElementById("chef");
+      daddy.innerHTML='';
         var rowId = 
             event.target.parentNode.parentNode.id;
       //this gives id of tr whose button was clicked
@@ -400,15 +410,33 @@
       "row-data" class within the row with given id*/
      
         var nom = data[0].innerHTML;
-        nom=nom.substring(19, nom.length-4);
+        nom=nom.substring(21, nom.length-4);
         var pre = data[1].innerHTML;
+        x=nom+' '+pre;
+       
+        var memberequipe = document.createElement('p')
+      
+      var text = document.createTextNode(x);
+      memberequipe.appendChild(text); 
+
+      var link = document.createElement('a')
+      
+      link.href="/users/"+rowId;
+      link.appendChild(memberequipe)
+  
+ 
    
-        document.getElementById("chef").value = nom+'\xa0\xa0'+pre;
-        document.getElementById("chefid").value = rowId;
+       daddy.appendChild(link);
+   
+      document.getElementById("chefid").value = rowId;
     }
 
     function show2() {
-        var rowId = 
+    
+      var daddy=document.getElementById("RepresentantE&P");
+      daddy.innerHTML='';
+      
+      var rowId = 
             event.target.parentNode.parentNode.id;
       //this gives id of tr whose button was clicked
      
@@ -417,18 +445,33 @@
       "row-data" class within the row with given id*/
      
         var nom = data[0].innerHTML;
-        nom=nom.substring(19, nom.length-4);
+        nom=nom.substring(21, nom.length-4);
         var pre = data[1].innerHTML;
+        x=nom+' '+pre;
+        
+      var memberequipe = document.createElement('p')
+      
+      var text = document.createTextNode(x);
+      memberequipe.appendChild(text); 
+
+      var link = document.createElement('a')
+      
+      link.href="/users/"+rowId;
+      link.appendChild(memberequipe)
+  
+ 
    
-        document.getElementById("RepresentantE&P").value = nom+'\xa0\xa0'+pre;
-        document.getElementById("RepresentantE&Pid").value = rowId;
+       daddy.appendChild(link);
+   
+    
+      document.getElementById("RepresentantE&Pid").value = rowId;
     }
 
 let a=[];
 let b=[];
 
     function show3() {
-        var rowId = 
+      var rowId = 
             event.target.parentNode.parentNode.id;
       //this gives id of tr whose button was clicked
      
@@ -437,23 +480,32 @@ let b=[];
       "row-data" class within the row with given id*/
       
         nom = data[0].innerHTML;
-        nom=nom.substring(19, nom.length-4);
         pre = data[1].innerHTML;
+        nom=nom.substring(21, nom.length-4);
        x=nom+' '+pre;
         a.push(x);
         b.push(rowId);
 
-        var memberequipe = document.createElement('p')
-      
-        var text = document.createTextNode(x);
-      memberequipe.appendChild(text); 
-      var daddy=document.getElementById("equipe")
-   
      
-      daddy.appendChild(memberequipe);
+      var memberequipe = document.createElement('p')
       
+      var text = document.createTextNode(x);
+      memberequipe.appendChild(text); 
+
+      var link = document.createElement('a')
       
-        document.getElementById("equipeid").value =b;
+      link.href="/users/"+rowId;
+      link.appendChild(memberequipe)
+      var daddy=document.getElementById("equipe")
+ 
+   
+      daddy.appendChild(link);
+    
+   
+      
+   
+      
+      document.getElementById("equipeid").value=b;
       
         
       

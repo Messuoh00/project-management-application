@@ -117,8 +117,37 @@ class ProjectController extends Controller
             return redirect('projet');
             
         }else{
+            $chef="";
+           $rep="";
+    
+
+
+            $users=User::latest()->get();
+            $chef0= DB::table('users')->find($project->chef_projet);
+            if ($chef0!=null) {
+                $chef=$chef0->nom.' '.$chef0->prenom;
+            }
+
+            $rep0= DB::table('users')->find($project->representant_EP);
+            
+            if ($rep0!=null) {
+                $rep=$rep0->nom.' '.$rep0->prenom;
+            }
+
+
+            $equipe=DB::select("
+            
+            select nom,prenom,id from users where  id IN 
+            
+            (
+                select user_id from project_user
+                where project_id='".$id."'
+            )
+            
+            ");
+            
         
-        return view('projets/show', ['project'=>$project]);
+        return view('projets/show',  ['project'=>$project ,'users'=>$users,'chef'=>$chef,'rep'=>$rep,'equipe'=>$equipe]);
         }
     }
 

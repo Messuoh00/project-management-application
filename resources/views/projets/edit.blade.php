@@ -83,12 +83,12 @@ break;
                     <div class="form-group">
                       <h6 class="mb-0"> Region Implementation:</h6>
 
-                      <input type="text" class="form-control" value="{{$project->region_test}}"  name="RegionImp"/>
+                      <input type="text" class="form-control" value="{{$project->region_implementation}}"  name="RegionImp"/>
                   </div>
                   <div class="form-group">
                       <h6 class="mb-0"> Region Exploitation:</h6>
 
-                      <input type="text" class="form-control" value="{{$project->region_test}}"  name="RegionExp"/>
+                      <input type="text" class="form-control" value="{{$project->region_exploitation}}"  name="RegionExp"/>
                   </div>
 
                      <div class="form-group">
@@ -166,10 +166,14 @@ break;
                     </div>
 
                     <div class="form-group ">
+
+
+
+                      
                        {{-- Chef Projet: --}}
                        <h6 class="mb-0"> Chef Projet:</h6>
-
-                       <input type="text"  id="chef" class="form-control " value="{{$chef}}"  name="ChefProjet" disabled/>
+                       <div  type="text" id="chef"class="form-control"  name="ChefProjet"  ><a href="/users/{{$project->chef_projet}}"><p>{{$chef}}</p></a> </div>
+                    
                        <input type="hidden"  id="chefid" class="form-control " value="{{$project->chef_projet}}"  name="Chefid" />
                        
                      
@@ -206,7 +210,7 @@ break;
                                                        
                                                            <tr id={{$user->id}}>
                                                            
-                                                            <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
+                                                            <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                            <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                            <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                            <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
@@ -236,7 +240,8 @@ break;
                         {{-- Representant E&P --}}
                         <h6 class="mb-0"> Representant E&P:</h6>
 
-                        <input type="text"  id="RepresentantE&P"  class="form-control"  value="{{$rep}}"  name="Representant E&P" disabled/>
+             
+                        <div   type="text"   id="RepresentantE&P"  class="form-control"  name="Representant E&P" placeholder="Representant E&P" > <a href="/users/{{$project->representant_EP}}"><p>{{$rep}}</p></a> </div>
                         <input type="hidden" id="RepresentantE&Pid"  class="form-control" name="RepresentantE&Pid"   value="{{$project->representant_EP}}"  />
 
                     
@@ -274,7 +279,7 @@ break;
                                                             @foreach ($users as $user)
                                                         
                                                             <tr id={{$user->id}}>
-                                                              <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
+                                                              <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                             <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                             <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                            
@@ -308,7 +313,7 @@ break;
 
                             <div  style="overflow-y: scroll; height:140px;"  id="equipe"class="form-control"  name="Equipe" placeholder="Equipe"type="text" ></div>
 
-                            <input type="hidden" id="equipeid"  class="form-control"   name="equipeid[]"/>
+                            <input type="hidden" id="equipeid"  class="form-control"  value="" name="equipeid[]"/>
 
 
 
@@ -355,9 +360,9 @@ break;
                                                             
                                                                 <tr id={{$user->id}}>
                                                                 
-                                                                  <th scope="row" style="text-align: center" class="rowdata"><a href="users/{{$user->id}}}">  {{$user->nom}} </a> </th>
-                                                                <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
-                                                                <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
+                                                                <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">{{$user->nom}} </a> </th>
+                                                                <td style="text-align: center" class="rowdata">{{$user->prenom}}</td>
+                                                                <td style="text-align: center" class="rowdata">{{$user->poste}} </td>
                                                               
                                                                 <td><input type="button"value="submit"onclick="show3()" /> </td>
                                                                 
@@ -409,26 +414,7 @@ break;
               <input type="range"  name="Avancement" value="{{$project->avancement}}" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%'">
               <output>{{$project->avancement}}%</output>
 
-              {{-- <h6 class="mb-0" style=> Ajouter Fichier:</h6>
-              <div class="box">
-               
-                <div class="behinde"> 
-                   <input type="file" name="file" id="file" class="file" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
-                 </div>
-            
-                <div class="front">
-                <label  for="file" class="lab">
-                  <div style="border: 1px dashed black ;width:40% ;margin:auto;"> 
-                  <br>
-                    <img id="pdfimg" src="{{url('/img/pdf-icon.jpg')}}" style="width:70px" >
-                    <br>
-                    <span class="file-name">Aucun fichier</span>
-                
-                  </div>
-                  
-                  </label>
-                </div>
-                </div> --}}
+         
                 
             </div>
             
@@ -562,6 +548,8 @@ break;
     
 <script>
     function show() {
+      var daddy=document.getElementById("chef");
+      daddy.innerHTML='';
         var rowId = 
             event.target.parentNode.parentNode.id;
       //this gives id of tr whose button was clicked
@@ -571,15 +559,35 @@ break;
       "row-data" class within the row with given id*/
      
         var nom = data[0].innerHTML;
-        nom=nom.substring(20, nom.length-4);
+        nom=nom.substring(21, nom.length-4);
         var pre = data[1].innerHTML;
+        x=nom+' '+pre;
+       
+        var memberequipe = document.createElement('p')
+      
+      var text = document.createTextNode(x);
+      memberequipe.appendChild(text); 
+
+      var link = document.createElement('a')
+      
+      link.href="/users/"+rowId;
+      link.appendChild(memberequipe)
+  
+ 
    
-        document.getElementById("chef").value = nom+'\xa0\xa0'+pre;
-        document.getElementById("chefid").value = rowId;
+       daddy.appendChild(link);
+   
+
+     
+      document.getElementById("chefid").value = rowId;
     }
 
     function show2() {
-        var rowId = 
+      
+      var daddy=document.getElementById("RepresentantE&P");
+      daddy.innerHTML='';
+      
+      var rowId = 
             event.target.parentNode.parentNode.id;
       //this gives id of tr whose button was clicked
      
@@ -588,13 +596,26 @@ break;
       "row-data" class within the row with given id*/
      
         var nom = data[0].innerHTML;
-        nom=nom.substring(20, nom.length-4);
+        nom=nom.substring(21, nom.length-4);
         var pre = data[1].innerHTML;
-
+        x=nom+' '+pre;
         
+      var memberequipe = document.createElement('p')
+      
+      var text = document.createTextNode(x);
+      memberequipe.appendChild(text); 
+
+      var link = document.createElement('a')
+      
+      link.href="/users/"+rowId;
+      link.appendChild(memberequipe)
+  
+ 
    
-        document.getElementById("RepresentantE&P").value = nom+'\xa0\xa0'+pre;
-        document.getElementById("RepresentantE&Pid").value = rowId;
+       daddy.appendChild(link);
+   
+    
+      document.getElementById("RepresentantE&Pid").value = rowId;
     }
 
 let a=[];
@@ -603,16 +624,18 @@ let b=[];
  
   Array.prototype.push.apply(a,@json($equipe));
   Array.prototype.push.apply(b,@json($ei));
-  
+  let inc=0;
   a.forEach(element => {
+   
     var memberequipe = document.createElement('p')
-      
+    
       var text = document.createTextNode(element);
        memberequipe.appendChild(text); 
+       var link = document.createElement('a')
+    link.href="/users/"+b[inc];
+    link.appendChild(memberequipe)
       var daddy=document.getElementById("equipe")
- 
-   
-       daddy.appendChild(memberequipe);
+       daddy.appendChild(link);
     
    
       
@@ -632,7 +655,7 @@ let b=[];
       
         nom = data[0].innerHTML;
         pre = data[1].innerHTML;
-        nom=nom.substring(20, nom.length-4);
+        nom=nom.substring(21, nom.length-4);
        x=nom+' '+pre;
         a.push(x);
         b.push(rowId);
@@ -641,17 +664,22 @@ let b=[];
       var memberequipe = document.createElement('p')
       
       var text = document.createTextNode(x);
-       memberequipe.appendChild(text); 
+      memberequipe.appendChild(text); 
+
+      var link = document.createElement('a')
+      
+      link.href="/users/"+rowId;
+      link.appendChild(memberequipe)
       var daddy=document.getElementById("equipe")
  
    
-       daddy.appendChild(memberequipe);
+      daddy.appendChild(link);
     
    
       
    
       
-        document.getElementById("equipeid").value =b;
+      document.getElementById("equipeid").value=b;
       
         
       
@@ -674,19 +702,6 @@ let b=[];
 
   }
 
-
-//   const file = document.querySelector('#file');
-// file.addEventListener('change', (e) => {
-//   // Get the selected file
-//   const [file] = e.target.files;
-//   // Get the file name and size
-//   const { name: fileName, size } = file;
-//   // Convert size in bytes to kilo bytes
-//   const fileSize = (size / 1000).toFixed(2);
-//   // Set the text content
-//   const fileNameAndSize = `${fileName} - ${fileSize}KB`;
-//   document.querySelector('.file-name').textContent = fileNameAndSize+'\xa0 \xa0 ✓';
-// });
 
 
 
