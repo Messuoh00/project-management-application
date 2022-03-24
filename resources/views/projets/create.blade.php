@@ -129,6 +129,8 @@
                         
                       
                         <a data-toggle="modal" href="#myModal"  class="btn btn-warning btn-sm " style="margin:10px">Choisir Chef Projet</a>
+                        <button type="button"  class="btn btn-warning btn-sm " onclick="clear1()">annuler</button>
+
 
                         <div class="modal" tabindex="-1" role="dialog" id="myModal">
                             <div class="modal-dialog" role="document">
@@ -197,7 +199,7 @@
 
 
                         <a data-toggle="modal" href="#myModal2"  class="btn btn-warning btn-sm " style="margin: 10px">Choisir Representant E&P</a>
-
+                        <button type="button"  class="btn btn-warning btn-sm " onclick="clear2()">Clear input field</button>
                         <div class="modal" tabindex="-1" role="dialog" id="myModal2">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
@@ -450,7 +452,7 @@
         x=nom+' '+pre;
         
       var memberequipe = document.createElement('p')
-      
+      memberequipe.setAttribute("id",'p'+rownId  )
       var text = document.createTextNode(x);
       memberequipe.appendChild(text); 
 
@@ -467,8 +469,8 @@
       document.getElementById("RepresentantE&Pid").value = rowId;
     }
 
-let a=[];
-let b=[];
+
+    let b=[];
 
     function show3() {
       var rowId = 
@@ -483,28 +485,47 @@ let b=[];
         pre = data[1].innerHTML;
         nom=nom.substring(21, nom.length-4);
        x=nom+' '+pre;
-        a.push(x);
+
         b.push(rowId);
 
      
-      var memberequipe = document.createElement('p')
-      
+      var memberequipedad = document.createElement('p');
+     
+      var memberequipe = document.createElement('span');
+  
       var text = document.createTextNode(x);
       memberequipe.appendChild(text); 
 
       var link = document.createElement('a')
       
       link.href="/users/"+rowId;
-      link.appendChild(memberequipe)
+      link.appendChild(memberequipe);
+      memberequipedad.appendChild(link);
+
+                    var button = document.createElement('button');
+                    button.innerHTML = '&times;';
+                    button.classList.add("close");
+                    button.setAttribute('type','button');
+                    button.onclick = function(){
+
+                    var index = b.indexOf(rowId);
+                        if (index !== -1) {
+                          b.splice(index, 1);
+                          document.getElementById("equipeid").value=b;
+                        } 
+                    button.parentNode.parentNode.removeChild(button.parentNode);
+                
+                  };
+                 
+       
+
       var daddy=document.getElementById("equipe")
- 
-   
-      daddy.appendChild(link);
+      
+      memberequipedad.appendChild(button);
+      daddy.appendChild(memberequipedad);
+      
     
-   
-      
-   
-      
+  
       document.getElementById("equipeid").value=b;
       
         
@@ -512,11 +533,39 @@ let b=[];
     }
 
 
+    function clear1(){
+    
+   
+
+   
+    const myNode = document.getElementById("chef");
+      myNode.innerHTML = '';
+
+     document.getElementById("chef").value ='';
+      
+      document.getElementById("chefid").value ='';
+
+  }
+
+  function clear2(){
+    
+   
+
+
+    const myNode = document.getElementById("RepresentantE&P");
+      myNode.innerHTML = '';
+
+     document.getElementById("RepresentantE&P").value ='';
+      
+      document.getElementById("RepresentantE&Pid").value ='';
+
+  }
+
 
   function clearf(){
     
    
-     a=[];
+
      b=[];
      const myNode = document.getElementById("equipe");
       myNode.innerHTML = '';

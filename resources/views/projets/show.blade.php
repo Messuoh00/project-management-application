@@ -256,8 +256,11 @@ break;
             </div>
             <div class="col-sm-9 ">
 
-            <a href="/download/{{$project->id}}/note">download</a>
-           
+            
+              <a href="/download/{{$project->id}}/note/">download</a>
+              <a href="/download/{{$project->id}}/fiche/">download</a>
+              <a href="/download/{{$project->id}}/random/">download</a>
+              
              
                 
         

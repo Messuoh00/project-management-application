@@ -29,11 +29,22 @@ Route::resource('/projet', ProjectController::class);
 Route::get('/download/{id}/{filename}', function($id,$filename)
 {
     // Check if file exists in app/storage/file folder
-    $file_path =storage_path('app\fichier-projet\fichier-projet-'.$id.'\\'.$filename.'-p'.$id.'.pdf' );
+    $file_path =storage_path('app\fichier-projet\fichier-projet-'.$id.'\\'.$filename);
     if (file_exists($file_path))
     {
+        $fileNames = [];
+       
+        $files = \File::allFiles($file_path);
+    
+        foreach($files as $file) {
+            array_push($fileNames, pathinfo($file)['basename']  );
+        }
+    
+      
+
+
         // Send Download
-        return Response::download($file_path, $filename, [
+        return Response::download($file_path.'\\'.$fileNames[0],$fileNames[0] , [
             'Content-Length: '. filesize($file_path)
         ]);
     }

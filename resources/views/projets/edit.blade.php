@@ -178,6 +178,7 @@ break;
                        
                      
                        <a data-toggle="modal" href="#myModal"  class="btn btn-warning btn-sm " style="margin: 10px">Choisir Chef Projet</a>
+                       <button type="button"  class="btn btn-warning btn-sm " onclick="clear1()">annuler</button>
 
                        <div class="modal" tabindex="-1" role="dialog" id="myModal">
                            <div class="modal-dialog" role="document">
@@ -248,6 +249,7 @@ break;
 
 
                         <a data-toggle="modal" href="#myModal2"  class="btn btn-warning btn-sm " style="margin: 10px">Choisir Representant E&P</a>
+                        <button type="button"  class="btn btn-warning btn-sm " onclick="clear2()">annuler</button>
 
                         <div class="modal" tabindex="-1" role="dialog" id="myModal2">
                             <div class="modal-dialog" role="document">
@@ -325,7 +327,7 @@ break;
 
 
 
-                            <button type="button"  class="btn btn-warning btn-sm " onclick="clearf()">Clear input field</button>
+                            <button type="button"  class="btn btn-warning btn-sm " onclick="clearf()">annuler</button>
 
                             </div>
 
@@ -446,10 +448,17 @@ break;
                       </button>
                     </div>
                     <div class="modal-body">
+
+                     
+                   
                      @switch($project->phase)
-                         @case(1.1)
-                             <span>Aucun fichier a ajour dans la phase {{$phasenom}}</span>
-                             @break
+                          
+                     
+                      
+                         
+                          @case(1.1)
+                             <span>Aucun fichier a ajouter dans la phase {{$phasenom}}</span>
+                         @break
                           
                          @case(1.2)
                          <label class="form-label">note</label>
@@ -460,7 +469,7 @@ break;
                              @break 
                              
                          @case(2.1)
-                         <span>Aucun fichier a metre ajour dans la phase {{$phasenom}}</span>
+                         <span>Aucun fichier a ajouter dans la phase {{$phasenom}}</span>
                              
                              @break 
                              
@@ -472,15 +481,21 @@ break;
                              
                          @case(3.1)
                         
-                         <span>Aucun fichier a metre ajour dans la phase {{$phasenom}}</span>
+                         <span>Aucun fichier ajouter dans la phase  {{$phasenom}}</span>
                          
                       
                              @break
 
-                             
-                         @default
+                             @default
+                      
                              
                      @endswitch
+
+                     <label  class="form-label">ajouter d'autre ficher </label>
+                     <input class="form-control form-control-sm" id="random"  name="random"  type="file" accept= "application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf">
+
+
+
                     </div>
                     <div class="modal-footer">
                      
@@ -627,25 +642,45 @@ let b=[];
   let inc=0;
   a.forEach(element => {
    
-    var memberequipe = document.createElement('p')
+    var memberequipedad = document.createElement('p');
+    var memberequipe = document.createElement('span');
     
       var text = document.createTextNode(element);
        memberequipe.appendChild(text); 
+
        var link = document.createElement('a')
     link.href="/users/"+b[inc];
     link.appendChild(memberequipe)
+    memberequipedad.appendChild(link);
+
+    var button = document.createElement('button');
+                    button.innerHTML = '&times;';
+                    button.classList.add("close");
+                    button.setAttribute('type','button');
+                    button.onclick = function(){
+
+                    var index = b.indexOf(b[inc]);
+                        if (index !== -1) {
+                          b.splice(index, 1);
+                          document.getElementById("equipeid").value=b;
+                        } 
+                    button.parentNode.parentNode.removeChild(button.parentNode);
+                
+                  };
+                 
+      memberequipedad.appendChild(button);
       var daddy=document.getElementById("equipe")
-       daddy.appendChild(link);
+       daddy.appendChild(memberequipedad);
     
    
       
   });
-  document.getElementById("equipe").value =a;
+
       
   document.getElementById("equipeid").value =b;
 
     function show3() {
-        var rowId = 
+      var rowId = 
             event.target.parentNode.parentNode.id;
       //this gives id of tr whose button was clicked
      
@@ -657,34 +692,80 @@ let b=[];
         pre = data[1].innerHTML;
         nom=nom.substring(21, nom.length-4);
        x=nom+' '+pre;
-        a.push(x);
+
         b.push(rowId);
 
      
-      var memberequipe = document.createElement('p')
-      
+      var memberequipedad = document.createElement('p');
+     
+      var memberequipe = document.createElement('span');
+  
       var text = document.createTextNode(x);
       memberequipe.appendChild(text); 
 
       var link = document.createElement('a')
       
       link.href="/users/"+rowId;
-      link.appendChild(memberequipe)
+      link.appendChild(memberequipe);
+      memberequipedad.appendChild(link);
+
+                    var button = document.createElement('button');
+                    button.innerHTML = '&times;';
+                    button.classList.add("close");
+                    button.setAttribute('type','button');
+                    button.onclick = function(){
+
+                    var index = b.indexOf(rowId);
+                        if (index !== -1) {
+                          b.splice(index, 1);
+                          document.getElementById("equipeid").value=b;
+                        } 
+                    button.parentNode.parentNode.removeChild(button.parentNode);
+                
+                  };
+                 
+       
+
       var daddy=document.getElementById("equipe")
- 
-   
-      daddy.appendChild(link);
+      
+      memberequipedad.appendChild(button);
+      daddy.appendChild(memberequipedad);
+      
     
-   
-      
-   
-      
+  
       document.getElementById("equipeid").value=b;
       
         
       
     }
 
+    function clear1(){
+    
+   
+
+   
+    const myNode = document.getElementById("chef");
+      myNode.innerHTML = '';
+
+     document.getElementById("chef").value ='';
+      
+      document.getElementById("chefid").value ='';
+
+  }
+
+  function clear2(){
+    
+   
+
+
+    const myNode = document.getElementById("RepresentantE&P");
+      myNode.innerHTML = '';
+
+     document.getElementById("RepresentantE&P").value ='';
+      
+      document.getElementById("RepresentantE&Pid").value ='';
+
+  }
 
 
   function clearf(){
