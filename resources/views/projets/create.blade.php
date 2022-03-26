@@ -46,12 +46,12 @@
                   <div class="form-group">
                     <h6 class="mb-0"> Region Implementation:</h6>
 
-                    <input type="text" class="form-control" value="Region Implementation"  name="RegionImp"/>
+                    <input type="text" class="form-control" placeholder="Region Implementation"  name="RegionImp"/>
                 </div>
                 <div class="form-group">
                     <h6 class="mb-0"> Region Exploitation:</h6>
 
-                    <input type="text" class="form-control" value="Region Exploitation"  name="RegionExp"/>
+                    <input type="text" class="form-control" placeholder="Region Exploitation"  name="RegionExp"/>
                 </div>
 
 
@@ -199,7 +199,7 @@
 
 
                         <a data-toggle="modal" href="#myModal2"  class="btn btn-warning btn-sm " style="margin: 10px">Choisir Representant E&P</a>
-                        <button type="button"  class="btn btn-warning btn-sm " onclick="clear2()">Clear input field</button>
+                        <button type="button"  class="btn btn-warning btn-sm " onclick="clear2()">annuler</button>
                         <div class="modal" tabindex="-1" role="dialog" id="myModal2">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
@@ -276,7 +276,7 @@
                         
 
 
-                        <button type="button"  class="btn btn-warning btn-sm " onclick="clearf()">Clear input field</button>
+                        <button type="button"  class="btn btn-warning btn-sm " onclick="clearf()">annuler</button>
 
                       </div>
 
@@ -396,10 +396,6 @@
     function show() {
      
      
-       
-     
-      
-   
       
         var daddy=document.getElementById("chef");
       daddy.innerHTML='';
@@ -416,15 +412,15 @@
         var pre = data[1].innerHTML;
         x=nom+' '+pre;
        
-        var memberequipe = document.createElement('p')
+        var memberequipe = document.createElement('p');
       
       var text = document.createTextNode(x);
       memberequipe.appendChild(text); 
 
-      var link = document.createElement('a')
+      var link = document.createElement('a');
       
       link.href="/users/"+rowId;
-      link.appendChild(memberequipe)
+      link.appendChild(memberequipe);
   
  
    
@@ -451,15 +447,15 @@
         var pre = data[1].innerHTML;
         x=nom+' '+pre;
         
-      var memberequipe = document.createElement('p')
-      memberequipe.setAttribute("id",'p'+rownId  )
+      var memberequipe = document.createElement('p');
+     
       var text = document.createTextNode(x);
       memberequipe.appendChild(text); 
 
-      var link = document.createElement('a')
+      var link = document.createElement('a');
       
       link.href="/users/"+rowId;
-      link.appendChild(memberequipe)
+      link.appendChild(memberequipe);
   
  
    
@@ -476,7 +472,9 @@
       var rowId = 
             event.target.parentNode.parentNode.id;
       //this gives id of tr whose button was clicked
-     
+     if ( !(b.includes(rowId) ) ) {
+       
+   
         var data = document.getElementById(rowId).querySelectorAll(".rowdata"); 
       /*returns array of all elements with 
       "row-data" class within the row with given id*/
@@ -519,7 +517,7 @@
                  
        
 
-      var daddy=document.getElementById("equipe")
+      var daddy=document.getElementById("equipe");
       
       memberequipedad.appendChild(button);
       daddy.appendChild(memberequipedad);
@@ -527,7 +525,7 @@
     
   
       document.getElementById("equipeid").value=b;
-      
+    }
         
       
     }

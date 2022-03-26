@@ -26,25 +26,14 @@ Route::resource('/projet', ProjectController::class);
 
 
 
-Route::get('/download/{id}/{filename}', function($id,$filename)
+Route::get('/download/{file_path}/{fileNames}', function($file_path,$fileNames)
 {
     // Check if file exists in app/storage/file folder
-    $file_path =storage_path('app\fichier-projet\fichier-projet-'.$id.'\\'.$filename);
+   
     if (file_exists($file_path))
     {
-        $fileNames = [];
-       
-        $files = \File::allFiles($file_path);
-    
-        foreach($files as $file) {
-            array_push($fileNames, pathinfo($file)['basename']  );
-        }
-    
-      
-
-
-        // Send Download
-        return Response::download($file_path.'\\'.$fileNames[0],$fileNames[0] , [
+       // Send Download
+        return Response::download($file_path.'\\'.$fileNames,$fileNames, [
             'Content-Length: '. filesize($file_path)
         ]);
     }
@@ -53,7 +42,15 @@ Route::get('/download/{id}/{filename}', function($id,$filename)
         // Error
         exit('Requested file does not exist on our server!');
     }
-})->where('filename', '[A-Za-z0-9\-\_\.]+')->where('id','[0-9]+');
+})->where('file_path', '[A-Za-z0-9\-\_\.]+')->where('fileNames','[A-Za-z0-9\-\_\.]+')->where('file_path', '(.*)')->where('fileNames', '(.*)');
+
+
+
+
+Route::post('/filedelete/{id}/{file_path}/{fileNames}','App\Http\Controllers\ProjectController@deletefile')->where('file_path', '[A-Za-z0-9\-\_\.]+')->where('fileNames','[A-Za-z0-9\-\_\.]+')->where('file_path', '(.*)')->where('fileNames', '(.*)');
+
+
+
 
 
 
@@ -72,7 +69,7 @@ Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
 Route::get('/logout','App\Http\Controllers\Authcontroller@logout');
 Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
 Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepassword');
-  Route::resource('users',Authcontroller::class);
+Route::resource('users',Authcontroller::class);
 
 
 });

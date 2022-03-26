@@ -78,7 +78,7 @@ table.table-bordered > tbody > tr > td{
 }
 
 .form{
-    width: 80%;
+    width: 100%;
     margin: auto;
     margin-top: 5%;
 }
@@ -98,7 +98,8 @@ p{
 .butt{
     display: grid;
  
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr  1fr;
+    
    
 }
 
@@ -106,9 +107,8 @@ p{
 
 .son2{
     text-align: right;
- 
+    
 }
-
 
 
 

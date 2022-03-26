@@ -97,7 +97,7 @@ class ProjectController extends Controller
        
        
         
-      return redirect('projet');
+      return redirect('projet/'.$proje->id);
     
     }
 
@@ -252,7 +252,7 @@ class ProjectController extends Controller
             Mail::to($membre->email)->send(new SendEmail());
            }
         
-            return redirect('projet');
+      
 
       
         }else{
@@ -315,7 +315,7 @@ class ProjectController extends Controller
        
 
 
-            return redirect('projet');
+            return redirect('projet/'.$id);
     }
 
     /**
@@ -336,6 +336,13 @@ class ProjectController extends Controller
 
 
     
+    public function deletefile($id,$file_path,$fileNames)
+    {
+        File::delete($file_path.'\\'.$fileNames,$fileNames);
+        
+
+        return redirect('projet/'.$id);
+    }
 
 
 

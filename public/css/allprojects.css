@@ -1,4 +1,4 @@
-table.table-bordered{
+/* table.table-bordered{
     border-color: orange;
     
   }
@@ -9,7 +9,7 @@ table.table-bordered > thead > tr > th{
 table.table-bordered > tbody > tr > td{
     border-color: orange;
     border-width: 3px;
-}
+} */
 
 
 .icon{
@@ -49,4 +49,6 @@ table.table-bordered > tbody > tr > td{
     
   }
 
- 
+ a{
+   color: orange;
+ }

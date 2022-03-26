@@ -206,77 +206,97 @@ break;
           <div class="col-sm-3">
             <h6 class="mb-0">Equipe</h6>
           </div>
-          <div class="col-sm-9 "style="overflow-y: scroll; height:117px;" >
+          <div class="col-sm-9 "style="overflow-y: scroll; height:123px;" >
            @foreach ($equipe as $eq)
               <a href="users/{{$eq->id}}"><p>{{$eq->nom}}  {{$eq->prenom}}</p></a>
            @endforeach
           </div>
         </div>
         <hr>
-        
-
-        @php 
-        switch ($project->phase) {
-  
-            case '1.1':
-            $bol=true;
-            break;
-  
-            case '1.2':
-            $bol=file_exists(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\note-p'.$project->id.'.pdf' ));
-            $bol1=file_exists(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\fiche-p'.$project->id.'.pdf' ));
-            $bol=$bol and $bol1;
-            break;
-  
-  
-            case '2.1':
-            $bol=true;
-            break;
-  
-  
-            case '2.2':
-           $bol=file_exists(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\misc-p'.$project->id.'.pdf' ) );
-            break;
-          
-            case '3.0':
-            $bol=false;
-            break;
-            
-          default:
-            $bol=true;
-            break;
-  
-        }
       
-        @endphp
-
-            <div class="row">
-            <div class="col-sm-3">
-            <h6 class="mb-0">Fichier</h6>
-            </div>
-            <div class="col-sm-9 ">
-
-            
-              <a href="/download/{{$project->id}}/note/">download</a>
-              <a href="/download/{{$project->id}}/fiche/">download</a>
-              <a href="/download/{{$project->id}}/random/">download</a>
-              
-             
-                
         
-            </div>
-        </div>
+
+
+
+        <div class="son son1 " style="text-align: center">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btnSubmit btn-md" style="background: grey;" data-toggle="modal" data-target="#exampleModalCenter">
+          les fichier du projet
+          </div>
+         <!-- Modal -->
+         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLongTitle">Fichier:</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+    
+                  <div class="col-sm-9 ">
+                    
+                    
+                        @php
+                              $filenames = array("note", "fiche", "random");
+                        @endphp
+      
+      
+                          @foreach ($filenames as $filename)
+                            
+      
+                            @php
+                          
+      
+                            
+                        
+                                  $file_path=storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\\'.$filename);
+                                  $files=array( );
+                                  if (file_exists($file_path))
+                                  {
+                                  $files = \File::allFiles($file_path);
+                                  }
+              
+                              
+                                
+                            @endphp
+      
+                          <h6>les fichier {{$filename}}:</h6>
+                          
+                          @foreach ($files as $pdffilename)
+                        
+                          <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <b>{{pathinfo($pdffilename)['basename']}} </b></a> /
+                          @endforeach
+                          <br> <br>
+                        @endforeach
+                  
+                  </div>
+               
+              
+      
+               </div>
+               <div class="modal-footer">
+                
+                 <button type="button" class="btn btn-primary"  data-dismiss="modal">OK</button>
+               </div>
+             </div>
+           </div>
+         </div>
+          {{-- FORM N2 START HERE  FOR PASSAGE --}}
+    
+    
+
+
+
+
 
 
         <hr>
-
-
       </div>
-      
-      
 
-        
-
+      
+     
 
 
 
@@ -310,15 +330,36 @@ break;
          
     <div class="card-body status gutters-sm ">
       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"> Description:</i></h6>
-      <span class="box"> {{$project->description}}</span>
+
+      <div class="col-sm-9 box "style="overflow-y: scroll; height:200px;" >
+      
+        {{$project->description}}
+      </div>
+
      
     </div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class="editer">
   
-   
+    
 
     <div class="editerbtn"  >
  
@@ -355,8 +396,49 @@ break;
 
 
 
+
+
+
+
+
+
+
+
     <div class="editerbtn" >  
-      
+      @php 
+      switch ($project->phase) {
+
+          case '1.1':
+          $bol=true;
+          break;
+
+          case '1.2':
+          $bol=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\note') );
+          $bol1=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\fiche' ));
+          $bol=$bol and $bol1;
+          break;
+
+
+          case '2.1':
+          $bol=true;
+          break;
+
+
+          case '2.2':
+         $bol=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\misc' ) );
+          break;
+        
+          case '3.0':
+          $bol=false;
+          break;
+          
+        default:
+          $bol=true;
+          break;
+
+      }
+    
+      @endphp    
   
    
      @if (strcmp($phasenom,"Archivage"))
