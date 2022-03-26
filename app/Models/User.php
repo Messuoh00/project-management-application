@@ -20,6 +20,9 @@ class User extends Authenticatable
         return  $this->belongsToMany(Project::class);
 
     }
+    function publications(){
+        $this->hasMany(Publication::class);
+    }
 
     
     /**

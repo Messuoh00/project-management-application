@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\PublicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Authcontroller;
@@ -69,7 +69,13 @@ Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
 Route::get('/logout','App\Http\Controllers\Authcontroller@logout');
 Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
 Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepassword');
+<<<<<<< HEAD
 Route::resource('users',Authcontroller::class);
+=======
+  Route::resource('users',Authcontroller::class);
+  Route::resource('publications',PublicationController::class);
+  Route::get('/telecharger/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
+>>>>>>> 96bf34bfdb35210f86abeb7b217fedcb6d1518c1
 
 
 });
