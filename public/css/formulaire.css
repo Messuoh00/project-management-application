@@ -50,7 +50,9 @@ label{
     color: rgb(63, 62, 62);
  font-size:larger
 }
-hr{ 
+
+
+.x hr{ 
   
 border: none;
 	height: 3px !important;

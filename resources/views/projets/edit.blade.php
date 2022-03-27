@@ -8,7 +8,7 @@
 @section('content')
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <h1 class="h3 mb-0 text-gray-800"> Modifier projet N:  <a href="/projet/{{$project->id}}">{{$project->id}}</a> </h1>
    
 </div>
 
@@ -61,10 +61,7 @@
 
 
                                 <div class="form">
-                                <div class="note">
-                                <a href="/projet/ {{$project->id}}">  <h1>Modifier projet N:{{$project->id}}</h1></a>
-                                </div>
-
+                                
 
                                 <div class="form-content">
                                 <form action='/projet/{{$project->id}}' method="POST" enctype="multipart/form-data">

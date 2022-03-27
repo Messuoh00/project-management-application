@@ -35,7 +35,7 @@
                       <table class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
                       
                       
-                          <p style="position: absolute;padding-top: 10px">ajouter projet : <a href="projet/create"><img src="{{url('/img/add.png')}}" height="35px"></a> </p>
+                          {{-- <p style="position: absolute;padding-top: 10px">ajouter projet : <a href="projet/create"><img src="{{url('/img/add.png')}}" height="35px"></a> </p> --}}
                       <thead>
                           <tr style="text-align: center">
                       

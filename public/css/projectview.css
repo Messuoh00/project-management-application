@@ -21,16 +21,12 @@
 }
 
 
+
 .conten_project_view {
   
-    max-width: 100%;
+    width: 90%;
     margin: auto;
-    margin-top: 20px;
-    border: 1px solid #ced4da;
-    overflow:hidden ;
-   margin-top: 50px;
-   margin-bottom: 50px;
-
+    margin-top: 30px;
     
   }
 
@@ -85,7 +81,7 @@ a{
     background: -webkit-linear-gradient(left, orange, rgb(170, 152, 152));
 }
 
-hr{
+.x hr{
     color: rgb(255, 153, 0);
 }
 
@@ -100,3 +96,5 @@ p{
     color: black;
     text-align: center;
 }
+
+
