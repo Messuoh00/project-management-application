@@ -31,6 +31,11 @@
 
 <body id="page-top">
 
+@php
+  
+@endphp
+
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -48,55 +53,82 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-            <div class="sidebar-heading">
-               Info
+            <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
+               Info:
             </div>
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
+       
+            <li class="nav-item  {{request()->is('coo-E&P','coo-E&P-R') ? 'active  ' : ''}}{{-- active --}}">
+                <a class="nav-link  {{!request()->is('coo-E&P','coo-E&P-R') ? 'collapsed  ' : ''}}  {{-- collapsed --}} " href="#" data-toggle="collapse" data-target="#collapseone"
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Coordination E&P</span></a>
+                </a>
+               
+               
+                <div id="collapseone" class="collapse {{request()->is('coo-E&P','coo-E&P-R') ? 'show  ' : ''}} {{-- show --}} " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+
+                    
+                    <div class="bg-white py-2 collapse-inner rounded">
+                       
+                        <a class="collapse-item {{request()->is('coo-E&P') ? 'active text-warning ' : ''}}"   href="/coo-E&P" >Présentation Coordination <br> E&P</a>
+                        <hr class="sidebar-divider my-0">
+                        
+                        <a  class="collapse-item {{request()->is('coo-E&P-R') ? 'active text-warning ' : ''}}"  href="/coo-E&P-R">Rapports Coordination <br> E&P</a>
+
+                        
+                    </div>
+                </div>
+
+            
+
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
                 projets:
             </div>
            
             <!-- Nav Item - -->
-            <li class="nav-item">
-                <a class="nav-link"  href="/projet">
+            <li class="nav-item {{request()->is('projet') && request()->missing('phase') ? 'active ' : ''}}">
+                <a class="nav-link "  href="/projet">
                     <i class="fas fa-fw fa-database"></i>
                     <span>Tous les projets</span></a>
             </li>
             
             
-            <li class="nav-item   {{-- active --}}">
-                <a class="nav-link  {{-- collapsed --}} " href="#" data-toggle="collapse" data-target="#collapsethree"
+            <li class="nav-item  {{request()->filled('phase')  ? 'active ' : ''}} {{-- active --}}">
+                <a class="nav-link  {{!request()->filled('phase') ? 'collapsed ' : ''}}{{-- collapsed --}} " href="#" data-toggle="collapse" data-target="#collapsethree"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-tasks"></i>
                     <span>Pphase projets</span>
                 </a>
                
                
-                <div id="collapsethree" class="collapse {{-- show --}} " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapsethree" class="collapse {{request()->has('phase') ? 'show ' : ''}} {{-- show --}} " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
                     
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header" style="color: orange"> Phase avant projet <br> et planification:</h6>
-                        <a class="collapse-item" href="/projet?phase=1.1">Idee RD</a>
-                        <a class="collapse-item" href="/projet?phase=1.2">Maturation</a>
 
-                        <h6 class="collapse-header" style="color: orange">  Phase exécution <br> et suivi évaluation:</h6>
-                        <a class="collapse-item" href="/projet?phase=2.1">Recherche </a>
-                        <a class="collapse-item"  href="/projet?phase=2.2">Test Pilote</a>
+                        <h6 class="collapse-header" style="color: rgb(85, 84, 84)"> Phase avant projet <br> et planification:</h6>
+                        <a class="collapse-item  {{  request()->input('phase')=='1.1' ? 'active text-warning ' : ''}} " href="/projet?phase=1.1">Idee RD</a>
+                        
+                        <a class="collapse-item  {{  request()->input('phase')=='1.2' ? 'active text-warning ' : ''}}" href="/projet?phase=1.2">Maturation</a>
+                        <hr class="sidebar-divider my-0">
 
-                        <h6 class="collapse-header" style="color: orange"> Phase  clôture  <br> et valorisation:</h6>
+                        <h6 class="collapse-header"style="color: rgb(85, 84, 84)">  Phase exécution <br> et suivi évaluation:</h6>
+                        <a class="collapse-item {{  request()->input('phase')=='2.1' ? 'active text-warning ' : ''}}" href="/projet?phase=2.1">Recherche </a>
+                    
+                        <a class="collapse-item {{  request()->input('phase')=='2.2' ? 'active text-warning ' : ''}}"  href="/projet?phase=2.2">Test Pilote</a>
+                        <hr class="sidebar-divider my-0">
+
+                        <h6 class="collapse-header" style="color: rgb(85, 84, 84)"> Phase  clôture  <br> et valorisation:</h6>
       
-                        <a class="collapse-item {{-- active text-warning --}}" href="/projet?phase=3.1">Archivage </a>
+                        <a class="collapse-item {{  request()->input('phase')=='3.1' ? 'active text-warning ' : ''}}" href="/projet?phase=3.1">Archivage </a>
+                        
                     </div>
                 </div>
 
@@ -107,8 +139,8 @@
 
                         
             <!-- Nav Item - -->
-            <li class="nav-item">
-                <a class="nav-link"  href="/projet/create">
+            <li class="nav-item {{request()->is('projet/create') ? 'active ' : ''}}">
+                <a class="nav-link "  href="/projet/create">
                     <i class="fas fa-fw fa-plus-circle"></i>
                     <span>Ajouter un projet</span></a>
             </li>
@@ -121,13 +153,13 @@
             <hr class="sidebar-divider">
 
 
-            <div class="sidebar-heading">
+            <div class="sidebar-heading "style="color: rgb(34, 33, 33)">
                 Données
              </div>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link {{request()->is('') ? 'active ' : ''}}" href="">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Statistique</span></a>
             </li>
@@ -136,18 +168,18 @@
             <hr class="sidebar-divider">
 
 
-            <div class="sidebar-heading">
+            <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
                 Utulisateur:
              </div>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="/users">
+            <li class="nav-item  {{request()->is('users') ? 'active ' : ''}}">
+                <a class="nav-link " href="/users">
                     <i class="fas fa-fw fa-user"></i>
                     <span>List Utulisateur</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{request()->is('users/create') ? 'active ' : ''}}">
                 <a class="nav-link" href="/users/create">
                     <i class="fas fa-fw fa-plus-circle"></i>
                     <span>Ajouter Utulisateur</span></a>

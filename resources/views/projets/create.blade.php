@@ -101,6 +101,12 @@
 
                                   </div>
 
+                                  
+                                  <div class="form-group">
+                                    <h6 class="mb-0"> Phase:</h6>
+                                    <input   class="form-control" value="Idee R/D" disabled>
+                                  </div>
+
 
                                   </div>
 

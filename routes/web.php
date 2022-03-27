@@ -62,7 +62,11 @@ Route::get('/', 'App\Http\Controllers\Authcontroller@log')->name('log');
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::resource('/projet', ProjectController::class);
+
+
+    
+Route::resource('/projet', ProjectController::class);
+
 
 
 Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
@@ -70,10 +74,12 @@ Route::get('/logout','App\Http\Controllers\Authcontroller@logout');
 Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
 Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepassword');
 
-  Route::resource('users',Authcontroller::class);
-  Route::resource('publications',PublicationController::class);
-  Route::get('/telecharger/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
+Route::resource('users',Authcontroller::class);
+Route::resource('publications',PublicationController::class);
+Route::get('/telecharger/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
 
 
+Route::view('/coo-E&P', 'coo-ep.coo-ep');
+Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 });
