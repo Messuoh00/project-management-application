@@ -39,10 +39,7 @@
                                                 <div class="col ">
                                                    
                                                                 
-
-        
-
-                                                        
+   
                                                         insert rapport stuff here
 
 
