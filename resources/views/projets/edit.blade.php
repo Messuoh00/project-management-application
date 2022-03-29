@@ -26,12 +26,12 @@
                                 @php
                                 $phase1=$project->phase;
 
-                                $phasenom='';
-                                $phasenom1="";
+                                $phasenom='x';
+                                $phasenom1="x";
                                 switch ($phase1) {
                                     
                                 case 1.1:
-                                $phase1=1.2;   $phasenom1=' Maturation ';$phasenom='Idee R/D  ';
+                                $phase1=1.2;   $phasenom1=' Maturation ';$phasenom='Idee R&D';
                                 break;
 
                                 case 1.2:
@@ -39,11 +39,11 @@
                                 break;
 
                                 case 2.1:
-                                $phase1=2.2;   $phasenom='Recherche(En TEST)';$phasenom='Recherche(En cours) ';
+                                $phase1=2.2;   $phasenom='Recherche(En TEST)';$phasenom='Recherche(En cours)';
                                 break;
 
                                 case 2.2:
-                                $phase1=3.1;   $phasenom='Archivage ';$phasenom='Recherche(En TEST) ';
+                                $phase1=3.1;   $phasenom='Archivage ';$phasenom='Recherche(En TEST)';
 
                                 
                                 break;
@@ -411,7 +411,7 @@
 
 
                                 <div class="form-group" style="text-align: center">
-                                    <a href="/fichier/{{$project->id}}/{{$phasenom}}">
+                                    <a href="/fichier/{{$project->id}}/{{$phasenom}}?var=edit">
                             
                                         <button type="button" class="btn   btn-warning btn-lg " style="margin-top: 20px">
                                          <i class="fas fa-fw fa-archive"></i> Modifier fichier du projet  

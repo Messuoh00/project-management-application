@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\fichier;
 use App\Models\Publication;
 use Illuminate\Support\Facades\Response;
-
+use File;
 class UploadController extends Controller
 {
 
@@ -23,7 +23,7 @@ class UploadController extends Controller
 
 
     
-    public function store(Request $request,$id)
+    public function store(Request $request,$id,$phase)
     {
   
       
@@ -36,7 +36,7 @@ class UploadController extends Controller
 
         if ($request->hasFile(key:'misc') ) {request()->file(key:'misc')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/misc',name:'misc-p'.$id.request()->file(key:'misc')->getClientOriginalName(),options:'');   }
 
-        return redirect('projet\\'.$id);
+        return redirect('fichier\\'.$id.'\\'.$phase.'?var=edit');
     }
 
 
@@ -59,7 +59,23 @@ class UploadController extends Controller
 
     }
 
- 
+    public function delete($file_path,$fileNames,$id,$phase)
+    {
+
+        if (file_exists($file_path))
+        {
+           // Send Download
+          File::delete($file_path.'\\'.$fileNames,$fileNames);
+          return redirect('fichier\\'.$id.'\\'.$phase.'?var=edit');
+        
+        }
+        else
+        {
+            // Error
+            exit('Requested file does not exist on our server!');
+        }
+
+    }
 
 
 

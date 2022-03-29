@@ -7,6 +7,9 @@
 
 @section('content')
 
+
+
+
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800">INFO PROJET N:{{$project->id}}</h1>
@@ -223,7 +226,7 @@
                                               <div class="col-sm-3">
                                               <h6 class="mb-0">Equipe:</h6>
                                               </div>
-                                              <div class="col-sm-9 "style="overflow-y: scroll; height:155px;" >
+                                              <div class="col-sm-9 "style="overflow-y: scroll; height:109px;" >
                                               @foreach ($equipe as $eq)
                                                   <a href="users/{{$eq->id}}"><p>{{$eq->nom}}  {{$eq->prenom}}</p></a>
                                               @endforeach
@@ -236,91 +239,16 @@
 
 
                                               <div class="son son1 " style="text-align: center">
-                                              <!-- Button trigger modal -->
-                                              <button type="button" class="btn   btn-warning btn-lg "  data-toggle="modal" data-target="#exampleModalCenter">
-                                                <i class="fas fa-fw fa-archive"></i> fichier du projet  
+                                                <!-- Button trigger modal -->
+                                                <a href="/fichier/{{$project->id}}/{{$phasenom}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
+                                                    <i class="fas fa-fw fa-archive"></i> fichier du projet  
+                                                </a>
                                               </div>
-                                              <!-- Modal -->
-                                              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                                  <div class="modal-content">
-                                                  <div class="modal-header">
-                                                      <h5 class="modal-title" id="exampleModalLongTitle">Fichier:</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                  </div>
-                                                  <div class="modal-body">
-
-                                                      <div class="col-sm-9 ">
-                                                      
-                                                      
-                                                          @php
-                                                                  $filenames = array("note", "fiche", "random");
-                                                          @endphp
-
-
-                                                              @foreach ($filenames as $filename)
-                                                              
-
-                                                              @php
-                                                              
-
-                                                              
-                                                          
-                                                                      $file_path=storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\\'.$filename);
-                                                                      $files=array( );
-                                                                      if (file_exists($file_path))
-                                                                      {
-                                                                      $files = \File::allFiles($file_path);
-                                                                      }
-                                                  
-                                                                  
-                                                                  
-                                                              @endphp
-
-                                                              <h6>les fichier {{$filename}}:</h6>
-                                                              
-                                                              @foreach ($files as $pdffilename)
-                                                          
-                                                              <b>{{pathinfo($pdffilename)['basename']}}</b>
-
-                                                              <div >
-                                                              
-                                                                  <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}">download</a>
-                                                              
-                                                              </div>
-
-                                                              @endforeach
-                                                              <br> 
-                                                          @endforeach
-                                                      
-                                                      </div>
-                                                  
-                                                  
-
-                                                  </div>
-                                                  <div class="modal-footer">
-                                                  
-                                                      <button type="button" class="btn btn-primary"  data-dismiss="modal">OK</button>
-                                                  </div>
-                                                  </div>
-                                              </div>
-                                              </div>
-                                              {{-- FORM N2 START HERE  FOR PASSAGE --}}
-
-
-
-
-
-
+                                            
 
 
                                               <hr>
                                               </div>
-
-
-
 
 
 
@@ -334,7 +262,7 @@
 
 
                                               <div class="card-body status">
-                                              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"> Statu</i>Projet:</h6>
+                                              <h6 class="d-flex align-items-center mb-3"> Statut Projet:</h6>
                                               <small>Visibilite:{{$project->visibilite}}%</small>
                                               <div class="progress mb-3" style="height: 5px">
                                               <div class="progress-bar bg-primary" role="progressbar" style="width:{{$project->visibilite}}%" aria-valuenow="{{$project->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -353,7 +281,7 @@
                                               
 
                                               <div class="card-body status gutters-sm ">
-                                              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"> Description:</i></h6>
+                                              <h6 class="d-flex align-items-center mb-3">Description:</h6>
 
                                               <div class="col-sm-9 box "style="overflow-y: scroll; height:200px;" >
 
@@ -398,40 +326,7 @@
 
 
                                               <div class="editerbtn" >  
-                                              @php 
-                                              switch ($project->phase) {
-
-                                              case '1.1':
-                                              $bol=true;
-                                              break;
-
-                                              case '1.2':
-                                              $bol=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\note') );
-                                              $bol1=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\fiche' ));
-                                              $bol=$bol and $bol1;
-                                              break;
-
-
-                                              case '2.1':
-                                              $bol=true;
-                                              break;
-
-
-                                              case '2.2':
-                                              $bol=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\misc' ) );
-                                              break;
-
-                                              case '3.0':
-                                              $bol=false;
-                                              break;
-                                              
-                                              default:
-                                              $bol=true;
-                                              break;
-
-                                              }
-
-                                              @endphp    
+                                                
 
 
                                               @if (strcmp($phasenom,"Archivage"))
@@ -444,18 +339,18 @@
                                               <div class="modal-dialog" role="document">
                                               <div class="modal-content">
                                               <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalLabel" style="color:black">Passer a la phase {{$phasenom1}} ?</h5>
+                                                  
                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <span aria-hidden="true">&times;</span>
                                                   </button>
                                               </div>
 
-                                              @if (!$bol)
+                                          
                                                   
-                                              <div class="modal-body">
-                                              <span style="color: black">   Passage impossible il manque des document !</span>
+                                              <div class="modal-body" style="text-align: center">
+                                              <span style="color: black">Passer a la phase {{$phasenom1}} ?</span>
                                               </div>
-                                              @endif
+                                            
 
                                               <div class="modal-footer">
 
@@ -465,19 +360,20 @@
                                                   
 
 
-                                                  @if($bol)
+                                                 
                                                   
                                                   <form action="/projet/{{$project->id}}" method="POST">
                                                   @csrf
                                                   @method('PUT')
                                                           
-                                                  <input type="text" value="{{$phase1}}" name="updatephase" hidden>    
+                                                  <input type="text" value="{{$phase1}}" name="updatephase" hidden> 
+                                                  <input type="text" value="{{$phasenom}}" name="currentphase" hidden>    
                                                   <button type="button submit" class="btn btn-warning" style="text-align: center">Confirme </button>
                                               
                                                   </form>
 
                                               
-                                                  @endif
+                                      
 
                                               </div>
                                               </div>

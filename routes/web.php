@@ -66,12 +66,12 @@ Route::middleware(['auth'])->group(function(){
 Route::resource('/projet', ProjectController::class);
 
 
-Route::get('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@edit');
+Route::get('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@edit')->where('phase', '(.*)');
 
-Route::post('/fichier/{id}','App\Http\Controllers\UploadController@store');
+Route::post('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
 
 Route::get('/download/{file_path}/{fileNames}','App\Http\Controllers\UploadController@download')->where('file_path', '(.*)')->where('fileNames', '(.*)');
-
+Route::get('/delete/{file_path}/{fileNames}/{id}/{phsae}','App\Http\Controllers\UploadController@delete')->where('file_path', '(.*)')->where('fileNames', '(.*)')->where('phase', '(.*)');
 
 Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
 Route::get('/logout','App\Http\Controllers\Authcontroller@logout');

@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\User;
 use App\Models\UserProject;
 use App\Mail\SendEmail;
+use Session;
 
 class ProjectController extends Controller
 {
@@ -227,7 +228,25 @@ class ProjectController extends Controller
         if ($request->has('updatephase')) {
            
            $project= Project::find($id);
+           
+           $test=(
+          
 
+            (file_exists(  storage_path('app\fichier-projet\fichier-projet-'.$id.'\note')  )and($project->phase==1.2) and file_exists(  storage_path('app\fichier-projet\fichier-projet-'.$id.'\fiche') ) )
+            or
+            (file_exists(  storage_path('app\fichier-projet\fichier-projet-'.$id.'\misc') )and($project->phase==2.2))
+            or
+            ($project->phase==2.1)
+            or
+            ($project->phase==1.1)
+
+           );
+          
+
+        if ($test) {
+
+            
+       
            $project->phase=$request->input('updatephase');
            $project->save();
            
@@ -252,7 +271,7 @@ class ProjectController extends Controller
             Mail::to($membre->email)->send(new SendEmail());
            }
         
-      
+        }else{ return redirect('fichier/'.$project->id.'/'.$request->input("currentphase").'?var=edit')->with('alert', 'PASSAGE IMPOSSIBLE IL MANQUE DES FICHIER'); }
 
       
         }else{

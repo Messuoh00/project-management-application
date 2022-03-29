@@ -8,6 +8,7 @@
 @section('content')
 
 
+
 @php
     $ur=Request::fullUrl();
   $ur=substr($ur,-3);
@@ -114,40 +115,7 @@
                               </a>
                               <br>
 
-                              @php 
-                          switch ($project->phase) {
-
-                              case '1.1':
-                              $bol=true;
-                              break;
-
-                              case '1.2':
-                              $bol=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\note') );
-                              $bol1=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\fiche' ));
-                              $bol=$bol and $bol1;
-                              break;
-
-
-                              case '2.1':
-                              $bol=true;
-                              break;
-
-
-                              case '2.2':
-                              $bol=!empty(storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\misc' ) );
-                              break;
                               
-                              case '3.0':
-                              $bol=false;
-                              break;
-                              
-                              default:
-                              $bol=true;
-                              break;
-
-                          }
-                          
-                          @endphp    
                           
                           
                               @if (strcmp($phasenom,"Archivage"))
@@ -160,18 +128,18 @@
                                   <div class="modal-dialog" role="document">
                                   <div class="modal-content">
                                       <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel"> Passer a la phase {{$phasenom1}} ?</h5>
+                                    
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                       </button>
                                       </div>
                                   
-                                      @if (!$bol)
+                                     
                                           
                                       <div class="modal-body">
-                                      Passage impossible il manque des document !
+                                        Passer a la phase {{$phasenom1}} ?
                                       </div>
-                                      @endif
+                                
 
                                       <div class="modal-footer">
 
@@ -181,7 +149,7 @@
                                       
 
 
-                                          @if($bol)
+                                       
                                       
                                       <form action="/projet/{{$project->id}}" method="POST">
                                           @csrf
@@ -193,7 +161,7 @@
                                       </form>
 
                                   
-                                      @endif
+                                  
                               
                                       </div>
                                   </div>
