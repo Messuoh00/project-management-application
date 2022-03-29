@@ -401,14 +401,7 @@
                                             
                                         </div>
 
-                                        <div class="form-group" style="text-align: center">
-                                            <a href="linik">
-                                    
-                                                <button type="button" class="btn   btn-warning btn-lg ">
-                                                 <i class="fas fa-fw fa-archive"></i> Modifier fichier du projet  
-                                               </button>
-                                                  </a>
-                                        </div>
+                                      
                                         
          
                                     </div>
@@ -417,7 +410,14 @@
 
 
 
-
+                                <div class="form-group" style="text-align: center">
+                                    <a href="/fichier/{{$project->id}}/{{$phasenom}}">
+                            
+                                        <button type="button" class="btn   btn-warning btn-lg " style="margin-top: 20px">
+                                         <i class="fas fa-fw fa-archive"></i> Modifier fichier du projet  
+                                       </button>
+                                          </a>
+                                </div>
 
 
                                 

@@ -162,7 +162,7 @@
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                
+
                                               </div>
 
                                               <div class="card-body info2">
@@ -223,7 +223,7 @@
                                               <div class="col-sm-3">
                                               <h6 class="mb-0">Equipe:</h6>
                                               </div>
-                                              <div class="col-sm-9 "style="overflow-y: scroll; height:123px;" >
+                                              <div class="col-sm-9 "style="overflow-y: scroll; height:155px;" >
                                               @foreach ($equipe as $eq)
                                                   <a href="users/{{$eq->id}}"><p>{{$eq->nom}}  {{$eq->prenom}}</p></a>
                                               @endforeach
@@ -283,9 +283,16 @@
                                                               
                                                               @foreach ($files as $pdffilename)
                                                           
-                                                              <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <b>{{pathinfo($pdffilename)['basename']}} </b></a> /
+                                                              <b>{{pathinfo($pdffilename)['basename']}}</b>
+
+                                                              <div >
+                                                              
+                                                                  <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}">download</a>
+                                                              
+                                                              </div>
+
                                                               @endforeach
-                                                              <br> <br>
+                                                              <br> 
                                                           @endforeach
                                                       
                                                       </div>

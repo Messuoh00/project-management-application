@@ -291,15 +291,7 @@ class ProjectController extends Controller
 
             DB::table('project_user')->where('project_id', $id)->delete();
 
-            if ($request->hasFile(key:'random') ) {request()->file(key:'random')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/random',name:request()->file(key:'random')->getClientOriginalName(),options:'');   }
-               
-            if ($request->hasFile(key:'note') ) {request()->file(key:'note')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/note',name:'note-p'.$id.request()->file(key:'note')->getClientOriginalName(),options:'');   }
-
-            if ($request->hasFile(key:'fiche') ) {request()->file(key:'fiche')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/fiche',name:'fiche-p'.$id.request()->file(key:'fiche')->getClientOriginalName(),options:'');   }
-
-            if ($request->hasFile(key:'misc') ) {request()->file(key:'misc')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/misc',name:'misc-p'.$id.request()->file(key:'misc')->getClientOriginalName(),options:'');   }
-
-
+            
       $xs= $request->input('equipeid');
       $array = explode(',',$xs[0]);
        
@@ -336,15 +328,6 @@ class ProjectController extends Controller
 
 
     
-    public function deletefile($id,$file_path,$fileNames)
-    {
-        File::delete($file_path.'\\'.$fileNames,$fileNames);
-        
-
-        return redirect('projet/'.$id);
-    }
-
-
 
 
 

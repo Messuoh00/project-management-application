@@ -3,6 +3,7 @@ use App\Http\Controllers\PublicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Authcontroller;
+use App\Http\Controllers\UploadController;
 use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Mail;
 /*
@@ -25,28 +26,25 @@ use Illuminate\Support\Facades\Mail;
 
 
 
-Route::get('/download/{file_path}/{fileNames}', function($file_path,$fileNames)
-{
-    // Check if file exists in app/storage/file folder
+// Route::get('/download/{file_path}/{fileNames}', function($file_path,$fileNames)
+// {
+//     // Check if file exists in app/storage/file folder
    
-    if (file_exists($file_path))
-    {
-       // Send Download
-        return Response::download($file_path.'\\'.$fileNames,$fileNames, [
-            'Content-Length: '. filesize($file_path)
-        ]);
-    }
-    else
-    {
-        // Error
-        exit('Requested file does not exist on our server!');
-    }
-})->where('file_path', '[A-Za-z0-9\-\_\.]+')->where('fileNames','[A-Za-z0-9\-\_\.]+')->where('file_path', '(.*)')->where('fileNames', '(.*)');
+//     if (file_exists($file_path))
+//     {
+//        // Send Download
+//         return Response::download($file_path.'\\'.$fileNames,$fileNames, [
+//             'Content-Length: '. filesize($file_path)
+//         ]);
+//     }
+//     else
+//     {
+//         // Error
+//         exit('Requested file does not exist on our server!');
+//     }
+// })->where('file_path', '[A-Za-z0-9\-\_\.]+')->where('fileNames','[A-Za-z0-9\-\_\.]+')->where('file_path', '(.*)')->where('fileNames', '(.*)');
 
 
-
-
-Route::post('/filedelete/{id}/{file_path}/{fileNames}','App\Http\Controllers\ProjectController@deletefile')->where('file_path', '[A-Za-z0-9\-\_\.]+')->where('fileNames','[A-Za-z0-9\-\_\.]+')->where('file_path', '(.*)')->where('fileNames', '(.*)');
 
 
 
@@ -67,6 +65,12 @@ Route::middleware(['auth'])->group(function(){
     
 Route::resource('/projet', ProjectController::class);
 
+
+Route::get('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@edit');
+
+Route::post('/fichier/{id}','App\Http\Controllers\UploadController@store');
+
+Route::get('/download/{file_path}/{fileNames}','App\Http\Controllers\UploadController@download')->where('file_path', '(.*)')->where('fileNames', '(.*)');
 
 
 Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
