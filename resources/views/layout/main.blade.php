@@ -159,7 +159,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link {{request()->is('') ? 'active ' : ''}}" href="">
+                <a class="nav-link {{request()->is('') ? 'active ' : ''}}" href="/stat">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Statistique</span></a>
             </li>

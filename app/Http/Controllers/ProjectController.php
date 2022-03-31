@@ -347,6 +347,39 @@ class ProjectController extends Controller
 
 
     
+    public function stat()
+    {
+        $projects=Project::latest()->get();
+
+        $names=array();
+        $vis=array();
+        $reac=array();
+        $avan=array();
+  
+        $phase11 = Project::latest()->where('phase',1.1)->get();
+        $count11 = count($phase11);
+
+        foreach ($phase11 as $val) {
+            $names[]='projet n:'.$val->id;
+            $vis[]=$val->visibilite;
+            $reac[]=$val->reactivite;
+            $avan[]=$val->avancement;
+        }
+        
+        $phase12 = Project::latest()->where('phase',1.2)->get();
+        $count12 = count($phase12);
+        
+        $phase21 = Project::latest()->where('phase',2.1)->get();
+        $count21 = count($phase21);
+        
+        $phase22 = Project::latest()->where('phase',2.2)->get();
+        $count22 = count($phase22);
+      
+        
+        return view('projets.stats',compact('count11','count12','count21','count22','names','vis','reac','avan'));
+    }
+
+    
 
 
 
