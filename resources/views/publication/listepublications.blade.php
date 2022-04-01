@@ -80,7 +80,7 @@
                                                                         <span class="icone">
                                                                         <i class="fa  fa-2x fa-user"></i> 
                                                                         </span>
-                                                                    <i class="user">{{$publication->user->nom}} {{$publication->user->prenom}} </i>
+                                                                    <i class="user"> <a href="publications/profil/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
 
                                                                 </div>
                                                                     <h8> {{$publication->date_publication}}</h8>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\fichier;
 use App\Models\Publication;
+use App\Models\User;
 
 class PublicationController extends Controller
 {
@@ -64,5 +65,20 @@ class PublicationController extends Controller
 
 
 
+    }
+    function indexprofil($id){
+        $user=User::find($id);
+        
+        $publications=$user->publications->sortByDesc('date_publication');
+        $slides=[];
+
+        foreach($publications as $pub){
+            $slides[]=1;
+            
+        }
+        
+         return view('publication/listepublications',['publications'=>$publications,'slides'=>$slides]);
+        
+      
     }
 }
