@@ -41,20 +41,19 @@
 
   
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Publication</h1>
-                               
+                                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                                
                             </div>
 
                             <!-- Content Row -->
-                         
+                            <div class="row">
 
                                 <!-- Pending Requests Card Example -->
-                                <div class="col">
-                                    
-                                        <div class="card-body shadow">
+                                <div class="col ">
+                                    <div class="card shadow">
+                                        <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col ">
-                                                   
                                                                 
 
         
@@ -214,16 +213,16 @@
 
 
 
-                                                    
+                                                               
                                                 </div>
                                                 
+                                                </div>
                                             </div>
                                         </div>
-                                   
+                                    </div>
+    
                                 </div>
-
-                           
-
+    
 
 
 
