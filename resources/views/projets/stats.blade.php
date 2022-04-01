@@ -29,137 +29,124 @@
                             </div>
 
                      
-                            <!-- Content Row -->
-                            <div class="row">
 
-                                <!-- Pending Requests Card Example -->
-                                <div class="col" style="margin-bottom: 30px">
-                                    <div class="card shadow">
-                                        <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Stat projet</h6>
-                                        <div class="dropdown no-arrow">
-                                           
-                                        </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col ">
-                                                   
-                                                                
 
-        
+                        <div class="row"  >
+
+                            <div class="col-xl-9 col-lg-7">
+    
+
+                                <!-- Bar Chart -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Projet {{$phasenom}}:</h6>
+                                    </div>
+                                    <div class="card-body" >
+                                        <div class="chart-bar"style="height: 100%">
+                                            <canvas id="bar-chart-grouped" style="max-height: 100%"></canvas>
+                                        </div>
+                                       
+                                        
+                                    </div>
+                                </div>
+                               
+    
+                            </div>
+    
+                            <!-- Donut Chart -->
+                            <div class="col-xl-3 col-lg-5">
+                                <div class="card shadow mb-4" >
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Projet en cours</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4">
+                                            <canvas id="myPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-4 text-center small">
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-warning"></i> Idee R/D
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-primary"></i> Maturation
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-danger"></i> Recherche
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-succes"></i> Test Pilote 
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="text-align: center">
+                                    <a href="/stat?var=1.1">
+                                        <div class="card border-left-warning shadow h-100 py-0" style="width: 50%;margin: auto;">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
                                                    
-                                                        <canvas id="bar-chart-grouped" height="60"></canvas>
-                                                 
-                                                       
-                                                        
-                                                        
-                                                    
+                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                            Idee R/D 
+                                                        </div>
+                                                   
                                                 </div>
-                                                
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </a>
 
-                            </div>
+                                    <a href="/stat?var=1.2">
+                                        <div class="card border-left-primary shadow h-100 py-0" style="width: 50%;margin: auto;">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                   
+                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                            Maturation
+                                                        </div>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
 
-
-                            
-                                             <!-- Content Row -->
-                    <div class="row">
-
-                      
-                     
-                      <div class="col" style="max-width: 50% ;">
-                       
-                            
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-2 col-md-6 mb-4" style="height: 90px;" >
-                            <a href="">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                      hey
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        </div>
-   
-                         
-                          <!-- Earnings (Monthly) Card Example -->
-                          <div class="col-xl-2 col-md-6 mb-4" style="height: 90px">
-                             <a href="">
-                             <div class="card border-left-success shadow h-100 py-2">
-                                 <div class="card-body">
-                                    
-                                     <div class="row no-gutters align-items-center">
-                                       hey
-                                     </div>
-                                 </div>
-                             </div>
-                         </a>
-                         </div>
-   
-                         
-                         <!-- Earnings (Monthly) Card Example -->
-                         <div class="col-xl-2 col-md-6 mb-4" style="height: 90px;" >
-                             <a href="">
-                             <div class="card border-left-info shadow h-100 py-2">
-                                 <div class="card-body">
-                                    
-                                     <div class="row no-gutters align-items-center">
-                                       hey
-                                     </div>
-                                 </div>
-                             </div>
-                         </a>
-                         </div>
-                      
-                         
-
-                       
-                    </div>
-     
-
-                        <!-- Pie Chart -->
-                        <div class="col" style="max-width: 50% ;">
-                          <div class="card shadow mb-4">
-                              <!-- Card Header - Dropdown -->
-                              <div
-                                  class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                  <div class="dropdown no-arrow">
+                                    <a href="/stat?var=2.1">    
+                                        <div class="card border-left-danger shadow h-100 py-0" style="width: 50%;margin: auto;">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                   
+                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                            Recherche
+                                                        </div>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </a>
                                      
-                                  </div>
-                              </div>
-                              <!-- Card Body -->
-                              <div class="card-body">
-                                  <div class="chart-pie pt-4 pb-2">
-                                      <canvas id="myPieChart"></canvas>
-                                  </div>
-                                  <div class="mt-4 text-center small">
-                                      <span class="mr-2">
-                                          <i class="fas fa-circle text-primary"></i> Direct
-                                      </span>
-                                      <span class="mr-2">
-                                          <i class="fas fa-circle text-success"></i> Social
-                                      </span>
-                                      <span class="mr-2">
-                                          <i class="fas fa-circle text-info"></i> Referral
-                                      </span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+                                    <a href="/stat?var=2.2">
+                                        <div class="card border-left-success shadow h-100 py-0" style="width: 50%;margin: auto;">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                   
+                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                            Test Pilote 
+                                                        </div>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+
+                              
+                                
 
 
-                  </div>
+                            </div>
 
-
-
+                        </div>
 
 
 
@@ -170,9 +157,7 @@
                             <!-- Page level plugins -->
                             <script src="vendor/chart.js/Chart.min.js"></script>
                         
-                            <!-- Page level custom scripts -->
-                            <script src="js/demo/chart-area-demo.js"></script>
-                            <script src="js/demo/chart-pie-demo.js"></script>
+                
               
                             <!-- Page level plugins -->
                             <script src="vendor/chart.js/Chart.min.js"></script>
@@ -220,10 +205,52 @@
                                     text: 'avancement projet'
 
                                 }
+
+                                    
                                 }
                             });
 
 
+                            </script>
+
+
+
+                            <script>
+                                // Set new default font family and font color to mimic Bootstrap's default styling
+                            Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+                            Chart.defaults.global.defaultFontColor = '#858796';
+
+                            // Pie Chart Example
+                            var ctx = document.getElementById("myPieChart");
+                            var myPieChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ["Idee R/D", "Maturation", "Recherche", "Test Pilote"],
+                                datasets: [{
+                                data: [{{$count11}},{{$count12}},{{$count21}},{{$count22}}],
+                                backgroundColor: ['#f6c23e', '#4e73df', '#e74a3b', '#1cc88a'],
+                                hoverBackgroundColor: ['yellow', 'blue', 'red', 'green'],
+                                hoverBorderColor: "rgba(234, 236, 244, 1)",
+                                }],
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                tooltips: {
+                                backgroundColor: "rgb(255,255,255)",
+                                bodyFontColor: "#858796",
+                                borderColor: '#dddfeb',
+                                borderWidth: 1,
+                                xPadding: 15,
+                                yPadding: 15,
+                                displayColors: false,
+                                caretPadding: 10,
+                                },
+                                legend: {
+                                display: false
+                                },
+                                cutoutPercentage: 10,
+                            },
+                            });
                             </script>
 
 

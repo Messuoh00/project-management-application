@@ -356,16 +356,11 @@ class ProjectController extends Controller
         $reac=array();
         $avan=array();
   
-        $phase11 = Project::latest()->where('phase',1.1)->get();
+        $phasenom='';
+        $phase= $phase11 = Project::latest()->where('phase',1.1)->get();
         $count11 = count($phase11);
 
-        foreach ($phase11 as $val) {
-            $names[]='projet n:'.$val->id;
-            $vis[]=$val->visibilite;
-            $reac[]=$val->reactivite;
-            $avan[]=$val->avancement;
-        }
-        
+      
         $phase12 = Project::latest()->where('phase',1.2)->get();
         $count12 = count($phase12);
         
@@ -374,9 +369,41 @@ class ProjectController extends Controller
         
         $phase22 = Project::latest()->where('phase',2.2)->get();
         $count22 = count($phase22);
+
+        $switch=request()->input('var'); 
+        switch ($switch) {
+            case '1.1':
+                $phase= $phase11 ;$phasenom='Idee R/D';
+                break;
+            case '1.2':
+                $phase= $phase12 ;$phasenom='Maturation ';
+                break;
+                
+            case '2.1':
+                $phase= $phase21; $phasenom='RECHERCHE';
+                break;
+
+            case '2.2':
+                $phase= $phase22; $phasenom='Test Pilote';
+                break;
+            
+            
+            default:
+              
+                break;
+        }
+      
+
+        foreach ($phase as $val) {
+            $names[]='projet n:'.$val->id;
+            $vis[]=$val->visibilite;
+            $reac[]=$val->reactivite;
+            $avan[]=$val->avancement;
+        }
+        
       
         
-        return view('projets.stats',compact('count11','count12','count21','count22','names','vis','reac','avan'));
+        return view('projets.stats',compact('count11','count12','count21','count22','names','vis','reac','avan','phasenom'));
     }
 
     
