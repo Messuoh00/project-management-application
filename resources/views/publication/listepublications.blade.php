@@ -51,7 +51,7 @@
                                 <!-- Pending Requests Card Example -->
                                 <div class="col">
                                     
-                                        <div class="card-body">
+                                        <div class="card-body shadow">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col ">
                                                    

@@ -30,7 +30,7 @@
 
                                 <!-- Pending Requests Card Example -->
                                 <div class="col">
-                                    <div class="card ">
+                                    <div class="card shadow">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col ">

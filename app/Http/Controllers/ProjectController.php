@@ -347,6 +347,66 @@ class ProjectController extends Controller
 
 
     
+    public function stat()
+    {
+        $projects=Project::latest()->get();
+
+        $names=array();
+        $vis=array();
+        $reac=array();
+        $avan=array();
+  
+        $phasenom='';
+        $phase= $phase11 = Project::latest()->where('phase',1.1)->get();
+        $count11 = count($phase11);
+
+      
+        $phase12 = Project::latest()->where('phase',1.2)->get();
+        $count12 = count($phase12);
+        
+        $phase21 = Project::latest()->where('phase',2.1)->get();
+        $count21 = count($phase21);
+        
+        $phase22 = Project::latest()->where('phase',2.2)->get();
+        $count22 = count($phase22);
+
+        $switch=request()->input('var'); 
+        switch ($switch) {
+            case '1.1':
+                $phase= $phase11 ;$phasenom='Idee R/D';
+                break;
+            case '1.2':
+                $phase= $phase12 ;$phasenom='Maturation ';
+                break;
+                
+            case '2.1':
+                $phase= $phase21; $phasenom='RECHERCHE';
+                break;
+
+            case '2.2':
+                $phase= $phase22; $phasenom='Test Pilote';
+                break;
+            
+            
+            default:
+              
+                break;
+        }
+      
+
+        foreach ($phase as $val) {
+            $names[]='projet n:'.$val->id;
+            $vis[]=$val->visibilite;
+            $reac[]=$val->reactivite;
+            $avan[]=$val->avancement;
+        }
+        
+      
+        
+        return view('projets.stats',compact('count11','count12','count21','count22','names','vis','reac','avan','phasenom'));
+    }
+
+    
 
 
 

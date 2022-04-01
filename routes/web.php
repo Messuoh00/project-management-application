@@ -19,40 +19,6 @@ use Illuminate\Support\Facades\Mail;
 
 
 
-//route houssem
-//hello
-//hello
-
-
-
-
-// Route::get('/download/{file_path}/{fileNames}', function($file_path,$fileNames)
-// {
-//     // Check if file exists in app/storage/file folder
-   
-//     if (file_exists($file_path))
-//     {
-//        // Send Download
-//         return Response::download($file_path.'\\'.$fileNames,$fileNames, [
-//             'Content-Length: '. filesize($file_path)
-//         ]);
-//     }
-//     else
-//     {
-//         // Error
-//         exit('Requested file does not exist on our server!');
-//     }
-// })->where('file_path', '[A-Za-z0-9\-\_\.]+')->where('fileNames','[A-Za-z0-9\-\_\.]+')->where('file_path', '(.*)')->where('fileNames', '(.*)');
-
-
-
-
-
-
-
-
-// routes walid
-
 
 Route::post('/login', 'App\Http\Controllers\Authcontroller@login');
 Route::get('/log', 'App\Http\Controllers\Authcontroller@log')->name('log'); 
@@ -62,6 +28,8 @@ Route::get('/', 'App\Http\Controllers\Authcontroller@log')->name('log');
 Route::middleware(['auth'])->group(function(){
 
 
+
+//route houssem
     
 Route::resource('/projet', ProjectController::class);
 
@@ -73,6 +41,18 @@ Route::post('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@store
 Route::get('/download/{file_path}/{fileNames}','App\Http\Controllers\UploadController@download')->where('file_path', '(.*)')->where('fileNames', '(.*)');
 Route::get('/delete/{file_path}/{fileNames}/{id}/{phsae}','App\Http\Controllers\UploadController@delete')->where('file_path', '(.*)')->where('fileNames', '(.*)')->where('phase', '(.*)');
 
+Route::get('/stat', 'App\Http\Controllers\ProjectController@stat');
+
+Route::view('/coo-E&P', 'coo-ep.coo-ep');
+
+Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
+
+
+
+
+
+// routes walid
+
 Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
 Route::get('/logout','App\Http\Controllers\Authcontroller@logout');
 Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
@@ -83,7 +63,5 @@ Route::resource('publications',PublicationController::class);
 Route::get('/telecharger/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
 
 
-Route::view('/coo-E&P', 'coo-ep.coo-ep');
-Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 });
