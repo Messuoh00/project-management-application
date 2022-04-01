@@ -61,6 +61,8 @@ Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepasswo
 Route::resource('users',Authcontroller::class);
 Route::resource('publications',PublicationController::class);
 Route::get('/telecharger/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
+Route::get('publications/profil/{id}','App\Http\Controllers\PublicationController@indexprofil');
+
 
 
 
