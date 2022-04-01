@@ -50,7 +50,7 @@ Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 
 
-
+//hello
 // routes walid
 
 Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
