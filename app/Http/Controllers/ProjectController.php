@@ -239,6 +239,8 @@ class ProjectController extends Controller
             ($project->phase==2.1)
             or
             ($project->phase==1.1)
+            or
+            ($project->phase==3.1)
 
            );
           
@@ -369,6 +371,9 @@ class ProjectController extends Controller
         
         $phase22 = Project::latest()->where('phase',2.2)->get();
         $count22 = count($phase22);
+
+      
+
 
         $switch=request()->input('var'); 
         switch ($switch) {

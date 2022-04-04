@@ -47,12 +47,17 @@
 
                                 
                                 break;
+
                                 case 3.1:
-                                $phase1=3.1;   $phasenom1='Archivage ';$phasenom='Archivage';
+                                $phase1=3.2;   $phasenom1='En exploitation';$phasenom='En implementation';
+                                
+                                break;
+                                
+                                case 3.2:
+                                $phase1=3.2;   $phasenom1='En exploitation';$phasenom='En exploitation';
 
 
                                 break;
-
 
                                 }
 
