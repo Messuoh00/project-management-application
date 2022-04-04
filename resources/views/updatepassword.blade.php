@@ -3,7 +3,8 @@
 
 @section('styles')
 
-<link href="{{asset('css/formulaire.css')}}" rel="stylesheet">
+<link href="{{ asset('css/projectadd.css') }}" rel="stylesheet" type="text/css"  >
+
 
 
 @endsection
@@ -45,20 +46,29 @@
                                                                                 {{csrf_field()}}
                                                                                 {{ method_field('PATCH') }}
                                                                                 
-                                                                                <label  >veuillez introduire l'ancien mot de passe:</label>
+                                                                                <h6  >veuillez introduire l'ancien mot de passe:</h6>
                                                                                 <div class="form-group input-group">
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text"> <i class="fas fa-key"></i> </span>
                                                                                     </div>
                                                                                     <input id="oldpassword" name="oldpassword" class="form-control" placeholder="ancien mot de passe " type="password">
                                                                                 </div>
-                                                                                <label  >veuillez introduire le nouveau mot de passe:</label>
+                                                                                <h6  >veuillez introduire le nouveau mot de passe:</h6>
                                                                                 <div class="form-group input-group">
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
                                                                                     </div>
 
                                                                                     <input  id="newpassword" name="newpassword" class="form-control" placeholder="nouveau mot de passe " type="password">
+                                                                                    
+                                                                                </div>
+                                                                                <h6  >veuillez introduire une nouvelle fois le nouveau mot de passe :</h6>
+                                                                                <div class="form-group input-group">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
+                                                                                    </div>
+
+                                                                                    <input  id="newpassword2" name="newpassword2" class="form-control" placeholder="confirmation du nouveau mot de passe " type="password">
                                                                                     
                                                                                 </div>
 
@@ -68,7 +78,7 @@
 
                                                                                 
                                                                             
-                                                                                <button type="submit" class="btn btn-primary">Valider</button>
+                                                                                
 
                                                                                     @if($message=Session::get('error'))
                                                                                     {{Session::get('error')}}
@@ -80,6 +90,7 @@
                                                                                         @endforeach
 
                                                                                         @endif
+                                                                                        <button type="submit" class="btn btn-warning">Valider</button>
                                                                                 </form> 
                                                                             </div>
 

@@ -87,7 +87,12 @@ class Authcontroller extends Controller
         return redirect('/users/create');
     }
 
+    function show($id){
+        $user=User::find($id);
 
+        return view('formulaireuser_show')->with('user',$user);
+        
+    }
      //formulaire de modification du user
     function edit($id){
         $user=User::find($id);
@@ -127,7 +132,14 @@ class Authcontroller extends Controller
  
             'oldpassword' => 'required',
             'newpassword' => 'required',
+            'newpassword2'=>'required',
             ]);
+            if($request->newpassword != $request->newpassword2){ 
+                
+                return back()->with('error','confirmation du mot de passe incorrect');
+            } else{
+
+            
          
             $hashedPassword = Auth::user()->password;    
             if (Hash::check($request->oldpassword , $hashedPassword )) {
@@ -142,7 +154,7 @@ class Authcontroller extends Controller
                   }
             }else{  
                 return back()->with('error','ancien mot de passe incorrect ');
-              }
+              } }
 
 
     }
