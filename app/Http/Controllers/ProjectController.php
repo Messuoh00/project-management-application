@@ -61,7 +61,7 @@ class ProjectController extends Controller
         $proje->thematique= $request->input('Thematique');
         $proje->structure_pilote= $request->input('StructurePilote');
         $proje->phase='1.1';
-
+        $proje->extras='refus';
         $proje->region_test= $request->input('RegionTest');
         $proje->region_implementation= $request->input('RegionImp');
         $proje->region_exploitation= $request->input('RegionExp');
@@ -232,7 +232,7 @@ class ProjectController extends Controller
            $test=(
           
 
-            (file_exists(  storage_path('app\fichier-projet\fichier-projet-'.$id.'\note')  )and($project->phase==1.2) and file_exists(  storage_path('app\fichier-projet\fichier-projet-'.$id.'\fiche') ) )
+            (file_exists(  storage_path('app\fichier-projet\fichier-projet-'.$id.'\note')  )and($project->phase==1.2) and(strcmp($project->extras,"accord")==0) and file_exists(  storage_path('app\fichier-projet\fichier-projet-'.$id.'\fiche') ) )
             or
             (file_exists(  storage_path('app\fichier-projet\fichier-projet-'.$id.'\misc') )and($project->phase==2.2))
             or
@@ -283,6 +283,7 @@ class ProjectController extends Controller
                 'abreviation'=> $request->input('Abreviation'),
                 'thematique'=> $request->input('Thematique'),
                 'structure_pilote'=> $request->input('StructurePilote'),
+                
                
         
                 'region_test'=> $request->input('RegionTest'),
@@ -295,7 +296,7 @@ class ProjectController extends Controller
                 'representant_EP'=> $request->input('RepresentantE&Pid'),
          
                 'etude_echo'=> $request->input('inlineRadioOptions'),
-        
+                'extras'=> $request->input('extras'),
                 
                 'description'=> $request->input('Description'),
                 

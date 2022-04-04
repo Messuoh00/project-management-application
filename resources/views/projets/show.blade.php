@@ -37,19 +37,19 @@
                                               switch ($phase1) {
                                                   
                                               case 1.1:
-                                              $phase1=1.2;   $phasenom1='Maturation'; $phasenom='Idee R/D  ';
+                                              $phase1=1.2;   $phasenom1='Maturation'; $phasenom='Idee R/D';
                                               break;
 
                                               case 1.2:
-                                              $phase1=2.1;   $phasenom1='Recherche(En cours)';$phasenom='Maturation ';
+                                              $phase1=2.1;   $phasenom1='Recherche(En cours)';$phasenom='Maturation';
                                               break;
 
                                               case 2.1:
-                                              $phase1=2.2;   $phasenom1='Recherche(En TEST)';$phasenom='Recherche(En cours) ';
+                                              $phase1=2.2;   $phasenom1='Recherche(En TEST)';$phasenom='Recherche(En cours)';
                                               break;
 
                                               case 2.2:
-                                              $phase1=3.1;   $phasenom1='En implementation';$phasenom='Recherche(En TEST) ';
+                                              $phase1=3.1;   $phasenom1='En implementation';$phasenom='Recherche(En TEST)';
 
                                               
                                               break;
@@ -162,6 +162,8 @@
                                                   </div>
                                                   <hr>
 
+                                                  
+
                                                   <div class="row">
                                                     <div class="col-sm-3">
                                                     <h6 class="mb-0">Phase:</h6>
@@ -171,6 +173,20 @@
                                                     </div>
                                                 </div>
                                                 <hr>
+
+                                                @if (strcmp($phasenom,"Maturation")==0)
+                                                    
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                    <h6 class="mb-0">Validation:</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 ">
+                                                    {{$project->extras}}
+                                                    </div>
+                                                </div>
+                                                <hr>
+
+                                                @endif
 
                                               </div>
 
