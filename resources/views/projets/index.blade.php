@@ -78,11 +78,14 @@
                       
                       break;
 
-                      case 3.1:
-                      $phase1=3.1;   $phasenom1='Archivage ';$phasenom='Archivage';
+                    case 3.1:
+                    $phase1=3.2;   $phasenom1='En exploitation';$phasenom='En implementation';
+                    
+                    case 3.2:
+                    $phase1=3.2;   $phasenom1='En exploitation';$phasenom='En exploitation';
 
-                      
-                      break;
+
+                    break;
                       }
 
                       @endphp
@@ -118,7 +121,7 @@
                               
                           
                           
-                              @if (strcmp($phasenom,"Archivage"))
+                              @if (strcmp($phasenom,"En exploitation"))
                               <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}">
                                   <img src="{{url('/img/next.png')}}" height="20"  alt="">  
                               </button>

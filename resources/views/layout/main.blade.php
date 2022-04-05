@@ -127,7 +127,10 @@
 
                         <h6 class="collapse-header" style="color: rgb(85, 84, 84)"> Phase  clôture  <br> et valorisation:</h6>
       
-                        <a class="collapse-item {{  request()->input('phase')=='3.1' ? 'active text-warning ' : ''}}" href="/projet?phase=3.1">Archivage </a>
+                        <a class="collapse-item {{  request()->input('phase')=='3.1' ? 'active text-warning ' : ''}}" href="/projet?phase=3.1">En implementation </a>
+                        <a class="collapse-item {{  request()->input('phase')=='3.2' ? 'active text-warning ' : ''}}" href="/projet?phase=3.2">En exploitation </a>
+
+
                         
                     </div>
                 </div>

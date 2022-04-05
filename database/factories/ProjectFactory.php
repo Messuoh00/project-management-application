@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
@@ -22,10 +23,12 @@ class ProjectFactory extends Factory
                 
                
                'nom_projet'=> $this->faker->title,
+               'chef_projet'=> User::all()->random()->id,
+               'representant_EP'=> User::all()->random()->id,
                'abreviation' => $this->faker->title,
                'thematique'=> $this->faker->name(),
-               'structure_pilote'=> $this->faker->name(),
-               'phase'=> $this->faker->randomElement(['1.1', '1.2', '2.1', '2.2', '3.1']),
+               'structure_pilote'=> $this->faker->randomElement(['PED','DP','AST','EXP','FOR']),
+               'phase'=> $this->faker->randomElement(['1.1', '1.2', '2.1', '2.2', '3.1','3.2']),
                
                'region_test'=> $this->faker->name(),
                'region_implementation'=> $this->faker->name(),
@@ -36,9 +39,11 @@ class ProjectFactory extends Factory
                'date_deb'=> now(),
                'date_fin'=>  now(),
     
-               
+               'visibilite'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
+               'reactivite'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
+               'avancement'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
     
-               'etude_echo' => $this->faker->name() ,
+               'etude_echo' => $this->faker->randomElement(['oui','non', 'na']),
                 
                 
     

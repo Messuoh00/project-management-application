@@ -33,6 +33,9 @@ return new class extends Migration
             $table->timestamp('date_fin')->nullable()->useCurrentOnUpdate();
 
 
+            $table->String('extras')->nullable();
+
+
           
             $table->foreignId('chef_projet')->unsigned()->nullable();
             $table->foreign('chef_projet')->references('id')->on('users');

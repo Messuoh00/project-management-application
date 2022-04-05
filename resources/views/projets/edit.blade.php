@@ -47,12 +47,17 @@
 
                                 
                                 break;
+
                                 case 3.1:
-                                $phase1=3.1;   $phasenom1='Archivage ';$phasenom='Archivage';
+                                $phase1=3.2;   $phasenom1='En exploitation';$phasenom='En implementation';
+                                
+                                break;
+
+                                case 3.2:
+                                $phase1=3.2;   $phasenom1='En exploitation';$phasenom='En exploitation';
 
 
                                 break;
-
 
                                 }
 
@@ -140,12 +145,33 @@
                                         </div>
 
 
+                                        <div class="form-group radio" style="    text-align:center ;">
+                                            <h6 class="mb-0" style="text-align: left" > Validation:</h6>
+                                    
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="extras" id="inlineRadio4" value="accord"  @if (  $project->extras=="accord")  checked @endif>
+                                                <label class="form-check-label" for="inlineRadio1">accord</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="extras" id="inlineRadio5" value="complément d'information"@if (  $project->extras=="complément d'information")  checked @endif>
+                                                <label class="form-check-label" for="inlineRadio2">complément d'information</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="extras" id="inlineRadio6" value="refus" @if ( $project->extras=="refus")  checked @endif>
+                                                <label class="form-check-label" for="inlineRadio3">refus</label>
+                                                </div>
+
+                                        </div>
+
+
                                         <div class="form-group">
                                             <h6 class="mb-0"> Phase:</h6>
 
                                             <input type="text" class="form-control" value="{{$phasenom}}"  disabled/>
                                             
                                         </div>
+
+
                                     </div>
 
 
