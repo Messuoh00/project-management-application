@@ -27,11 +27,13 @@ Route::get('/', 'App\Http\Controllers\Authcontroller@log')->name('log');
 
 Route::middleware(['auth'])->group(function(){
 
-
+    Route::resource('/projet', ProjectController::class);
 
 //route houssem
-    
-Route::resource('/projet', ProjectController::class);
+Route::middleware(['projet'])->group(function(){
+    Route::resource('/projet', ProjectController::class)->only(['edit','show','destroy','update']);
+});
+
 
 
 Route::get('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@edit')->where('phase', '(.*)');
@@ -57,8 +59,9 @@ Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
 Route::get('/logout','App\Http\Controllers\Authcontroller@logout');
 Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
 Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepassword');
-
 Route::resource('users',Authcontroller::class);
+Route::middleware(['admin'])->group(function(){Route::resource('users',Authcontroller::class)->only(['edit','index','update']);     });
+
 Route::resource('publications',PublicationController::class);
 Route::get('/telecharger/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
 Route::get('publications/profil/{id}','App\Http\Controllers\PublicationController@indexprofil');

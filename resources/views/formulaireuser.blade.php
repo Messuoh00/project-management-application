@@ -85,6 +85,7 @@
                                                                                                             <option value="vice president">vice president</option>
                                                                                                             <option value="manager">manager</option>
                                                                                                             <option value="employé">employé</option>
+                                                                                                            <option value="admin">admin</option>
                                                                                                         </select>
                                                                                                     </div>
 
