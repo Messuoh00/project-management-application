@@ -212,6 +212,8 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+                 
+
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: orange">
                         <i class="fa fa-bars"></i>
@@ -219,13 +221,25 @@
 
 
 
+                    <div class="ml-auto">
 
+                         
+                                                     <div></div>
+                       <a href="/publications"> <i class="fas fa-fw fa-lg fa-home" style="margin-right: 60px;margin-left: 132%"></i></a>
+                      
+                       <a href="/publications/create"> <i class="fas fa-fw fa-lg  fa-plus-circle" style="margin-left: 60px"> </i></a>
+                        
+                        
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    </div>
+
                     
 
-                        
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto" >
+                    
+                      
+
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
