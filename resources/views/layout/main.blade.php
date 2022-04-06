@@ -225,7 +225,7 @@
 
                          
                                                      <div></div>
-                       <a href="/publications"> <i class="fas fa-fw fa-lg fa-home" style="margin-right: 60px;margin-left: 132%"></i></a>
+                       <a href="/publications"> <i class="fas fa-fw fa-lg fa-home" style="margin-right: 60px;margin-left: 132px"></i></a>
                       
                        <a href="/publications/create"> <i class="fas fa-fw fa-lg  fa-plus-circle" style="margin-left: 60px"> </i></a>
                         
