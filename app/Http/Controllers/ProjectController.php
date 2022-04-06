@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\UserProject;
 use App\Mail\SendEmail;
 use Session;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProjectController extends Controller
 {
@@ -20,8 +22,17 @@ class ProjectController extends Controller
     public function index()
     {
        
-        $projects=Project::latest()->get();
+       
         $user=User::latest()->get();
+        if (Auth::user()->poste=="admin"){
+            $projects=Project::latest()->get();
+        }
+        else {
+            $user_id=Auth::user()->id;
+          $projects=Project::whereRelation('user','id',$user_id)->orWhere('chef_projet',$user_id)->orWhere('representant_EP',$user_id)->latest()->get();
+            
+           
+        }
         
         
 

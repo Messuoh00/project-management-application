@@ -74,8 +74,12 @@
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
 																		</div>
+<<<<<<< HEAD
 																		<input disabled id="poste" name="poste" class="form-control" value=" {{  $user->poste}}" type="text">
 																	
+=======
+																		
+>>>>>>> 05826bbe7324b3cb89fc7d776d5c4b8502f0faa5
 																	</div>
 
 																	<div class="form-group input-group">
