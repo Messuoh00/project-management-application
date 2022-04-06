@@ -25,7 +25,7 @@
 
   
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                                <h1 class="h3 mb-0 text-gray-800">Profil utilisateur</h1>
                                
                             </div>
 
@@ -42,7 +42,7 @@
 																																
 																	
 																<div class="container">
-																<h3> profil utilisateur</h3>
+																
 																
 																	<hr>
 																
@@ -74,30 +74,20 @@
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
 																		</div>
-																		<select disabled class="form-control form-select" name="poste" id="poste">
-																			<option value="{{ $user->poste}}" selected  hidden>{{ $user->poste}}</option>
-																			<option value="vice president">vice president</option>
-																			<option value="manager">manager</option>
-																			<option value="employé">employé</option>
-																		</select>
+																		<input disabled id="poste" name="poste" class="form-control" value=" {{  $user->poste}}" type="text">
+																	
 																	</div>
 
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 																		</div>
-																		<select disabled class="form-control form-select" name="division" id="division">
-																			<option value="{{ $user->division}}" selected  hidden>{{ $user->division}}</option>	
-																			<option value="ep">ep</option>
-																			<option value="ped">ped</option>
-																			<option value="exp">exp</option>
-																			<option value="dp">dp</option>
-																			<option value="ast">ast</option>
-																			<option value="for">for</option>
-																		</select>
+
+																		<input disabled id="division" name="division" class="form-control" value=" {{$user->division}}" type="text">
+																		
 																	</div>
 																				
-                                                                    <a href="/publications/profil/{{$user->id}}"  class="btn btn-warning">   Publications </a>
+                                                                    <a style="float: right" href="/publications/profil/{{$user->id}}"  class="btn btn-warning"> Publications </a>
 
 
 																

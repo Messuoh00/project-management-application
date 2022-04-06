@@ -25,7 +25,7 @@
 
   
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                                <h1 class="h3 mb-0 text-gray-800"> modification d'un utilisateur</h1>
                                
                             </div>
 
@@ -42,7 +42,7 @@
 																																
 																	
 																<div class="container">
-																<h3> modification d'un utilisateur</h3>
+																
 																
 																	<hr>
 																
