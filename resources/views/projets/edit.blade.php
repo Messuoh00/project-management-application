@@ -189,13 +189,16 @@
                                             <div class="form-group col-md-4 " style="max-width: 100%">
                                                 
                                                 <select class="custom-select form-control "   name="StructurePilote" >
-                                                    <option value="PED"  @if (  $project->structure_pilote=="PED")  selected @endif >PED</option>
-                                                    <option value="DP"@if (  $project->structure_pilote=="DP")  selected @endif >DP</option>
-                                                    <option value="AST"@if (  $project->structure_pilote=="AST")  selected @endif >AST</option>
-                                                    <option value="EXP"@if (  $project->structure_pilote=="EXP")  selected @endif >EXP</option>
-                                                    <option value="FOR"@if (  $project->structure_pilote=="FOR")  selected @endif >FOR</option>
-                                                    
-                                                    </select>
+                                                    <option value={{ $project->structure_pilote }} selected>{{$project->structure_pilote}}</option>
+                                                    @foreach ($dep as $d)
+
+                                                    @if (  $project->structure_pilote!=$d->nomdep ) 
+                                                    <option value={{$d->nomdep}}  >{{$d->nomdep}}</option>
+                                                    @endif
+
+                                                    @endforeach
+                                                     
+                                                </select>
                                             </div>
 
                                         <div class="form-group">

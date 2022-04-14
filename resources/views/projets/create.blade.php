@@ -125,12 +125,9 @@
                                   <div class="form-group col-md-4 " style="max-width: 100%">
 
                                   <select class="custom-select form-control "   name="StructurePilote" >
-                                      <option selected value="PED">PED</option>
-                                      <option value="DP">DP</option>
-                                      <option value="AST">AST</option>
-                                      <option value="EXP">EXP</option>
-                                      <option value="FOR">FOR</option>
-                                    
+                                      @foreach ($dep as $d)
+                                       <option value={{$d->nomdep}}>{{$d->nomdep}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
 

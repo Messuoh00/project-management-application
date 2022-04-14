@@ -20,6 +20,9 @@ return new class extends Migration
             $table->String('abreviation')->nullable();
             $table->String('thematique')->nullable();
             $table->String('structure_pilote')->nullable();
+
+            // $table->Integer('departement_id')->nullable();
+
             $table->String('phase')->nullable();
            
             $table->String('region_test')->nullable();

@@ -140,7 +140,7 @@
             </li>
 
 
-                        
+                                
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('projet/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/projet/create">
@@ -150,6 +150,13 @@
                     
 
 
+                        
+            <!-- Nav Item - -->
+            <li class="nav-item {{request()->is('Departement/create') ? 'active ' : ''}}">
+                <a class="nav-link "  href="/Departement/create">
+                    <i class="fas fa-fw  fa-building"></i>
+                    <span>Modifier Departements</span></a>
+            </li>
             
 
             <!-- Divider -->

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\DepartementController;
 use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Mail;
 /*
@@ -50,6 +51,7 @@ Route::view('/coo-E&P', 'coo-ep.coo-ep');
 Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 
+Route::resource('Departement',DepartementController::class);
 
 
 //hello
@@ -63,6 +65,7 @@ Route::resource('users',Authcontroller::class);
 Route::middleware(['admin'])->group(function(){Route::resource('users',Authcontroller::class)->only(['edit','index','update']);     });
 
 Route::resource('publications',PublicationController::class);
+
 Route::get('/telecharger/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
 Route::get('publications/profil/{id}','App\Http\Controllers\PublicationController@indexprofil');
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Departement;
 use App\Models\UserProject;
 use App\Mail\SendEmail;
 use Session;
@@ -49,8 +50,9 @@ class ProjectController extends Controller
     public function create()
     {   
         $users=User::latest()->get();
+        $dep=Departement::get(); 
        
-        return view('projets/create',['users'=>$users]);
+        return view('projets/create',['users'=>$users,'dep'=>$dep]);
     }
 
     /**
@@ -172,7 +174,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project=Project::find($id);
-       
+        $dep=Departement::get(); 
 
         if ($project==null) {
             return redirect('projet');
@@ -186,6 +188,7 @@ class ProjectController extends Controller
 
 
             $users=User::latest()->get();
+              
             $chef0= DB::table('users')->find($project->chef_projet);
             if ($chef0!=null) {
                 $chef=$chef0->nom.' '.$chef0->prenom;
@@ -223,7 +226,7 @@ class ProjectController extends Controller
         
             }
         
-        return view('projets/edit', ['project'=>$project ,'users'=>$users,'chef'=>$chef,'rep'=>$rep,'equipe'=>$eq,'ei'=>$ei]);
+        return view('projets/edit', ['project'=>$project ,'users'=>$users,'chef'=>$chef,'rep'=>$rep,'equipe'=>$eq,'ei'=>$ei,'dep'=>$dep]);
         }
     }
 

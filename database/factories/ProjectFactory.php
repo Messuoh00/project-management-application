@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
+use App\Models\Departement;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
@@ -17,6 +18,7 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
+        $x=Departement::all()->random();
         return [
           
                 
@@ -27,7 +29,8 @@ class ProjectFactory extends Factory
                'representant_EP'=> User::all()->random()->id,
                'abreviation' => $this->faker->title,
                'thematique'=> $this->faker->name(),
-               'structure_pilote'=> $this->faker->randomElement(['PED','DP','AST','EXP','FOR']),
+            //    'departement_id'=>$x->id,
+               'structure_pilote'=>$x->nomdep,
                'phase'=> $this->faker->randomElement(['1.1', '1.2', '2.1', '2.2', '3.1','3.2']),
                
                'region_test'=> $this->faker->name(),

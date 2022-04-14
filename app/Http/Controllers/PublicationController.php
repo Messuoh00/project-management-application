@@ -30,6 +30,8 @@ class PublicationController extends Controller
         ]); 
         
         
+        if ($request->has('fichiers')) {
+            # code...
         
          foreach(($request->file('fichiers')) as $fichier){
              
@@ -39,7 +41,11 @@ class PublicationController extends Controller
                 'route'=>$route,
             ]);
 
+            
+
          }
+
+        }
          
         return redirect('publications/create');
     }

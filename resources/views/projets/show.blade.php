@@ -439,7 +439,7 @@
                                                     <form action="/projet/{{$project->id}}" method="POST">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="button submit" class="btn btn-danger" >supprime</button>
+                                                    <button type="button submit" class="btn btn-danger">supprime</button>
                                                     </form>
   
                                                 </div>

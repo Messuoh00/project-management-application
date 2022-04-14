@@ -91,12 +91,14 @@
 																		</div>
 																		<select class="form-control form-select" name="division" id="division">
 																			<option value="{{ $user->division}}" selected  hidden>{{ $user->division}}</option>	
-																			<option value="ep">ep</option>
-																			<option value="ped">ped</option>
-																			<option value="exp">exp</option>
-																			<option value="dp">dp</option>
-																			<option value="ast">ast</option>
-																			<option value="for">for</option>
+																			
+																			@foreach ($dep as $d)
+						
+																			@if (   $user->division!=$d->nomdep ) 
+																			<option value={{$d->nomdep}}  >{{$d->nomdep}}</option>
+																			@endif
+						
+																			@endforeach
 																		</select>
 																	</div>
 																				@if(count($errors) >0)
