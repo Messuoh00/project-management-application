@@ -24,16 +24,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
-    
+
     <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css"  >
     @yield('styles')
 </head>
 
 <body id="page-top">
 
-@php
-  
-@endphp
+
 
 
     <!-- Page Wrapper -->
@@ -43,12 +41,12 @@
         <ul class="navbar-nav bg-gray-700 sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            
+
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon ">
                       <img src="{{url('/img/logo.png')}}" alt="" style="height:100px">
                 </div>
-                
+
             </a>
 
             <!-- Divider -->
@@ -57,30 +55,30 @@
                Info:
             </div>
             <!-- Nav Item - Dashboard -->
-       
+
             <li class="nav-item  {{request()->is('coo-E&P','coo-E&P-R') ? 'active  ' : ''}}{{-- active --}}">
                 <a class="nav-link  {{!request()->is('coo-E&P','coo-E&P-R') ? 'collapsed  ' : ''}}  {{-- collapsed --}} " href="#" data-toggle="collapse" data-target="#collapseone"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Coordination E&P</span></a>
                 </a>
-               
-               
+
+
                 <div id="collapseone" class="collapse {{request()->is('coo-E&P','coo-E&P-R') ? 'show  ' : ''}} {{-- show --}} " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
-                    
+
                     <div class="bg-white py-2 collapse-inner rounded">
-                       
+
                         <a class="collapse-item {{request()->is('coo-E&P') ? 'active text-warning ' : ''}}"   href="/coo-E&P" >Présentation Coordination <br> E&P</a>
                         <hr class="sidebar-divider my-0">
-                        
+
                         <a  class="collapse-item {{request()->is('coo-E&P-R') ? 'active text-warning ' : ''}}"  href="/coo-E&P-R">Rapports Coordination <br> E&P</a>
 
-                        
+
                     </div>
                 </div>
 
-            
+
 
             </li>
 
@@ -91,73 +89,79 @@
             <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
                 projets:
             </div>
-           
+
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('projet') && request()->missing('phase') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/projet">
                     <i class="fas fa-fw fa-database"></i>
                     <span>Tous les projets</span></a>
             </li>
-            
-            
+
+              <!-- Nav Item - -->
+              <li class="nav-item {{request()->input('phase')=='0' ? 'active ' : ''}}">
+                <a class="nav-link "  href="/projet?phase=0">
+                    <i class="fas fa-fw fa-spinner"></i>
+                    <span>Idee RD Non Valider</span></a>
+            </li>
+
             <li class="nav-item  {{request()->filled('phase')  ? 'active ' : ''}} {{-- active --}}">
                 <a class="nav-link  {{!request()->filled('phase') ? 'collapsed ' : ''}}{{-- collapsed --}} " href="#" data-toggle="collapse" data-target="#collapsethree"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-tasks"></i>
                     <span>Pphase projets</span>
                 </a>
-               
-               
+
+
                 <div id="collapsethree" class="collapse {{request()->has('phase') ? 'show ' : ''}} {{-- show --}} " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
-                    
+
                     <div class="bg-white py-2 collapse-inner rounded">
 
                         <h6 class="collapse-header" style="color: rgb(85, 84, 84)"> Phase avant projet <br> et planification:</h6>
-                        <a class="collapse-item  {{  request()->input('phase')=='1.1' ? 'active text-warning ' : ''}} " href="/projet?phase=1.1">Idee RD</a>
-                        
-                        <a class="collapse-item  {{  request()->input('phase')=='1.2' ? 'active text-warning ' : ''}}" href="/projet?phase=1.2">Maturation</a>
+                        <a class="collapse-item  {{  request()->input('phase')=='1' ? 'active text-warning ' : ''}} " href="/projet?phase=1">Idee RD</a>
+
+                        <a class="collapse-item  {{  request()->input('phase')=='2' ? 'active text-warning ' : ''}}" href="/projet?phase=2">Maturation</a>
                         <hr class="sidebar-divider my-0">
 
                         <h6 class="collapse-header"style="color: rgb(85, 84, 84)">  Phase exécution <br> et suivi évaluation:</h6>
-                        <a class="collapse-item {{  request()->input('phase')=='2.1' ? 'active text-warning ' : ''}}" href="/projet?phase=2.1">Recherche </a>
-                    
-                        <a class="collapse-item {{  request()->input('phase')=='2.2' ? 'active text-warning ' : ''}}"  href="/projet?phase=2.2">Test Pilote</a>
+                        <a class="collapse-item {{  request()->input('phase')=='3' ? 'active text-warning ' : ''}}" href="/projet?phase=3">Recherche </a>
+
+                        <a class="collapse-item {{  request()->input('phase')=='4' ? 'active text-warning ' : ''}}"  href="/projet?phase=4">Test Pilote</a>
                         <hr class="sidebar-divider my-0">
 
                         <h6 class="collapse-header" style="color: rgb(85, 84, 84)"> Phase  clôture  <br> et valorisation:</h6>
-      
-                        <a class="collapse-item {{  request()->input('phase')=='3.1' ? 'active text-warning ' : ''}}" href="/projet?phase=3.1">En implementation </a>
-                        <a class="collapse-item {{  request()->input('phase')=='3.2' ? 'active text-warning ' : ''}}" href="/projet?phase=3.2">En exploitation </a>
+
+                        <a class="collapse-item {{  request()->input('phase')=='5' ? 'active text-warning ' : ''}}" href="/projet?phase=5">En implementation </a>
+                        <a class="collapse-item {{  request()->input('phase')=='6' ? 'active text-warning ' : ''}}" href="/projet?phase=6">En exploitation </a>
 
 
-                        
+
                     </div>
                 </div>
 
-            
+
 
             </li>
 
 
-                                
+
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('projet/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/projet/create">
                     <i class="fas fa-fw fa-plus-circle"></i>
                     <span>Ajouter un projet</span></a>
             </li>
-                    
 
 
-                        
+
+
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('Departement/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/Departement/create">
                     <i class="fas fa-fw  fa-building"></i>
                     <span>Modifier Departements</span></a>
             </li>
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -169,7 +173,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link {{request()->is('') ? 'active ' : ''}}" href="/stat?var=1.1">
+                <a class="nav-link {{request()->is('') ? 'active ' : ''}}" href="/stat?var=1&x=now">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Statistique</span></a>
             </li>
@@ -201,7 +205,7 @@
 
 
 
-            
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -219,7 +223,7 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                 
+
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="color: orange">
@@ -230,34 +234,34 @@
 
                     <div class="ml-auto">
 
-                         
+
                                                      <div></div>
                        <a href="/publications"> <i class="fas fa-fw fa-lg fa-home" style="margin-right: 60px;margin-left: 132px"></i></a>
-                      
+
                        <a href="/publications/create"> <i class="fas fa-fw fa-lg  fa-plus-circle" style="margin-left: 60px"> </i></a>
-                        
-                        
+
+
 
                     </div>
 
-                    
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto" >
-                    
-                      
+
+
 
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
 
-                        
+
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->nom}} {{Auth::user()->prenom}} </span>
-                                <img class="img-profile rounded-circle" 
+                                <img class="img-profile rounded-circle"
                                     src={{ asset("img/user.png") }}>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -295,7 +299,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                          
+
                         @yield('content')
 
 
@@ -322,7 +326,7 @@
     </div>
     <!-- End of Page Wrapper -->
 
-   
+
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -353,9 +357,11 @@
 
     <!-- Custom scripts for all pages-->
     <script src= {{ asset("js/sb-admin-2.min.js") }}></script>
-   
+
     <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/locale/bootstrap-table-fr-FR.min.js"></script>
 </body>
 
 </html>
+
+

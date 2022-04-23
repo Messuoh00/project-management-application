@@ -20,43 +20,41 @@ class ProjectFactory extends Factory
     {
         $x=Departement::all()->random();
         return [
-          
-                
-                
-               
+
+
+
+
                'nom_projet'=> $this->faker->title,
-               'chef_projet'=> User::all()->random()->id,
-               'representant_EP'=> User::all()->random()->id,
                'abreviation' => $this->faker->title,
                'thematique'=> $this->faker->name(),
             //    'departement_id'=>$x->id,
                'structure_pilote'=>$x->nomdep,
-               'phase'=> $this->faker->randomElement(['1.1', '1.2', '2.1', '2.2', '3.1','3.2']),
-               
+               'phase'=> $this->faker->randomElement(['0', '1', '2', '3', '4','5','6']),
+
                'region_test'=> $this->faker->name(),
                'region_implementation'=> $this->faker->name(),
                'region_exploitation'=> $this->faker->name(),
-               
+
                'budget'=> $this->faker->biasedNumberBetween($min = 1000, $max = 2000, $function = 'sqrt'),
-    
+
                'date_deb'=> now(),
                'date_fin'=>  now(),
-    
+
                'visibilite'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
                'reactivite'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
                'avancement'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
-    
+
                'etude_echo' => $this->faker->randomElement(['oui','non', 'na']),
-                
-                
-    
-    
+
+
+
+
                'description'=> $this->faker->paragraph(),
-    
-                
-            
-               
-         
+
+
+
+
+
         ];
     }
 }

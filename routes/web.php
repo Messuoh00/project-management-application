@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Mail;
 
 
 Route::post('/login', 'App\Http\Controllers\Authcontroller@login');
-Route::get('/log', 'App\Http\Controllers\Authcontroller@log')->name('log'); 
-Route::get('/', 'App\Http\Controllers\Authcontroller@log')->name('log'); 
+Route::get('/log', 'App\Http\Controllers\Authcontroller@log')->name('log');
+Route::get('/', 'App\Http\Controllers\Authcontroller@log')->name('log');
 
 
 Route::middleware(['auth'])->group(function(){
@@ -41,6 +41,8 @@ Route::get('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@edit')
 
 Route::post('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
 
+
+
 Route::get('/download/{file_path}/{fileNames}','App\Http\Controllers\UploadController@download')->where('file_path', '(.*)')->where('fileNames', '(.*)');
 Route::get('/delete/{file_path}/{fileNames}/{id}/{phsae}','App\Http\Controllers\UploadController@delete')->where('file_path', '(.*)')->where('fileNames', '(.*)')->where('phase', '(.*)');
 
@@ -52,6 +54,17 @@ Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 
 Route::resource('Departement',DepartementController::class);
+
+
+Route::get('/{id}/equipe','App\Http\Controllers\UploadController@team')->where('phase', '(.*)');
+
+Route::post('{id}/equipe','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
+
+
+Route::get('{id}/hequipe','App\Http\Controllers\ProjectController@hist')->where('phase', '(.*)');
+
+
+
 
 
 //hello
