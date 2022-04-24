@@ -8,14 +8,21 @@
 @section('content')
 
 
+@php
+$nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(En cours)",'Recherche(En TEST)','En implementation','En exploitation','');
+
+@endphp
 
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800">INFO PROJET N:{{$project->id}}</h1>
- 
+
 </div>
 
+@if ($errors->any())
+<div><h4 style="color: red">Passage Impossible projet non valider</h4></div>
+@endif
 <!-- Content Row -->
 <div class="row">
 
@@ -25,57 +32,17 @@
           <div class="card-body">
               <div class="row no-gutters align-items-center">
                   <div class="col x">
-                     
-                            
-                      
-
-                                              @php
-                                              $phase1=$project->phase;
-
-                                              $phasenom='';
-
-                                              switch ($phase1) {
-                                                  
-                                              case 1.1:
-                                              $phase1=1.2;   $phasenom1='Maturation'; $phasenom='Idee R/D';
-                                              break;
-
-                                              case 1.2:
-                                              $phase1=2.1;   $phasenom1='Recherche(En cours)';$phasenom='Maturation';
-                                              break;
-
-                                              case 2.1:
-                                              $phase1=2.2;   $phasenom1='Recherche(En TEST)';$phasenom='Recherche(En cours)';
-                                              break;
-
-                                              case 2.2:
-                                              $phase1=3.1;   $phasenom1='En implementation';$phasenom='Recherche(En TEST)';
-
-                                              
-                                              break;
-
-                                              case 3.1:
-                                              $phase1=3.2;   $phasenom1='En exploitation';$phasenom='En implementation';
-                                             
-                                              break;
-                                              
-                                              case 3.2:
-                                              $phase1=3.2;   $phasenom1='En exploitation';$phasenom='En exploitation';
 
 
-                                              break;
 
 
-                                              }
-
-                                              @endphp
 
                                               <div class="conten_project_view">
-                                             
+
 
                                               <div class="info">
-                                              
-                                              
+
+
                                               <div class="card-body info1">
                                                   <div class="row">
                                                       <div class="col-sm-3">
@@ -84,9 +51,10 @@
                                                       <div class="col-sm-9 ">
                                                       {{$project->nom_projet}}
                                                       </div>
+
                                                   </div>
                                                   <hr>
-                                                  
+
                                                   <div class="row">
                                                       <div class="col-sm-3">
                                                       <h6 class="mb-0">Thematique:</h6>
@@ -96,40 +64,43 @@
                                                       </div>
                                                   </div>
                                                   <hr>
-                                                  
-                                                  <div class="row">
+
+                                                  <div class="row"@if ($project->phase<4) hidden @endif>
                                                       <div class="col-sm-3">
                                                       <h6 class="mb-0">Region Test:</h6>
                                                       </div>
                                                       <div class="col-sm-9 ">
                                                       {{$project->region_test}}
                                                       </div>
-                                                  </div>
-                                                  <hr>
 
-                                                  <div class="row">
+                                                  </div>
+                                                  @if ($project->phase>=4) <hr> @endif
+
+                                                  <div class="row" @if ($project->phase<5) hidden @endif>
                                                       <div class="col-sm-3">
                                                       <h6 class="mb-0">Region implementation:</h6>
                                                       </div>
                                                       <div class="col-sm-9 ">
                                                       {{$project->region_implementation}}
                                                       </div>
+
                                                   </div>
-                                                  <hr>
-                                                  
-                                                  
-                                                  <div class="row">
+
+                                                  @if ($project->phase>=5) <hr> @endif
+
+                                                  <div class="row" @if ($project->phase<6) hidden @endif>
                                                       <div class="col-sm-3">
                                                       <h6 class="mb-0">Region Exploitation:</h6>
                                                       </div>
                                                       <div class="col-sm-9 ">
                                                       {{$project->region_exploitation}}
                                                       </div>
+
                                                   </div>
-                                                  <hr>
 
+                                                  @if ($project->phase>=6) <hr> @endif
 
-                                                  <div class="row">
+                                                  <div class="row" >
                                                       <div class="col-sm-3">
                                                       <h6 class="mb-0">Date Debut:</h6>
                                                       </div>
@@ -138,7 +109,7 @@
                                                       </div>
                                                   </div>
                                                   <hr>
-                                                      
+
                                                   <div class="row">
                                                   <div class="col-sm-3">
                                                   <h6 class="mb-0">Date Fin:</h6>
@@ -149,8 +120,8 @@
                                                   </div>
 
                                                   <hr>
-                                                  
-                                                  
+
+
 
                                                   <div class="row">
                                                       <div class="col-sm-3">
@@ -162,20 +133,20 @@
                                                   </div>
                                                   <hr>
 
-                                                  
+
 
                                                   <div class="row">
                                                     <div class="col-sm-3">
                                                     <h6 class="mb-0">Phase:</h6>
                                                     </div>
                                                     <div class="col-sm-9 ">
-                                                    {{$phasenom}}
+                                                    {{$nomphase[$project->phase]}}
                                                     </div>
                                                 </div>
                                                 <hr>
 
-                                                @if (strcmp($phasenom,"Maturation")==0)
-                                                    
+                                                @if ($project->phase==0||$project->phase==2)
+
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                     <h6 class="mb-0">Validation:</h6>
@@ -227,7 +198,7 @@
                                               <h6 class="mb-0">Chef Projet:</h6>
                                               </div>
                                               <div class="col-sm-9 ">
-                                              <a href="/users/{{$project->chef_projet}}"><p>{{$chef}}</p></a>
+                                              <a href="/users/{{$chef->id}}"><p>{{$chef->nom}} {{$chef->prenom}}</p></a>
                                               </div>
                                               </div>
 
@@ -239,7 +210,7 @@
                                               <h6 class="mb-0">Representant E&P:</h6>
                                               </div>
                                               <div class="col-sm-9 ">
-                                              <a href="/users/{{$project->representant_EP}}"><p>{{$rep}}</p></a>
+                                              <a href="/users/{{$rep->id}}"><p>{{$rep->nom}} {{$rep->prenom}}</p></a>
                                               </div>
                                               </div>
                                               <hr>
@@ -258,15 +229,21 @@
 
 
 
-
-
                                               <div class="son son1 " style="text-align: center">
                                                 <!-- Button trigger modal -->
-                                                <a href="/fichier/{{$project->id}}/{{$phasenom}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
-                                                    <i class="fas fa-fw fa-archive"></i> fichier du projet  
+                                                <div style="float: left">
+                                                <a href="/fichier/{{$project->id}}/{{$nomphase[$project->phase]}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
+                                                    <i class="fas fa-fw fa-archive"></i> fichier du projet
                                                 </a>
+                                                </div>
+
+
+                                                <a href="/{{$project->id}}/equipe"> <button type="button" class="btn   btn-warning btn-lg " >
+                                                    <i class="fas fa-fw fa-archive"></i> fichier equipe
+                                                </a>
+
                                               </div>
-                                            
+
 
 
                                               <hr>
@@ -299,8 +276,8 @@
                                               </div>
 
                                               </div>
-                                                  
-                                              
+
+
 
                                               <div class="card-body status gutters-sm ">
                                               <h6 class="d-flex align-items-center mb-3">Description:</h6>
@@ -335,7 +312,6 @@
 
 
 
-                                       
 
 
 
@@ -347,81 +323,83 @@
 
 
 
-                                              <div class="editerbtn" >  
-                                                
+
+                                              <div class="editerbtn" >
 
 
-                                              @if (strcmp($phasenom,"En exploitation"))
+
+                                              @if ($project->phase!=6)
                                               <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}">
-                                              <img src="{{url('/img/next.png')}}" height="20"  alt="">  
+                                              <img src="{{url('/img/next.png')}}" height="20"  alt="">
                                               </button>
+
                                               @endif
                                               <!-- Modal -->
                                               <div class="modal fade" id="exampleModal{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe" aria-hidden="true">
                                               <div class="modal-dialog" role="document">
                                               <div class="modal-content">
                                               <div class="modal-header">
-                                                  
+
                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <span aria-hidden="true">&times;</span>
                                                   </button>
                                               </div>
 
-                                          
-                                                  
+
+
                                               <div class="modal-body" style="text-align: center">
-                                              <span style="color: black">Passer a la phase {{$phasenom1}} ?</span>
+                                              <span style="color: black">Passer a la phase {{$nomphase[$project->phase+1]}} ?</span>
                                               </div>
-                                            
+
 
                                               <div class="modal-footer">
 
 
 
                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                                  
 
 
-                                                 
-                                                  
+
+
+
                                                   <form action="/projet/{{$project->id}}" method="POST">
                                                   @csrf
                                                   @method('PUT')
-                                                          
-                                                  <input type="text" value="{{$phase1}}" name="updatephase" hidden> 
-                                                  <input type="text" value="{{$phasenom}}" name="currentphase" hidden>    
+
+                                                  <input type="text" value="{{$project->phase+1}}" name="updatephase" hidden>
+                                                  <input type="text" value="{{$project->phase}}" name="currentphase" hidden>
                                                   <button type="button submit" class="btn btn-warning" style="text-align: center">Confirme </button>
-                                              
+
                                                   </form>
 
-                                              
-                                      
-
-                                              </div>
-                                              </div>
-                                              </div>
-                                              </div>  
-
 
 
 
                                               </div>
+                                              </div>
+                                              </div>
+                                              </div>
 
 
 
 
-                                              <div class="editerbtn" >  
+                                              </div>
 
-                                              <a href="/projet/ {{$project->id}}/edit"> <button type="button" class="btn "> <img src="{{url('/img/edit.png')}}" alt="">       </button>  </a>    
+
+
+
+                                              <div class="editerbtn" >
+
+                                              <a href="/projet/ {{$project->id}}/edit"> <button type="button" class="btn "> <img src="{{url('/img/edit.png')}}" alt="">       </button>  </a>
 
                                               </div>
 
                                               <div class="editerbtn"  >
 
                                                 <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}supp">
-                                                <img src="{{url('/img/delete.png')}}" height="20"  alt=""> 
+                                                <img src="{{url('/img/delete.png')}}" height="20"  alt="">
                                                 </button>
-  
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModal{{$project->id}}supp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -432,21 +410,21 @@
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-  
+
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                                    
+
                                                     <form action="/projet/{{$project->id}}" method="POST">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="button submit" class="btn btn-danger" >supprime</button>
+                                                    <button type="button submit" class="btn btn-danger">supprime</button>
                                                     </form>
-  
+
                                                 </div>
                                                 </div>
                                                 </div>
-                                                </div>  
-  
+                                                </div>
+
                                                 </div>
 
 
@@ -457,10 +435,10 @@
                                               </div>
 
 
-                                       
-                      
+
+
                   </div>
-                  
+
               </div>
           </div>
       </div>
@@ -470,7 +448,7 @@
 @endsection
 
 
-    
+
 @section('java')
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -484,3 +462,4 @@
 
 
 @endsection
+

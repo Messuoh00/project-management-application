@@ -26,12 +26,12 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col ">
-                       
-                                    
-                                                                
+
+
+
 
                                   <div class="form">
-                                 
+
 
                                   <div class="form-content">
                                   <form action="{{route('projet.store')}}" method="POST" enctype="multipart/form-data">
@@ -43,16 +43,26 @@
                                   <h6 class="mb-0">Nom Projet:</h6>
 
                                   <input type="text" class="form-control" placeholder="NomProjet" name="NomProjet"/>
+
+                                    @if($errors->has('NomProjet'))
+                                        <div><span style="color: red">Saisissez le nom du projet</span></div>
+                                    @endif
+
                                   </div>
 
                                   <div class="form-group">
                                   <h6 class="mb-0"> Thematique:</h6>
 
                                   <input type="text" class="form-control" placeholder="Thematique" name="Thematique"/>
+
+                                  @if($errors->has('Thematique'))
+                                  <div><span style="color: red">Saisissez la Thematique du projet</span></div>
+                                  @endif
+
                                   </div>
 
 
-                                  <div class="form-group">
+                                  {{-- <div class="form-group">
                                   <h6 class="mb-0"> Region Test:</h6>
 
                                   <input type="text" class="form-control" placeholder="RegionTest" name="RegionTest"/>
@@ -67,13 +77,18 @@
                                   <h6 class="mb-0"> Region Exploitation:</h6>
 
                                   <input type="text" class="form-control" placeholder="Region Exploitation"  name="RegionExp"/>
-                                  </div>
+                                  </div> --}}
 
 
                                   <div class="form-group">
                                   <h6 class="mb-0"> Date Debut:</h6>
 
                                   <input type="date"  class="form-control" id="birthday" name="DateDebut" onkeydown="return false">
+
+                                  @if($errors->has('DateDebut'))
+                                  <div><span style="color: red">Saisissez la Date de debut du projet</span></div>
+                                  @endif
+
                                   </div>
 
 
@@ -81,17 +96,23 @@
                                   <h6 class="mb-0"> Date Fin:</h6>
 
                                   <input type="date"  class="form-control" id="birthday" name="DateFin" onkeydown="return false">
+
+
+                                  @if($errors->has('DateFin'))
+                                  <div><span style="color: red">la Date de début doit être inférieur Date de fin </span></div>
+                                  @endif
+
                                   </div>
 
                                   <div class="form-group radio" style="    text-align:center ;">
                                   <h6 class="mb-0" style="text-align: left"> Etude Echo:</h6>
 
                                   <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="oui" checked>
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="oui" >
                                   <label class="form-check-label" for="inlineRadio1">oui</label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="non">
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="non" checked>
                                   <label class="form-check-label" for="inlineRadio2">non</label>
                                   </div>
                                   <div class="form-check form-check-inline">
@@ -101,12 +122,12 @@
 
                                   </div>
 
-                                  
+
                                   <div class="form-group">
                                     <h6 class="mb-0"> Phase:</h6>
-                                    <input   class="form-control" value="Idee R/D" disabled>
+                                    <input   class="form-control" value="Idee R/D Non Valider" disabled>
                                   </div>
-                                  
+
 
                                   </div>
 
@@ -117,6 +138,10 @@
                                   <h6 class="mb-0"> Abreviation:</h6>
 
                                   <input type="text" class="form-control" placeholder="Abreviation" name="Abreviation"/>
+
+                                  @if($errors->has('Abreviation'))
+                                  <div><span style="color: red">Saisissez l'abreviation du projet</span></div>
+                                  @endif
                                   </div>
 
                                   <div class="form-group" >
@@ -125,12 +150,9 @@
                                   <div class="form-group col-md-4 " style="max-width: 100%">
 
                                   <select class="custom-select form-control "   name="StructurePilote" >
-                                      <option selected value="PED">PED</option>
-                                      <option value="DP">DP</option>
-                                      <option value="AST">AST</option>
-                                      <option value="EXP">EXP</option>
-                                      <option value="FOR">FOR</option>
-                                    
+                                      @foreach ($dep as $d)
+                                       <option value={{$d->nomdep}}>{{$d->nomdep}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
 
@@ -142,6 +164,8 @@
 
                                   <div class="form-group ">
                                   {{-- Chef Projet: --}}
+
+
                                   <h6 class="mb-0"> Chef Projet:</h6>
 
 
@@ -163,12 +187,12 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                                                                              
+
                                                               <table id="table"class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
-                                                              
+
                                                               <thead>
                                                                   <tr style="text-align: center">
-                                                                  
+
                                                                   <th scope="col" data-sortable="true">Nom</th>
                                                                   <th scope="col" data-sortable="true">Prenom</th>
                                                                   <th scope="col" data-sortable="true">Post</th>
@@ -179,28 +203,28 @@
                                                                   </tr>
                                                               </thead>
                                                               <tbody>
-                                                              
+
                                                                   @foreach ($users as $user)
-                                                              
+
                                                                   <tr id={{$user->id}}>
-                                                                  
+
                                                                 <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
                                                                   <td><input type="button"value="submit"onclick="show()"data-dismiss="modal" /> </td>
-                                                                  
+
                                                                   </tr>
-                                                                  
+
                                                                   @endforeach
 
                                                               </tbody>
 
-                                                              </table>           
+                                                              </table>
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-dismiss="modal" >Feremr</button>
-                                    
+
                                       </div>
                                     </div>
                                   </div>
@@ -231,44 +255,44 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                                                                              
+
                                                               <table id="table"class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
-                                                              
+
                                                               <thead>
                                                                   <tr style="text-align: center">
-                                                                  
+
                                                                   <th scope="col" data-sortable="true">Nom</th>
                                                                   <th scope="col" data-sortable="true">Prenom</th>
                                                                   <th scope="col" data-sortable="true">Post</th>
-                                                                
+
                                                                   <th scope="col">select</th>
 
 
                                                                   </tr>
                                                               </thead>
                                                               <tbody>
-                                                              
+
                                                                   @foreach ($users as $user)
-                                                              
+
                                                                   <tr id={{$user->id}}>
-                                                                  
+
                                                                   <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
-                                                                
+
                                                                   <td><input type="button"value="submit"onclick="show2()"data-dismiss="modal" /> </td>
-                                                                  
+
                                                                   </tr>
-                                                                  
+
                                                                   @endforeach
 
                                                               </tbody>
 
-                                                              </table>           
+                                                              </table>
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-dismiss="modal" >Feremr</button>
-                                    
+
                                       </div>
                                     </div>
                                   </div>
@@ -278,7 +302,14 @@
 
                                   </div>
 
+
+                                </div>
+
+
+                                 </div>
+
                                   <div class="form-group">
+
                                   {{-- Equipe --}}
 
                                   <h6 class="mb-0"> Equipe:</h6>
@@ -311,12 +342,12 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                                                                              
+
                                                               <table id="table"class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
-                                                              
+
                                                               <thead>
                                                                   <tr style="text-align: center">
-                                                                  
+
                                                                   <th scope="col" data-sortable="true">Nom</th>
                                                                   <th scope="col" data-sortable="true">Prenom</th>
                                                                   <th scope="col" data-sortable="true">Post</th>
@@ -327,30 +358,30 @@
                                                                   </tr>
                                                               </thead>
                                                               <tbody>
-                                                              
+
                                                                   @foreach ($users as $user)
-                                                              
+
                                                                   <tr id={{$user->id}}>
-                                                                  
+
                                                                     <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
                                                                   <td><input type="button"value="submit"onclick="show3()" /> </td>
-                                                                  
+
                                                                   </tr>
-                                                                  
+
                                                                   @endforeach
 
                                                               </tbody>
 
-                                                              </table>           
+                                                              </table>
                                       </div>
 
 
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" >Feremr</button>
-                                    
+
                                       </div>
                                     </div>
                                   </div>
@@ -360,37 +391,19 @@
                                   </div>
 
 
-                                  </div>
-
-
-                                  </div>
 
                                   <div class="form-group">
                                   <h6 class="mb-0"> Description:</h6>
                                   <textarea class="form-control" rows="5"name="Description"></textarea>
+
+                                  @if($errors->has('Description'))
+                                  <div><span style="color: red">Saisissez la description du projet</span></div>
+                                  @endif
+
                                   </div>
 
 
 
-                                  {{-- <h6 class="mb-0" style=> Ajouter Fichier:</h6>
-                                  <div class="box">
-
-                                  <div class="behinde"> 
-                                  <input type="file" name="file" id="file" class="file" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf">
-                                  </div>
-
-                                  <div class="front">
-                                  <label  for="file" class="lab">
-                                  <div style="border: 1px dashed black ;width:40% ;margin:auto;"> 
-                                  <br>
-                                  <img id="pdfimg" src="{{url('/img/pdf-icon.jpg')}}" style="width:70px" >
-                                  <br>
-                                  <span  class="file-name">Aucun fichier</span>
-                                  </div>
-
-                                  </label>
-                                  </div>
-                                  </div> --}}
 
                                   </div>
 
@@ -420,12 +433,12 @@
 
                                   var daddy=document.getElementById("chef");
                                   daddy.innerHTML='';
-                                  var rowId = 
+                                  var rowId =
                                   event.target.parentNode.parentNode.id;
                                   //this gives id of tr whose button was clicked
 
-                                  var data = document.getElementById(rowId).querySelectorAll(".rowdata"); 
-                                  /*returns array of all elements with 
+                                  var data = document.getElementById(rowId).querySelectorAll(".rowdata");
+                                  /*returns array of all elements with
                                   "row-data" class within the row with given id*/
 
                                   var nom = data[0].innerHTML;
@@ -436,7 +449,7 @@
                                   var memberequipe = document.createElement('p');
 
                                   var text = document.createTextNode(x);
-                                  memberequipe.appendChild(text); 
+                                  memberequipe.appendChild(text);
 
                                   var link = document.createElement('a');
 
@@ -455,12 +468,12 @@
                                   var daddy=document.getElementById("RepresentantE&P");
                                   daddy.innerHTML='';
 
-                                  var rowId = 
+                                  var rowId =
                                   event.target.parentNode.parentNode.id;
                                   //this gives id of tr whose button was clicked
 
-                                  var data = document.getElementById(rowId).querySelectorAll(".rowdata"); 
-                                  /*returns array of all elements with 
+                                  var data = document.getElementById(rowId).querySelectorAll(".rowdata");
+                                  /*returns array of all elements with
                                   "row-data" class within the row with given id*/
 
                                   var nom = data[0].innerHTML;
@@ -471,7 +484,7 @@
                                   var memberequipe = document.createElement('p');
 
                                   var text = document.createTextNode(x);
-                                  memberequipe.appendChild(text); 
+                                  memberequipe.appendChild(text);
 
                                   var link = document.createElement('a');
 
@@ -490,14 +503,14 @@
                                   let b=[];
 
                                   function show3() {
-                                  var rowId = 
+                                  var rowId =
                                   event.target.parentNode.parentNode.id;
                                   //this gives id of tr whose button was clicked
                                   if ( !(b.includes(rowId) ) ) {
 
 
-                                  var data = document.getElementById(rowId).querySelectorAll(".rowdata"); 
-                                  /*returns array of all elements with 
+                                  var data = document.getElementById(rowId).querySelectorAll(".rowdata");
+                                  /*returns array of all elements with
                                   "row-data" class within the row with given id*/
 
                                   nom = data[0].innerHTML;
@@ -513,7 +526,7 @@
                                   var memberequipe = document.createElement('span');
 
                                   var text = document.createTextNode(x);
-                                  memberequipe.appendChild(text); 
+                                  memberequipe.appendChild(text);
 
                                   var link = document.createElement('a')
 
@@ -531,7 +544,7 @@
                                   if (index !== -1) {
                                   b.splice(index, 1);
                                   document.getElementById("equipeid").value=b;
-                                  } 
+                                  }
                                   button.parentNode.parentNode.removeChild(button.parentNode);
 
                                   };
@@ -597,25 +610,12 @@
 
 
 
-                                  //   const file = document.querySelector('#file');
-                                  // file.addEventListener('change', (e) => {
-                                  //   // Get the selected file
-                                  //   const [file] = e.target.files;
-                                  //   // Get the file name and size
-                                  //   const { name: fileName, size } = file;
-                                  //   // Convert size in bytes to kilo bytes
-                                  //   const fileSize = (size / 1000).toFixed(2);
-                                  //   // Set the text content
-                                  //   const fileNameAndSize = `${fileName} - ${fileSize}KB`;
-
-                                  //   document.querySelector('.file-name').textContent = fileNameAndSize+'\xa0 \xa0 ✓';
-                                  // });
 
 
-                                  </script>           
-                        
+                                  </script>
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -630,4 +630,4 @@
 @endsection
 
 
-    
+

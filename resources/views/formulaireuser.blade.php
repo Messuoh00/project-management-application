@@ -25,7 +25,7 @@
 
   
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                                <h1 class="h3 mb-0 text-gray-800"> Creation d'un utilisateur</h1>
                                 
                             </div>
 
@@ -42,7 +42,7 @@
                                                                                                                                                                 
                                                                                               
                                                                                                 <div class="container">
-                                                                                                <h3> Creation d'un utilisateur</h3>
+                                                                                                
                                                                                                 
                                                                                                     <hr>
                                                                                                 
@@ -95,13 +95,12 @@
                                                                                                             <span class="input-group-text"> <i class="fa fa-building"></i> </span>
                                                                                                         </div>
                                                                                                         <select class="form-control form-select" name="division" id="division">
-                                                                                                            <option value="" selected disabled hidden>veuillez selectionner une division</option>
-                                                                                                            <option value="ep">ep</option>
-                                                                                                            <option value="ped">ped</option>
-                                                                                                            <option value="exp">exp</option>
-                                                                                                            <option value="dp">dp</option>
-                                                                                                            <option value="ast">ast</option>
-                                                                                                            <option value="for">for</option>
+                                                                                                            @foreach ($dep as $d)
+						
+                                                                                                            <option value={{$d->nomdep}}  >{{$d->nomdep}}</option>
+                                                                                                           
+                                                        
+                                                                                                            @endforeach
                                                                                                         </select>
                                                                                                     </div>
                                                                                                                 @if(count($errors) >0)

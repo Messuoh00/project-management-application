@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
-
+use App\Models\Departement;
 
 
 
@@ -62,7 +62,8 @@ class Authcontroller extends Controller
     //formulaire de creation du user
     function create(){
 
-        return view('formulaireuser');
+        $dep=Departement::get(); 
+        return view('formulaireuser', ['dep'=>$dep]);
     }
 
 
@@ -98,9 +99,8 @@ class Authcontroller extends Controller
      //formulaire de modification du user
     function edit($id){
         $user=User::find($id);
-        
-
-        return view('formulaireuser_modif')->with('user',$user);
+        $dep=Departement::get(); 
+        return view('formulaireuser_modif', ['dep'=>$dep,'user'=>$user]);
 
 
     }

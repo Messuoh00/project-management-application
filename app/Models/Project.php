@@ -15,6 +15,12 @@ class Project extends Model
 
     }
 
+    // public function departement(){
+
+    //     return  $this->hasOne(Departement::class);
+
+    // }
+
 
     protected $fillable = [
         'nom_projet',
