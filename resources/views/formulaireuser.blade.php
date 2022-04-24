@@ -83,8 +83,9 @@
                                                                                                         <select class="form-control form-select" name="poste" id="poste">
                                                                                                             <option value="" selected disabled hidden>veuillez selectionner un poste</option>
                                                                                                             <option value="vice president">vice president</option>
-                                                                                                            <option value="manager">manager</option>
+                                                                                                            <option value="Divisionnaire">manager</option>
                                                                                                             <option value="employé">employé</option>
+                                                                                                            <option value="relai">employé</option>
                                                                                                             <option value="admin">admin</option>
                                                                                                         </select>
                                                                                                     </div>

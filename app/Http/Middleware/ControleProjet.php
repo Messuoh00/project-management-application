@@ -20,13 +20,13 @@ class ControleProjet
      */
     public function handle(Request $request, Closure $next)
     {  
-      if (Auth::user()->poste=="admin"){
+      if (Auth::user()->poste=="admin"||Auth::user()->poste=="vice president"||Auth::user()->poste=="Divisionnaire"){
             
         return $next($request);
      }
       $project_id=$request->route()->parameter('projet');
       $user_id=Auth::user()->id;
-      $trouve=Project::where('id',$project_id)->where(function($query) use ($user_id){$query->whereRelation('user','id',$user_id)->orWhere('chef_projet',$user_id)->orWhere('representant_EP',$user_id);})->first();
+      $trouve=Project::where('id',$project_id)->where(function($query) use ($user_id){$query->where('chef_projet',$user_id)->orWhere('representant_EP',$user_id);})->first();
       
      //$trouve=UserProject::where('user_id',$user_id)->where('project_id',$project_id)->first();
      

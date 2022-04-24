@@ -31,7 +31,10 @@ Route::middleware(['auth'])->group(function(){
 
 //route houssem
 Route::middleware(['projet'])->group(function(){
-    Route::resource('/projet', ProjectController::class)->only(['edit','show','destroy','update']);
+    Route::resource('/projet', ProjectController::class)->only(['edit','destroy','update']);
+});
+Route::middleware(['projet-lecture'])->group(function(){
+    Route::resource('/projet', ProjectController::class)->only(['show']);
 });
 
 
@@ -63,9 +66,9 @@ Route::resource('users',Authcontroller::class);
 Route::middleware(['admin'])->group(function(){Route::resource('users',Authcontroller::class)->only(['edit','index','update']);     });
 
 Route::resource('publications',PublicationController::class);
-Route::get('/telecharger/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
+Route::get('/telecharger/publications/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
 Route::get('publications/profil/{id}','App\Http\Controllers\PublicationController@indexprofil');
-
+Route::get('/publications/supprimer/{id}','App\Http\Controllers\PublicationController@supprimer');
 
 
 
