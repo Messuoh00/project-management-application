@@ -41,7 +41,7 @@ class archivevra extends Command
     {
 
 
-            $name = date('m-Y');
+            $name = date('Y-m');
 
 
             $temp=array();

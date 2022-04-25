@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('project_user', function (Blueprint $table) {
 
-            $table->primary(array('user_id', 'project_id','statut'));
+            $table->primary(array('user_id', 'project_id','post'));
 
             $table->integer('statut')->unsigned()->default(0);
 

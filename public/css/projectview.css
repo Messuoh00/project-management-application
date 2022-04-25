@@ -7,15 +7,15 @@
         grid-template-columns: 1fr 1fr;
         grid-gap: 20px;
     }
-    
+
     .editerbtn{
         width: 120px;
     }
     .conten_project_view {
         width: 80%;
-      
-       
-      
+
+
+
     }
 
 }
@@ -23,28 +23,36 @@
 
 
 .conten_project_view {
-  
+
     width: 90%;
     margin: auto;
     margin-top: 30px;
-    
+
   }
+
+
+.filebutt
+{
+    display: grid;
+
+    grid-template-columns: 1fr 1fr  1fr;
+}
 
 .box{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     max-width: 100%;
-  
+
 }
 
 
 
 
 .editerbtn{
-   
-    
-    
+
+
+
     border:none;
-    border-radius:1.5rem; 
+    border-radius:1.5rem;
     text-align: center;
     cursor: pointer;
     background: orange;
@@ -71,13 +79,13 @@ a{
     cursor: pointer;
     background: orange;
     color: #fff;
-  
+
 }
 
 .N1{
     padding-top: 20px;
     text-align: center;
-    
+
     background: -webkit-linear-gradient(left, orange, rgb(170, 152, 152));
 }
 

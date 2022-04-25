@@ -42,7 +42,7 @@
                                   <div class="form-group">
                                   <h6 class="mb-0">Nom Projet:</h6>
 
-                                  <input type="text" class="form-control" placeholder="NomProjet" name="NomProjet"/>
+                                  <input type="text" class="form-control" placeholder="NomProjet" name="NomProjet" value="{{ old('name') }}"/>
 
                                     @if($errors->has('NomProjet'))
                                         <div><span style="color: red">Saisissez le nom du projet</span></div>
@@ -53,7 +53,7 @@
                                   <div class="form-group">
                                   <h6 class="mb-0"> Thematique:</h6>
 
-                                  <input type="text" class="form-control" placeholder="Thematique" name="Thematique"/>
+                                  <input type="text" class="form-control" placeholder="Thematique" name="Thematique" value="{{ old('Thematique') }}"/>
 
                                   @if($errors->has('Thematique'))
                                   <div><span style="color: red">Saisissez la Thematique du projet</span></div>
@@ -83,7 +83,7 @@
                                   <div class="form-group">
                                   <h6 class="mb-0"> Date Debut:</h6>
 
-                                  <input type="date"  class="form-control" id="birthday" name="DateDebut" onkeydown="return false">
+                                  <input type="date"  class="form-control" id="birthday" name="DateDebut" onkeydown="return false" value="{{ old('DateDebut') }}">
 
                                   @if($errors->has('DateDebut'))
                                   <div><span style="color: red">Saisissez la Date de debut du projet</span></div>
@@ -95,7 +95,7 @@
                                   <div class="form-group">
                                   <h6 class="mb-0"> Date Fin:</h6>
 
-                                  <input type="date"  class="form-control" id="birthday" name="DateFin" onkeydown="return false">
+                                  <input type="date"  class="form-control" id="birthday" name="DateFin" onkeydown="return false" value="{{ old('DateFin') }}">
 
 
                                   @if($errors->has('DateFin'))
@@ -108,11 +108,11 @@
                                   <h6 class="mb-0" style="text-align: left"> Etude Echo:</h6>
 
                                   <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="oui" >
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="oui"  >
                                   <label class="form-check-label" for="inlineRadio1">oui</label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="non" checked>
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="non" >
                                   <label class="form-check-label" for="inlineRadio2">non</label>
                                   </div>
                                   <div class="form-check form-check-inline">
@@ -121,7 +121,9 @@
                                   </div>
 
                                   </div>
-
+                                  @if($errors->has('inlineRadioOptions'))
+                                  <div><span style="color: red">l'etude echo doit etre sélectionné </span></div>
+                                  @endif
 
                                   <div class="form-group">
                                     <h6 class="mb-0"> Phase:</h6>
@@ -137,7 +139,7 @@
                                   <div class="form-group">
                                   <h6 class="mb-0"> Abreviation:</h6>
 
-                                  <input type="text" class="form-control" placeholder="Abreviation" name="Abreviation"/>
+                                  <input type="text" class="form-control" placeholder="Abreviation" name="Abreviation" value="{{ old('Abreviation') }}"/>
 
                                   @if($errors->has('Abreviation'))
                                   <div><span style="color: red">Saisissez l'abreviation du projet</span></div>
@@ -159,7 +161,7 @@
                                   <div class="form-group">
                                   <h6 class="mb-0"> budget:</h6>
 
-                                  <input type="number" class="form-control" placeholder="budget" name="budget"/>
+                                  <input type="number" class="form-control" placeholder="budget" name="budget"  value="{{ old('budget') }}"/>
                                   </div>
 
                                   <div class="form-group ">
@@ -394,7 +396,7 @@
 
                                   <div class="form-group">
                                   <h6 class="mb-0"> Description:</h6>
-                                  <textarea class="form-control" rows="5"name="Description"></textarea>
+                                  <textarea class="form-control" rows="5"name="Description" value="{{ old('Description') }}"></textarea>
 
                                   @if($errors->has('Description'))
                                   <div><span style="color: red">Saisissez la description du projet</span></div>

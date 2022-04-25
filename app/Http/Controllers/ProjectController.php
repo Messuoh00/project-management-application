@@ -37,7 +37,7 @@ class ProjectController extends Controller
             $user_id=Auth::user()->id;
           $projects=Project::whereRelation('user','id',$user_id)->orWhere('chef_projet',$user_id)->orWhere('representant_EP',$user_id)->latest()->get();
             }
-           
+
         }
 
 
@@ -76,7 +76,7 @@ class ProjectController extends Controller
             'DateDebut'=>'required',
             'Description'=>'required',
             'DateFin'=>'required|after:DateDebut',
-
+            'inlineRadioOptions'=>'required',
         ]);
 
 
@@ -160,7 +160,8 @@ class ProjectController extends Controller
 
 
 
-
+            $rep=array();
+            $chef=array();
             $users=User::latest()->get();
 
             $chef0=DB::select("
@@ -490,7 +491,7 @@ class ProjectController extends Controller
         $reac=array();
         $avan=array();
 
-        if (request()->input('x')=='now') {
+        if (request()->input('x')=='') {
             $phase= $phase1 = Project::latest()->where('phase',1)->get();
             $count1 = count($phase1);
 
@@ -549,26 +550,28 @@ class ProjectController extends Controller
 
             $switch=request()->input('var');
             $date=request()->input('x');
+            $recoveredData=false;
+
         switch ($switch) {
             case '1':
-                $recoveredData= $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Idee RD.txt')); ;
+                if (file_exists(Storage::path('archiveVRA/'.$date.' Idee RD.txt') ))  { $recoveredData =  file_get_contents(Storage::path('archiveVRA/'.$date.' Idee RD.txt')); }
                 break;
             case '2':
-                $recoveredData= $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Maturation.txt'));
+                if (file_exists( Storage::path('archiveVRA/'.$date.' Maturation.txt')))  {  $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Maturation.txt'));}
                 break;
 
             case '3':
-                $recoveredData= $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Recherche.txt'));
+                if (file_exists( Storage::path('archiveVRA/'.$date.' Recherche.txt')))  {   $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Recherche.txt'));}
 
                 break;
 
             case '4':
-                $recoveredData= $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Test.txt'));
+                if (file_exists( Storage::path('archiveVRA/'.$date.' Test.txt')))  { $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Test.txt'));}
 
                 break;
 
             case '5':
-                $recoveredData= $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Implementation.txt'));
+                if (file_exists(Storage::path('archiveVRA/'.$date.' Implementation.txt') ))  { $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Implementation.txt'));}
 
                 break;
 
@@ -577,6 +580,13 @@ class ProjectController extends Controller
 
                 break;
         }
+
+
+        if (!$recoveredData) {
+
+            return redirect()->back();
+        }
+
 
             $recoveredArray = unserialize($recoveredData);
 
@@ -723,7 +733,7 @@ class ProjectController extends Controller
 
         ");
 
-        return view('projets/historique_eq',['membres'=>$membre,'chefs'=>$chef,'reps'=>$rep]);
+        return view('projets/historique_eq',['membres'=>$membre,'chefs'=>$chef,'reps'=>$rep,'id'=>$id]);
     }
 
 

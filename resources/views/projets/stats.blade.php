@@ -31,17 +31,15 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                 <h1 class="h3 mb-0 text-gray-800">Statistique:</h1>
 
 
-                                <form action="/stat?var=1&x=now" method="get">
-                                    @csrf
-
-                                <span class="d-none d-sm-inline-block  shadow-sm"> choisir mois: <input type="month" value="april-2022"cname='x' id='x' required pattern="\d{2}-\d{2}"  style="width: 100px" onkeydown="return false">
 
 
-                                    <button type="submit" class="btn btn-sm btn-primary shadow-sm">go</button>
+                                <span class="d-none d-sm-inline-block  shadow-sm"> choisir mois: <input type="month" value="april-2022"cname='x' id='url' required pattern="\d{2}-\d{2}"  style="width: 100px" onkeydown="return false">
+
+
+                                    <button type="submit" class="btn btn-sm btn-primary shadow-sm" id="btn">go</button>
                                     {{-- href="/stat?var={{request()->input('var')}}&x=04-2022" --}}
                                    <br> <br>
 
-                                </form>
 
 
                                     <div style="float: right">
@@ -65,7 +63,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                 <!-- Bar Chart -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Projet {{$nomphase[request()->input('var')]}}:</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Projet {{$nomphase[request()->input('var')]}} {{  request()->input('x') }}:</h6>
                                     </div>
                                     <div class="card-body" >
                                         <div class="chart-bar"style="height: 100%">
@@ -84,7 +82,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                 <div class="card shadow mb-4" >
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Projet en cours</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Nombre Projet :</h6>
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
@@ -207,6 +205,12 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                             <!-- Page level plugins -->
                             <script src="vendor/chart.js/Chart.min.js"></script>
 
+                            <script>
+                                document.getElementById("btn").addEventListener("click", goToUrl);
+                                function goToUrl(){
+                                window.location = '/stat?var=2&x='+document.getElementById('url').value;
+                                }
+                            </script>
 
                             <script>
                              let names=[];
