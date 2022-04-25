@@ -1,0 +1,120 @@
+
+
+#upload{
+    margin-top:30px;
+    background-color: rgb(255, 255, 255);
+    width:100%;
+    min-height:200px;
+    margin-left:auto;
+    margin-right:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border:1px solid #ced4da;
+    border-radius: 1.5rem;
+    
+}
+#iconupload{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#909396
+}
+#upload .fa-download{
+    font-size: 60px;
+    
+}
+.file-upload-btn{
+    text-align: center;
+}
+#uploadtext{
+    text-align: center;
+    
+}
+hr.stylehr{ 
+    border: 0; 
+    width: 100%;
+    height: 1px; 
+    background-image: linear-gradient(to right, rgba(218, 218, 218, 0), rgb(255, 255, 255), rgba(214, 214, 214, 0))
+  }
+
+#fichiers-selec{
+    border-radius: 10px;
+    width: 90%;
+    height:60px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #eeeeee7a; 
+    display: flex;
+    align-content: center;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.iconefiche{
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 10px;
+    font-size: 30px;
+}
+.iconetrash{
+    
+    padding-left: 10px;
+    font-size: 30px;
+    color: red;
+    position:absolute;
+    top: 12px;
+    cursor: pointer;
+    right:10px;
+
+}
+#fichiers-selec .filename{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    font-size: 18px;
+
+}
+#input1{
+    visibility: hidden;
+}
+
+#upload .text{
+    font-size: 20px;
+    font-weight: 500;
+}
+#publierbtn{
+    
+    text-align: center;
+    width: 30%;
+    margin-top: 20px;
+    border-radius: 1.5rem;
+}
+#pere{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form-control{
+    border-radius: 1.5rem;
+}
+.text-corps{
+    border-radius: 1.5 rem !important;
+
+} 
+label{
+    font-weight: 500;
+}
+#divpublierbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}

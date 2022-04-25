@@ -4,6 +4,7 @@
 @section('styles')
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="{{ asset('css/formulairepub.css') }}" rel="stylesheet" type="text/css"  >
 
 
 @endsection
@@ -42,147 +43,43 @@
                                                     <form method="post" action="{{url('/publications')}}" enctype="multipart/form-data"  >
                                                         {{csrf_field()}}
                                                       
-                                                        <label  >veuillez introduire le titre de la publication:</label>
-                                                        <input type="text" id='titre' name='titre'>
-                                                        <label  >corps:</label>
-                                                        <textarea class="form-control" rows="5" name="corps"></textarea>
-                                                        <div class="formfile" id="formfile">
-                                                    
                                                         
-                                                        <label  >fichier:</label>
-                                                        <input type="file"   name="fichiers[]" id=input0 class="inputimgvid" accept="image/*,video/mp4" onchange="verification_image_video(this.id)"  >
+                                                        <label  >text de la publication:</label>
+                                                        <textarea class=" text-corps form-control" rows="5" name="corps"></textarea>
+                                                       <div id="upload">
+            
+                                                            <input id='input1'type="file" name='fichiers[]'>
+                                                            <span class="text"> veuillez inserer un fichier:</span>
+                                                            <hr class="stylehr">
+
+                                                            <div id="iconupload"><i class="fa fa-download" aria-hidden="true"></i></div>
+                                                            
+                                                            
+                                                            <span id="file-upload-btn" class="btn btn-warning">selectionner un fichier</span>
+                                                            <hr class="stylehr">
+                                                            
+                                                            
+                                                            
+                                                          </div>
+                                                        
+                                                        <div id='divpublierbtn'> 
+                                                        <input id='publierbtn' type="submit" class="btn btn-warning" value='publier'>
+
+
                                                         </div>
-                                                        <div>
-                                                    
-                                                        <a href="" name="add" id="add"> add</a>
-                                                        <a href="" name="remove" id="remove"> remove </a>
-                                                    
-                                                      
+
                                                         
-                                                        <input class="btn btn-dark" type="submit" value="publier">
-                                                        </form>
                                                       
+                                                      </form>
                                                     
-                                                    
-                                                        </div>
-                                                        
-                                                        <button class="btn btn-dark" id="upload_img_vid" disabled> upload  image/video</button>
-                                                        <button class="btn btn-dark" id="upload_fichier"> upload fichier </button>
-                                                    
-                                                    
-                                                    
+                                            
                                                     
                                                         
                                                         </div>
                                                       
                                                     
                                                     
-                                                        <script>
-                                                    var i=1;
-                                                    var formfile = document.getElementById('formfile');
-                                                    var add_more_fields = document.getElementById('add');
-                                                    var remove_fields = document.getElementById('remove');
-                                                    var upload_img_vid=document.getElementById('upload_img_vid');
-                                                    var upload_fichier=document.getElementById('upload_fichier');
-                                                    
-                                                    add_more_fields.onclick = function(event){
-                                                        event.preventDefault();
-                                                        var input_tags = formfile.getElementsByTagName('input');
-                                                        var cloned=input_tags[0].cloneNode(true);
-                                                        var newinput=document.createElement('input');
-                                                        newinput.type='file';
-                                                        newinput.name='fichiers[]';
-                                                        newinput.className=cloned.className;
-                                                        newinput.id='input'+i;
-                                                        i=i+1;
-                                                        if(newinput.className=='inputfichier'){
-                                                          newinput.addEventListener("change",function(){verification_fichier(this.id)});
-                                                        }else{  newinput.addEventListener("change",function(){verification_image_video(this.id)});}
-                                                        newinput.accept=cloned.accept;
-                                                        
-                                                        
-                                                      
-                                                      formfile.appendChild(newinput);
-                                                    }
-                                                    
-                                                    remove_fields.onclick = function(event){
-                                                        event.preventDefault();
-                                                      var input_tags = formfile.getElementsByTagName('input');
-                                                      if(input_tags.length > 1) {
-                                                        formfile.removeChild(input_tags[(input_tags.length) - 1]);
-                                                      }
-                                                    }        
-                                                    
-                                                    upload_img_vid.onclick=function(event){
-                                                      event.preventDefault();
-                                                      var newinput=document.createElement('input');
-                                                      var oldinput=document.getElementsByClassName('inputfichier');
-                                                      
-                                                      newinput.type='file';
-                                                      newinput.name='fichiers[]';
-                                                      newinput.accept='image/*,video/mp4';
-                                                      newinput.className='inputimgvid';
-                                                      newinput.id='input'+i;
-                                                        i=i+1;
-                                                      newinput.addEventListener("change",function(){verification_image_video(this.id)});
-                                                      while(oldinput.length>0){
-                                                      formfile.removeChild(oldinput[0]);}
-                                                      formfile.appendChild(newinput);
-                                                      upload_img_vid.disabled=true;
-                                                      upload_fichier.disabled=false;
-                                                      
-                                                    }
-                                                    
-                                                    upload_fichier.onclick=function(event){
-                                                      event.preventDefault();
-                                                      var newinput=document.createElement('input');
-                                                      var oldinput=document.getElementsByClassName('inputimgvid');
-                                                      newinput.type='file';
-                                                      newinput.name='fichiers[]';
-                                                      newinput.className='inputfichier';
-                                                      newinput.id='input'+i;
-                                                        i=i+1;
-                                                      newinput.addEventListener("change",function(){verification_fichier(this.id)});
-                                                      
-                                                      while(oldinput.length>0){
-                                                      formfile.removeChild(oldinput[0]);}
-                                                      formfile.appendChild(newinput);
-                                                      upload_img_vid.disabled=false;
-                                                      upload_fichier.disabled=true;
-                                                      
-                                                    }
-                                                    
-                                                    
-                                                    function verification_fichier(id){
-                                                      
-                                                      
-                                                      
-                                                        elm=document.getElementById(id);
-                                                        
-                                                        if(elm.value.search('.jpg|.mp4|.png|.jpeg')!=-1){
-                                                          alert('type de fichier invalide');
-                                                          elm.value='';
-                                                    
-                                                        }
-                                                      
-                                                    
-                                                    }
-                                                    function verification_image_video(id){
-                                                      
-                                                      
-                                                      elm=document.getElementById(id);
-                                                      
-                                                      
-                                                        if(elm.value.search('.jpg|.mp4|.png|.jpeg')==-1){
-                                                          alert('type de fichier invalide');
-                                                          elm.value='';
-                                                    
-                                                        }
-                                                      
-                                                    
-                                                    }
-                                                    
-                                                        </script>
+                                                       
                                                   
 
    
@@ -194,6 +91,77 @@
                                 </div>
 
                             </div>
+                            <script>
+                        var fichiers=[]
+                    var input1=document.getElementById('input1');
+                    var btn=document.getElementById('file-upload-btn');
+                    var upload=document.getElementById('upload');
+                    
+                    
+                    btn.onclick=function(){input1.click();}
+                    input1.onchange=({target})=>{
+                        const file=target.files[0];
+                        fichiers.push(file);
+                        
+                    
+                        
+                        if(file){
+                            var filename=file.name;
+                            
+                            
+                            if(filename.length>12){
+                              filename=filename.substr(0,12)+'...'+filename.split('.').pop();
+                            }
+                            var template=document.createElement('template');
+                            template.innerHTML=`
+                            <div id="fichiers-selec" data-fich=${file.name}>
+                            <i class=" iconefiche fa fa-file" aria-hidden="true"></i>
+                            <span class='filename'> ${filename}</span>
+                            <i class=" iconetrash fa fa-trash" onclick="supprimer(this)" aria-hidden="true"></i> </div>`;
+                            upload.appendChild(template.content);
+                            
+                            list = new DataTransfer();
+                            
+                            for(i=0;i<fichiers.length;i++){
+                                newfile = new File([fichiers[i]],fichiers[i].name);
+                                list.items.add(newfile);
+                          
+                        }
+                            input1.files=list.files;
+                            
+
+
+                        }
+
+
+                    }
+                    function supprimer(elem){
+
+                        pere=elem.parentNode;
+                        filename=pere.getAttribute('data-fich');
+                        
+                        for(i=0;i<fichiers.length;i++){
+                            if(fichiers[i].name==filename){
+                                fichiers.splice(i,1);
+                                break;
+                            }
+                        }
+                        pere.remove();
+                        list = new DataTransfer();
+                            
+                            for(i=0;i<fichiers.length;i++){
+                                newfile = new File([fichiers[i]],fichiers[i].name);
+                                list.items.add(newfile);
+                          
+                        }
+                            input1.files=list.files;
+                            console.log(input1.files)
+
+                    }
+        
+        
+
+        </script>
 
 
 

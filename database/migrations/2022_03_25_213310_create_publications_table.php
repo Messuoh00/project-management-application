@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
+            
             $table->text('corps');
+            $table->string('fichiers');
            
             $table->foreignId('user_id')->constrained();
 

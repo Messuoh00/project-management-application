@@ -26,14 +26,18 @@ class ProjectController extends Controller
 
 
         $user=User::latest()->get();
-        if (Auth::user()->poste=="admin"){
+        if (Auth::user()->poste=="admin" || Auth::user()->poste=="Divisionnaire" ||  Auth::user()->poste=="vice president"){
             $projects=Project::latest()->get();
         }
         else {
-          $user_id=Auth::user()->id;
+            if(Auth::user()->poste=="relai"){
+                $projects=Project::where('structure_pilote',Auth::user()->division)->latest()->get();;
+            }
+            else{
+            $user_id=Auth::user()->id;
           $projects=Project::whereRelation('user','id',$user_id)->orWhere('chef_projet',$user_id)->orWhere('representant_EP',$user_id)->latest()->get();
-
-
+            }
+           
         }
 
 

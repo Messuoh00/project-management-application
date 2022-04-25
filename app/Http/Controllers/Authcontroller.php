@@ -69,9 +69,10 @@ class Authcontroller extends Controller
 
     //creation du user
     function store(Request $request){
+       
         $this->validate($request,[
-            'email' => 'required|email',
-            'password' => 'required|alphaNum|min:3',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:3',
             'nom' => 'required',
             'prenom' => 'required',
             'poste' => 'required',
@@ -90,6 +91,7 @@ class Authcontroller extends Controller
 
     function show($id){
         $user=User::find($id);
+       
 
         return view('formulaireuser_show')->with('user',$user);
         
@@ -157,6 +159,12 @@ class Authcontroller extends Controller
                 return back()->with('error','ancien mot de passe incorrect ');
               } }
 
+
+    }
+    function destroy($id){
+        $user=User::find($id);
+        $user->delete();
+        return redirect('users');
 
     }
 
