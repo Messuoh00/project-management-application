@@ -44,7 +44,7 @@
                           <th scope="col" data-sortable="true">Nom Projet</th>
                           <th scope="col" data-sortable="true">Structure Pilote</th>
                           <th scope="col" data-sortable="true">Thematique </th>
-                          @if ($ur=='jet')   <th scope="col" data-sortable="true">Phase</th>  @endif
+                          @if (!request()->has('phase'))   <th scope="col" data-sortable="true">Phase</th>  @endif
 
 
 
@@ -70,8 +70,8 @@
 
                           <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')"> {{$project->thematique}} </div> </td>
 
-                          @if ($ur=='jet')
-                          <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">{{$nomphase[$project->phase]}} </div> </td>
+                          @if (!request()->has('phase'))
+                          <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">{{$array[$project->phase]}} </div> </td>
                           @endif
 
 
