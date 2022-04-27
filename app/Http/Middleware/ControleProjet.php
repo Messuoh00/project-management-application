@@ -19,20 +19,25 @@ class ControleProjet
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {  
+    { 
       if (Auth::user()->poste=="admin"||Auth::user()->poste=="vice president"||Auth::user()->poste=="Divisionnaire"){
             
         return $next($request);
      }
       $project_id=$request->route()->parameter('projet');
       $user_id=Auth::user()->id;
-      $trouve=Project::where('id',$project_id)->where(function($query) use ($user_id){$query->where('chef_projet',$user_id)->orWhere('representant_EP',$user_id);})->first();
+      $trouve=Project::where('id',$project_id)->whereRelation('user','id',$user_id)->latest()->first();
+      
+      if($trouve!=null){
+        $trouve2=UserProject::where('project_id',$project_id)->where('user_id',$user_id)->where('statut',1)->where(function($query){$query->where('post',1)->orWhere('post',2);})->first();
+        if ($trouve2!=null){return $next($request); }else{ return abort(403);}
+      } else{  return abort(403);
+
+      }
       
      //$trouve=UserProject::where('user_id',$user_id)->where('project_id',$project_id)->first();
      
-      if($trouve==null){return abort(403);
-       
-      }else { return $next($request);}
+      
 
         
     }

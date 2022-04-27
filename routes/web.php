@@ -27,6 +27,7 @@ Route::get('/', 'App\Http\Controllers\Authcontroller@log')->name('log');
 
 
 Route::middleware(['auth'])->group(function(){
+    
 
     Route::resource('/projet', ProjectController::class);
 
@@ -34,8 +35,9 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['projet'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['edit','destroy','update']);
 });
-Route::middleware(['projet-lecture'])->group(function(){
+Route::middleware(['projetlecture'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['show']);
+   
 });
 
 

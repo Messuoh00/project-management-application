@@ -46,14 +46,17 @@
                                                                                 {{csrf_field()}}
                                                                                 {{ method_field('PATCH') }}
                                                                                 
-                                                                                <h6  >veuillez introduire l'ancien mot de passe:</h6>
+                                                                                <h6  >ancien mot de passe:</h6>
                                                                                 <div class="form-group input-group">
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text"> <i class="fas fa-key"></i> </span>
                                                                                     </div>
                                                                                     <input id="oldpassword" name="oldpassword" class="form-control" placeholder="ancien mot de passe " type="password">
                                                                                 </div>
-                                                                                <h6  >veuillez introduire le nouveau mot de passe:</h6>
+                                                                                   @if($errors->has('oldpassword'))
+                                                                                <div><span style="color: red">veuillez introduire l'ancien mot de passe</span></div>
+                                                                                        @endif
+                                                                                <h6  > nouveau mot de passe:</h6>
                                                                                 <div class="form-group input-group">
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
@@ -62,7 +65,10 @@
                                                                                     <input  id="newpassword" name="newpassword" class="form-control" placeholder="nouveau mot de passe " type="password">
                                                                                     
                                                                                 </div>
-                                                                                <h6  >veuillez introduire une nouvelle fois le nouveau mot de passe :</h6>
+                                                                                @if($errors->has('newpassword'))
+                                                                                <div><span style="color: red">veuillez introduire le nouveau mot de passe</span></div>
+                                                                                        @endif
+                                                                                <h6  >confirmation du nouveau mot de passe :</h6>
                                                                                 <div class="form-group input-group">
                                                                                     <div class="input-group-prepend">
                                                                                         <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
@@ -71,6 +77,9 @@
                                                                                     <input  id="newpassword2" name="newpassword2" class="form-control" placeholder="confirmation du nouveau mot de passe " type="password">
                                                                                     
                                                                                 </div>
+                                                                                @if($errors->has('newpassword2'))
+                                                                                <div><span style="color: red">veuillez introduire la confirmation du nouveau mot de passe</span></div>
+                                                                                        @endif
 
                                                                             
 
@@ -81,15 +90,12 @@
                                                                                 
 
                                                                                     @if($message=Session::get('error'))
-                                                                                    {{Session::get('error')}}
+                                                                                    
+                                                                                    
+                                                                                        
+                                                                                <div><span style="color: red">{{Session::get('error')}}</span></div>
                                                                                         @endif
-                                                                                        @if(count($errors) >0)
-
-                                                                                        @foreach($errors->all() as $error)
-                                                                                        {{$error}}
-                                                                                        @endforeach
-
-                                                                                        @endif
+                                                                            
                                                                                         <button type="submit" class="btn btn-warning">Valider</button>
                                                                                 </form> 
                                                                             </div>

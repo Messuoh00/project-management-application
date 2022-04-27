@@ -24,7 +24,7 @@ class Authcontroller extends Controller
     function login(Request $request){
         $this->validate($request,[
         'email' => 'required|email',
-        'password' => 'required|alphaNum|min:3'
+        'password' => 'required'
         ]);
      $userdata=array(
         'email' =>$request->get('email'),
@@ -107,7 +107,7 @@ class Authcontroller extends Controller
     //modification du user
     function update($id,Request $request){
         $this->validate($request,[
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,'.$id,
             'nom' => 'required',
             'prenom' => 'required',
             'poste' => 'required',
@@ -167,5 +167,6 @@ class Authcontroller extends Controller
         return redirect('users');
 
     }
+    
 
 }

@@ -35,7 +35,7 @@ class ProjectController extends Controller
             }
             else{
             $user_id=Auth::user()->id;
-          $projects=Project::whereRelation('user','id',$user_id)->orWhere('chef_projet',$user_id)->orWhere('representant_EP',$user_id)->latest()->get();
+          $projects=Project::whereRelation('user','id',$user_id)->latest()->get();
             }
            
         }

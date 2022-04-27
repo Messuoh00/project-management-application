@@ -44,7 +44,7 @@
                                                         {{csrf_field()}}
                                                       
                                                         
-                                                        <label  >text de la publication:</label>
+                                                        <label  >text de la publication(non obligatoire):</label>
                                                         <textarea class=" text-corps form-control" rows="5" name="corps"></textarea>
                                                        <div id="upload">
             
@@ -53,15 +53,19 @@
                                                             <hr class="stylehr">
 
                                                             <div id="iconupload"><i class="fa fa-download" aria-hidden="true"></i></div>
+
                                                             
                                                             
                                                             <span id="file-upload-btn" class="btn btn-warning">selectionner un fichier</span>
                                                             <hr class="stylehr">
-                                                            
+                                                                   
+                                                                                    
                                                             
                                                             
                                                           </div>
-                                                        
+                                                          @if($errors->has('fichiers'))
+                                                                <div><span style="color: red">veuillez au moin inserer un fichier</span></div>
+                                                                @endif
                                                         <div id='divpublierbtn'> 
                                                         <input id='publierbtn' type="submit" class="btn btn-warning" value='publier'>
 
@@ -117,7 +121,7 @@
                             <div id="fichiers-selec" data-fich=${file.name}>
                             <i class=" iconefiche fa fa-file" aria-hidden="true"></i>
                             <span class='filename'> ${filename}</span>
-                            <i class=" iconetrash fa fa-trash" onclick="supprimer(this)" aria-hidden="true"></i> </div>`;
+                            <i class=" iconetimes fa fa-times" onclick="supprimer(this)" aria-hidden="true"></i> </div>`;
                             upload.appendChild(template.content);
                             
                             list = new DataTransfer();

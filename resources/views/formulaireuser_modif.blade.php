@@ -49,6 +49,7 @@
 																<form method="post" action="/users/{{$user->id}}/" >
 																	{{csrf_field()}}
 																	{{ method_field('PUT') }}
+																	<h6 class="mb-0"> nom:</h6>
 																	<div class="form-group input-group">
 																		
 																		<div class="input-group-prepend">
@@ -57,21 +58,33 @@
 																		<input id="nom" name="nom" class="form-control" value=" {{ $user->nom}}" type="text">
 																	
 																	</div>
+																	@if($errors->has('nom'))
+																	<div><span style="color: red">{{$errors->first('nom')}}</span></div>
+																	@endif
+																	<h6 class="mb-0"> prenom:</h6>
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 																		</div>
 																		<input id="prenom" name="prenom" class="form-control" value=" {{ $user->prenom}}" type="text">
 																	</div>
+																	@if($errors->has('prenom'))
+                                                                        <div><span style="color: red">{{$errors->first('prenom')}}</span></div>
+                                                                   @endif
+																   <h6 class="mb-0"> email:</h6>
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 																		</div>
 																		<input id="email" name="email" class="form-control" value=" {{ $user->email}}" type="email">
 																	</div>
+																	@if($errors->has('email'))
+                                                                         <div><span style="color: red">{{$errors->first('email')}}</span></div>
+                                                                      @endif
+
 
 																
-
+																	  <h6 class="mb-0"> poste:</h6>
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
@@ -81,10 +94,11 @@
 																			<option value="vice president">vice president</option>
 																			<option value="Divisionnaire">manager</option>
 																			<option value="employé">employé</option>
-																			<option value="relai">employé</option>
+																			<option value="relai">relai</option>
 																			<option value="admin">admin</option>
 																		</select>
 																	</div>
+																	<h6 class="mb-0"> division:</h6>
 
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
@@ -102,13 +116,7 @@
 																			@endforeach
 																		</select>
 																	</div>
-																				@if(count($errors) >0)
-
-																			@foreach($errors->all() as $error)
-																			{{$error}}
-																			@endforeach
-
-																			@endif
+																	
 																	<button type="submit" class="btn btn-primary">Enregistrer</button>
 
 																</form> 

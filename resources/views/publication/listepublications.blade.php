@@ -58,10 +58,12 @@
                                                                         <i class="fa  fa-2x fa-user"></i> 
                                                                         </span>
                                                                     <i class="user"> <a href="publications/profil/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
+                                                                    @if(Auth::user()->id==$publication->user->id)
                                                                     <a class='supp-public' href="/publications/supprimer/{{$publication->id}}" onclick="return confirm('etes vous sur de vouloir supprimer cette publication?');" >
-                                                                    <i class="fa  fa-2x fa-trash"></i> 
+                                                                    <i class=" iconex fa  fa-2x fa-times"></i> 
 
                                                                         </a>
+                                                                         @endif
                                                                   </div>
                                                                     <h8> {{$publication->date_publication}}</h8>
                                                                         
@@ -148,7 +150,34 @@
 
 
 
+                                <script>
 
+function search(event){
+event.preventDefault();
+chaine=document.getElementById('recherche').value;
+
+
+listpublications=document.getElementsByClassName('pubcont');
+
+
+for(i=0;i<listpublications.length;i++){
+user=listpublications[i].getElementsByClassName('user');
+corps=listpublications[i].getElementsByClassName('corps');
+
+
+if(user[0].innerHTML.search(chaine)<0 && corps[0].innerHTML.search(chaine)<0){
+    
+    listpublications[i].style.display="none";
+    
+}else{
+    listpublications[i].style.display="";
+}
+
+
+}}
+
+    
+</script>
 
 
 @endsection

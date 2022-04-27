@@ -36,12 +36,22 @@
                             <input type="email" id="email" name="email" class="form-control" placeholder="adresse email">
                             
                         </div>
+                        @if($errors->has('email'))
+                             <div><span style="color: white">veuillez introduire l'email</span></div>
+                                     @endif
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
                             <input type="password" id="password" name="password" class="form-control" placeholder="mot de passe">
+                            
                         </div>
+                        @if($errors->has('password'))
+                             <div><span style="color: white">veuillez introduire le mot de passe</span></div>
+                                     @endif
+                                     @if($message=Session::get('error'))
+                                     <div><span style="color: white">{{Session::get('error')}}</span></div>
+						  @endif
                         
                         <div class="form-group">
                             <input type="submit" value="se connecter" class="btn float-right login_btn">
@@ -49,15 +59,6 @@
                         <hr>
                     </form>
 					
-						@if(count($errors) >0)
-
-						@foreach($errors->all() as $error)
-						{{$error}}
-						@endforeach
-                         @endif
-						   @if($message=Session::get('error'))
-						  {{Session::get('error')}}
-						  @endif
 
                 </div>
                

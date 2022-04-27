@@ -21,7 +21,7 @@ class PublicationController extends Controller
     function store(Request $request){
         $this->validate($request,[
            
-            'corps' => 'required',
+            'fichiers' => 'required',
         ]);
         
        

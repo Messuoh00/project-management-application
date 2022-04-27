@@ -180,6 +180,7 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
+            @if(Auth::user()->poste=='admin')
 
 
             <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
@@ -201,6 +202,7 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+            @endif
 
 
 

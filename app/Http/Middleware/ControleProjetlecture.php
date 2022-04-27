@@ -4,10 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\UserProject;
 use App\Models\Project;
-use Illuminate\Support\Facades\Route;
-class ControleProjet_lecture
+use Illuminate\Support\Facades\Auth;
+
+class ControleProjetlecture
 {
     /**
      * Handle an incoming request.
@@ -17,7 +18,6 @@ class ControleProjet_lecture
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    
     {
         $project_id=$request->route()->parameter('projet');
         if (Auth::user()->poste=="relai"){
@@ -31,10 +31,16 @@ class ControleProjet_lecture
              if(Auth::user()->poste=="employé"){
                 $user_id=Auth::user()->id;
 
-                $trouve=Project::where('id',$project_id)->where(function($query) use ($user_id){$query->whereRelation('user','id',$user_id)->orWhere('chef_projet',$user_id)->orWhere('representant_EP',$user_id);})->first();
-                if($trouve==null){return abort(403);}
+                $trouve=Project::where('id',$project_id)->where(function($query) use ($user_id){$query->whereRelation('user','id',$user_id);})->latest()->first();
+                if($trouve==null){return abort(403);} else{
+                    $trouve2=UserProject::where('project_id',$project_id)->where('user_id',$user_id)->where('statut',1)->first();
+                    if($trouve2==null){return abort(403);
+
+                    }
+                }
                 
              }
          } return $next($request);
+        
     }
 }

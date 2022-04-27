@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
             
-            $table->text('corps');
+            $table->text('corps')->nullable();
             $table->string('fichiers');
            
             $table->foreignId('user_id')->constrained();
