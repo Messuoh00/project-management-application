@@ -329,16 +329,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                             </script>
 
-                            <script>
-                                  function clickhandler(click){
-                                const points=bar.getElementsAtEventForMode(click, 'nearest', {instersect: true}, true);
-                                if(points.lenght){
-                                    const firstpoint=points[0];
-                                    consol.log(firstpoint);
-                                }
-                                ctxbar.onclick=clickhandler;
-                            }
-                            </script>
+
 
 
 @endsection
