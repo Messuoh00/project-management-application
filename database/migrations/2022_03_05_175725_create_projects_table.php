@@ -29,7 +29,7 @@ return new class extends Migration
             $table->String('region_implementation')->nullable();
             $table->String('region_exploitation')->nullable();
 
-            $table->unsignedDecimal('budget')->nullable();
+            $table->bigInteger('budget')->nullable();
 
             $table->timestamp('date_deb')->nullable();
 
