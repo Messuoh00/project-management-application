@@ -49,6 +49,7 @@
                                                             <th scope="col" data-sortable="true">Nom</th>
                                                             <th scope="col" data-sortable="true">Prenom</th>
                                                             <th scope="col" data-sortable="true">Post </th>
+                                                            <th scope="col" data-sortable="true">Date </th>
 
 
 
@@ -70,6 +71,7 @@
 
                                                             <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/users/{{$chef->id}}')"> Chef Projet </div> </td>
 
+                                                            <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/users/{{$chef->id}}')"> {{$chef->updated_at}} </div> </td>
 
                                                             </tr>
 
@@ -90,6 +92,8 @@
 
                                                             <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/users/{{$rep->id}}')"> Rep Ep</div> </td>
 
+                                                            <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/users/{{$rep->id}}')"> {{$rep->updated_at}} </div> </td>
+
 
                                                             </tr>
 
@@ -107,6 +111,8 @@
 
 
                                                             <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/users/{{$membre->id}}')"> Membre equipe </div> </td>
+
+                                                            <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/users/{{$membre->id}}')"> {{$membre->updated_at}} </div> </td>
 
 
                                                             </tr>

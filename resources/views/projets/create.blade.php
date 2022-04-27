@@ -42,7 +42,7 @@
                                   <div class="form-group">
                                   <h6 class="mb-0">Nom Projet:</h6>
 
-                                  <input type="text" class="form-control" placeholder="NomProjet" name="NomProjet" value="{{ old('name') }}"/>
+                                  <input type="text" class="form-control" placeholder="NomProjet" name="NomProjet" value="{{ old('NomProjet') }}"/>
 
                                     @if($errors->has('NomProjet'))
                                         <div><span style="color: red">Saisissez le nom du projet</span></div>
