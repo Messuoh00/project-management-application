@@ -58,7 +58,7 @@ Route::view('/coo-E&P', 'coo-ep.coo-ep');
 Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 
-Route::resource('Departement',DepartementController::class);
+
 
 
 Route::get('/{id}/equipe','App\Http\Controllers\UploadController@team')->where('phase', '(.*)');
@@ -80,7 +80,11 @@ Route::get('/logout','App\Http\Controllers\Authcontroller@logout');
 Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
 Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepassword');
 Route::resource('users',Authcontroller::class);
-Route::middleware(['admin'])->group(function(){Route::resource('users',Authcontroller::class)->only(['edit','index','update']);     });
+Route::middleware(['admin'])->group(function(){
+    Route::resource('/projet', ProjectController::class)->only(['create']);
+    Route::resource('users',Authcontroller::class)->only(['edit','create','index','update']);    
+    Route::resource('Departement',DepartementController::class);
+ });
 
 Route::resource('publications',PublicationController::class);
 Route::get('/telecharger/publications/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');

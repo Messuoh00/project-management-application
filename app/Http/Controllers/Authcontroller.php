@@ -38,7 +38,7 @@ class Authcontroller extends Controller
     }
     //ici la page principal apres le login
     function apreslogin(){
-        return view('aff');
+        return redirect('/coo-E&P');
     }
 
     //traitement du logout

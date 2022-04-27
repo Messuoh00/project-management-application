@@ -144,23 +144,24 @@
             </li>
 
 
-
+            @if(Auth::user()->poste=='admin')
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('projet/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/projet/create">
                     <i class="fas fa-fw fa-plus-circle"></i>
                     <span>Ajouter un projet</span></a>
             </li>
+            @endif
 
 
-
-
+            @if(Auth::user()->poste=='admin')
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('Departement/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/Departement/create">
                     <i class="fas fa-fw  fa-building"></i>
                     <span>Modifier Departements</span></a>
             </li>
+            @endif
 
 
             <!-- Divider -->

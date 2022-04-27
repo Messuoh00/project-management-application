@@ -13,7 +13,7 @@
 </head>
 <body>
 @if(isset(Auth::user()->email))
-<script> window.location="/apreslogin";      </script>
+<script> window.location="/coo-E&P";      </script>
 @endif
     <div class="container">
         <div class="d-flex justify-content-center h-100">

@@ -92,7 +92,7 @@
 																		<select class="form-control form-select" name="poste" id="poste">
 																			<option value="{{ $user->poste}}" selected  hidden>{{ $user->poste}}</option>
 																			<option value="vice president">vice president</option>
-																			<option value="Divisionnaire">manager</option>
+																			<option value="Divisionnaire">Divisionnaire</option>
 																			<option value="employé">employé</option>
 																			<option value="relai">relai</option>
 																			<option value="admin">admin</option>
