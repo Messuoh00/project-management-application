@@ -72,7 +72,8 @@
 																	</div>
 
 																
-                                  
+																	@if(Auth::user()->poste=='admin')
+
 																	<h6 class="mb-0"> poste:</h6>
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
@@ -81,7 +82,7 @@
 																		<select disabled class="form-control form-select" name="poste" id="poste">
 																			<option value="{{ $user->poste}}" selected  hidden>{{ $user->poste}}</option>
 																			<option value="vice president">vice president</option>
-																			<option value="Divisionnaire">manager</option>
+																			<option value="Divisionnaire">Divisionnaire</option>
 																			<option value="employé">employé</option>
 																			<option value="relai">relai</option>
 																			<option value="admin">admin</option>
@@ -97,6 +98,7 @@
 																		<input disabled id="division" name="division" class="form-control" value=" {{$user->division}}" type="text">
 																		
 																	</div>
+																	@endif
 																				
                                                                     <a style="float: right" href="/publications/profil/{{$user->id}}"  class="btn btn-warning"> Publications </a>
 
