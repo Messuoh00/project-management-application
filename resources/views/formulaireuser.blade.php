@@ -88,6 +88,19 @@
                                                                                                     @if($errors->has('password'))
                                                                                                         <div><span style="color: red">{{$errors->first('password')}}</span></div>
                                                                                                                 @endif
+                                                                                                    <div class="form-group input-group">
+                                                                                                        <div class="input-group-prepend">
+                                                                                                            <span class="input-group-text"> <i class="fas fa-key"></i> </span>
+                                                                                                        </div>
+                                                                                                        <input id="password2" name="password2" class="form-control" placeholder=" confirmation mot de passe " type="password">
+                                                                                                    </div>
+                                                                                                    @if($errors->has('password2'))
+                                                                                                        <div><span style="color: red">{{$errors->first('password2')}}</span></div>
+                                                                                                                @endif
+                                                                                                                @if($message=Session::get('error'))                                                                                              
+                                                                                        
+                                                                                                                    <div><span style="color: red">{{Session::get('error')}}</span></div>
+                                                                                                                            @endif
 
                                                                                                     <div class="form-group input-group">
                                                                                                         <div class="input-group-prepend">

@@ -144,7 +144,7 @@ return [
     'custom' => [
         'password' => [
             'required' => 'le champs mot de passe est obligatoire.',
-        ],'email'=>['unique'=>'email a déjà eté enregistré.']
+        ],'email'=>['unique'=>'email a déjà eté enregistré.'],'password2'=>['required'=>'le champs confirmation mot de passe est obligatoire.']
     ],
 
     /*

@@ -81,8 +81,8 @@ Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
 Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepassword');
 Route::resource('users',Authcontroller::class);
 Route::middleware(['admin'])->group(function(){
-    Route::resource('/projet', ProjectController::class)->only(['create']);
-    Route::resource('users',Authcontroller::class)->only(['edit','create','index','update']);    
+    Route::resource('/projet', ProjectController::class)->only(['create','store']);
+    Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store']);    
     Route::resource('Departement',DepartementController::class);
  });
 

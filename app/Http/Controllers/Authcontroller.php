@@ -72,12 +72,18 @@ class Authcontroller extends Controller
        
         $this->validate($request,[
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:3',
+            'password' => 'required',
             'nom' => 'required',
             'prenom' => 'required',
             'poste' => 'required',
             'division' => 'required',
+            'password2'=>'required'
    ]);
+   if($request->password != $request->password2){ 
+                
+    return back()->with('error','confirmation du mot de passe incorrect');
+} else{
+   
     $user=User::create([
             'nom'=>$request->input('nom'),
             'prenom'=>$request->input('prenom'),
@@ -86,7 +92,7 @@ class Authcontroller extends Controller
             'poste'=>$request->get('poste'),
             'division'=>$request->get('division'),
          ]);
-        return redirect('/users/create');
+        return redirect('/users/create');}
     }
 
     function show($id){
