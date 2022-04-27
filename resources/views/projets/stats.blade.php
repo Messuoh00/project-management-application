@@ -29,6 +29,9 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                 <h1 class="h3 mb-0 text-gray-800">Statistique:</h1>
+                                @if ($errors->any())
+                                <div><h4 style="color: red">{{$errors}}</h4></div>
+                                @endif
 
 
 
@@ -43,7 +46,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 
                                     <div style="float: right">
-                                    <a href="/stat?var={{request()->input('var')}}&x=now" class="btn  btn-primary ">Statistique d'aujhordui</a>
+                                    <a href="/stat?var={{request()->input('var')}}&x=" class="btn  btn-primary ">Statistique d'aujhordui</a>
                                     </div>
 
                                 </span>
@@ -222,8 +225,8 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                              let avan=[];
                              Array.prototype.push.apply(avan,@json($avan));
 
-
-                               new Chart(document.getElementById("bar-chart-grouped"), {
+                             var  ctxbar = document.getElementById("myPieChart");
+                              var bar= new Chart(document.getElementById("bar-chart-grouped"), {
                                 type: 'bar',
                                 data: {
                                 labels: names,
@@ -321,6 +324,20 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                 cutoutPercentage: 10,
                             },
                             });
+
+
+
+                            </script>
+
+                            <script>
+                                  function clickhandler(click){
+                                const points=bar.getElementsAtEventForMode(click, 'nearest', {instersect: true}, true);
+                                if(points.lenght){
+                                    const firstpoint=points[0];
+                                    consol.log(firstpoint);
+                                }
+                                ctxbar.onclick=clickhandler;
+                            }
                             </script>
 
 

@@ -42,7 +42,7 @@
 
             <!-- Sidebar - Brand -->
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/coo-E&P">
                 <div class="sidebar-brand-icon ">
                       <img src="{{url('/img/logo.png')}}" alt="" style="height:100px">
                 </div>

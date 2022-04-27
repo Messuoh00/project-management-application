@@ -106,12 +106,18 @@ class ProjectController extends Controller
 
 
 
+        if ($request->input('Chefid')!=null) {
+
+
         $equipe=new UserProject();
         $equipe->project_id= $proje->id;
         $equipe->user_id=$request->input('Chefid');
         $equipe->post=1;
         $equipe->statut=1;
         $equipe->save();
+        }
+
+        if ($request->input('RepresentantE&Pid')!=null) {
 
         $equipe=new UserProject();
         $equipe->project_id= $proje->id;
@@ -119,6 +125,7 @@ class ProjectController extends Controller
         $equipe->post=2;
         $equipe->statut=1;
         $equipe->save();
+        }
 
         $xs= $request->input('equipeid');
         $array = explode(',',$xs[0]);
@@ -231,8 +238,8 @@ class ProjectController extends Controller
 
         }else{
 
-            $chef="";
-            $rep="";
+            $chef=null;
+            $rep=null;
             $eq=array();
             $ei=array();
 
@@ -342,9 +349,11 @@ class ProjectController extends Controller
             ]);
 
 
-            if ($project->phase==4) { $request->validate([ "RegionTest" => "required",]);}
-            if ($project->phase==5) { $request->validate([ "RegionImp" => "required",]);}
-            if ($project->phase==6) { $request->validate([ "RegionExp" => "required",]);}
+            if ($project->phase==4) { $request->validate([ "RegionTest" => "required",]);
+                if ($project->phase==5) { $request->validate([ "RegionImp" => "required",]);
+                    if ($project->phase==6) { $request->validate([ "RegionExp" => "required",]);}
+                }
+            }
 
 
         Project::where('id',$id)->update(
@@ -386,7 +395,6 @@ class ProjectController extends Controller
             DB::table('project_user')->where('project_id', $id)->update(['statut' =>0]);
 
 
-
             $xs= $request->input('equipeid');
             $array = explode(',',$xs[0]);
 
@@ -397,10 +405,11 @@ class ProjectController extends Controller
 
                 if(!empty($x)){
 
-                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$x);
+                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$x)->where('post','=',3);
 
                 if ($temp->exists()) {
                  $temp->update(['statut' =>1]);
+
                 }else{
 
                     $equipe=new UserProject();
@@ -420,29 +429,31 @@ class ProjectController extends Controller
 
 
 
-                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$request->input('Chefid'));
+                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$request->input('Chefid'))->where('post','=',1);
 
                 if ($temp->exists()) {
                  $temp->update(['statut' =>1]);
+
                 }else{
 
                     $equipe=new UserProject();
                     $equipe->project_id= $id;
-                    $equipe->user_id=$x;
+                    $equipe->user_id=$request->input('Chefid');
                     $equipe->post=1;
                     $equipe->statut=1;
                     $equipe->save();
                 }
 
-                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$request->input('RepresentantE&Pid'));
+                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$request->input('RepresentantE&Pid'))->where('post','=',2);
 
                 if ($temp->exists()) {
                  $temp->update(['statut' =>1]);
+
                 }else{
 
                     $equipe=new UserProject();
                     $equipe->project_id= $id;
-                    $equipe->user_id=$x;
+                    $equipe->user_id=$request->input('RepresentantE&Pid');
                     $equipe->post=2;
                     $equipe->statut=1;
                     $equipe->save();
@@ -584,7 +595,7 @@ class ProjectController extends Controller
 
         if (!$recoveredData) {
 
-            return redirect()->back();
+            return redirect()->back()->withErrors('Archive non existent');
         }
 
 

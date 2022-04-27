@@ -207,9 +207,9 @@
 
                                             {{-- Chef Projet: --}}
                                             <h6 class="mb-0"> Chef Projet:</h6>
-                                            <div  type="text" id="chef"class="form-control"  name="ChefProjet"  ><a href="/users/{{$chef->id}}"><p>{{$chef->nom}} {{$chef->prenom}}</p></a> </div>
+                                            <div  type="text" id="chef"class="form-control"  name="ChefProjet"  > @if($chef!=null)<a href="/users/{{$chef->id}}"><p>{{$chef->nom}} {{$chef->prenom}}</p></a> @endif</div>
 
-                                            <input type="hidden"  id="chefid" class="form-control " value="{{$chef->id}}"  name="Chefid" />
+                                            <input type="hidden"  id="chefid" class="form-control " @if($chef!=null) value="{{$chef->id}}" @endif  name="Chefid" />
 
 
                                             <a data-toggle="modal" href="#myModal"  class="btn btn-warning btn-sm " style="margin: 10px">Choisir Chef Projet</a>
@@ -277,8 +277,8 @@
                                             <h6 class="mb-0"> Representant E&P:</h6>
 
 
-                                            <div   type="text"   id="RepresentantE&P"  class="form-control"  name="Representant E&P" placeholder="Representant E&P" > <a href="/users/{{$rep->id}}"><p>{{$rep->nom}} {{$rep->prenom}}</p></a> </div>
-                                            <input type="hidden" id="RepresentantE&Pid"  class="form-control" name="RepresentantE&Pid"   value="{{$rep->id}}"  />
+                                            <div   type="text"   id="RepresentantE&P"  class="form-control"  name="Representant E&P" placeholder="Representant E&P" >@if($rep!=null) <a href="/users/{{$rep->id}}"><p>{{$rep->nom}} {{$rep->prenom}}</p></a> @endif</div>
+                                            <input type="hidden" id="RepresentantE&Pid"  class="form-control" name="RepresentantE&Pid"  @if($rep!=null) value="{{$rep->id}}" @endif />
 
 
 
