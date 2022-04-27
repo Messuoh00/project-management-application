@@ -35,7 +35,7 @@ class ControleProjet
 
       }
       
-     //$trouve=UserProject::where('user_id',$user_id)->where('project_id',$project_id)->first();
+     //a$trouve=UserProject::where('user_id',$user_id)->where('project_id',$project_id)->first();
      
       
 
