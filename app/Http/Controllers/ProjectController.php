@@ -710,37 +710,27 @@ class ProjectController extends Controller
 
         $chef=DB::select("
 
-        select nom,prenom,id from users where id IN
+        select users.nom,users.prenom,users.id,project_user.updated_at FROM users INNER JOIN project_user
+            ON users.id = project_user.user_id
+                where statut=0 and post=1 and project_id='".$id."'
 
-        (
-            select user_id from project_user
-            where statut=0 and post=1 and project_id='".$id."'
 
-        )
 
         ");
 
         $rep=DB::select("
 
-        select nom,prenom,id from users where id IN
-
-        (
-            select user_id from project_user
+        select users.nom,users.prenom,users.id,project_user.updated_at FROM users INNER JOIN project_user
+        ON users.id = project_user.user_id
             where statut=0 and post=2 and project_id='".$id."'
-
-        )
 
         ");
 
         $membre=DB::select("
 
-        select nom,prenom,id from users where id IN
-
-        (
-            select user_id from project_user
+        select users.nom,users.prenom,users.id,project_user.updated_at FROM users INNER JOIN project_user
+        ON users.id = project_user.user_id
             where statut=0 and post=3 and project_id='".$id."'
-
-        )
 
         ");
 
