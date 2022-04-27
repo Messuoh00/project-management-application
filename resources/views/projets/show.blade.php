@@ -159,6 +159,8 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                                 @endif
 
+
+
                                               </div>
 
                                               <div class="card-body info2">
@@ -198,7 +200,9 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <h6 class="mb-0">Chef Projet:</h6>
                                               </div>
                                               <div class="col-sm-9 ">
+                                                @if (!empty($chef))
                                               <a href="/users/{{$chef->id}}"><p>{{$chef->nom}} {{$chef->prenom}}</p></a>
+                                                @endif
                                               </div>
                                               </div>
 
@@ -210,7 +214,9 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <h6 class="mb-0">Representant E&P:</h6>
                                               </div>
                                               <div class="col-sm-9 ">
+                                                @if (!empty($rep))
                                               <a href="/users/{{$rep->id}}"><p>{{$rep->nom}} {{$rep->prenom}}</p></a>
+                                                @endif
                                               </div>
                                               </div>
                                               <hr>
@@ -220,45 +226,54 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <h6 class="mb-0">Equipe:</h6>
                                               </div>
                                               <div class="col-sm-9 "style="overflow-y: scroll; height:109px;" >
-                                              @foreach ($equipe as $eq)
+                                             @if (!empty($equipe))
+                                             @foreach ($equipe as $eq)
                                                   <a href="users/{{$eq->id}}"><p>{{$eq->nom}}  {{$eq->prenom}}</p></a>
                                               @endforeach
+                                              @endif
                                               </div>
                                               </div>
                                               <hr>
 
 
 
-                                              <div class="son son1 " style="text-align: center">
+
+                                              </div>
+
+
+
+                                              </div>
+
+
+
+
+
+
+                                              <div class="filebutt" style="text-align: center">
                                                 <!-- Button trigger modal -->
-                                                <div style="float: left">
+                                                <div>
                                                 <a href="/fichier/{{$project->id}}/{{$nomphase[$project->phase]}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
                                                     <i class="fas fa-fw fa-archive"></i> fichier du projet
                                                 </a>
                                                 </div>
 
-
+                                                <div>
                                                 <a href="/{{$project->id}}/equipe"> <button type="button" class="btn   btn-warning btn-lg " >
                                                     <i class="fas fa-fw fa-archive"></i> fichier equipe
                                                 </a>
+                                                </div>
+
+                                                <div >
+                                                <a href="/{{$project->id}}/hequipe"> <button type="button" class="btn   btn-warning btn-lg " >
+                                                    <i class="fas fa-fw fa-archive"></i> Historique equipe
+                                                </a>
+                                                </div>
 
                                               </div>
 
 
 
                                               <hr>
-                                              </div>
-
-
-
-                                              </div>
-
-
-
-
-
-
-
 
                                               <div class="card-body status">
                                               <h6 class="d-flex align-items-center mb-3"> Statut Projet:</h6>

@@ -19,6 +19,7 @@ class ProjectFactory extends Factory
     public function definition()
     {
         $x=Departement::all()->random();
+        $y=Departement::all()->random();
         return [
 
 
@@ -26,7 +27,7 @@ class ProjectFactory extends Factory
 
                'nom_projet'=> $this->faker->title,
                'abreviation' => $this->faker->title,
-               'thematique'=> $this->faker->name(),
+               'thematique'=> $y->nomdep,
             //    'departement_id'=>$x->id,
                'structure_pilote'=>$x->nomdep,
                'phase'=> $this->faker->randomElement(['0', '1', '2', '3', '4','5','6']),
@@ -38,7 +39,7 @@ class ProjectFactory extends Factory
                'budget'=> $this->faker->biasedNumberBetween($min = 1000, $max = 2000, $function = 'sqrt'),
 
                'date_deb'=> now(),
-               'date_fin'=>  now(),
+               'date_fin'=>  now()->addDays(5),
 
                'visibilite'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
                'reactivite'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
