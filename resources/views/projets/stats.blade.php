@@ -211,7 +211,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                             <script>
                                 document.getElementById("btn").addEventListener("click", goToUrl);
                                 function goToUrl(){
-                                window.location = '/stat?var=2&x='+document.getElementById('url').value;
+                                window.location = '/stat?var=1&x='+document.getElementById('url').value;
                                 }
                             </script>
 
