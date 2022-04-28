@@ -88,9 +88,9 @@ class ProjectController extends Controller
         $proje->structure_pilote= $request->input('StructurePilote');
         $proje->phase='0';
         $proje->extras='refus';
-        $proje->region_test= $request->input('RegionTest');
-        $proje->region_implementation= $request->input('RegionImp');
-        $proje->region_exploitation= $request->input('RegionExp');
+        $proje->region_test="";
+        $proje->region_implementation="";
+        $proje->region_exploitation="";
         $proje->budget= $request->input('budget');
         $proje->date_deb= $request->input('DateDebut');
         $proje->date_fin= $request->input('DateFin');
@@ -349,11 +349,11 @@ class ProjectController extends Controller
             ]);
 
 
-            if ($project->phase==4) { $request->validate([ "RegionTest" => "required",]);
-                if ($project->phase==5) { $request->validate([ "RegionImp" => "required",]);
-                    if ($project->phase==6) { $request->validate([ "RegionExp" => "required",]);}
-                }
-            }
+            if ($project->phase==4) { $request->validate([ "RegionTest" => "required",]); }
+
+            if ($project->phase==5) {$request->validate([ "RegionTest" => "required",]); $request->validate([ "RegionImp" => "required",]);}
+
+            if ($project->phase==6) {$request->validate([ "RegionTest" => "required",]); $request->validate([ "RegionImp" => "required",]); $request->validate([ "RegionExp" => "required",]);}
 
 
         Project::where('id',$id)->update(
@@ -388,6 +388,8 @@ class ProjectController extends Controller
 
             ]
             );
+
+
 
             // 'chef_projet'=> $request->input('Chefid'),
             // 'representant_EP'=> $request->input('RepresentantE&Pid'),
@@ -428,6 +430,8 @@ class ProjectController extends Controller
 
 
 
+            if ($request->input('Chefid')!=null) {
+
 
                 $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$request->input('Chefid'))->where('post','=',1);
 
@@ -444,6 +448,9 @@ class ProjectController extends Controller
                     $equipe->save();
                 }
 
+            }
+
+            if ($request->input('RepresentantE&Pid')!=null) {
                 $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$request->input('RepresentantE&Pid'))->where('post','=',2);
 
                 if ($temp->exists()) {
@@ -458,7 +465,7 @@ class ProjectController extends Controller
                     $equipe->statut=1;
                     $equipe->save();
                 }
-
+            }
 
 
 
@@ -793,7 +800,11 @@ class ProjectController extends Controller
 
             if ($project->phase==2) { if ($project->extras!='accord') {return back()->withErrors('accord non donne');} }
 
-
+            // 'region_test'=> $request->input('RegionTest'),
+            //     'region_implementation'=> $request->input('RegionImp'),
+            //     'region_exploitation'=> $request->input('RegionExp'),
+            if ($project->phase==4) { if ($project->region_test=="") {return back()->withErrors("saisissez la region de test");} }
+            if ($project->phase==5) { if ($project->region_implementation=="") {return back()->withErrors("saisissez la region d'implementation");} }
 
            $project->phase=$request->input('updatephase');
            $project->extras='refus';

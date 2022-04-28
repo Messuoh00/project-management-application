@@ -21,7 +21,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 </div>
 
 @if ($errors->any())
-<div><h4 style="color: red">Passage Impossible projet non valider</h4></div>
+<div><h4 style="color: red">{!!implode('', $errors->all('<div>:message</div>')) !!}</h4></div>
 @endif
 <!-- Content Row -->
 <div class="row">
