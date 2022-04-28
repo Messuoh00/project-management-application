@@ -549,7 +549,7 @@ class ProjectController extends Controller
 
 
         foreach ($phase as $val) {
-            $names[]='projet n:'.$val->id;
+            $names[]='P:-'.$val->nom_projet;
             $vis[]=$val->visibilite;
             $reac[]=$val->reactivite;
             $avan[]=$val->avancement;
@@ -561,28 +561,166 @@ class ProjectController extends Controller
 
             $switch=request()->input('var');
             $date=request()->input('x');
-            $recoveredData=false;
+
+            $recoveredArray=false;
+
+            if (file_exists( Storage::path('archiveVRA/'.$date.' Idee RD.txt') ))
+            {
+                $recoveredData1 =  file_get_contents(Storage::path('archiveVRA/'.$date.' Idee RD.txt'));
+
+                $recoveredArray1 = unserialize($recoveredData1);
+
+                $i=1;
+
+                while (isset($recoveredArray1[$i])) {
+
+                    $names1[]='p: '.$recoveredArray1[$i];
+                    $vis1[]=$recoveredArray1[$i+1];
+                    $reac1[]=$recoveredArray1[$i+2];
+                    $avan1[]=$recoveredArray1[$i+3];
+                    $i=$i+4;
+
+                }
+
+                $count1=($i-1)/4;
+            }
+
+
+
+            if (file_exists( Storage::path('archiveVRA/'.$date.' Maturation.txt')))
+            {
+                 $recoveredData2 = file_get_contents(Storage::path('archiveVRA/'.$date.' Maturation.txt'));
+
+                 $recoveredArray2 = unserialize($recoveredData2);
+
+                 $i=1;
+
+                 while (isset($recoveredArray2[$i])) {
+
+                     $names2[]='p: '.$recoveredArray2[$i];
+                     $vis2[]=$recoveredArray2[$i+1];
+                     $reac2[]=$recoveredArray2[$i+2];
+                     $avan2[]=$recoveredArray2[$i+3];
+                     $i=$i+4;
+
+                 }
+
+                 $count2=($i-1)/4;
+            }
+
+
+
+            if (file_exists( Storage::path('archiveVRA/'.$date.' Recherche.txt')))
+            {
+                $recoveredData3 = file_get_contents(Storage::path('archiveVRA/'.$date.' Recherche.txt'));
+
+                $recoveredArray3 = unserialize($recoveredData3);
+
+                $i=1;
+
+                while (isset($recoveredArray3[$i])) {
+
+                    $names3[]='p: '.$recoveredArray3[$i];
+                    $vis3[]=$recoveredArray3[$i+1];
+                    $reac3[]=$recoveredArray3[$i+2];
+                    $avan3[]=$recoveredArray3[$i+3];
+                    $i=$i+4;
+
+                }
+
+                $count3=($i-1)/4;
+            }
+
+
+
+
+            if (file_exists( Storage::path('archiveVRA/'.$date.' Test.txt')))
+            {
+                $recoveredData4 = file_get_contents(Storage::path('archiveVRA/'.$date.' Test.txt'));
+
+                $recoveredArray4 = unserialize($recoveredData4);
+
+                $i=1;
+
+                while (isset($recoveredArray4[$i])) {
+
+                    $names4[]='p: '.$recoveredArray4[$i];
+                    $vis4[]=$recoveredArray4[$i+1];
+                    $reac4[]=$recoveredArray4[$i+2];
+                    $avan4[]=$recoveredArray4[$i+3];
+                    $i=$i+4;
+
+                }
+
+                $count4=($i-1)/4;
+            }
+
+
+
+            if (file_exists( Storage::path('archiveVRA/'.$date.' Implementation.txt') ))
+            {
+                $recoveredData5 = file_get_contents(Storage::path('archiveVRA/'.$date.' Implementation.txt'));
+
+                $recoveredArray5 = unserialize($recoveredData5);
+
+                $i=1;
+
+                while (isset($recoveredArray5[$i])) {
+
+                    $names5[]='p: '.$recoveredArray5[$i];
+                    $vis5[]=$recoveredArray5[$i+1];
+                    $reac5[]=$recoveredArray5[$i+2];
+                    $avan5[]=$recoveredArray5[$i+3];
+                    $i=$i+4;
+
+                }
+
+                $count5=($i-1)/4;
+            }
+
+
+
+
 
         switch ($switch) {
             case '1':
-                if (file_exists(Storage::path('archiveVRA/'.$date.' Idee RD.txt') ))  { $recoveredData =  file_get_contents(Storage::path('archiveVRA/'.$date.' Idee RD.txt')); }
+                $recoveredArray=$recoveredArray1;
+                $names=$names1;
+                $vis= $vis1;
+                $reac=$reac1;
+                $avan=$avan1;
                 break;
             case '2':
-                if (file_exists( Storage::path('archiveVRA/'.$date.' Maturation.txt')))  {  $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Maturation.txt'));}
+                $recoveredArray=$recoveredArray2;
+                $names=$names2;
+                $vis= $vis2;
+                $reac=$reac2;
+                $avan=$avan2;
                 break;
 
             case '3':
-                if (file_exists( Storage::path('archiveVRA/'.$date.' Recherche.txt')))  {   $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Recherche.txt'));}
+                $recoveredArray=$recoveredArray3;
+                $names=$names3;
+                $vis= $vis3;
+                $reac=$reac3;
+                $avan=$avan3;
 
                 break;
 
             case '4':
-                if (file_exists( Storage::path('archiveVRA/'.$date.' Test.txt')))  { $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Test.txt'));}
+                $recoveredArray=$recoveredArray4;
+                $names=$names4;
+                $vis= $vis4;
+                $reac=$reac4;
+                $avan=$avan4;
 
                 break;
 
             case '5':
-                if (file_exists(Storage::path('archiveVRA/'.$date.' Implementation.txt') ))  { $recoveredData = file_get_contents(Storage::path('archiveVRA/'.$date.' Implementation.txt'));}
+                $recoveredArray=$recoveredArray5;$names=$names5;
+                $vis= $vis5;
+                $reac=$reac5;
+                $avan=$avan5;
 
                 break;
 
@@ -593,27 +731,13 @@ class ProjectController extends Controller
         }
 
 
-        if (!$recoveredData) {
+        if (!$recoveredArray) {
 
             return redirect()->back()->withErrors('Archive non existent');
         }
 
 
-            $recoveredArray = unserialize($recoveredData);
 
-            $i=1;
-            $x='';
-            while (isset($recoveredArray[$i])) {
-
-                $names[]=$recoveredArray[$i];
-                $vis[]=$recoveredArray[$i+1];
-                $reac[]=$recoveredArray[$i+2];
-                $avan[]=$recoveredArray[$i+3];
-                $i=$i+4;
-
-            }
-
-            $count5=$count4=$count3=$count2=$count1=$i-1;
         }
 
 
