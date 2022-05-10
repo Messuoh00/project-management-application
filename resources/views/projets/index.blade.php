@@ -12,7 +12,6 @@
 @php
 
   $ur=request()->input('phase');
-  $array = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(En cours)",'Recherche(En TEST)','Archivage','En implementation','En exploitation');
 
 @endphp
 
@@ -57,7 +56,7 @@
 
 
 
-                          @if ( ($project->phase==$ur)|| ( ($ur==null) ) )
+                          @if ( ($project->phase->position==$ur)|| ( ($ur==null) ) )
 
 
                           <tr id={{$project->id}} style='height:100px;cursor: pointer; cursor: hand;'   >
@@ -66,12 +65,12 @@
 
                           <th scope="row" style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">  {{$project->nom_projet}} </div> </th>
 
-                          <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">  {{$project->structure_pilote}} </div> </td>
+                          <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">  {{$project->departement->nomdep}} </div> </td>
 
                           <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')"> {{$project->thematique}} </div> </td>
 
                           @if (!request()->has('phase'))
-                          <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">{{$array[$project->phase]}} </div> </td>
+                          <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">{{$project->phase->name}} </div> </td>
                           @endif
 
 

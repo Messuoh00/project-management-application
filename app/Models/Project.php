@@ -8,18 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    
+
     public function user(){
 
         return  $this->belongsToMany(User::class);
 
     }
 
-    // public function departement(){
+    function Phase(){
 
-    //     return  $this->hasOne(Departement::class);
+        return $this->belongsTo(Phase::class);
+    }
 
-    // }
+
+    function departement(){
+
+
+        return $this->belongsTo(Departement::class);
+    }
 
 
     protected $fillable = [
@@ -27,12 +33,12 @@ class Project extends Model
         'abreviation' ,
         'thematique',
         'structure_pilote',
-        'phase',
+        'Phase_id',
         'files',
         'region_test',
         'region_implementation',
         'region_exploitation',
-        
+
         'budget',
 
         'date_deb',
@@ -43,8 +49,8 @@ class Project extends Model
         'representant_EP' ,
 
         'etude_echo'  ,
-         
-                
+
+
         'visibilite',
         'reactivite',
         'avancement',
@@ -58,5 +64,5 @@ class Project extends Model
      *
      * @var array<int, string>
      */
-    
+
 }

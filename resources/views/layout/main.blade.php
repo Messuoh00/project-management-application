@@ -32,7 +32,9 @@
 <body id="page-top">
 
 
-
+    @php
+    $phase = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
+    @endphp
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -98,18 +100,13 @@
                     <span>Tous les projets</span></a>
             </li>
 
-              <!-- Nav Item - -->
-              <li class="nav-item {{request()->input('phase')=='0' ? 'active ' : ''}}">
-                <a class="nav-link "  href="/projet?phase=0">
-                    <i class="fas fa-fw fa-spinner"></i>
-                    <span>Idee RD Non Valider</span></a>
-            </li>
+
 
             <li class="nav-item  {{request()->filled('phase')  ? 'active ' : ''}} {{-- active --}}">
                 <a class="nav-link  {{!request()->filled('phase') ? 'collapsed ' : ''}}{{-- collapsed --}} " href="#" data-toggle="collapse" data-target="#collapsethree"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-tasks"></i>
-                    <span>Pphase projets</span>
+                    <span>Phase projets</span>
                 </a>
 
 
@@ -118,23 +115,13 @@
 
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <h6 class="collapse-header" style="color: rgb(85, 84, 84)"> Phase avant projet <br> et planification:</h6>
-                        <a class="collapse-item  {{  request()->input('phase')=='1' ? 'active text-warning ' : ''}} " href="/projet?phase=1">Idee RD</a>
+                        @foreach ($phase as $p)
 
-                        <a class="collapse-item  {{  request()->input('phase')=='2' ? 'active text-warning ' : ''}}" href="/projet?phase=2">Maturation</a>
-                        <hr class="sidebar-divider my-0">
 
-                        <h6 class="collapse-header"style="color: rgb(85, 84, 84)">  Phase exécution <br> et suivi évaluation:</h6>
-                        <a class="collapse-item {{  request()->input('phase')=='3' ? 'active text-warning ' : ''}}" href="/projet?phase=3">Recherche </a>
+                        <a class="collapse-item  {{  request()->input('phase')==$p->position ? 'active text-warning ' : ''}} " href="/projet?phase={{$p->position}}">Phase {{$p->name}}</a>
 
-                        <a class="collapse-item {{  request()->input('phase')=='4' ? 'active text-warning ' : ''}}"  href="/projet?phase=4">Test Pilote</a>
-                        <hr class="sidebar-divider my-0">
 
-                        <h6 class="collapse-header" style="color: rgb(85, 84, 84)"> Phase  clôture  <br> et valorisation:</h6>
-
-                        <a class="collapse-item {{  request()->input('phase')=='5' ? 'active text-warning ' : ''}}" href="/projet?phase=5">En implementation </a>
-                        <a class="collapse-item {{  request()->input('phase')=='6' ? 'active text-warning ' : ''}}" href="/projet?phase=6">En exploitation </a>
-
+                        @endforeach
 
 
                     </div>
@@ -157,12 +144,24 @@
 
             @if(Auth::user()->poste=='admin')
             <!-- Nav Item - -->
+            <li class="nav-item {{request()->is('Phase/create') ? 'active ' : ''}}">
+                <a class="nav-link "  href="/Phase/create">
+                    <i class="fas fa-fw fa-th-list"></i>
+                    <span>Modifier Phase</span></a>
+            </li>
+            @endif
+
+
+            @if(Auth::user()->poste=='admin')
+            <!-- Nav Item - -->
             <li class="nav-item {{request()->is('Departement/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/Departement/create">
                     <i class="fas fa-fw  fa-building"></i>
                     <span>Modifier Departements</span></a>
             </li>
             @endif
+
+
 
 
             <!-- Divider -->
@@ -175,7 +174,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link {{request()->is('') ? 'active ' : ''}}" href="/stat?var=1&x=">
+                <a class="nav-link {{request()->is('') ? 'active ' : ''}}" href="/stat">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Statistique</span></a>
             </li>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
 use App\Models\fichier;
+use App\Models\Phase;
 use App\Models\Publication;
 use Illuminate\Support\Facades\Response;
 use File;
@@ -28,24 +29,18 @@ class UploadController extends Controller
     {
 
 
+        $phase=Phase::orderBy('position')->get()->whereNotNull('position');
 
+        foreach ($phase as $p) {
+
+            if ($request->hasFile(key:$p->name) ) {request()->file(key:$p->name)->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/'.$p->name,name:'fichier '.$p->name.' du projet '.$id.'.'.request()->file(key:$p->name)->getClientOriginalExtension(),options:'');   }
+
+        }
 
         if ($request->hasFile(key:'random') ) {request()->file(key:'random')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/random',name:request()->file(key:'random')->getClientOriginalName(),options:'');   }
 
-        if ($request->hasFile(key:'note') ) {request()->file(key:'note')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/note',name:'note-p'.$id,options:'');   }
 
-        if ($request->hasFile(key:'fiche') ) {request()->file(key:'fiche')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/fiche',name:'fiche-p'.$id,options:'');   }
-
-        if ($request->hasFile(key:'misc') ) {request()->file(key:'misc')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/misc',name:'misc-p'.$id,options:'');   }
-
-
-        if ($request->hasFile(key:'team') ) {
-
-
-
-
-
-            request()->file(key:'team')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/fichier_equipe',name:request()->file(key:'team')->getClientOriginalName(),options:'');   }
+        if ($request->hasFile(key:'team') ) {request()->file(key:'team')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/fichier_equipe',name:request()->file(key:'team')->getClientOriginalName(),options:'');   }
 
         return back();
     }

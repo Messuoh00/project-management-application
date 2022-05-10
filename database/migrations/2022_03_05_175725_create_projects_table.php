@@ -15,15 +15,19 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
 
+
             $table->id('id');
+
             $table->String('nom_projet')->nullable();
             $table->String('abreviation')->nullable();
             $table->String('thematique')->nullable();
-            $table->String('structure_pilote')->nullable();
 
-            // $table->Integer('departement_id')->nullable();
 
-            $table->String('phase')->nullable();
+
+
+            $table->foreignId('phase_id')->constrained();
+            $table->foreignId('departement_id')->constrained();
+
 
             $table->String('region_test')->nullable();
             $table->String('region_implementation')->nullable();
@@ -42,13 +46,9 @@ return new class extends Migration
 
 
 
-            $table->String('etude_echo')->nullable(); //oui non na
+            $table->String('etude_echo')->default('na')->nullable(); //oui non na
 
-            $value=0.0;
 
-            $table->unsignedDecimal('visibilite')->default($value);
-            $table->unsignedDecimal('reactivite')->default($value);
-            $table->unsignedDecimal('avancement')->default($value);
 
 
             $table->text('description')->default('ADD TEXT HERE')->nullable();

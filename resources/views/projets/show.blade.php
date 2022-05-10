@@ -9,6 +9,7 @@
 
 
 @php
+
 $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(En cours)",'Recherche(En TEST)','En implementation','En exploitation','');
 
 @endphp
@@ -34,7 +35,12 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                   <div class="col x">
 
 
+                    @php
+                    $next= App\Models\Phase::get()->where('position','=',$project->phase->position+1)->first();
 
+                    $vra= App\Models\Vra::latest()->get()->where('phase_id','=',$project->phase_id)->where('project_id','=',$project->id)->first();
+
+                    @endphp
 
 
                                               <div class="conten_project_view">
@@ -65,7 +71,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                   </div>
                                                   <hr>
 
-                                                  <div class="row"@if ($project->phase<4) hidden @endif>
+                                                  <div class="row">
                                                       <div class="col-sm-3">
                                                       <h6 class="mb-0">Region Test:</h6>
                                                       </div>
@@ -74,9 +80,9 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                       </div>
 
                                                   </div>
-                                                  @if ($project->phase>=4) <hr> @endif
+                                                  <hr>
 
-                                                  <div class="row" @if ($project->phase<5) hidden @endif>
+                                                  <div class="row">
                                                       <div class="col-sm-3">
                                                       <h6 class="mb-0">Region implementation:</h6>
                                                       </div>
@@ -86,9 +92,9 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                                   </div>
 
-                                                  @if ($project->phase>=5) <hr> @endif
+                                               <hr>
 
-                                                  <div class="row" @if ($project->phase<6) hidden @endif>
+                                                  <div class="row">
                                                       <div class="col-sm-3">
                                                       <h6 class="mb-0">Region Exploitation:</h6>
                                                       </div>
@@ -98,7 +104,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                                   </div>
 
-                                                  @if ($project->phase>=6) <hr> @endif
+                                                    <hr>
 
                                                   <div class="row" >
                                                       <div class="col-sm-3">
@@ -140,24 +146,12 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                     <h6 class="mb-0">Phase:</h6>
                                                     </div>
                                                     <div class="col-sm-9 ">
-                                                    {{$nomphase[$project->phase]}}
+                                                    {{$project->phase->name}}
                                                     </div>
                                                 </div>
                                                 <hr>
 
-                                                @if ($project->phase==0||$project->phase==2)
 
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                    <h6 class="mb-0">Validation:</h6>
-                                                    </div>
-                                                    <div class="col-sm-9 ">
-                                                    {{$project->extras}}
-                                                    </div>
-                                                </div>
-                                                <hr>
-
-                                                @endif
 
 
 
@@ -179,7 +173,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <h6 class="mb-0">Structure Pilote:</h6>
                                               </div>
                                               <div class="col-sm-9 ">
-                                              {{$project->structure_pilote}}
+                                              {{$project->departement->nomdep}}
                                               </div>
                                               </div>
                                               <hr>
@@ -225,7 +219,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <div class="col-sm-3">
                                               <h6 class="mb-0">Equipe:</h6>
                                               </div>
-                                              <div class="col-sm-9 "style="overflow-y: scroll; height:109px;" >
+                                              <div class="col-sm-9 "style="overflow-y: scroll; height:235px;" >
                                              @if (!empty($equipe))
                                              @foreach ($equipe as $eq)
                                                   <a href="users/{{$eq->id}}"><p>{{$eq->nom}}  {{$eq->prenom}}</p></a>
@@ -252,7 +246,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <div class="filebutt" style="text-align: center">
                                                 <!-- Button trigger modal -->
                                                 <div>
-                                                <a href="/fichier/{{$project->id}}/{{$nomphase[$project->phase]}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
+                                                <a href="/fichier/{{$project->id}}/{{$project->phase->name}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
                                                     <i class="fas fa-fw fa-archive"></i> fichier du projet
                                                 </a>
                                                 </div>
@@ -277,17 +271,17 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                               <div class="card-body status">
                                               <h6 class="d-flex align-items-center mb-3"> Statut Projet:</h6>
-                                              <small>Visibilite:{{$project->visibilite}}%</small>
+                                              <small>Visibilite:{{$vra->visibilite}}%</small>
                                               <div class="progress mb-3" style="height: 5px">
-                                              <div class="progress-bar bg-primary" role="progressbar" style="width:{{$project->visibilite}}%" aria-valuenow="{{$project->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                              <div class="progress-bar bg-primary" role="progressbar" style="width:{{$vra->visibilite}}%" aria-valuenow="{{$vra->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
                                               </div>
-                                              <small>Reactivite:{{$project->reactivite}}%</small>
+                                              <small>Reactivite:{{$vra->reactivite}}%</small>
                                               <div class="progress mb-3" style="height: 5px">
-                                              <div class="progress-bar bg-primary" role="progressbar" style="width: {{$project->reactivite}}%" aria-valuenow="{{$project->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                              <div class="progress-bar bg-primary" role="progressbar" style="width: {{$vra->reactivite}}%" aria-valuenow="{{$vra->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
                                               </div>
-                                              <small>Avancement:{{$project->avancement}}%</small>
+                                              <small>Avancement:{{$vra->avancement}}%</small>
                                               <div class="progress mb-3" style="height: 5px">
-                                              <div class="progress-bar bg-primary" role="progressbar" style="width: {{$project->avancement}}%" aria-valuenow="{{$project->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                              <div class="progress-bar bg-primary" role="progressbar" style="width: {{$vra->avancement}}%" aria-valuenow="{{$vra->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
                                               </div>
 
                                               </div>
@@ -343,28 +337,52 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 
 
-                                              @if ($project->phase!=6)
+                                                @if (!empty($next))
+
                                               <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}">
                                               <img src="{{url('/img/next.png')}}" height="20"  alt="">
                                               </button>
 
-                                              @endif
+
+
                                               <!-- Modal -->
                                               <div class="modal fade" id="exampleModal{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabe" aria-hidden="true">
                                               <div class="modal-dialog" role="document">
                                               <div class="modal-content">
                                               <div class="modal-header">
 
+
                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <span aria-hidden="true">&times;</span>
                                                   </button>
+
+
                                               </div>
+
+
+
 
 
 
                                               <div class="modal-body" style="text-align: center">
-                                              <span style="color: black">Passer a la phase {{$nomphase[$project->phase+1]}} ?</span>
+                                                <h4 style="color: black">Passer a la phase {{$next->name}} ?</h4>
+
+                                              <div class="form-group radio" style="    text-align:center ; height:20%">
+                                                <h6 class="mb-0" style="text-align: left; color:black" > Envoyer mail:</h6>
+
+                                                    <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="sendmail" id="sendmail2" value="0">
+                                                    <label style="color: black"class="form-check-label" for="inlineRadio2">non</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="sendmail" id="sendmail1" value="1"  checked >
+                                                    <label style="color: black"class="form-check-label" for="inlineRadio1">oui</label>
+                                                    </div>
+
+                                            </div>
                                               </div>
+
 
 
                                               <div class="modal-footer">
@@ -381,8 +399,8 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                   @csrf
                                                   @method('PUT')
 
-                                                  <input type="text" value="{{$project->phase+1}}" name="updatephase" hidden>
-                                                  <input type="text" value="{{$project->phase}}" name="currentphase" hidden>
+
+                                                  <input type="text" value="{{$project->phase->position}}" name="currentphase" hidden>
                                                   <button type="button submit" class="btn btn-warning" style="text-align: center">Confirme </button>
 
                                                   </form>
@@ -396,7 +414,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               </div>
 
 
-
+                                              @endif
 
                                               </div>
 

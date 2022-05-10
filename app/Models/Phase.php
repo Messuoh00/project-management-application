@@ -14,6 +14,7 @@ class Phase extends Model
     protected $fillable = [
         'name',
 
+        'position',
 
 
     ];

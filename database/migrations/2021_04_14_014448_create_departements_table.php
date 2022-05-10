@@ -13,11 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('phases', function (Blueprint $table) {
+        Schema::create('departements', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->String('nomdep');
+            $table->Integer('stat')->default(1);
             $table->timestamps();
         });
+
+
+
+        $data = [
+            [ 'nomdep' => 'PED',],
+            [ 'nomdep' => 'DP',],
+            [ 'nomdep' => 'AST',],
+            [ 'nomdep' => 'EXP',],
+            [ 'nomdep' => 'FOR',],
+         ];
+
+        DB::table('departements')->insert($data);
+
+
     }
 
     /**
@@ -27,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phases');
+        Schema::dropIfExists('departements');
     }
 };

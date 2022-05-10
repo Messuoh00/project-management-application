@@ -14,11 +14,18 @@
 
 @section('content')
 
+
+
+
+
+
+
                             <!-- Page Heading -->
 
 
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Modifier Departement:</h1>
+                                <h1 class="h3 mb-0 text-gray-800">Phase</h1>
+
                             </div>
 
                             <!-- Content Row -->
@@ -31,46 +38,60 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col ">
 
+
+
                                                     <table class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
 
                                                         <thead>
+                                                            <th></th>
                                                             <th></th>
 
                                                         </thead>
 
                                                         <tbody >
+                                                            @php
+                                                                $num=$ph->count();
+                                                            @endphp
 
-                                                            @foreach ($dep as $d)
+                                                            @foreach ($ph as $p)
                                                             <tr >
+                                                                    <td style="text-align: center"> <b>{{$p->position}} </b></td>
                                                                     <td>
 
-                                                                        <form action="/Departement/{{$d->id}}" method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            @method('put')
 
-                                                                            <div style="float: left">
-                                                                              <input type="text" value="{{$d->nomdep}}"  class="form-control" name='namedep'>
+                                                                        <form action="/Phase/{{$p->id}}" method="POST" enctype="multipart/form-data">
+                                                                         @csrf
+                                                                         @method('put')
 
-                                                                               <button type="button submit" hidden></button>
+                                                                         <div style="float: left">
+                                                                           <input type="text" value="{{$p->name}}"  class="form-control" name='namephasemod'>
 
-                                                                            </div>
+                                                                            <button type="button submit" hidden></button>
 
-                                                                           </form>
+                                                                         </div>
 
+                                                                        </form>
 
                                                                         <div style="float: right">
-                                                                            <form action="/Departement/{{$d->id}}" method="POST">
+                                                                            <form action="/Phase/{{$p->id}}" method="POST">
                                                                                 @csrf
                                                                                 @method('delete')
-                                                                                <button type="button submit" class="btn btn-danger" onclick="return confirm('etes vous sur de vouloir supprimer ce Departement?');">supprime</button>
+                                                                                <input type="number" value="{{$p->position}}" name='pos' hidden >
+                                                                                <button type="button submit" class="btn btn-danger" onclick="return confirm('etes vous sur de vouloir d\'eactive  cette phase?');">supprime</button>
                                                                             </form>
 
 
                                                                         </div>
 
+
+
                                                                     </td>
 
+
+
                                                             </tr>
+
+
                                                             @endforeach
                                                         </tbody>
 
@@ -78,23 +99,38 @@
 
 
 
-                                                    <form action="{{route('Departement.store')}}" method="POST" enctype="multipart/form-data">
+                                                    <form action="{{route('Phase.store')}}" method="POST" enctype="multipart/form-data">
                                                         @csrf
-                                                     <a data-toggle="modal" href="#myModal3"  class="btn btn-warning btn-sm " style="margin: 10px">Ajouter Departement</a>
+                                                     <a data-toggle="modal" href="#myModal3"  class="btn btn-warning btn-sm " style="margin: 10px">Ajouter Phase</a>
                                                     <div class="modal" tabindex="-1" role="dialog" id="myModal3">
                                                         <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                            <h5 class="modal-title"></h5>
+                                                            <h5 class="modal-title">Phase</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                             </div>
 
                                                             <div class="modal-body">
+                                                                <b>Numero de la phase:</b>
+                                                              @php
+                                                                  $i=-1;
+                                                              @endphp
+                                                                <select class="custom-select form-control "   name="idphase" >
 
-                                                                <b>Nom du nouveau Departement:</b>
-                                                                <input type="text" class="form-control" placeholder="NomDep" name="nomdep"/>
+                                                                    @for ($i = 0; $i <= $num; $i++)
+
+
+                                                                    <option value={{$i}} selected>{{$i}}</option>
+
+                                                                    @endfor
+
+
+                                                                  </select>
+
+                                                                <b>Nom de la phase:</b>
+                                                                <input type="text" class="form-control"  name="namephase"/>
                                                             </div>
 
                                                             <div class="modal-footer">
@@ -109,7 +145,6 @@
 
 
                                                     </form>
-
 
 
 

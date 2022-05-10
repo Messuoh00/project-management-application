@@ -1,16 +1,14 @@
 <?php
 
-
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;
-use App\Models\Departement;
-
-use Illuminate\Support\Facades\Auth;
+use App\Models\Phase;
 
 
-class DepartementController extends Controller
+
+class PhaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,9 +27,10 @@ class DepartementController extends Controller
      */
     public function create()
     {
-        $dep=Departement::get()->where('stat','=',1);
+        $ph=Phase::orderBy('position')->get()->whereNotNull('position');
 
-        return view('projets/departement', ['dep'=>$dep]);
+        return view('projets/phase',['ph'=>$ph]);
+
     }
 
     /**
@@ -42,10 +41,15 @@ class DepartementController extends Controller
      */
     public function store(Request $request)
     {
-        $dep=new Departement();
-        $dep->nomdep=$request->input('nomdep');
-        $dep->save();
-        return redirect('Departement/create');
+
+        $ph=new Phase();
+        $ph->position=$request->input('idphase');
+        $ph->name=$request->input('namephase');
+
+        DB::table('phases')->whereNotNull('position')->where('position','>=',$request->input('idphase'))->update(['position' =>DB::raw('position+1')]);
+
+        $ph->save();
+        return redirect('Phase/create');
     }
 
     /**
@@ -56,7 +60,7 @@ class DepartementController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -79,13 +83,14 @@ class DepartementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dep=Departement::find($id);
+
+        $dep=Phase::find($id);
 
 
 
-        DB::table('departements')->where('id','=',$id)->update(['nomdep' => $request->input('namedep') ])  ;
+        DB::table('phases')->where('id','=',$id)->update(['name' => $request->input('namephasemod') ])  ;
 
-        return redirect('Departement/create');
+        return redirect('Phase/create');
     }
 
     /**
@@ -94,13 +99,13 @@ class DepartementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request ,$id)
     {
+        DB::table('phases')->where('id','=',$id)->update(['position' => null ]);
 
 
-        DB::table('departements')->where('id','=',$id)->update(['stat' => 0 ]);
+        DB::table('phases')->where('position','!=',null)->where('position','>=',$request->input('pos'))->update(['position' =>DB::raw('position-1')]);
 
-
-        return redirect('Departement/create');
+        return redirect('Phase/create');
     }
 }

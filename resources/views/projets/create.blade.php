@@ -153,7 +153,7 @@
 
                                   <select class="custom-select form-control "   name="StructurePilote" >
                                       @foreach ($dep as $d)
-                                       <option value={{$d->nomdep}}>{{$d->nomdep}}</option>
+                                       <option value={{$d->id}}>{{$d->nomdep}}</option>
                                       @endforeach
                                     </select>
                                   </div>
@@ -396,7 +396,7 @@
 
                                   <div class="form-group">
                                   <h6 class="mb-0"> Description:</h6>
-                                  <textarea class="form-control" rows="5"name="Description" value="{{ old('Description') }}"></textarea>
+                                  <textarea class="form-control" rows="5"name="Description" value="{{ old('Description')}}"></textarea>
 
                                   @if($errors->has('Description'))
                                   <div><span style="color: red">Saisissez la description du projet</span></div>

@@ -15,16 +15,8 @@
 @section('content')
 
 
+                    <!-- Page Heading -->
 
-
-@php
-
-$nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(En cours)",'Recherche(En TEST)','En implementation','En exploitation','');
-
-@endphp
-
-
-                            <!-- Page Heading -->
 
 
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -32,31 +24,93 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                 @if ($errors->any())
                                 <div><h4 style="color: red">{{$errors}}</h4></div>
                                 @endif
+                            </div>
+
+                            <form action="stat" method="get" enctype="multipart/form-data">
+                                @csrf
+
+                            <div class="form">
+
+
+                                <div class="form-content">
+                                    <div class="row">
+
+
+
+                                        <div class="col-md-3">
+                                        <div class="form-group">
+                                            <h6 class="mb-0">  mois:</h6>
+                                            <input type="month" class=" form-control"  value="{{request('month')}}" pattern="\d{2}-\d{2}"  name="month">
+                                        </div>
+                                        </div>
 
 
 
 
-                                <span class="d-none d-sm-inline-block  shadow-sm"> choisir mois: <input type="month" value="april-2022"cname='x' id='url' required pattern="\d{2}-\d{2}"  style="width: 100px" onkeydown="return false">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h6 class="mb-0">  Phase:</h6>
+                                                @php
+                                                     $ph=App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
+
+                                                @endphp
+                                                <select class="custom-select form-control "   name="phase" >
+                                                    <option disabled selected value> ---- </option>
+                                                    @foreach ($ph as $p)
+                                                     <option value={{$p->id}}  @if(request('phase')==$p->id) selected @endif >{{$p->name}}</option>
+                                                    @endforeach
+                                                  </select>
+
+                                        </div>
+                                        </div>
 
 
-                                    <button type="submit" class="btn btn-sm btn-primary shadow-sm" id="btn">go</button>
-                                    {{-- href="/stat?var={{request()->input('var')}}&x=04-2022" --}}
-                                   <br> <br>
+
+                                        <div class="col-md-3">
+                                        <div class="form-group">
+                                            <h6 class="mb-0">  Structure pilote:</h6>
+                                            <select class="custom-select form-control "   name="stp" >
+                                                <option disabled selected value> ---- </option>
+                                                @foreach ($dep as $d)
+                                                 <option value={{$d->id}} @if(request('stp')==$d->id) selected @endif >{{$d->nomdep}}</option>
+                                                @endforeach
+                                              </select>
+
+                                        </div>
+                                        </div>
+
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h6 class="mb-0">Etude echo:</h6>
+                                                <select class="custom-select form-control "   name="echo" >
+                                                    <option disabled selected value> ---- </option>
+                                                     <option value="na"  @if(request('echo')=="na") selected @endif>na</option>
+                                                     <option value="oui"  @if(request('echo')=="oui") selected @endif>oui</option>
+                                                     <option value="non"  @if(request('echo')=="non") selected @endif>non</option>
+
+
+                                                  </select>
+
+                                        </div>
+                                        </div>
 
 
 
-                                    <div style="float: right">
-                                    <a href="/stat?var={{request()->input('var')}}&x=" class="btn  btn-primary ">Statistique d'aujhordui</a>
+
                                     </div>
 
-                                </span>
 
+                                </div>
 
 
                             </div>
 
+                            <button type="submit" class="btn btn-sm btn-primary shadow-sm" name="filt" style="float: right">confirme</button>
 
-
+                            <a href="/stat" class="btn btn-sm btn-primary shadow-sm" style="float: right;margin-right:13px">reset</a>
+                            <br><br>
+                        </form>
 
                         <div class="row"  >
 
@@ -66,7 +120,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                 <!-- Bar Chart -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Projet {{$nomphase[request()->input('var')]}} {{  request()->input('x') }}:</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Projet :</h6>
                                     </div>
                                     <div class="card-body" >
                                         <div class="chart-bar"style="height: 100%">
@@ -93,101 +147,22 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                             <canvas id="myPieChart"></canvas>
                                         </div>
                                         <div class="mt-4 text-center small">
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-warning"></i> Idee R/D
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> Maturation
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-danger"></i> Recherche
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Test Pilote
-                                            </span>
+
+                                            @php
+                                                $colors=array("","text-primary","text-secondary","text-success","text-danger","text-warning","text-info");
+                                            @endphp
+                                            @foreach ($phases as $item)
+
 
                                             <span class="mr-2">
-                                                <i class="fas fa-circle"style="color:grey"></i> En implementation
+                                                <i class="fas fa-circle {{next($colors)}}"></i> {{$item}}
                                             </span>
+
+                                            @endforeach
+
                                         </div>
                                     </div>
                                 </div>
-
-                                <div style="text-align: center">
-                                    <a href="/stat?var=1&x={{request()->input('x')}}">
-                                        <div class="card border-left-warning shadow h-100 py-0" style="width: 50%;margin: auto;">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-
-                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Idee R/D
-                                                        </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="/stat?var=2&x={{request()->input('x')}}">
-                                        <div class="card border-left-primary shadow h-100 py-0" style="width: 50%;margin: auto;">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-
-                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Maturation
-                                                        </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="/stat?var=3&x={{request()->input('x')}}">
-                                        <div class="card border-left-danger shadow h-100 py-0" style="width: 50%;margin: auto;">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-
-                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Recherche
-                                                        </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                     </a>
-
-                                    <a href="/stat?var=4&x={{request()->input('x')}}">
-                                        <div class="card border-left-success shadow h-100 py-0" style="width: 50%;margin: auto;">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-
-                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Test Pilote
-                                                        </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="/stat?var=5&x={{request()->input('x')}}">
-                                        <div class="card border-left-secondary shadow h-100 py-0" style="width: 50%;margin: auto;">
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-
-                                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            En implementation
-                                                        </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                </div>
-
-
-
 
 
                             </div>
@@ -208,20 +183,34 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                             <!-- Page level plugins -->
                             <script src="vendor/chart.js/Chart.min.js"></script>
 
-                            <script>
-                                document.getElementById("btn").addEventListener("click", goToUrl);
-                                function goToUrl(){
-                                window.location = '/stat?var=1&x='+document.getElementById('url').value;
-                                }
-                            </script>
+
 
                             <script>
+
+
+
+
+                             let phases=[];
+
+                             Array.prototype.push.apply(phases,@json($phases));
+
+
+
+                            let counts=[];
+
+                             Array.prototype.push.apply(counts,@json($counts));
+
+
+
                              let names=[];
                              Array.prototype.push.apply(names,@json($names));
+
                              let vis=[];
                              Array.prototype.push.apply(vis,@json($vis));
+
                              let reac=[];
                              Array.prototype.push.apply(reac,@json($reac));
+
                              let avan=[];
                              Array.prototype.push.apply(avan,@json($avan));
 
@@ -287,7 +276,6 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                             </script>
 
 
-
                             <script>
                                 // Set new default font family and font color to mimic Bootstrap's default styling
                             Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -298,11 +286,11 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                             var myPieChart = new Chart(ctx, {
                             type: 'doughnut',
                             data: {
-                                labels: ["Idee R/D", "Maturation", "Recherche", "Test Pilote","En implementation"],
+                                labels:phases,
                                 datasets: [{
-                                data: [{{$count1}},{{$count2}},{{$count3}},{{$count5}},{{$count5}}],
-                                backgroundColor: ['#f6c23e', '#4e73df', '#e74a3b', '#1cc88a',, 'grey'],
-                                hoverBackgroundColor: ['yellow', 'blue', 'red', 'green','grey'],
+                                data:counts,
+                                backgroundColor: ['blue', 'grey', 'green', 'red','yellow','#78cceb','black'],
+                                hoverBackgroundColor:  ['blue', 'grey', 'green', 'red','yellow','#78cceb','black'],
                                 hoverBorderColor: "rgba(234, 236, 244, 1,69)",
                                 }],
                             },

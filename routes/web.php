@@ -5,6 +5,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\PhaseController;
 use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Mail;
 /*
@@ -27,7 +28,7 @@ Route::get('/', 'App\Http\Controllers\Authcontroller@log')->name('log');
 
 
 Route::middleware(['auth'])->group(function(){
-    
+
 
     Route::resource('/projet', ProjectController::class);
 
@@ -37,7 +38,7 @@ Route::middleware(['projet'])->group(function(){
 });
 Route::middleware(['projetlecture'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['show']);
-   
+
 });
 
 
@@ -51,13 +52,14 @@ Route::post('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@store
 Route::get('/download/{file_path}/{fileNames}','App\Http\Controllers\UploadController@download')->where('file_path', '(.*)')->where('fileNames', '(.*)');
 Route::get('/delete/{file_path}/{fileNames}/{id}/{phsae}','App\Http\Controllers\UploadController@delete')->where('file_path', '(.*)')->where('fileNames', '(.*)')->where('phase', '(.*)');
 
-Route::get('/stat', 'App\Http\Controllers\ProjectController@stat');
+Route::get('/stat', 'App\Http\Controllers\VraController@index');
 
 Route::view('/coo-E&P', 'coo-ep.coo-ep');
 
 Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 
+Route::get('/phase', 'App\Http\Controllers\PhaseController@view');
 
 
 
@@ -82,8 +84,9 @@ Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepasswo
 Route::resource('users',Authcontroller::class);
 Route::middleware(['admin'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['create','store']);
-    Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store']);    
+    Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store']);
     Route::resource('Departement',DepartementController::class);
+    Route::resource('Phase',PhaseController::class);
  });
 
 Route::resource('publications',PublicationController::class);

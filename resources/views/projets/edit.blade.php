@@ -23,12 +23,12 @@
                     <div class="col ">
 
 
-                                @php
-                                $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(En cours)",'Recherche(En TEST)','Archivage','En implementation','En exploitation');
 
+                        @php
 
-                                @endphp
+                        $vra= App\Models\Vra::latest()->get()->where('phase_id','=',$project->phase_id)->where('project_id','=',$project->id)->first();
 
+                        @endphp
 
 
                                 <div class="form">
@@ -64,7 +64,7 @@
                                 {{-- nigger --}}
                                 {{-- hey--}}
 
-                                        <div class="form-group" @if ($project->phase<4) hidden @endif>
+                                        <div class="form-group">
                                             <h6 class="mb-0"> Region Test:</h6>
 
                                             <input type="text" class="form-control" value="{{$project->region_test}}"  name="RegionTest"/>
@@ -73,7 +73,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="form-group" @if ($project->phase<5) hidden @endif>
+                                        <div class="form-group" >
                                             <h6 class="mb-0"> Region Implementation:</h6>
 
                                             <input type="text" class="form-control" value="{{$project->region_implementation}}"  name="RegionImp"/>
@@ -81,7 +81,7 @@
                                             <div><span style="color: red">Saisissez la Region Implementation du projet</span></div>
                                             @endif
                                         </div>
-                                        <div class="form-group" @if ($project->phase<6) hidden @endif>
+                                        <div class="form-group" >
                                             <h6 class="mb-0"> Region Exploitation:</h6>
 
                                             <input type="text" class="form-control" value="{{$project->region_exploitation}}"  name="RegionExp"/>
@@ -131,32 +131,12 @@
                                         </div>
 
 
-                                        @if ($project->phase==0 ||$project->phase==2)
 
-                                        <div class="form-group radio" style="text-align:center ;">
-                                            <h6 class="mb-0" style="text-align: left" > Validation:</h6>
-
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="extras" id="inlineRadio4" value="accord"  @if (  $project->extras=="accord")  checked @endif>
-                                                <label class="form-check-label" for="inlineRadio1">accord</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="extras" id="inlineRadio5" value="complément d'information"@if (  $project->extras=="complément d'information")  checked @endif>
-                                                <label class="form-check-label" for="inlineRadio2">complément d'information</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="extras" id="inlineRadio6" value="refus" @if ( $project->extras=="refus")  checked @endif>
-                                                <label class="form-check-label" for="inlineRadio3">refus</label>
-                                                </div>
-
-                                        </div>
-
-                                        @endif
 
                                         <div class="form-group">
                                             <h6 class="mb-0"> Phase:</h6>
 
-                                            <input type="text" class="form-control" value="{{$nomphase[$project->phase]}}"  disabled/>
+                                            <input type="text" class="form-control" value="{{$project->phase->name}}"  disabled/>
 
                                         </div>
 
@@ -182,11 +162,12 @@
                                             <div class="form-group col-md-4 " style="max-width: 100%">
 
                                                 <select class="custom-select form-control "   name="StructurePilote" >
-                                                    <option value={{ $project->structure_pilote }} selected>{{$project->structure_pilote}}</option>
+                                                    <option value={{ $project->departement_id }} selected>{{$project->departement->nomdep}}</option>
+
                                                     @foreach ($dep as $d)
 
-                                                    @if (  $project->structure_pilote!=$d->nomdep )
-                                                    <option value={{$d->nomdep}}  >{{$d->nomdep}}</option>
+                                                    @if (  $project->departement_id!=$d->id )
+                                                    <option value={{$d->id}}  >{{$d->nomdep}}</option>
                                                     @endif
 
                                                     @endforeach
@@ -433,7 +414,7 @@
 
 
                                 <div class="form-group" style="text-align: center">
-                                    <a href="/fichier/{{$project->id}}/{{$nomphase[$project->phase]}}?var=edit">
+                                    <a href="/fichier/{{$project->id}}/{{$project->phase->name}}?var=edit">
 
                                         <button type="button" class="btn   btn-warning btn-lg " style="margin-top: 20px">
                                          <i class="fas fa-fw fa-archive"></i> Modifier fichier du projet
@@ -453,16 +434,16 @@
                                     </div>
 
                                     <label>Visibilite:</label>
-                                    <input type="range"  name="Visibilite" value="{{$project->visibilite}}" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%' ">
-                                    <output>{{$project->visibilite}}%</output>
+                                    <input type="range"  name="Visibilite" value="{{$vra->visibilite}}" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%' ">
+                                    <output>{{$vra->visibilite}}%</output>
 
                                     <label>Reactivite:</label>
-                                    <input type="range"  name="Reactivite" value="{{$project->reactivite}}" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%'">
-                                    <output>{{$project->reactivite}}%</output>
+                                    <input type="range"  name="Reactivite" value="{{$vra->reactivite}}" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%'">
+                                    <output>{{$vra->reactivite}}%</output>
 
                                     <label>Avancement:</label>
-                                    <input type="range"  name="Avancement" value="{{$project->avancement}}" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%'">
-                                    <output>{{$project->avancement}}%</output>
+                                    <input type="range"  name="Avancement" value="{{$vra->avancement}}" min="0" max="100" oninput="this.nextElementSibling.value = this.value+'%'">
+                                    <output>{{$vra->avancement}}%</output>
 
 
 

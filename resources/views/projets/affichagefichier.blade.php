@@ -28,13 +28,16 @@
     }
   </script>
 
-
+@php
+$ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
+@endphp
 
                             <form action='/fichier/{{$project->id}}/{{$phase}}' method="POST" enctype="multipart/form-data">
                                 @csrf
 
 
                             <!-- Page Heading -->
+
 
 
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -44,124 +47,9 @@
 
 
 
-                            @if ($project->phase >= 2)
-                            <!-- Content Row -->
-                            <div class="row">
 
-                                <!-- Pending Requests Card Example -->
-                                <div class="col">
-                                    <div class="card shadow">
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col ">
+                            @foreach ($ph as $p)
 
-
-
-                                                    <h5>fichier de la  Phase avant projet et planification::</h5>
-                                                    <br>
-                                                    <h6>fichier note:</h6>
-
-                                                    @php
-                                                    $filename="note";
-
-                                                    $file_path=storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\\'.$filename);
-                                                    $files=array( );
-                                                    if (file_exists($file_path)) { $files = \File::allFiles($file_path); }
-
-                                                    @endphp
-
-                                                    <table class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
-                                                           <thead>
-                                                               <tr>
-                                                                   <th></th>
-
-                                                               </tr>
-                                                           </thead>
-
-                                                        <tbody >
-
-                                                            @foreach ($files as $pdffilename)
-                                                            <tr >
-                                                                    <td><b>{{pathinfo($pdffilename)['basename']}}</b>
-
-                                                                   <div style="float: right">
-                                                                        <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
-                                                                        @if (request()->input('var')=='edit')
-                                                                        <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}/{{$phase}}"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete   </button></a>
-                                                                        @endif
-                                                                    </div>
-
-                                                                    </td>
-                                                            </tr>
-                                                            @endforeach
-                                                        </tbody>
-
-                                                    </table>
-                                                    @if (request()->input('var')=='edit')
-                                                    <br>
-                                                    <input class="form-control form-control-sm" id="misc"  name="note"  type="file" accept= " application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf">
-                                                    <br>
-                                                    <hr>
-                                                    @endif
-                                                    <h6>fichier fiche:</h6>
-
-
-                                                       @php
-                                                                $filename="fiche";
-
-                                                                    $file_path=storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\\'.$filename);
-                                                                    $files=array( );
-                                                                    if (file_exists($file_path)) { $files = \File::allFiles($file_path); }
-
-                                                      @endphp
-
-
-                                                    <table class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
-                                                        <thead>
-                                                            <tr>
-                                                                <th></th>
-
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody >
-
-                                                            @foreach ($files as $pdffilename)
-                                                            <tr >
-                                                                    <td><b>{{pathinfo($pdffilename)['basename']}}</b>
-
-                                                                    <div style="float: right">
-
-                                                                        <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
-                                                                        @if (request()->input('var')=='edit')
-                                                                        <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}/{{$phase}}"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete   </button></a>
-                                                                         @endif
-                                                                    </div>
-                                                                    </td>
-                                                            </tr>
-                                                            @endforeach
-                                                        </tbody>
-
-                                                    </table>
-                                                    @if (request()->input('var')=='edit')
-                                                    <br>
-                                                    <input class="form-control form-control-sm" id="fiche"  name="fiche"  type="file" accept= "application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf">
-                                                    <br><br>
-                                                    @endif
-
-
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            @endif
-
-                            @if ($project->phase >= 4)
 
                                 <!-- Content Row -->
                                 <div class="row" style="margin-top: 40px">
@@ -171,57 +59,52 @@
                                         <div class="card ">
                                             <div class="card-body">
                                                 <div class="row no-gutters align-items-center">
-                                                    <div class="col ">
+                                                   <div class="col ">
 
 
-                                                    <h5>fichier de la  Phase Execution et suivi evaluation:</h5>
-                                                    <br>
-                                                    <h6>fichier misc:</h6>
+                                                   <h5>ficher de la phase {{$p->name}}:</h5>
+                                                   @php
+                                                       $filename=$p->name;
 
-                                                    @php
-                                                    $filename="misc";
+                                                           $file_path=storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\\'.$filename);
+                                                           $files=array( );
+                                                           if (file_exists($file_path)) { $files = \File::allFiles($file_path); }
 
-                                                    $file_path=storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\\'.$filename);
-                                                    $files=array( );
-                                                    if (file_exists($file_path)) { $files = \File::allFiles($file_path); }
+                                                   @endphp
 
-                                                    @endphp
+                                                   <table class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
 
-                                                    <table class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
+                                                       <thead>
+                                                           <th></th>
 
-                                                        <thead>
-                                                            <tr>
-                                                                <th></th>
+                                                       </thead>
 
-                                                            </tr>
-                                                        </thead>
+                                                       <tbody >
 
-                                                        <tbody >
+                                                           @foreach ($files as $pdffilename)
+                                                           <tr >
+                                                                   <td><b>{{pathinfo($pdffilename)['basename']}}</b>
 
+                                                                  <div style="float: right">
+                                                                       <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
+                                                                       @if (request()->input('var')=='edit')
+                                                                       <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}/{{$phase}}"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete </button></a>
+                                                                       @endif
+                                                                   </div>
 
+                                                                   </td>
 
-                                                            @foreach ($files as $pdffilename)
-                                                            <tr >
-                                                                    <td><b>{{pathinfo($pdffilename)['basename']}}</b>
+                                                           </tr>
+                                                           @endforeach
+                                                       </tbody>
 
-                                                                    <div style="float: right">
-                                                                        <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
-                                                                        @if (request()->input('var')=='edit')
-                                                                        <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}/{{$phase}}"> <button type="button" class="btn   btn-danger"onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete   </button></a>
-                                                                        @endif
-                                                                    </div>
+                                                   </table>
+                                                   <br>
 
-                                                                    </td>
-                                                            </tr>
-                                                            @endforeach
-                                                        </tbody>
+                                               @if (request()->input('var')=='edit')
+                                                   <input class="form-control form-control-sm" id="{{$p->name}}"  name="{{$p->name}}"  type="file" accept= "application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf">
 
-                                                    </table>
-                                                    @if (request()->input('var')=='edit')
-                                                    <br><br>
-
-                                                    <input  class="form-control form-control-sm" id="misc"  name="misc"  type="file" accept= " application/vnd.ms-excel, application/vnd.ms-powerpoint, application/pdf">
-                                                    @endif
+                                                   @endif
 
                                                     </div>
 
@@ -232,10 +115,11 @@
 
                                 </div>
 
-                                @endif
+
+                                @endforeach
 
 
-                                <!-- Content Row -->
+
                                 <div class="row" style="margin-top: 40px">
 
                                     <!-- Pending Requests Card Example -->
@@ -298,8 +182,6 @@
                                     </div>
 
                                 </div>
-
-
 
                             @if (request()->input('var')=='edit')
                             <div  style="text-align: right; ">
