@@ -26,7 +26,6 @@ class ProjectController extends Controller
     public function index()
     {
 
-
         $user=User::latest()->get();
 
         if (Auth::user()->poste=="admin" || Auth::user()->poste=="Divisionnaire" ||  Auth::user()->poste=="vice president"){
@@ -44,9 +43,7 @@ class ProjectController extends Controller
         }
 
 
-
         return view('projets/index', ['projects'=>$projects,'user'=>$user]);
-
 
     }
 
@@ -55,6 +52,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         $users=User::latest()->get();
@@ -92,7 +90,7 @@ class ProjectController extends Controller
 
         $proje->departement_id= $request->input('StructurePilote');
         $proje->phase_id=$phase->id;
-        $proje->extras='refus';
+
         $proje->region_test="";
         $proje->region_implementation="";
         $proje->region_exploitation="";
@@ -108,49 +106,9 @@ class ProjectController extends Controller
 
         DB::table('projects')->where('id', $proje->id)->update(['files' =>'/fichier-projet/fichier-projet-'.$proje->id]);
 
+        $proje->createvra($request);
 
-        $va=new Vra();
-        $va->project_id=$proje->id;
-        $va->phase_id=$proje->phase_id;
-        $va->save();
-
-
-
-        if ($request->input('Chefid')!=null) {
-
-
-        $equipe=new UserProject();
-        $equipe->project_id= $proje->id;
-        $equipe->user_id=$request->input('Chefid');
-        $equipe->post=1;
-        $equipe->statut=1;
-        $equipe->save();
-        }
-
-        if ($request->input('RepresentantE&Pid')!=null) {
-
-        $equipe=new UserProject();
-        $equipe->project_id= $proje->id;
-        $equipe->user_id=$request->input('RepresentantE&Pid');
-        $equipe->post=2;
-        $equipe->statut=1;
-        $equipe->save();
-        }
-
-        $xs= $request->input('equipeid');
-        $array = explode(',',$xs[0]);
-
-        foreach ($array as $x) {
-            if(!empty($x)){
-            $equipe=new UserProject();
-            $equipe->project_id= $proje->id;
-            $equipe->user_id=$x;
-            $equipe->post=3;
-            $equipe->statut=1;
-            $equipe->save();
-        }
-        }
-
+        $proje->createquipe($request);
 
 
 
@@ -168,67 +126,17 @@ class ProjectController extends Controller
     {
         $project=Project::find($id);
 
-
-
         if ($project==null) {
             return redirect('projet');
 
         }else{
 
-
-
-            $rep=array();
-            $chef=array();
             $users=User::latest()->get();
 
-            $chef0=DB::select("
-
-            select nom,prenom,id from users where id IN
-
-            (
-                select user_id from project_user
-                where  statut=1 and post=1 and project_id='".$id."'
-            )
-
-            ");
-
-            foreach ($chef0 as $temp) {
-
-                $chef=$temp;
-
-            }
+            $result=$project->getequipe();
 
 
-            $rep0=DB::select("
-
-            select nom,prenom,id from users where id IN
-
-            (
-                select user_id from project_user
-                where statut=1 and post=2 and  project_id='".$id."'
-            )
-
-            ");
-
-            foreach ($rep0 as $temp) {
-
-                $rep=$temp;
-
-            }
-
-            $equipe=DB::select("
-
-            select nom,prenom,id from users where id IN
-
-            (
-                select user_id from project_user
-                where statut=1 and post=3 and  project_id='".$id."'
-            )
-
-            ");
-
-
-        return view('projets/show',  ['project'=>$project ,'users'=>$users,'chef'=>$chef,'rep'=>$rep,'equipe'=>$equipe]);
+            return view('projets/show',  ['project'=>$project ,'users'=>$users,'chef'=>$result[0],'rep'=>$result[1],'equipe'=>$result[2]]);
         }
     }
 
@@ -248,72 +156,18 @@ class ProjectController extends Controller
 
         }else{
 
-            $chef=null;
-            $rep=null;
+
             $eq=array();
             $ei=array();
 
-
             $users=User::latest()->get();
 
-
-            $chef0=DB::select("
-
-            select nom,prenom,id from users where id IN
-
-            (
-                select user_id from project_user
-                where  statut=1 and post=1 and project_id='".$id."'
-            )
-
-            ");
+            $result=$project->getequipe();
 
 
+            if ($result[2]!=null) {
 
-            foreach ($chef0 as $temp) {
-
-                $chef=$temp;
-
-            }
-
-
-            $rep0=DB::select("
-
-            select nom,prenom,id from users where id IN
-
-            (
-                select user_id from project_user
-                where statut=1 and post=2 and  project_id='".$id."'
-            )
-
-            ");
-
-
-            foreach ($rep0 as $temp) {
-
-                $rep=$temp;
-
-            }
-
-
-
-            $equipe=DB::select("
-
-            select nom,prenom,id from users where  id IN
-
-            (
-                select user_id from project_user
-                where statut=1 and post=3  and project_id='".$id."'
-            )
-
-            ");
-
-            if ($equipe!=null) {
-
-
-
-
-            foreach ($equipe as $x) {
+            foreach ($result[2] as $x) {
 
                 $eq[]=$x->nom.' '.$x->prenom;
                 $ei[]=$x->id;
@@ -322,7 +176,8 @@ class ProjectController extends Controller
 
             }
 
-        return view('projets/edit', ['project'=>$project ,'users'=>$users,'chef'=>$chef,'rep'=>$rep,'equipe'=>$eq,'ei'=>$ei,'dep'=>$dep]);
+
+        return view('projets/edit', ['project'=>$project ,'users'=>$users,'chef'=>$result[0],'rep'=>$result[1],'equipe'=>$eq,'ei'=>$ei,'dep'=>$dep]);
         }
     }
 
@@ -337,14 +192,13 @@ class ProjectController extends Controller
     {
         $project= Project::find($id);
 
-        if ($request->has('currentphase')) {
+        return var_dump($array);
 
+        if ($request->has('currentphase')) {
 
              $this->passage($project,$request);
 
-
         }else{
-
 
             $request->validate([
                 'NomProjet'=>'required',
@@ -356,123 +210,27 @@ class ProjectController extends Controller
 
             ]);
 
-
-
         Project::where('id',$id)->update(
             [
                 'nom_projet' =>  $request->input('NomProjet'),
                 'abreviation'=> $request->input('Abreviation'),
                 'thematique'=> $request->input('Thematique'),
                 'departement_id'=> $request->input('StructurePilote'),
-
-
-
                 'region_test'=> $request->input('RegionTest'),
                 'region_implementation'=> $request->input('RegionImp'),
                 'region_exploitation'=> $request->input('RegionExp'),
                 'budget'=> $request->input('budget'),
                 'date_deb'=> $request->input('DateDebut'),
                 'date_fin'=> $request->input('DateFin'),
-
-
                 'etude_echo'=> $request->input('inlineRadioOptions'),
-                'extras'=> $request->input('extras'),
-
                 'description'=> $request->input('Description'),
-
-
-
-
-
             ]
             );
 
+            $project->createvra($request);
 
 
-            $va=new Vra();
-            $va->project_id=$project->id;
-            $va->phase_id=$project->phase_id;
-            $va->visibilite= $request->input('Visibilite');
-            $va->reactivite= $request->input('Reactivite');
-            $va->avancement= $request->input('Avancement');
-            $va->save();
-
-            DB::table('project_user')->where('project_id', $id)->update(['statut' =>0]);
-
-
-
-            $xs= $request->input('equipeid');
-            $array = explode(',',$xs[0]);
-
-
-
-            foreach ($array as $x) {
-
-
-                if(!empty($x)){
-
-                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$x)->where('post','=',3);
-
-                if ($temp->exists()) {
-                 $temp->update(['statut' =>1]);
-
-                }else{
-
-                    $equipe=new UserProject();
-                    $equipe->project_id= $id;
-                    $equipe->user_id=$x;
-                    $equipe->post=3;
-                    $equipe->statut=1;
-                    $equipe->save();
-                }
-
-
-                }
-            }
-
-
-
-
-
-            if ($request->input('Chefid')!=null) {
-
-
-                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$request->input('Chefid'))->where('post','=',1);
-
-                if ($temp->exists()) {
-                 $temp->update(['statut' =>1]);
-
-                }else{
-
-                    $equipe=new UserProject();
-                    $equipe->project_id= $id;
-                    $equipe->user_id=$request->input('Chefid');
-                    $equipe->post=1;
-                    $equipe->statut=1;
-                    $equipe->save();
-                }
-
-            }
-
-            if ($request->input('RepresentantE&Pid')!=null) {
-                $temp=UserProject::where('project_id','=',$id)->where('user_id','=',$request->input('RepresentantE&Pid'))->where('post','=',2);
-
-                if ($temp->exists()) {
-                 $temp->update(['statut' =>1]);
-
-                }else{
-
-                    $equipe=new UserProject();
-                    $equipe->project_id= $id;
-                    $equipe->user_id=$request->input('RepresentantE&Pid');
-                    $equipe->post=2;
-                    $equipe->statut=1;
-                    $equipe->save();
-                }
-            }
-
-
-
+            $project->updateequipe($request);
 
 
         }
@@ -518,7 +276,6 @@ class ProjectController extends Controller
 
 
            $project->phase_id=$phase->id;
-           $project->extras='refus';
            $project->save();
 
 
@@ -554,7 +311,6 @@ class ProjectController extends Controller
 
     public function hist($id)
     {
-
         $chef=DB::select("
 
         select users.nom,users.prenom,users.id,project_user.updated_at FROM users INNER JOIN project_user
@@ -581,7 +337,7 @@ class ProjectController extends Controller
 
         ");
 
-        return view('projets/historique_eq',['membres'=>$membre,'chefs'=>$chef,'reps'=>$rep,'id'=>$id]);
+        return view('projets/historique_eq',['membres'=> $membre,'chefs'=>$rep,'reps'=> $chef,'id'=>$id]);
     }
 
 

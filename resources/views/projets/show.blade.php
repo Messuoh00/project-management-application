@@ -222,7 +222,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <div class="col-sm-9 "style="overflow-y: scroll; height:235px;" >
                                              @if (!empty($equipe))
                                              @foreach ($equipe as $eq)
-                                                  <a href="users/{{$eq->id}}"><p>{{$eq->nom}}  {{$eq->prenom}}</p></a>
+                                                  <a href="/users/{{$eq->id}}"><p>{{$eq->nom}}  {{$eq->prenom}}</p></a>
                                               @endforeach
                                               @endif
                                               </div>

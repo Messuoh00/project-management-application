@@ -40,13 +40,8 @@ return new class extends Migration
             $table->timestamp('date_fin')->nullable();
 
 
-            $table->String('extras')->nullable();
 
-
-
-
-
-            $table->String('etude_echo')->default('na')->nullable(); //oui non na
+            $table->String('etude_echo')->default('na'); //oui non na
 
 
 

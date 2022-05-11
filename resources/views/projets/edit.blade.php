@@ -190,7 +190,7 @@
                                             <h6 class="mb-0"> Chef Projet:</h6>
                                             <div  type="text" id="chef"class="form-control"  name="ChefProjet"  > @if($chef!=null)<a href="/users/{{$chef->id}}"><p>{{$chef->nom}} {{$chef->prenom}}</p></a> @endif</div>
 
-                                            <input type="hidden"  id="chefid" class="form-control " @if($chef!=null) value="{{$chef->id}}" @endif  name="Chefid" />
+                                            <input type="hidden"  id="chefid" class="form-control "  name="Chefid" @if($chef!=null) value="{{$chef->id}}" @endif   />
 
 
                                             <a data-toggle="modal" href="#myModal"  class="btn btn-warning btn-sm " style="margin: 10px">Choisir Chef Projet</a>
