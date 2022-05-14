@@ -192,7 +192,7 @@ class ProjectController extends Controller
     {
         $project= Project::find($id);
 
-        return var_dump($array);
+
 
         if ($request->has('currentphase')) {
 
@@ -227,15 +227,11 @@ class ProjectController extends Controller
             ]
             );
 
-            $project->createvra($request);
-
-
             $project->updateequipe($request);
 
+            $project->createvra($request);
 
         }
-
-
 
             return redirect('projet/'.$id);
     }

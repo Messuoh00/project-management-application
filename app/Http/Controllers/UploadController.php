@@ -33,7 +33,7 @@ class UploadController extends Controller
 
         foreach ($phase as $p) {
 
-            if ($request->hasFile(key:$p->name) ) {request()->file(key:$p->name)->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/'.$p->name,name:'fichier '.$p->name.' du projet '.$id.'.'.request()->file(key:$p->name)->getClientOriginalExtension(),options:'');   }
+            if ($request->hasFile(key:$p->id) ) {request()->file(key:$p->id)->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/'.$p->name,name:'fichier '.$p->name.' du projet '.$id.'.'.request()->file(key:$p->id)->getClientOriginalExtension(),options:'');   }
 
         }
 
@@ -41,6 +41,9 @@ class UploadController extends Controller
 
 
         if ($request->hasFile(key:'team') ) {request()->file(key:'team')->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/fichier_equipe',name:request()->file(key:'team')->getClientOriginalName(),options:'');   }
+
+        if ($request->hasFile(key:'rapp') ) {request()->file(key:'rapp')->storeAs(path:'rapport',name:request()->file(key:'rapp')->getClientOriginalName(),options:'');   }
+
 
         return back();
     }

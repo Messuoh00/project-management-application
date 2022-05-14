@@ -54,20 +54,18 @@ Route::get('/delete/{file_path}/{fileNames}/{id}/{phsae}','App\Http\Controllers\
 
 Route::get('/stat', 'App\Http\Controllers\VraController@index');
 
+Route::get('/stat/{id}', 'App\Http\Controllers\VraController@show');
+
 Route::view('/coo-E&P', 'coo-ep.coo-ep');
 
 Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 
+
 Route::get('/phase', 'App\Http\Controllers\PhaseController@view');
 
-
-
 Route::get('/{id}/equipe','App\Http\Controllers\UploadController@team')->where('phase', '(.*)');
-
 Route::post('{id}/equipe','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
-
-
 Route::get('{id}/hequipe','App\Http\Controllers\ProjectController@hist')->where('phase', '(.*)');
 
 

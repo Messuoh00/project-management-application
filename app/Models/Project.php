@@ -31,6 +31,14 @@ class Project extends Model
 
     public function createvra($request){
 
+
+        $exist=Vra::get()->where('visibilite',$request->input('Visibilite'))->where('reactivite',$request->input('Reactivite'))->where('avancement',$request->input('Avancement'))->where('phase_id',$this->phase_id)->where('project_id',$this->project_id)->first();
+
+        if (empty($exist))
+        {
+
+
+
         $va=new Vra();
         $va->project_id=$this->id;
         $va->phase_id=$this->phase_id;
@@ -49,9 +57,9 @@ class Project extends Model
         }
 
 
-
-
         $va->save();
+
+        }
 
     }
 

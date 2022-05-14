@@ -41,14 +41,9 @@ class ProjectFactory extends Factory
                'date_deb'=> now(),
                'date_fin'=>  now()->addDays(5),
 
-               'visibilite'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
-               'reactivite'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
-               'avancement'=> $this->faker->biasedNumberBetween($min = 0, $max = 100, $function = 'sqrt'),
+
 
                'etude_echo' => $this->faker->randomElement(['oui','non', 'na']),
-
-
-
 
                'description'=> $this->faker->paragraph(),
 
