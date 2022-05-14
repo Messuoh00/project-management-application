@@ -3,18 +3,10 @@
 
 @section('styles')
 
-
-
-
 @endsection
 
 
-
-
-
 @section('content')
-
-
 
 <form action='/0/equipe' method="POST" enctype="multipart/form-data">
     @csrf
@@ -45,7 +37,6 @@
                                $file_path=storage_path('app\rapport');
                                $files=array( );
                                if (file_exists($file_path)) { $files = \File::allFiles($file_path); }
-
                        @endphp
 
                        <table class="table table-sm " data-toggle="table" data-search="true"  data-show-columns="true" data-pagination="true"  >
@@ -99,11 +90,6 @@
 <button type="submit" name="updateall" class="btn btn-warning" style="margin-top: 20px"> Appliquer</button>
 
  </div>
-
-
-
-
-
 
 </form>
 
