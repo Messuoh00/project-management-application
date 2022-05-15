@@ -254,7 +254,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                                 <div>
                                                 <a href="/{{$project->id}}/equipe"> <button type="button" class="btn   btn-warning btn-lg " >
-                                                    <i class="fas fa-fw fa-book"></i> fichier equipe
+                                                    <i class="fas fa-fw fa-book"></i> espace equipe
                                                 </a>
                                                 </div>
 
