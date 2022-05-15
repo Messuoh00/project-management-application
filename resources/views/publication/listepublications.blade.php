@@ -75,12 +75,12 @@
                                                                 <div class="publication_contenu">
                                                                 
                                                                     <p class="corps">
-                                                                        {{$publication->corps}}
+                                                                        {{$publication->commentaire}}
                                                                     </p> 
                                                                     <div class="slideshow-container">
                                                                          @php 
                                                                          
-                                                                        $routefichier=storage_path('app\public/'.$publication->fichiers);
+                                                                        $routefichier=storage_path('app/'.$publication->fichiers);
                                                                         $fichiers=[];
                                                                         if($publication->fichiers!=''){
                                                                         if (file_exists($routefichier)){$fichiers = \File::allFiles($routefichier);}}

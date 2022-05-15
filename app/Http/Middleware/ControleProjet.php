@@ -20,7 +20,7 @@ class ControleProjet
      */
     public function handle(Request $request, Closure $next)
     { 
-      if (Auth::user()->poste=="admin"||Auth::user()->poste=="vice president"||Auth::user()->poste=="Divisionnaire"){
+      if (Auth::user()->poste=="admin"){
             
         return $next($request);
      }

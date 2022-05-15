@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-
+use File;
 use App\Models\Departement;
 
 
@@ -174,5 +174,52 @@ class Authcontroller extends Controller
 
     }
     
+    function importerfichierexcel(Request $request){
+        
+        if($request->hasFile('fichier')){
+           
+            $routedossier=storage_path('app\fichier-excel');
+            File::cleanDirectory($routedossier);
+            $nomfichier=$request->file('fichier')->getClientOriginalName();
+             
+            $route=$request->file('fichier')->storeAs('fichier-excel',$nomfichier);
+        }
+
+        return redirect('/users/create');
+
+    }
+    function editprofil($id ){
+        if(Auth::user()->id==$id){
+
+        
+        $user=User::find($id);
+        $dep=Departement::get(); 
+        
+        return view('formulaireprofil_modif', ['dep'=>$dep,'user'=>$user]);}
+        else{
+            return redirect('/coo-E&P');
+        }
+    }
+    function updateprofil($id,Request $request){
+        if(Auth::user()->id==$id){
+            $this->validate($request,[
+                'email' => 'required|email|unique:users,email,'.$id,
+                'nom' => 'required',
+                'prenom' => 'required',
+                
+                
+       ]);
+       $user=User::where('id',$id)->update([
+        'nom'=>$request->input('nom'),
+        'prenom'=>$request->input('prenom'),
+        'email'=>$request->input('email'),
+         ]);
+         return redirect('/profil/edit/'.$id);
+
+        }else{ return redirect('/coo-E&P');
+
+        }
+
+    }
 
 }

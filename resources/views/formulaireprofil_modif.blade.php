@@ -25,7 +25,7 @@
 
   
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Profil utilisateur</h1>
+                                <h1 class="h3 mb-0 text-gray-800"> modification d'un utilisateur</h1>
                                
                             </div>
 
@@ -46,65 +46,49 @@
 																
 																	<hr>
 																
-																    <h6 class="mb-0"> nom:</h6>
+																<form method="post" action="/profil/update/{{$user->id}}" >
+																	{{csrf_field()}}
+																	{{ method_field('PATCH') }}
+																	<h6 class="mb-0"> nom:</h6>
 																	<div class="form-group input-group">
-																	
 																		
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 																		</div>
-																		<input disabled id="nom" name="nom" class="form-control" value=" {{ $user->nom}}" type="text">
+																		<input id="nom" name="nom" class="form-control" value=" {{ $user->nom}}" type="text">
 																	
 																	</div>
+																	@if($errors->has('nom'))
+																	<div><span style="color: red">{{$errors->first('nom')}}</span></div>
+																	@endif
 																	<h6 class="mb-0"> prenom:</h6>
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 																		</div>
-																		<input disabled id="prenom" name="prenom" class="form-control" value=" {{ $user->prenom}}" type="text">
+																		<input id="prenom" name="prenom" class="form-control" value=" {{ $user->prenom}}" type="text">
 																	</div>
-																	<h6 class="mb-0"> email:</h6>
+																	@if($errors->has('prenom'))
+                                                                        <div><span style="color: red">{{$errors->first('prenom')}}</span></div>
+                                                                   @endif
+																   <h6 class="mb-0"> email:</h6>
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 																		</div>
-																		<input disabled id="email" name="email" class="form-control" value=" {{ $user->email}}" type="email">
+																		<input id="email" name="email" class="form-control" value=" {{ $user->email}}" type="email">
 																	</div>
-
-																
-																	@if(Auth::user()->poste=='admin')
-
-																	<h6 class="mb-0"> poste:</h6>
-																	<div class="form-group input-group">
-																		<div class="input-group-prepend">
-																			<span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
-																		</div>
-																		<select disabled class="form-control form-select" name="poste" id="poste">
-																			<option value="{{ $user->poste}}" selected  hidden>{{ $user->poste}}</option>
-																			<option value="vice president">vice president</option>
-																			<option value="Divisionnaire">Divisionnaire</option>
-																			<option value="employé">employé</option>
-																			<option value="relai">relai</option>
-																			<option value="admin">admin</option>
-																		</select>
-																	</div>
-																	<h6 class="mb-0"> division:</h6>
-
-																	<div class="form-group input-group">
-																		<div class="input-group-prepend">
-																			<span class="input-group-text"> <i class="fa fa-building"></i> </span>
-																		</div>
-
-																		<input disabled id="division" name="division" class="form-control" value=" {{$user->division}}" type="text">
-																		
-																	</div>
-																	@endif
-																				
-                                                                    <a style="float: right" href="/publications/profil/{{$user->id}}"  class="btn btn-warning"> Publications </a>
-																	<a style="margin-right:10px;float: right" href="/connaissances/profil/{{$user->id}}"  class="btn btn-warning"> Connaissances </a>
+																	@if($errors->has('email'))
+                                                                         <div><span style="color: red">{{$errors->first('email')}}</span></div>
+                                                                      @endif
 
 
 																
+																	  
+																	
+																	<button type="submit" class="btn btn-warning">Enregistrer</button>
+
+																</form> 
 
 																</div>
 																		

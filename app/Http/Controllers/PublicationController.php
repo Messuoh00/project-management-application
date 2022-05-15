@@ -27,22 +27,30 @@ class PublicationController extends Controller
        
         $publication=Publication::create([
            
-            'corps' => $request->input('corps'),
+            'commentaire' => $request->input('commentaire'),
             'fichiers'=>'',
             'user_id'=>Auth::user()->id,
         ]); 
+       
+        
+
         
          if($request->hasFile('fichiers')){
 
          
          $publication->fichiers='publications/publication'.$publication->id;
          $publication->save();
+         $routefichier=storage_path('app/'.$publication->fichiers);
+         if (file_exists($routefichier)){
+            File::deleteDirectory($routefichier);
+
+         }
          foreach(($request->file('fichiers')) as $fichier){
 
              
              $nomfichier=time().'.'.$fichier->getClientOriginalName();
              
-            $route=$fichier->storeAs('public/publications/publication'.$publication->id,$nomfichier);
+            $route=$fichier->storeAs('publications/publication'.$publication->id,$nomfichier);
             
             
          }} 
@@ -53,23 +61,18 @@ class PublicationController extends Controller
        $publications=Publication::orderBy('date_publication','DESC')->get();
        
        
-       $slides=[];
-
-       foreach($publications as $pub){
-           $slides[]=1;
-           
-       }
        
-        return view('publication/listepublications',['publications'=>$publications,'slides'=>$slides]);
+       
+        return view('publication/listepublications',['publications'=>$publications]);
     }
 
     function telecharger(Request $request,$dossier,$fichier){
       
-        $file = storage_path('app/public/publications/'.$dossier.'/'.$fichier);
+        $file = storage_path('app/publications/'.$dossier.'/'.$fichier);
         
        
         if (File::exists($file)){
-            return response()->download(storage_path('app/public/publications/'.$dossier.'/'.$fichier));
+            return response()->download(storage_path('app/publications/'.$dossier.'/'.$fichier));
 
         }
         else{
@@ -98,7 +101,7 @@ class PublicationController extends Controller
     }
     function supprimer($id){
        $publication=Publication::find($id);
-       $dossier=storage_path('app/public/'.$publication->fichiers);
+       $dossier=storage_path('app/'.$publication->fichiers);
        
        File::deleteDirectory($dossier);
        

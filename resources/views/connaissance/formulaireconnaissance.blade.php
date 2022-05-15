@@ -22,7 +22,7 @@
 
   
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Ajouter une Publication</h1>
+                                <h1 class="h3 mb-0 text-gray-800">Ajouter une Connaissance</h1>
                                
                             </div>
 
@@ -40,11 +40,11 @@
 
 
                                                     <div class="pere" id="pere">
-                                                    <form method="post" action="{{url('/publications')}}" enctype="multipart/form-data"  >
+                                                    <form method="post" action="{{url('/connaissances')}}" enctype="multipart/form-data"  >
                                                         {{csrf_field()}}
                                                       
                                                         
-                                                        <label  >text de la publication(non obligatoire):</label>
+                                                        <label  >text de la connaissance(non obligatoire):</label>
                                                         <textarea class=" text-corps form-control" rows="5" name="commentaire"></textarea>
                                                        <div id="upload">
             
@@ -105,22 +105,11 @@
                     btn.onclick=function(){input1.click();}
                     input1.onchange=({target})=>{
                         const file=target.files[0];
-                       
-                        if(file.name.split('.').pop().toLowerCase()=='jpg'||file.name.split('.').pop().toLowerCase()=='jpeg'||file.name.split('.').pop().toLowerCase()=='gif'||file.name.split('.').pop().toLowerCase()=='png'||file.name.split('.').pop().toLowerCase()=='mp4'){
-                            alert("ce type de fichier n'est pas accepté ")
-                            input1.value='';
-                            for(i=0;i<fichiers.length;i++){
-                                newfile = new File([fichiers[i]],fichiers[i].name);
-                                list.items.add(newfile);
-                          
-                        }
-                            input1.files=list.files;
-
-                        }else{
+                        fichiers.push(file);
+                        
                     
                         
                         if(file){
-                            fichiers.push(file);
                             var filename=file.name;
                             
                             
@@ -144,9 +133,9 @@
                         }
                             input1.files=list.files;
                             
-                           
 
-                        }}
+
+                        }
 
 
                     }

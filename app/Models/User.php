@@ -23,7 +23,9 @@ class User extends Authenticatable
     function publications(){
         return $this->hasMany(Publication::class);
     }
-
+    function connaissances(){
+        return $this->hasMany(Connaissance::class);
+    }
     
     /**
      * The attributes that are mass assignable.

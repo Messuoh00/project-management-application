@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('publications', function (Blueprint $table) {
+        Schema::create('connaissances', function (Blueprint $table) {
             $table->id();
-            
             $table->text('commentaire')->nullable();
             $table->string('fichiers');
            
             $table->foreignId('user_id')->constrained();
 
             $table->timestamp('date_publication')->useCurrent();
-            
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publications');
+        Schema::dropIfExists('connaissances');
     }
 };

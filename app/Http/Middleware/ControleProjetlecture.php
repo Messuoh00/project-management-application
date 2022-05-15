@@ -20,7 +20,7 @@ class ControleProjetlecture
     public function handle(Request $request, Closure $next)
     {
         $project_id=$request->route()->parameter('projet');
-        if (Auth::user()->poste=="relai"){
+        if (Auth::user()->poste=="relai"||Auth::user()->poste=="Divisionnaire"){
            
             $trouve=Project::where('id',$project_id)->where('structure_pilote',Auth::user()->division);
             

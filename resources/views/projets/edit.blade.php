@@ -471,9 +471,14 @@
 
 
                                 <div class="son son2">
-
+                                @if(Auth::user()->poste=='admin')
                                 <button type="button" class="btnSubmit " data-toggle="modal" data-target="#exampleModal">
                                 Confirmer Modification
+                                @else
+                                <button type="button" class="btnSubmit " data-toggle="modal" data-target="#exampleModal" disabled>
+                                Confirmer Modification
+
+                                @endif
                                 </button>
                                 </div>
                                 <!-- Modal -->
@@ -489,8 +494,12 @@
 
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-
+                                @if(Auth::user()->poste=='admin')
                                 <button type="submit" name="updateall" class="btn btn-warning"> Appliquer</button>
+                                @else
+                                <button type="submit" name="updateall" class="btn btn-warning" disabled> Appliquer</button>
+
+                                @endif
 
                                 </div>
                                 </div>

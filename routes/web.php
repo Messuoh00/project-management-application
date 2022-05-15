@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\ConnaissanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Authcontroller;
@@ -81,18 +82,26 @@ Route::get('/apreslogin','App\Http\Controllers\Authcontroller@apreslogin');
 Route::get('/logout','App\Http\Controllers\Authcontroller@logout');
 Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
 Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepassword');
+Route::get('/profil/edit/{id}','App\Http\Controllers\Authcontroller@editprofil');
+Route::patch('/profil/update/{id}','App\Http\Controllers\Authcontroller@updateprofil');
+
 Route::resource('users',Authcontroller::class);
 Route::middleware(['admin'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['create','store']);
     Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store']);
+    Route::post('/importexcel','App\Http\Controllers\Authcontroller@importerfichierexcel');
     Route::resource('Departement',DepartementController::class);
     Route::resource('Phase',PhaseController::class);
  });
-
+Route::resource('connaissances',ConnaissanceController::class);
 Route::resource('publications',PublicationController::class);
+Route::get('/telecharger/connaissances/{dossier}/{fichier}','App\Http\Controllers\ConnaissanceController@telecharger');
 Route::get('/telecharger/publications/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
 Route::get('publications/profil/{id}','App\Http\Controllers\PublicationController@indexprofil');
+Route::get('connaissances/profil/{id}','App\Http\Controllers\ConnaissanceController@indexprofil');
 Route::get('/publications/supprimer/{id}','App\Http\Controllers\PublicationController@supprimer');
+Route::get('/connaissances/supprimer/{id}','App\Http\Controllers\ConnaissanceController@supprimer');
+
 
 
 
