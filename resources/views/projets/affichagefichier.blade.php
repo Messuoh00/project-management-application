@@ -102,7 +102,7 @@ $ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
                                                    <br>
 
                                                @if (request()->input('var')=='edit')
-                                                   <input class="form-control form-control-sm" id="{{$p->name}}"  name="{{$p->name}}"  type="file" accept= "application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf">
+                                                   <input class="form-control form-control-sm" id="{{$p->id}}"  name="{{$p->id}}"  type="file" accept= "application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf">
 
                                                    @endif
 

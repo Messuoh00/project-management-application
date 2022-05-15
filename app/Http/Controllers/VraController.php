@@ -31,12 +31,7 @@ class VraController extends Controller
 
 
 
-        $projets=Project::get();
-
-
-
-
-
+        $projets=Project::latest()->get();
 
         $temp=array();
 
@@ -47,7 +42,12 @@ class VraController extends Controller
 
             if ($request->has('month'))
             {
-             $x=Vra::latest()->get()->where('project_id','=',$projet->id)->where('created_at','<=',$request->input('month'))->first();
+
+                if ($request->input('month')<now()) {
+
+                $x=Vra::latest()->get()->where('project_id','=',$projet->id)->where('created_at','<=',$request->input('month'))->first();
+
+                }
 
             }else {
 
@@ -55,7 +55,7 @@ class VraController extends Controller
 
             }
 
-
+            if (!empty($x)) {
 
            if ($request->has('phase'))
            {
@@ -73,22 +73,17 @@ class VraController extends Controller
             }
 
 
-
-
-
             if ($test) {
 
-                if (!empty($x)) {
                     $temp[]=$x;
-                }
 
             }
 
 
            $counts1[$x->phase->name]=$counts1[$x->phase->name]+1;
+
+          }
         }
-
-
 
 
 
@@ -116,21 +111,59 @@ class VraController extends Controller
         }
 
 
-
-
-
-
-
-
-
-
-
         $dep=Departement::get()->where('stat','=',1);
         return view('projets.stats',compact('counts','phases','names','vis','reac','avan','dep'));
     }
 
 
 
+
+    public function show($id)
+    {
+        $project=Project::find($id);
+
+        $result=Vra::get()->where('project_id','=',$project->id);
+
+
+        $dates=array();
+
+        $names=array();
+
+        $vis=array();
+
+        $reac=array();
+
+        $avan=array();
+
+        $prev=$result->first()->phase->name;
+
+        foreach ($result as $r) {
+
+
+            if ($prev!=$r->phase->name) {
+
+                $dates[]=substr($r->created_at,0,10).' debut phase: '.$r->phase->name;
+            }else{
+                $dates[]=substr($r->created_at,0,10);
+            }
+
+            $vis[]=$r->visibilite;
+
+            $reac[]=$r->reactivite;
+
+            $avan[]=$r->avancement;
+
+            $prev=$r->phase->name;
+
+        }
+
+
+
+        return view('projets.statisticprojet',compact('result','project','dates','vis','reac','avan'));
+
+
+
+    }
 
 
 }

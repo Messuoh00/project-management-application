@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('publications', function (Blueprint $table) {
-            $table->id();
-            
-            $table->text('commentaire')->nullable();
-            $table->string('fichiers');
+        Schema::create('publicationprojets', function (Blueprint $table) {
 
-            $table->foreignId('user_id')->constrained();
 
-            $table->timestamp('date_publication')->useCurrent();
-            
+            $table->foreignId('publication_id')->constrained();
+
+            $table->foreignId('project_id')->constrained();
+
+
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publications');
+        Schema::dropIfExists('publicationprojets');
     }
 };
