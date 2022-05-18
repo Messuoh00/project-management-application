@@ -303,6 +303,12 @@ class ProjectController extends Controller
     }
 
 
+    public function archive($id){
+        $project=Project::find($id);
+        $project->phase_id=1;
+        $project->save();
+        return redirect('projet/'.$id);
+    }
 
 
     public function hist($id)

@@ -32,7 +32,7 @@
 $ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
 @endphp
 
-                            <form action='/fichier/{{$project->id}}/{{$phase}}' method="POST" enctype="multipart/form-data">
+                            <form action='/fichier/{{$project->id}}' method="POST" enctype="multipart/form-data">
                                 @csrf
 
 
@@ -50,6 +50,8 @@ $ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
 
                             @foreach ($ph as $p)
 
+                            @if (($p->position <= $project->phase->position) || ( $project->phase_id==1)  )
+
 
                                 <!-- Content Row -->
                                 <div class="row" style="margin-top: 40px">
@@ -64,7 +66,7 @@ $ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
 
                                                    <h5>ficher de la phase {{$p->name}}:</h5>
                                                    @php
-                                                       $filename=$p->name;
+                                                       $filename=$p->id;
 
                                                            $file_path=storage_path('app\fichier-projet\fichier-projet-'.$project->id.'\\'.$filename);
                                                            $files=array( );
@@ -88,7 +90,7 @@ $ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
                                                                   <div style="float: right">
                                                                        <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
                                                                        @if (request()->input('var')=='edit')
-                                                                       <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}/{{$phase}}"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete </button></a>
+                                                                       <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete </button></a>
                                                                        @endif
                                                                    </div>
 
@@ -115,7 +117,7 @@ $ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
 
                                 </div>
 
-
+                                @endif
                                 @endforeach
 
 
@@ -156,7 +158,7 @@ $ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
                                                                   <div style="float: right">
                                                                        <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
                                                                        @if (request()->input('var')=='edit')
-                                                                       <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}/{{$phase}}"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete </button></a>
+                                                                       <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete </button></a>
                                                                        @endif
                                                                    </div>
 
@@ -170,9 +172,10 @@ $ph = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
                                                    <br>
 
                                                @if (request()->input('var')=='edit')
+
                                                    <input class="form-control form-control-sm" id="random"  name="random"  type="file" accept= "application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf">
 
-                                                   @endif
+                                                @endif
 
                                                     </div>
 

@@ -23,6 +23,7 @@ return new class extends Migration
 
 
         $data = [
+            [ 'position' => null,'name' => 'archive'],
             [ 'position' => 0,'name' => 'Idee R/D non valide'],
             [ 'position' => 1,'name' => 'Idee R/D '],
             [ 'position' => 2,'name' => 'Maturation'],

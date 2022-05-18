@@ -18,6 +18,9 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800">INFO PROJET N:{{$project->id}}</h1>
+@if ($project->phase_id!=1)
+  <a href="/archive/{{$project->id}}" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm"> <button type="button" class="btn   " onclick="return confirm('etes vous sur de vouloir archiver ce pojet cette action est definitive?');"> archive projet</button> <i class="fas fa-download fa-sm text-white-50"></i> </a>
+@endif
 
 </div>
 
@@ -36,10 +39,9 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 
                     @php
-                    $next= App\Models\Phase::get()->where('position','=',$project->phase->position+1)->first();
 
-                    $vra= App\Models\Vra::latest()->get()->where('phase_id','=',$project->phase_id)->where('project_id','=',$project->id)->first();
-
+                        $next= App\Models\Phase::get()->where('position','=',$project->phase->position+1)->first();
+                        $vra= App\Models\Vra::latest()->get()->where('phase_id','=',$project->phase_id)->where('project_id','=',$project->id)->first();
 
                     @endphp
 
@@ -147,7 +149,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                     <h6 class="mb-0">Phase:</h6>
                                                     </div>
                                                     <div class="col-sm-9 ">
-                                                    {{$project->phase->name}}
+                                                         {{$project->phase->name}}
                                                     </div>
                                                 </div>
                                                 <hr>
@@ -247,7 +249,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <div class="filebutt" style="text-align: center">
                                                 <!-- Button trigger modal -->
                                                 <div>
-                                                <a href="/fichier/{{$project->id}}/{{$project->phase->name}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
+                                                <a href="/fichier/{{$project->id}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
                                                     <i class="fas fa-fw fa-print"></i> fichier du projet
                                                 </a>
                                                 </div>
@@ -269,6 +271,8 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 
                                               <hr>
+                                              @if ($project->phase_id!=1)
+
 
                                               <div class="card-body status">
                                               <h6 class="d-flex align-items-center mb-3"> Statut Projet:</h6>
@@ -293,6 +297,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                               </div>
 
+                                              @endif
 
 
                                               <div class="card-body status gutters-sm ">
@@ -339,12 +344,17 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 
 
-
-                                              <div class="editerbtn" >
-
+                                            @if ( ($project->phase_id!=1))
 
 
-                                                @if (!empty($next))
+                                            @if ((!empty($next)))
+
+
+                                                <div class="editerbtn" >
+
+
+
+
 
                                               <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}">
                                               <img src="{{url('/img/next.png')}}" height="20"  alt="">
@@ -421,11 +431,11 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               </div>
 
 
-                                              @endif
+
 
                                               </div>
 
-
+                                              @endif
 
 
                                               <div class="editerbtn" >
@@ -433,7 +443,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <a href="/projet/ {{$project->id}}/edit"> <button type="button" class="btn "> <img src="{{url('/img/edit.png')}}" alt="">       </button>  </a>
 
                                               </div>
-
+                                              @endif
                                               <div class="editerbtn"  >
 
                                                 <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}supp">

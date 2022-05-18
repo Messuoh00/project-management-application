@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('/projet', ProjectController::class);
 
-//route houssem
+
 Route::middleware(['projet'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['edit','destroy','update']);
 });
@@ -44,14 +44,14 @@ Route::middleware(['projetlecture'])->group(function(){
 
 
 
-Route::get('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@edit')->where('phase', '(.*)');
+Route::get('/fichier/{id}','App\Http\Controllers\UploadController@edit');
 
-Route::post('/fichier/{id}/{phase}','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
+Route::post('/fichier/{id}','App\Http\Controllers\UploadController@store');
 
-
+Route::get('/archive/{id}', 'App\Http\Controllers\ProjectController@archive');
 
 Route::get('/download/{file_path}/{fileNames}','App\Http\Controllers\UploadController@download')->where('file_path', '(.*)')->where('fileNames', '(.*)');
-Route::get('/delete/{file_path}/{fileNames}/{id}/{phsae}','App\Http\Controllers\UploadController@delete')->where('file_path', '(.*)')->where('fileNames', '(.*)')->where('phase', '(.*)');
+Route::get('/delete/{file_path}/{fileNames}/{id}','App\Http\Controllers\UploadController@delete')->where('file_path', '(.*)')->where('fileNames', '(.*)');
 
 Route::get('/stat', 'App\Http\Controllers\VraController@index');
 

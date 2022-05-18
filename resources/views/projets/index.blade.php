@@ -56,7 +56,7 @@
 
 
 
-                          @if ( ($project->phase->position==$ur)|| ( ($ur==null) ) )
+                          @if (  (($project->phase->position==$ur)||( ($ur==null) )) )
 
 
                           <tr id={{$project->id}} style='height:100px;cursor: pointer; cursor: hand;'   >

@@ -25,8 +25,8 @@ return new class extends Migration
 
 
 
-            $table->foreignId('phase_id')->constrained();
-            $table->foreignId('departement_id')->constrained();
+            $table->foreignId('phase_id')->nullable()->constrained();
+            $table->foreignId('departement_id')->nullable()->constrained();
 
 
             $table->String('region_test')->nullable();

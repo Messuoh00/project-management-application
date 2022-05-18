@@ -16,11 +16,11 @@ class UploadController extends Controller
 {
 
 
- public function edit($id,$phase)
+ public function edit($id)
     {
         $project=Project::find($id);
 
-        return view('projets/affichagefichier',['project'=>$project,'phase'=>$phase]);
+        return view('projets/affichagefichier',['project'=>$project]);
     }
 
 
@@ -33,7 +33,7 @@ class UploadController extends Controller
 
         foreach ($phase as $p) {
 
-            if ($request->hasFile(key:$p->id) ) {request()->file(key:$p->id)->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/'.$p->name,name:'fichier '.$p->name.' du projet '.$id.'.'.request()->file(key:$p->id)->getClientOriginalExtension(),options:'');   }
+            if ($request->hasFile(key:$p->id) ) {request()->file(key:$p->id)->storeAs(path:'fichier-projet/fichier-projet-'.$id.'/'.$p->id,name:'fichier de la phase n'.$p->position.' du projet '.$id.'.'.request()->file(key:$p->id)->getClientOriginalExtension(),options:'');   }
 
         }
 

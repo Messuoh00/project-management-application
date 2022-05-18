@@ -136,7 +136,7 @@
                                         <div class="form-group">
                                             <h6 class="mb-0"> Phase:</h6>
 
-                                            <input type="text" class="form-control" value="{{$project->phase->name}}"  disabled/>
+                                            <input type="text" class="form-control" value="{{$project->phase->name}}" disabled/>
 
                                         </div>
 
@@ -414,7 +414,7 @@
 
 
                                 <div class="form-group" style="text-align: center">
-                                    <a href="/fichier/{{$project->id}}/{{$project->phase->name}}?var=edit">
+                                    <a href="/fichier/{{$project->id}}?var=edit">
 
                                         <button type="button" class="btn   btn-warning btn-lg " style="margin-top: 20px">
                                          <i class="fas fa-fw fa-archive"></i> Modifier fichier du projet

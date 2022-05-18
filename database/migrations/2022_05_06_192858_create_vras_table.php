@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->primary(array('project_id','phase_id','created_at'));
 
-            $table->foreignId('project_id')->constrained();
+            $table->foreignId('project_id')->constrained()->onDelete("cascade");;
             $table->foreignId('phase_id')->constrained();
 
 
