@@ -43,7 +43,7 @@
                           <th scope="col" data-sortable="true">Nom Projet</th>
                           <th scope="col" data-sortable="true">Structure Pilote</th>
                           <th scope="col" data-sortable="true">Thematique </th>
-                          @if (!request()->has('phase'))   <th scope="col" data-sortable="true">Phase</th>  @endif
+                          @if (!request()->has('phase'))  <th scope="col" data-sortable="true">Phase</th>  @endif
 
 
 
@@ -54,9 +54,25 @@
 
                       @foreach ($projects as $project)
 
+                        @php
+                         $test=false;
+                        if ($ur==null) {
+
+                          if ($project->phase_id!=1) {
+                            $test=true;
+                          }
+
+                        }elseif ($ur=='archive'&&$project->phase_id==1) {
+                            $test=true;
+
+                        }elseif ($project->phase->position==$ur) {
+                           $test=true;
+                        }
 
 
-                          @if (  (($project->phase->position==$ur)||( ($ur==null) )) )
+                        @endphp
+
+                          @if ($test)
 
 
                           <tr id={{$project->id}} style='height:100px;cursor: pointer; cursor: hand;'   >

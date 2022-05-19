@@ -26,7 +26,7 @@ class ProjectController extends Controller
     public function index()
     {
 
-        $user=User::latest()->get();
+
 
         if (Auth::user()->poste=="admin" || Auth::user()->poste=="Divisionnaire" ||  Auth::user()->poste=="vice president"){
             $projects=Project::latest()->get();
@@ -43,7 +43,7 @@ class ProjectController extends Controller
         }
 
 
-        return view('projets/index', ['projects'=>$projects,'user'=>$user]);
+        return view('projets/index', ['projects'=>$projects]);
 
     }
 

@@ -102,7 +102,7 @@
 
 
 
-            <li class="nav-item  {{request()->filled('phase')  ? 'active ' : ''}} {{-- active --}}">
+            <li class="nav-item  {{request()->filled('phase') && is_numeric(request()->phase)   ? 'active ' : ''}} {{-- active --}}">
                 <a class="nav-link  {{!request()->filled('phase') ? 'collapsed ' : ''}}{{-- collapsed --}} " href="#" data-toggle="collapse" data-target="#collapsethree"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-tasks"></i>
@@ -110,7 +110,7 @@
                 </a>
 
 
-                <div id="collapsethree" class="collapse {{request()->has('phase') ? 'show ' : ''}} {{-- show --}} " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapsethree" class="collapse {{request()->has('phase') && is_numeric(request()->phase)  ? 'show ' : ''}} {{-- show --}} " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
 
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -131,6 +131,11 @@
 
             </li>
 
+            <li class="nav-item {{request()->input('phase')=='archive' ? 'active ' : ''}}">
+                <a class="nav-link "  href="/projet?phase=archive">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Projets archiver</span></a>
+            </li>
 
             @if(Auth::user()->poste=='admin')
             <!-- Nav Item - -->

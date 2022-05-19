@@ -76,10 +76,13 @@
                                                                    <td><b>{{pathinfo($pdffilename)['basename']}}</b>
 
                                                                   <div style="float: right">
-                                                                       <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
+
+                                                                    <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
+
+                                                                     @if ($project->phase_id!=1)
 
                                                                        <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/{{$project->id}}"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete </button></a>
-
+                                                                       @endif
                                                                    </div>
 
                                                                    </td>
@@ -91,9 +94,9 @@
                                                    </table>
                                                    <br>
 
-
+                                                   @if ($project->phase_id!=1)
                                                    <input class="form-control form-control-sm" id="team"  name="team"  type="file" accept= "application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf">
-
+                                                   @endif
 
 
                                                     </div>
