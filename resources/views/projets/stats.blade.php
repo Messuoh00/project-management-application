@@ -55,11 +55,13 @@
 
                                                 @endphp
                                                 <select class="custom-select form-control "   name="phase" >
-                                                    <option disabled selected value> ---- </option>
+
+
                                                     @foreach ($ph as $p)
-                                                     <option value={{$p->id}}  @if(request('phase')==$p->id) selected @endif >{{$p->name}}</option>
+                                                     <option value={{$p->position}}  @if(request('phase')==$p->position) selected @endif >{{$p->name}}</option>
                                                     @endforeach
-                                                  </select>
+                                                    <option disabled  @if(!is_numeric(request('phase'))) selected @endif> ---- </option>
+                                                </select>
 
                                         </div>
                                         </div>
@@ -70,7 +72,7 @@
                                         <div class="form-group">
                                             <h6 class="mb-0">  Structure pilote:</h6>
                                             <select class="custom-select form-control "   name="stp" >
-                                                <option disabled selected value> ---- </option>
+                                                <option disabled selected > ---- </option>
                                                 @foreach ($dep as $d)
                                                  <option value={{$d->id}} @if(request('stp')==$d->id) selected @endif >{{$d->nomdep}}</option>
                                                 @endforeach
@@ -84,7 +86,7 @@
                                             <div class="form-group">
                                                 <h6 class="mb-0">Etude echo:</h6>
                                                 <select class="custom-select form-control "   name="echo" >
-                                                    <option disabled selected value> ---- </option>
+                                                    <option disabled selected > ---- </option>
                                                      <option value="na"  @if(request('echo')=="na") selected @endif>na</option>
                                                      <option value="oui"  @if(request('echo')=="oui") selected @endif>oui</option>
                                                      <option value="non"  @if(request('echo')=="non") selected @endif>non</option>

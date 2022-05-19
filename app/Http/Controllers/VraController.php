@@ -28,9 +28,6 @@ class VraController extends Controller
             $counts1[$p->name]=0;
          }
 
-
-
-
         $projets=Project::latest()->get();
 
         $temp=array();
@@ -40,7 +37,7 @@ class VraController extends Controller
 
             $test=true;
 
-            if ($request->has('month'))
+            if ($request->input('month')!=null )
             {
 
                 if ($request->input('month')<now()) {
@@ -59,7 +56,7 @@ class VraController extends Controller
 
            if ($request->has('phase'))
            {
-            if($x->phase_id!=$request->input('phase')){$test=false;}
+            if($x->phase->position!=$request->input('phase')){$test=false;}
             }
 
             if ($request->has('stp'))
@@ -114,6 +111,14 @@ class VraController extends Controller
         $dep=Departement::get()->where('stat','=',1);
         return view('projets.stats',compact('counts','phases','names','vis','reac','avan','dep'));
     }
+
+
+
+
+
+
+
+
 
 
 
