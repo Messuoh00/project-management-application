@@ -26,7 +26,7 @@ return new class extends Migration
 
 
             $table->foreignId('phase_id')->nullable()->constrained();
-            $table->foreignId('departement_id')->nullable()->constrained();
+            $table->foreignId('division_id')->nullable()->constrained();
 
 
             $table->String('region_test')->nullable();
@@ -42,8 +42,6 @@ return new class extends Migration
 
 
             $table->String('etude_echo')->default('na'); //oui non na
-
-
 
 
             $table->text('description')->default('ADD TEXT HERE')->nullable();

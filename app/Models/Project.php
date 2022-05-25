@@ -22,12 +22,10 @@ class Project extends Model
     }
 
 
-    function departement(){
+    function division(){
 
-
-        return $this->belongsTo(Departement::class);
+        return $this->belongsTo(Division::class,'division_id');
     }
-
 
     public function createvra($request){
 

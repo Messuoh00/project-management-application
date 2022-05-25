@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\UploadController;
-use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\PhaseController;
 use App\Mail\SendEmail;
 use Illuminate\Support\Facades\Mail;
@@ -88,7 +88,7 @@ Route::middleware(['admin'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['create','store']);
     Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store']);
     Route::post('/importexcel','App\Http\Controllers\Authcontroller@importerfichierexcel');
-    Route::resource('Departement',DepartementController::class);
+    Route::resource('Division',DivisionController::class);
     Route::resource('Phase',PhaseController::class);
  });
 Route::resource('connaissances',ConnaissanceController::class);

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('departements', function (Blueprint $table) {
+        Schema::create('divisions', function (Blueprint $table) {
             $table->id();
             $table->String('nomdep');
             $table->Integer('stat')->default(1);
@@ -30,7 +30,7 @@ return new class extends Migration
             [ 'nomdep' => 'FOR',],
          ];
 
-        DB::table('departements')->insert($data);
+        DB::table('divisions')->insert($data);
 
 
     }
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departements');
+        Schema::dropIfExists('divisions');
     }
 };

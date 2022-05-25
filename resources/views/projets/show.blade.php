@@ -176,7 +176,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <h6 class="mb-0">Structure Pilote:</h6>
                                               </div>
                                               <div class="col-sm-9 ">
-                                              {{$project->departement->nomdep}}
+                                              {{$project->division->nomdep}}
                                               </div>
                                               </div>
                                               <hr>

@@ -5,6 +5,8 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Departement;
+use App\Models\Phase;
+use App\Models\Vra;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
@@ -19,18 +21,21 @@ class ProjectFactory extends Factory
     public function definition()
     {
         $x=Departement::all()->random();
-        $y=Departement::all()->random();
-        return [
 
+        $z=Phase::all()->random();
+
+        return [
 
 
 
                'nom_projet'=> $this->faker->title,
                'abreviation' => $this->faker->title,
-               'thematique'=> $y->nomdep,
-            //    'departement_id'=>$x->id,
-               'structure_pilote'=>$x->nomdep,
-               'phase'=> $this->faker->randomElement(['0', '1', '2', '3', '4','5','6']),
+               'thematique'=> $this->faker->title,
+
+               'departement_id'=>$x->id,
+               'files'=>'/fichier-projet/fichier-projet-'.$this->id,
+               'phase_id'=>$z->id,
+
 
                'region_test'=> $this->faker->name(),
                'region_implementation'=> $this->faker->name(),
@@ -46,9 +51,6 @@ class ProjectFactory extends Factory
                'etude_echo' => $this->faker->randomElement(['oui','non', 'na']),
 
                'description'=> $this->faker->paragraph(),
-
-
-
 
 
         ];

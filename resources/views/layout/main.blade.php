@@ -54,7 +54,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
-               Info:
+                Info coordination E&P:
             </div>
             <!-- Nav Item - Dashboard -->
 
@@ -148,6 +148,10 @@
 
 
             @if(Auth::user()->poste=='admin')
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading "style="color: rgb(34, 33, 33)">
+               Gestion Phases/Divisions:
+            </div>
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('Phase/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/Phase/create">
@@ -159,10 +163,10 @@
 
             @if(Auth::user()->poste=='admin')
             <!-- Nav Item - -->
-            <li class="nav-item {{request()->is('Departement/create') ? 'active ' : ''}}">
-                <a class="nav-link "  href="/Departement/create">
+            <li class="nav-item {{request()->is('Division/create') ? 'active ' : ''}}">
+                <a class="nav-link "  href="/Division/create">
                     <i class="fas fa-fw  fa-building"></i>
-                    <span>Modifier Departements</span></a>
+                    <span>Modifier Division</span></a>
             </li>
             @endif
 
@@ -174,7 +178,7 @@
 
 
             <div class="sidebar-heading "style="color: rgb(34, 33, 33)">
-                Données
+                Données projets:
              </div>
 
             <!-- Nav Item - Tables -->
@@ -190,7 +194,7 @@
 
 
             <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
-                Utulisateur:
+              Gestion  Utilisateur:
              </div>
 
             <!-- Nav Item - Tables -->

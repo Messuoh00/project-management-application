@@ -116,7 +116,7 @@
                                   <label class="form-check-label" for="inlineRadio2">non</label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="na" >
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="na" checked>
                                   <label class="form-check-label" for="inlineRadio3">na</label>
                                   </div>
 
@@ -396,7 +396,7 @@
 
                                   <div class="form-group">
                                   <h6 class="mb-0"> Description:</h6>
-                                  <textarea class="form-control" rows="5"name="Description" value="{{ old('Description')}}"></textarea>
+                                  <textarea class="form-control" rows="5"name="Description" >{{ old('Description')}}</textarea>
 
                                   @if($errors->has('Description'))
                                   <div><span style="color: red">Saisissez la description du projet</span></div>

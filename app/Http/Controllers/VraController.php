@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Vra;
 use App\Models\Project;
 use App\Models\Phase;
-use App\Models\Departement;
+use App\Models\Division;
 
 
 class VraController extends Controller
@@ -61,7 +61,7 @@ class VraController extends Controller
 
             if ($request->has('stp'))
             {
-            if($x->project->departement_id!=$request->input('stp')){$test=false;}
+            if($x->project->division_id!=$request->input('stp')){$test=false;}
             }
 
             if ($request->has('echo'))
@@ -108,7 +108,7 @@ class VraController extends Controller
         }
 
 
-        $dep=Departement::get()->where('stat','=',1);
+        $dep=Division::get()->where('stat','=',1);
         return view('projets.stats',compact('counts','phases','names','vis','reac','avan','dep'));
     }
 

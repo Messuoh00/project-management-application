@@ -18,7 +18,7 @@
 
 
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Modifier Departement:</h1>
+                                <h1 class="h3 mb-0 text-gray-800">Modifier Division:</h1>
                             </div>
 
                             <!-- Content Row -->
@@ -44,7 +44,7 @@
                                                             <tr >
                                                                     <td>
 
-                                                                        <form action="/Departement/{{$d->id}}" method="POST" enctype="multipart/form-data">
+                                                                        <form action="/Division/{{$d->id}}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('put')
 
@@ -59,10 +59,10 @@
 
 
                                                                         <div style="float: right">
-                                                                            <form action="/Departement/{{$d->id}}" method="POST">
+                                                                            <form action="/Division/{{$d->id}}" method="POST">
                                                                                 @csrf
                                                                                 @method('delete')
-                                                                                <button type="button submit" class="btn btn-danger" onclick="return confirm('etes vous sur de vouloir supprimer ce Departement?');">supprime</button>
+                                                                                <button type="button submit" class="btn btn-danger" onclick="return confirm('etes vous sur de vouloir supprimer cette Division?');">supprime</button>
                                                                             </form>
 
 
@@ -78,9 +78,9 @@
 
 
 
-                                                    <form action="{{route('Departement.store')}}" method="POST" enctype="multipart/form-data">
+                                                    <form action="{{route('Division.store')}}" method="POST" enctype="multipart/form-data">
                                                         @csrf
-                                                     <a data-toggle="modal" href="#myModal3"  class="btn btn-warning btn-sm " style="margin: 10px">Ajouter Departement</a>
+                                                     <a data-toggle="modal" href="#myModal3"  class="btn btn-warning btn-sm " style="margin: 10px">Ajouter Division</a>
                                                     <div class="modal" tabindex="-1" role="dialog" id="myModal3">
                                                         <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -93,8 +93,8 @@
 
                                                             <div class="modal-body">
 
-                                                                <b>Nom du nouveau Departement:</b>
-                                                                <input type="text" class="form-control" placeholder="NomDep" name="nomdep"/>
+                                                                <b>Nom de la nouvelle Division:</b>
+                                                                <input type="text" class="form-control"  required='required' placeholder="NomDep" name="nomdep"/>
                                                             </div>
 
                                                             <div class="modal-footer">

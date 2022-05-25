@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Project;
 use App\Models\User;
-use App\Models\Departement;
+use App\Models\Division;
 use App\Models\UserProject;
 use App\Models\Phase;
 use App\Models\Vra;
@@ -33,7 +33,7 @@ class ProjectController extends Controller
         }
         else {
             if(Auth::user()->poste=="relai"){
-                $projects=Project::where('departement_id',Auth::user()->division)->latest()->get();;
+                $projects=Project::where('division_id',Auth::user()->division)->latest()->get();;
             }
             else{
             $user_id=Auth::user()->id;
@@ -56,7 +56,7 @@ class ProjectController extends Controller
     public function create()
     {
         $users=User::latest()->get();
-        $dep=Departement::get()->where('stat','=',1);
+        $dep=Division::get()->where('stat','=',1);
 
         return view('projets/create',['users'=>$users,'dep'=>$dep]);
     }
@@ -88,7 +88,7 @@ class ProjectController extends Controller
         $proje->abreviation= $request->input('Abreviation');
         $proje->thematique= $request->input('Thematique');
 
-        $proje->departement_id= $request->input('StructurePilote');
+        $proje->division_id= $request->input('StructurePilote');
         $proje->phase_id=$phase->id;
 
         $proje->region_test="";
@@ -149,7 +149,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project=Project::find($id);
-        $dep=Departement::get()->where('stat','=',1);
+        $dep=Division::get()->where('stat','=',1);
 
         if ($project==null) {
             return redirect('projet');
@@ -215,7 +215,7 @@ class ProjectController extends Controller
                 'nom_projet' =>  $request->input('NomProjet'),
                 'abreviation'=> $request->input('Abreviation'),
                 'thematique'=> $request->input('Thematique'),
-                'departement_id'=> $request->input('StructurePilote'),
+                'division_id'=> $request->input('StructurePilote'),
                 'region_test'=> $request->input('RegionTest'),
                 'region_implementation'=> $request->input('RegionImp'),
                 'region_exploitation'=> $request->input('RegionExp'),

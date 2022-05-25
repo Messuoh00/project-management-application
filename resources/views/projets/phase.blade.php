@@ -64,7 +64,7 @@
                                                                          @method('put')
 
                                                                          <div style="float: left">
-                                                                           <input type="text" value="{{$p->name}}"  class="form-control" name='namephasemod'>
+                                                                           <input type="text" value="{{$p->name}}"   class="form-control" name='namephasemod'>
 
                                                                             <button type="button submit" hidden></button>
 
@@ -130,7 +130,7 @@
                                                                   </select>
 
                                                                 <b>Nom de la phase:</b>
-                                                                <input type="text" class="form-control"  name="namephase"/>
+                                                                <input type="text" class="form-control" required='required'  name="namephase"/>
                                                             </div>
 
                                                             <div class="modal-footer">

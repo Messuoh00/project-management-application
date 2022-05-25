@@ -1,22 +1,16 @@
 <?php
 
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
-use App\Models\Departement;
+use App\Models\Division;
 
 use Illuminate\Support\Facades\Auth;
 
 
-class DepartementController extends Controller
+class DivisionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
@@ -29,9 +23,9 @@ class DepartementController extends Controller
      */
     public function create()
     {
-        $dep=Departement::get()->where('stat','=',1);
+        $dep=Division::get()->where('stat','=',1);
 
-        return view('projets/departement', ['dep'=>$dep]);
+        return view('projets/Division', ['dep'=>$dep]);
     }
 
     /**
@@ -42,10 +36,10 @@ class DepartementController extends Controller
      */
     public function store(Request $request)
     {
-        $dep=new Departement();
+        $dep=new Division();
         $dep->nomdep=$request->input('nomdep');
         $dep->save();
-        return redirect('Departement/create');
+        return redirect('Division/create');
     }
 
     /**
@@ -79,13 +73,13 @@ class DepartementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dep=Departement::find($id);
+        $dep=Division::find($id);
 
 
 
-        DB::table('departements')->where('id','=',$id)->update(['nomdep' => $request->input('namedep') ])  ;
+        DB::table('divisions')->where('id','=',$id)->update(['nomdep' => $request->input('namedep') ])  ;
 
-        return redirect('Departement/create');
+        return redirect('Division/create');
     }
 
     /**
@@ -98,9 +92,9 @@ class DepartementController extends Controller
     {
 
 
-        DB::table('departements')->where('id','=',$id)->update(['stat' => 0 ]);
+        DB::table('divisions')->where('id','=',$id)->update(['stat' => 0 ]);
 
 
-        return redirect('Departement/create');
+        return redirect('Division/create');
     }
 }

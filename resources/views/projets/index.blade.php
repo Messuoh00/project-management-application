@@ -81,7 +81,7 @@
 
                           <th scope="row" style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">  {{$project->nom_projet}} </div> </th>
 
-                          <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">  {{$project->departement->nomdep}} </div> </td>
+                          <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')">  {{$project->division->nomdep}} </div> </td>
 
                           <td style="text-align: center;"><div style="width:100%;padding:25px" onclick="link('/projet/{{$project->id}}')"> {{$project->thematique}} </div> </td>
 

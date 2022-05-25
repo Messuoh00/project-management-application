@@ -162,11 +162,11 @@
                                             <div class="form-group col-md-4 " style="max-width: 100%">
 
                                                 <select class="custom-select form-control "   name="StructurePilote" >
-                                                    <option value={{ $project->departement_id }} selected>{{$project->departement->nomdep}}</option>
+                                                    <option value={{ $project->division_id }} selected>{{$project->division->nomdep}}</option>
 
                                                     @foreach ($dep as $d)
 
-                                                    @if (  $project->departement_id!=$d->id )
+                                                    @if (  $project->division_id!=$d->id )
                                                     <option value={{$d->id}}  >{{$d->nomdep}}</option>
                                                     @endif
 
