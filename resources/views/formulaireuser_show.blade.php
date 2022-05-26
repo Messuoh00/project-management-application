@@ -106,6 +106,7 @@
 																				
                                                                     <a style="float: right" href="/publications/profil/{{$user->id}}"  class="btn btn-warning"> Publications </a>
 																	<a style="margin-right:10px;float: right" href="/connaissances/profil/{{$user->id}}"  class="btn btn-warning"> Connaissances </a>
+																	<a style="margin-right:10px;float: right" href="/projets/profil/{{$user->id}}"  class="btn btn-warning"> Projets affectés </a>
 
 
 																

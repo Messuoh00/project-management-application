@@ -135,6 +135,7 @@ Route::get('/telecharger/connaissances/{dossier}/{fichier}','App\Http\Controller
 Route::get('/telecharger/publications/{dossier}/{fichier}','App\Http\Controllers\PublicationController@telecharger');
 Route::get('publications/profil/{id}','App\Http\Controllers\PublicationController@indexprofil');
 Route::get('connaissances/profil/{id}','App\Http\Controllers\ConnaissanceController@indexprofil');
+Route::get('projets/profil/{id}','App\Http\Controllers\ProjectController@indexprofil');
 Route::get('/publications/supprimer/{id}','App\Http\Controllers\PublicationController@supprimer');
 Route::get('/connaissances/supprimer/{id}','App\Http\Controllers\ConnaissanceController@supprimer');
 
