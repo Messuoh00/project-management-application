@@ -38,8 +38,8 @@
                                 <h1 class="h3 mb-0 text-gray-800">Fichier de  L'equipe <a href="/projet/{{$project->id}}"> {{$project->id}} </a> </h1>
 
 
-                                <a href="/{{$project->id}}/equipepub" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm">
-                                    <button type="button" class="btn   ">publication projet</button> <i class="fas fa-download fa-sm text-white-50"></i>
+                                <a href="/{{$project->id}}/publicationequipe" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm">
+                                    <button type="button" class="btn ">publication projet</button> <i class="fas fa-download fa-sm text-white-50"></i>
                                 </a>
 
 

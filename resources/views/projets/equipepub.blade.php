@@ -21,6 +21,18 @@
 
 
 
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Publication  de  L'equipe  </h1>
+
+
+    <a href="/{{Request::segment(1)}}/equipe" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm">
+        <button type="button" class="btn ">fichier projet (equipe)</button> <i class="fas fa-download fa-sm text-white-50"></i>
+    </a>
+
+
+</div>
+
+
                             <!-- Content Row -->
                             <div class="row">
 
@@ -32,13 +44,11 @@
                                                 <div class="col ">
 
 
+
+
                                                 <a data-toggle="modal" href="#myModal3"  class="btn btn-warning btn-sm " style="margin: 10px;float:right;">
                                                     Ajouter publication projet
                                                 </a>
-                                                @php
-                                                     $publications=App\Models\Publication::orderBy('date_publication','DESC')->get();
-                                                @endphp
-
 
                                                 <div class="input-group">
                                                     <input type="search" id='recherche' class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -154,13 +164,15 @@
                     <div class="modal-body">
                                 {{-- begin creation --}}
                                 <div class="pere" id="pere" >
-                                    <form method="post" action="{{url('/publications')}}" enctype="multipart/form-data"  >
+                                    <form method="post" action="{{url('/'.Request::segment(1).'/publicationequipe')}}" enctype="multipart/form-data"  >
                                         {{csrf_field()}}
 
 
-                                    <label  >text de la publication(non obligatoire):</label>
+                                    <label>text de la publication(non obligatoire):</label>
                                     <textarea class=" text-corps form-control" rows="5" name="commentaire"></textarea>
                                 <div id="upload">
+
+                                        <input id='id'type="text" value="{{Request::segment(1)}}" name='id' hidden>
 
                                         <input id='input1'type="file" name='fichiers[]'>
                                         <span class="text"> veuillez inserer un fichier:</span>

@@ -44,12 +44,12 @@ Route::middleware(['auth'])->group(function(){
     });
     Route::middleware(['controle_supression'])->group(function(){
         Route::resource('/projet', ProjectController::class)->only(['destroy']);
-        
+
 
     });
 Route::middleware(['projet'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['edit','update']);
-    
+
 });
 Route::middleware(['projetlecture'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['show']);
@@ -91,7 +91,9 @@ Route::middleware(['controle_espace_equipe'])->group(function(){
 });
 
 Route::post('{id}/equipe','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
-Route::view('/equipepublication','projets.equipepub');
+
+Route::get('/{id}/publicationequipe','App\Http\Controllers\Publication_projetController@index');
+Route::post('/{id}/publicationequipe','App\Http\Controllers\Publication_projetController@store');
 
 
 
@@ -114,10 +116,10 @@ Route::put('/roles/{id}/ajouter_acces','App\Http\Controllers\RoleController@ajou
 Route::get('/supprimeracces/{id}/{accesid}','App\Http\Controllers\RoleController@supprimer_acces');
 Route::resource('users',Authcontroller::class);
 Route::middleware(['controle_gestion_utilisateur'])->group(function(){
-    
+
     Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store']);
     Route::post('/importexcel','App\Http\Controllers\Authcontroller@importerfichierexcel');
-    
+
  });
  Route::middleware(['controle_gestion_division'])->group(function(){
     Route::resource('Division',DivisionController::class);
@@ -125,10 +127,10 @@ Route::middleware(['controle_gestion_utilisateur'])->group(function(){
  });
  Route::middleware(['controle_gestion_phase'])->group(function(){
     Route::resource('Phase',PhaseController::class);
-     
+
 });
 
-    
+
 Route::resource('connaissances',ConnaissanceController::class);
 Route::resource('publications',PublicationController::class);
 Route::get('/telecharger/connaissances/{dossier}/{fichier}','App\Http\Controllers\ConnaissanceController@telecharger');

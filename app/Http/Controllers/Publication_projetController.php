@@ -2,30 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Publication_projet;
+
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Storage;
 use App\Models\fichier;
 use App\Models\Publication;
-use App\Models\Publication_projet;
 use App\Models\User;
 use File;
 
 
-class PublicationController extends Controller
+class Publication_projetController extends Controller
 {
-    //
-    function create(){
 
-        return view('publication/formulairepublication');
+    public function index($id)
+    {
+
+        $pub=Publication_projet::get()->where('project_id','=',$id);
+
+        $test=array();
+
+
+        foreach ($pub as $p ) {
+        $test[]=$p->publication_id;
+        }
+
+
+        $publications=Publication::orderBy('date_publication','DESC')->whereIn('id',$test)->get();
+
+
+
+        return view('projets/equipepub',['publications'=>$publications]);
     }
 
 
-    function store(Request $request){
+    public function store(Request $request)
+    {
 
         $this->validate($request,[
 
-            'fichiers' => 'required',
+            'commentaire' => 'required',
         ]);
 
 
@@ -34,6 +52,16 @@ class PublicationController extends Controller
             'commentaire' => $request->input('commentaire'),
             'fichiers'=>'',
             'user_id'=>Auth::user()->id,
+
+
+        ]);
+
+
+        $publication1=Publication_projet::create([
+
+            'publication_id' => $publication->id,
+            'project_id'=>$request->input('id'),
+
         ]);
 
 
@@ -59,30 +87,9 @@ class PublicationController extends Controller
 
          }}
 
-        return redirect('publications/create');
+        return back();
     }
 
-
-
-    function index(){
-
-
-
-        $pub=Publication_projet::get();
-
-        $test=array();
-
-        foreach ($pub as $p ) {
-        $test[]=$p->publication_id;
-        }
-
-       $publications=Publication::orderBy('date_publication','DESC')->whereNotIn('id',$test)->get();
-
-
-
-
-        return view('publication/listepublications',['publications'=>$publications]);
-    }
 
     function telecharger(Request $request,$dossier,$fichier){
 
@@ -97,26 +104,10 @@ class PublicationController extends Controller
             exit('ce fichier existe pas!');
         }
 
-
-
-
-
     }
-    function indexprofil($id){
-        $user=User::find($id);
-
-        $publications=$user->publications->sortByDesc('date_publication');
-        $slides=[];
-
-        foreach($publications as $pub){
-            $slides[]=1;
-
-        }
-
-         return view('publication/listepublications',['publications'=>$publications,'slides'=>$slides]);
 
 
-    }
+
     function supprimer($id){
        $publication=Publication::find($id);
        $dossier=storage_path('app/'.$publication->fichiers);

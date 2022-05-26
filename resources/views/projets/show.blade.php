@@ -263,7 +263,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                 @if($acces_espace_equipe!=null||$tous_les_privileges!=null)
 
                                                 <div>
-                                                <a href="/{{$project->id}}/equipe"> <button type="button" class="btn   btn-warning btn-lg " >
+                                                <a href="/{{$project->id}}/publicationequipe"> <button type="button" class="btn   btn-warning btn-lg " >
                                                     <i class="fas fa-fw fa-book"></i> espace equipe
                                                 </a>
                                                 </div>
@@ -302,7 +302,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               </div>
                                               @if($acces_statistique!=null||$tous_les_privileges!=null)
 
-                                              
+
 
                                               <div style="float: right">
                                                 <a href="/stat/{{$project->id}}"> <button type="button" class="btn   btn-warning btn-lg " >

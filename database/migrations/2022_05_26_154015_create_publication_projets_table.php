@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fichiers', function (Blueprint $table) {
-            $table->id();
-            
-            $table->foreignId('publication_id')->constrained();
+        Schema::create('publication_projets', function (Blueprint $table) {
 
-            $table->string('route');
-            $table->timestamps();
+            $table->foreignId('publication_id')->constrained()->onDelete("cascade");
+
+            $table->foreignId('project_id')->constrained();
+
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fichiers');
+        Schema::dropIfExists('publication_projets');
     }
 };

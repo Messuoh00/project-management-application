@@ -62,22 +62,6 @@
                                   </div>
 
 
-                                  {{-- <div class="form-group">
-                                  <h6 class="mb-0"> Region Test:</h6>
-
-                                  <input type="text" class="form-control" placeholder="RegionTest" name="RegionTest"/>
-                                  </div>
-
-                                  <div class="form-group">
-                                  <h6 class="mb-0"> Region Implementation:</h6>
-
-                                  <input type="text" class="form-control" placeholder="Region Implementation"  name="RegionImp"/>
-                                  </div>
-                                  <div class="form-group">
-                                  <h6 class="mb-0"> Region Exploitation:</h6>
-
-                                  <input type="text" class="form-control" placeholder="Region Exploitation"  name="RegionExp"/>
-                                  </div> --}}
 
 
                                   <div class="form-group">
