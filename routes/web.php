@@ -3,6 +3,8 @@ use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\ConnaissanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RoleController;
+
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\DivisionController;
@@ -32,10 +34,14 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::resource('/projet', ProjectController::class);
+    Route::middleware(['controle_creation_projet'])->group(function(){
+        Route::resource('/projet', ProjectController::class)->only(['create','store']);
 
+    });
 
 Route::middleware(['projet'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['edit','destroy','update']);
+    Route::get('/archive/{id}', 'App\Http\Controllers\ProjectController@archive');
 });
 Route::middleware(['projetlecture'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['show']);
@@ -48,14 +54,16 @@ Route::get('/fichier/{id}','App\Http\Controllers\UploadController@edit');
 
 Route::post('/fichier/{id}','App\Http\Controllers\UploadController@store');
 
-Route::get('/archive/{id}', 'App\Http\Controllers\ProjectController@archive');
+
 
 Route::get('/download/{file_path}/{fileNames}','App\Http\Controllers\UploadController@download')->where('file_path', '(.*)')->where('fileNames', '(.*)');
 Route::get('/delete/{file_path}/{fileNames}/{id}','App\Http\Controllers\UploadController@delete')->where('file_path', '(.*)')->where('fileNames', '(.*)');
+Route::middleware(['controle_statistique'])->group(function(){
+    Route::get('/stat', 'App\Http\Controllers\VraController@index');
 
-Route::get('/stat', 'App\Http\Controllers\VraController@index');
+    Route::get('/stat/{id}', 'App\Http\Controllers\VraController@show');
+});
 
-Route::get('/stat/{id}', 'App\Http\Controllers\VraController@show');
 
 Route::view('/coo-E&P', 'coo-ep.coo-ep');
 
@@ -64,10 +72,17 @@ Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 
 Route::get('/phase', 'App\Http\Controllers\PhaseController@view');
+Route::middleware(['controle_historique_equipe'])->group(function(){
+    Route::get('{id}/hequipe','App\Http\Controllers\ProjectController@hist')->where('phase', '(.*)');
 
-Route::get('/{id}/equipe','App\Http\Controllers\UploadController@team')->where('phase', '(.*)');
+
+});
+Route::middleware(['controle_espace_equipe'])->group(function(){
+    Route::get('/{id}/equipe','App\Http\Controllers\UploadController@team')->where('phase', '(.*)');
+
+});
+
 Route::post('{id}/equipe','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
-Route::get('{id}/hequipe','App\Http\Controllers\ProjectController@hist')->where('phase', '(.*)');
 
 
 
@@ -82,15 +97,29 @@ Route::get('/passwordedit','App\Http\Controllers\Authcontroller@editpassword');
 Route::patch('/passwordupdate','App\Http\Controllers\Authcontroller@updatepassword');
 Route::get('/profil/edit/{id}','App\Http\Controllers\Authcontroller@editprofil');
 Route::patch('/profil/update/{id}','App\Http\Controllers\Authcontroller@updateprofil');
+Route::middleware(['controle_gestion_role'])->group(function(){
+    Route::resource('roles',RoleController::class);
+});
 
+Route::put('/roles/{id}/ajouter_acces','App\Http\Controllers\RoleController@ajouter_acces');
+Route::get('/supprimeracces/{id}/{accesid}','App\Http\Controllers\RoleController@supprimer_acces');
 Route::resource('users',Authcontroller::class);
-Route::middleware(['admin'])->group(function(){
-    Route::resource('/projet', ProjectController::class)->only(['create','store']);
+Route::middleware(['controle_gestion_utilisateur'])->group(function(){
+    
     Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store']);
     Route::post('/importexcel','App\Http\Controllers\Authcontroller@importerfichierexcel');
-    Route::resource('Division',DivisionController::class);
-    Route::resource('Phase',PhaseController::class);
+    
  });
+ Route::middleware(['controle_gestion_division'])->group(function(){
+    Route::resource('Division',DivisionController::class);
+
+ });
+ Route::middleware(['controle_gestion_phase'])->group(function(){
+    Route::resource('Phase',PhaseController::class);
+     
+});
+
+    
 Route::resource('connaissances',ConnaissanceController::class);
 Route::resource('publications',PublicationController::class);
 Route::get('/telecharger/connaissances/{dossier}/{fichier}','App\Http\Controllers\ConnaissanceController@telecharger');

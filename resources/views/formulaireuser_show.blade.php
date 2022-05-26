@@ -38,6 +38,16 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col x">
+												@php
+    $user_id=Auth::user()->id;
+      if(auth::user()->role==null){
+        return abort(403);
+    }
+     $role_id=auth::user()->role->id;
+     $main_tous_les_privileges= App\Models\acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
+     $main_acces_gestion_utilisateur=App\Models\acces::where('nom_acces','gestion des utilisateurs')->whereRelation('roles','roles.id',$role_id)->get()->first();
+
+    @endphp
                                                    
 																																
 																	
@@ -72,21 +82,15 @@
 																	</div>
 
 																
-																	@if(Auth::user()->poste=='admin')
+																	@if($main_tous_les_privileges!=null||$main_acces_gestion_utilisateur!=null)
 
-																	<h6 class="mb-0"> poste:</h6>
+																	<h6 class="mb-0"> role:</h6>
 																	<div class="form-group input-group">
 																		<div class="input-group-prepend">
 																			<span class="input-group-text"> <i class="fa fa-briefcase"></i> </span>
 																		</div>
-																		<select disabled class="form-control form-select" name="poste" id="poste">
-																			<option value="{{ $user->poste}}" selected  hidden>{{ $user->poste}}</option>
-																			<option value="vice president">vice president</option>
-																			<option value="Divisionnaire">Divisionnaire</option>
-																			<option value="employé">employé</option>
-																			<option value="relai">relai</option>
-																			<option value="admin">admin</option>
-																		</select>
+																		<input disabled id="role" name="role" class="form-control" value="{{$user->role->nom_role}}" type="text">
+
 																	</div>
 																	<h6 class="mb-0"> division:</h6>
 
@@ -95,7 +99,7 @@
 																			<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 																		</div>
 
-																		<input disabled id="division" name="division" class="form-control" value=" {{$user->division}}" type="text">
+																		<input disabled id="division" name="division" class="form-control" value=" {{$user->division->nomdep}}" type="text">
 																		
 																	</div>
 																	@endif

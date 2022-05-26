@@ -20,6 +20,13 @@ class User extends Authenticatable
         return  $this->belongsToMany(Project::class);
 
     }
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+    function division(){
+
+        return $this->belongsTo(Division::class);
+    }
     function publications(){
         return $this->hasMany(Publication::class);
     }
@@ -37,8 +44,8 @@ class User extends Authenticatable
         'email',
         'password',
         'prenom',
-        'poste',
-        'division',
+        'role_id',
+        'division_id'
     ];
 
     /**

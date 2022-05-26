@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Role;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use File;
-use App\Models\Departement;
+use App\Models\Division;
 
 
 
@@ -62,22 +64,25 @@ class Authcontroller extends Controller
     //formulaire de creation du user
     function create(){
 
-        $dep=Departement::get(); 
-        return view('formulaireuser', ['dep'=>$dep]);
+        $dep=Division::get(); 
+        $roles=Role::all();
+        return view('formulaireuser', ['dep'=>$dep,'roles'=>$roles]);
     }
 
 
     //creation du user
     function store(Request $request){
+        
+       
        
         $this->validate($request,[
             'email' => 'required|email|unique:users',
             'password' => 'required',
             'nom' => 'required',
             'prenom' => 'required',
-            'poste' => 'required',
             'division' => 'required',
-            'password2'=>'required'
+            'password2'=>'required',
+            'role'=>'required'
    ]);
    if($request->password != $request->password2){ 
                 
@@ -89,8 +94,8 @@ class Authcontroller extends Controller
             'prenom'=>$request->input('prenom'),
             'email'=>$request->input('email'),
             'password'=>Hash::make($request->input('password')),
-            'poste'=>$request->get('poste'),
-            'division'=>$request->get('division'),
+            'division_id'=>(int)$request->get('division'),
+            'role_id'=>(int)$request->input('role'),
          ]);
         return redirect('/users/create');}
     }
@@ -105,28 +110,35 @@ class Authcontroller extends Controller
      //formulaire de modification du user
     function edit($id){
         $user=User::find($id);
-        $dep=Departement::get(); 
-        return view('formulaireuser_modif', ['dep'=>$dep,'user'=>$user]);
+        $dep=Division::get(); 
+        $roles=Role::all();
+        return view('formulaireuser_modif', ['dep'=>$dep,'user'=>$user,'roles'=>$roles]);
 
 
     }
     //modification du user
     function update($id,Request $request){
+        
         $this->validate($request,[
             'email' => 'required|email|unique:users,email,'.$id,
             'nom' => 'required',
             'prenom' => 'required',
-            'poste' => 'required',
             'division' => 'required',
+            'role'=>'required',
             
    ]);
-   $user=User::where('id',$id)->update([
-    'nom'=>$request->input('nom'),
-    'prenom'=>$request->input('prenom'),
-    'email'=>$request->input('email'),
-    'poste'=>$request->get('poste'), 
-    'division'=>$request->get('division'),
-     ]);
+
+   
+        $user=User::where('id',$id)->update([
+            'nom'=>$request->input('nom'),
+            'prenom'=>$request->input('prenom'),
+            'email'=>$request->input('email'),
+            'division_id'=>(int)$request->get('division'),
+            'role_id'=>(int)$request->input('role'),
+             ]);
+        
+
+    
     return redirect("/users/$id/edit");
     }
     
@@ -193,7 +205,7 @@ class Authcontroller extends Controller
 
         
         $user=User::find($id);
-        $dep=Departement::get(); 
+        $dep=Division::get(); 
         
         return view('formulaireprofil_modif', ['dep'=>$dep,'user'=>$user]);}
         else{

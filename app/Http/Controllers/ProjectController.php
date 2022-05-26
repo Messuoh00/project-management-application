@@ -14,6 +14,8 @@ use App\Mail\SendEmail;
 use Session;
 use Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\acces;
+
 
 
 class ProjectController extends Controller
@@ -25,19 +27,41 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        /* code walid:afficher la liste de projet selon l'acces */
+        $user_id=Auth::user()->id;
+        if(auth::user()->role==null){
+            $projects=[];
+            return view('projets/index', ['projects'=>$projects]);
+
+        }
+        $role_id=auth::user()->role->id;
+        $tous_les_privileges=acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
+        $acces_lecture_tous_les_projets=acces::where('nom_acces','lecture de tous les projets')->whereRelation('roles','roles.id',$role_id)->get()->first();
 
 
 
-        if (Auth::user()->poste=="admin" || Auth::user()->poste=="Divisionnaire" ||  Auth::user()->poste=="vice president"){
+
+
+        if ($tous_les_privileges!=null||$acces_lecture_tous_les_projets!=null){
             $projects=Project::latest()->get();
         }
         else {
-            if(Auth::user()->poste=="relai"){
-                $projects=Project::where('division_id',Auth::user()->division)->latest()->get();;
+            $acces_lecture_par_division=acces::where('nom_acces','lecture de projets de la meme division')->whereRelation('roles','roles.id',$role_id)->get()->first();
+
+            if($acces_lecture_par_division!=null){
+                $projects=Project::where('division_id',Auth::user()->division->id)->latest()->get();;
             }
             else{
-            $user_id=Auth::user()->id;
-          $projects=Project::whereRelation('user','id',$user_id)->latest()->get();
+           $acces_lecture=acces::where('nom_acces','lecture de projet affecté')->whereRelation('roles','roles.id',$role_id)->get()->first();
+           if($acces_lecture!=null){
+
+           
+
+            
+          $projects=Project::whereRelation('user','id',$user_id)->latest()->get();}
+          else{
+              $projects=[];
+          }
             }
 
         }
@@ -135,8 +159,25 @@ class ProjectController extends Controller
 
             $result=$project->getequipe();
 
+            /* code walid:preparation des accès pour les traiter en front end*/
+            $user_id=Auth::user()->id;
+            if(auth::user()->role==null){
+                return abort(403);
+            }
+            $role_id=auth::user()->role->id;
+            $acces_espace_equipe=acces::where('nom_acces','gérer les fichiers de espace equipe des projets accessibles en lecture')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            $acces_historique=acces::where('nom_acces','consultation historique equipe des projets accessibles en lecture')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            $acces_statistique=acces::where('nom_acces','consultation des statistiques')->whereRelation('roles','roles.id',$role_id)->get()->first();
 
-            return view('projets/show',  ['project'=>$project ,'users'=>$users,'chef'=>$result[0],'rep'=>$result[1],'equipe'=>$result[2]]);
+            $tous_les_privileges=acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
+
+
+
+
+
+
+
+            return view('projets/show',  ['project'=>$project ,'users'=>$users,'chef'=>$result[0],'rep'=>$result[1],'equipe'=>$result[2],'acces_espace_equipe'=> $acces_espace_equipe,'acces_historique_equipe'=>$acces_historique,'tous_les_privileges'=>$tous_les_privileges,'acces_statistique'=>$acces_statistique]);
         }
     }
 
@@ -175,9 +216,27 @@ class ProjectController extends Controller
             }
 
             }
+            /* code walid:preparation des accès pour les traiter en front end!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+            $user_id=Auth::user()->id;
+            if(auth::user()->role==null){
+                return abort(403);
+            }
+            $role_id=auth::user()->role->id;
+            
+            $tous_les_privileges=acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            
+            $acces_ecriture_tous_les_projets=acces::where('nom_acces','ecriture de tous les projets')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            $acces_ecriture_par_division=acces::where('nom_acces','ecriture de projets de la meme division')->whereRelation('roles','roles.id',$role_id)->get()->first();
+           
+            $acces_ecriture=acces::where('nom_acces','ecriture de projet affecté')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            $acces_ecriture_chef_rep=acces::where('nom_acces','ecriture de projet affecté que en etant chef/représentant du projet')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            
+            
 
 
-        return view('projets/edit', ['project'=>$project ,'users'=>$users,'chef'=>$result[0],'rep'=>$result[1],'equipe'=>$eq,'ei'=>$ei,'dep'=>$dep]);
+
+
+        return view('projets/edit', ['project'=>$project ,'users'=>$users,'chef'=>$result[0],'rep'=>$result[1],'equipe'=>$eq,'ei'=>$ei,'dep'=>$dep,'tous_les_privileges'=>$tous_les_privileges,'acces_ecriture_tous_les_projets'=>$acces_ecriture_tous_les_projets,'acces_ecriture_par_division'=>$acces_ecriture_par_division,'acces_ecriture'=>$acces_ecriture,'acces_ecriture_chef_rep'=>$acces_ecriture_chef_rep,]);
         }
     }
 

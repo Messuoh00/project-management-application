@@ -48,7 +48,7 @@
 
                                                             <th scope="col" data-sortable="true">Nom</th>
                                                             <th scope="col" data-sortable="true">Prenom</th>
-                                                            <th scope="col" data-sortable="true">Post </th>
+                                                            <th scope="col" data-sortable="true">Poste </th>
                                                             <th scope="col" data-sortable="true">Date </th>
 
 

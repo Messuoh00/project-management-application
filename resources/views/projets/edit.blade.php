@@ -214,7 +214,7 @@
 
                                                                                 <th scope="col" data-sortable="true">Nom</th>
                                                                                 <th scope="col" data-sortable="true">Prenom</th>
-                                                                                <th scope="col" data-sortable="true">Post</th>
+                                                                                <th scope="col" data-sortable="true">Role</th>
                                                                                 <th scope="col" data-sortable="true">Division</th>
                                                                                 <th scope="col">select</th>
 
@@ -229,8 +229,8 @@
 
                                                                                 <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                                                 <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
-                                                                                <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
-                                                                                <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
+                                                                                <td style="text-align: center" class="rowdata"> {{$user->role->nom_role}} </td>
+                                                                                <td style="text-align: center" class="rowdata"> {{$user->division->nomdep}} </td>
                                                                                 <td><input type="button"value="submit"onclick="show()"data-dismiss="modal" /> </td>
 
                                                                                 </tr>
@@ -285,7 +285,7 @@
 
                                                                                 <th scope="col" data-sortable="true">Nom</th>
                                                                                 <th scope="col" data-sortable="true">Prenom</th>
-                                                                                <th scope="col" data-sortable="true">Post</th>
+                                                                                <th scope="col" data-sortable="true">Role</th>
 
                                                                                 <th scope="col">select</th>
 
@@ -299,7 +299,7 @@
                                                                                 <tr id={{$user->id}}>
                                                                                     <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                                                 <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
-                                                                                <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
+                                                                                <td style="text-align: center" class="rowdata"> {{$user->role->nom_role}} </td>
 
                                                                                 <td><input type="button"value="submit"onclick="show2()"data-dismiss="modal" /> </td>
 
@@ -365,7 +365,7 @@
 
                                                                                     <th scope="col" data-sortable="true">Nom</th>
                                                                                     <th scope="col" data-sortable="true">Prenom</th>
-                                                                                    <th scope="col" data-sortable="true">Post</th>
+                                                                                    <th scope="col" data-sortable="true">Role</th>
 
                                                                                     <th scope="col">select</th>
 
@@ -380,7 +380,7 @@
 
                                                                                     <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">{{$user->nom}} </a> </th>
                                                                                     <td style="text-align: center" class="rowdata">{{$user->prenom}}</td>
-                                                                                    <td style="text-align: center" class="rowdata">{{$user->poste}} </td>
+                                                                                    <td style="text-align: center" class="rowdata">{{$user->role->nom_role}} </td>
 
                                                                                     <td><input type="button"value="submit"onclick="show3()" /> </td>
 
@@ -471,12 +471,11 @@
 
 
                                 <div class="son son2">
-                                @if(Auth::user()->poste=='admin')
+                                @if($tous_les_privileges!=null||$acces_ecriture_tous_les_projets!=null||$acces_ecriture_par_division!=null||$acces_ecriture!=null||$acces_ecriture_chef_rep!=null)
+
                                 <button type="button" class="btnSubmit " data-toggle="modal" data-target="#exampleModal">
                                 Confirmer Modification
-                                @else
-                                <button type="button" class="btnSubmit " data-toggle="modal" data-target="#exampleModal" disabled>
-                                Confirmer Modification
+                                
 
                                 @endif
                                 </button>
@@ -494,10 +493,11 @@
 
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                @if(Auth::user()->poste=='admin')
+
+                                @if($tous_les_privileges!=null||$acces_ecriture_tous_les_projets!=null||$acces_ecriture_par_division!=null||$acces_ecriture!=null||$acces_ecriture_chef_rep!=null)
                                 <button type="submit" name="updateall" class="btn btn-warning"> Appliquer</button>
-                                @else
-                                <button type="submit" name="updateall" class="btn btn-warning" disabled> Appliquer</button>
+                                
+                                
 
                                 @endif
 

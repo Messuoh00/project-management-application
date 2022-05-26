@@ -197,7 +197,7 @@
 
                                                                   <th scope="col" data-sortable="true">Nom</th>
                                                                   <th scope="col" data-sortable="true">Prenom</th>
-                                                                  <th scope="col" data-sortable="true">Post</th>
+                                                                  <th scope="col" data-sortable="true">Role</th>
                                                                   <th scope="col" data-sortable="true">Division</th>
                                                                   <th scope="col">select</th>
 
@@ -212,8 +212,8 @@
 
                                                                 <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
-                                                                  <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
-                                                                  <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
+                                                                  <td style="text-align: center" class="rowdata"> {{$user->role->nom_role}} </td>
+                                                                  <td style="text-align: center" class="rowdata"> {{$user->division->nomdep}} </td>
                                                                   <td><input type="button"value="submit"onclick="show()"data-dismiss="modal" /> </td>
 
                                                                   </tr>
@@ -265,7 +265,7 @@
 
                                                                   <th scope="col" data-sortable="true">Nom</th>
                                                                   <th scope="col" data-sortable="true">Prenom</th>
-                                                                  <th scope="col" data-sortable="true">Post</th>
+                                                                  <th scope="col" data-sortable="true">Role</th>
 
                                                                   <th scope="col">select</th>
 
@@ -280,7 +280,7 @@
 
                                                                   <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
-                                                                  <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
+                                                                  <td style="text-align: center" class="rowdata"> {{$user->role->nom_role}} </td>
 
                                                                   <td><input type="button"value="submit"onclick="show2()"data-dismiss="modal" /> </td>
 
@@ -352,7 +352,7 @@
 
                                                                   <th scope="col" data-sortable="true">Nom</th>
                                                                   <th scope="col" data-sortable="true">Prenom</th>
-                                                                  <th scope="col" data-sortable="true">Post</th>
+                                                                  <th scope="col" data-sortable="true">Role</th>
                                                                   <th scope="col" data-sortable="true">Division</th>
                                                                   <th scope="col">select</th>
 
@@ -367,8 +367,8 @@
 
                                                                     <th scope="row" style="text-align: center" class="rowdata"><a href="/users/{{$user->id}}}">  {{$user->nom}} </a> </th>
                                                                   <td style="text-align: center" class="rowdata"> {{$user->prenom}}</td>
-                                                                  <td style="text-align: center" class="rowdata"> {{$user->poste}} </td>
-                                                                  <td style="text-align: center" class="rowdata"> {{$user->division}} </td>
+                                                                  <td style="text-align: center" class="rowdata"> {{$user->role->nom_role}} </td>
+                                                                  <td style="text-align: center" class="rowdata"> {{$user->division->nomdep}} </td>
                                                                   <td><input type="button"value="submit"onclick="show3()" /> </td>
 
                                                                   </tr>

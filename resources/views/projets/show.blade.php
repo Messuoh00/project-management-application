@@ -254,17 +254,23 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                 </a>
                                                 </div>
 
+                                                @if($acces_espace_equipe!=null||$tous_les_privileges!=null)
+
                                                 <div>
                                                 <a href="/{{$project->id}}/equipe"> <button type="button" class="btn   btn-warning btn-lg " >
                                                     <i class="fas fa-fw fa-book"></i> espace equipe
                                                 </a>
                                                 </div>
+                                                @endif
+                                                @if($acces_historique_equipe!=null||$tous_les_privileges!=null)
+
 
                                                 <div >
                                                 <a href="/{{$project->id}}/hequipe"> <button type="button" class="btn   btn-warning btn-lg " >
                                                     <i class="fas fa-fw fa-user"></i> Historique equipe
                                                 </a>
                                                 </div>
+                                                @endif
 
                                               </div>
 
@@ -288,12 +294,16 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                               <div class="progress mb-3" style="height: 5px">
                                               <div class="progress-bar bg-primary" role="progressbar" style="width: {{$vra->avancement}}%" aria-valuenow="{{$vra->visibilite}}" aria-valuemin="0" aria-valuemax="100"></div>
                                               </div>
+                                              @if($acces_statistique!=null||$tous_les_privileges!=null)
+
+                                              
 
                                               <div style="float: right">
                                                 <a href="/stat/{{$project->id}}"> <button type="button" class="btn   btn-warning btn-lg " >
                                                     <i class="fas fa-fw  fa-archive"></i> Statistique Projet
                                                 </a>
                                                 </div>
+                                                @endif
 
                                               </div>
 

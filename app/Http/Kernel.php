@@ -63,9 +63,15 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'admin' =>\App\Http\Middleware\Controleadmin::class,
         'projet'=>\App\Http\Middleware\ControleProjet::class,
-        'projet-lecture'=>\App\Http\Middleware\Projet_que_lecture::class,
         'projetlecture'=>\App\Http\Middleware\ControleProjetlecture::class,
+        'controle_espace_equipe'=>\App\Http\Middleware\ControleEspaceequipe::class,
+        'controle_gestion_division'=>\App\Http\Middleware\ControleGestionDivision::class,
+        'controle_gestion_phase'=>\App\Http\Middleware\ControleGestionPhase::class,
+        'controle_gestion_role'=>\App\Http\Middleware\ControleGestionRole::class,
+        'controle_gestion_utilisateur'=>\App\Http\Middleware\ControleGestionUtilisateur::class,
+        'controle_historique_equipe'=>\App\Http\Middleware\ControleHistoriqueequipe::class,
+        'controle_creation_projet'=>\App\Http\Middleware\ControleProjetcreation::class,
+        'controle_statistique'=>\App\Http\Middleware\ControleStatistique::class
     ];
 }

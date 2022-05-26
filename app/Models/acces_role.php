@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Division extends Model
+class acces_role extends Model
 {
-    public function users(){
+    protected $table = 'acces_role';
 
-        return  $this->belongsToMany(User::class);
-
-    }
     use HasFactory;
+    protected $fillable = ['role_id','acces_id'];
 }

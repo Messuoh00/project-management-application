@@ -47,7 +47,7 @@
                                                                  <th scope="col" data-sortable="true">nom</th>  
                                                                  <th scope="col" data-sortable="true">prenom</th>
                                                                  <th scope="col" data-sortable="true">email</th>
-                                                                 <th scope="col" data-sortable="true">poste</th>
+                                                                 <th scope="col" data-sortable="true">role</th>
                                                                  <th scope="col" data-sortable="true">divsion</th>
                                                                  <th scope="col" >modifier</th>
 
@@ -58,13 +58,14 @@
                                                             </thead>
 
                                                             <tbody>
-                                                            <tr> 
+                                                            
                                                             @foreach($users as $user)
+                                                            <tr> 
                                                             <td > <div style="width:100%;padding:25px;cursor:pointer"  onclick="link('/users/{{$user->id}}')" > {{$user->nom}} </div></td>
                                                             <td > <div style="width:100%;padding:25px;cursor:pointer"  onclick="link('/users/{{$user->id}}')" > {{$user->prenom}} </div></td>
                                                             <td > <div style="width:100%;padding:25px ;cursor:pointer" onclick="link('/users/{{$user->id}}')" > {{$user->email}} </div></td>
-                                                            <td > <div style="width:100%;padding:25px;cursor:pointer" onclick="link('/users/{{$user->id}}')" > {{$user->poste}}  </div></td>
-                                                            <td > <div style="width:100%;padding:25px;cursor:pointer" onclick="link('/users/{{$user->id}}')" > {{$user->division}}  </div> </td>
+                                                            <td > <div style="width:100%;padding:25px;cursor:pointer" onclick="link('/users/{{$user->id}}')" > {{$user->role->nom_role}}  </div></td>
+                                                            <td > <div style="width:100%;padding:25px;cursor:pointer" onclick="link('/users/{{$user->id}}')" > {{$user->division->nomdep}}  </div> </td>
                                                             <td> <a class="btn btn-warning" href="/users/{{$user->id}}/edit">modifier</a>  </td>
                                                             
 
@@ -90,7 +91,7 @@
  <script type="text/javascript" >
  function link(url)
  {
-     console.log('bjr');
+     
     location.href = url;
  }
    

@@ -20,14 +20,18 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('poste');
-            $table->string('division');
+      
+            $table->foreignId('role_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('division_id')->nullable()->constrained();
+
+
+            
             $table->rememberToken();
             $table->timestamps();
         });
 
         $data = [
-            [ 'nom' => 'admin','prenom' => 'admin','email' => 'a@a.com','password' =>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','poste' => 'admin','division' => 1 ],
+            [ 'nom' => 'admin','prenom' => 'admin','email' => 'a@a.com','password' =>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','division_id' => 1,'role_id'=>1 ],
           
          ];
 

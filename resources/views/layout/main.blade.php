@@ -36,6 +36,21 @@
     $phase = App\Models\Phase::orderBy('position')->get()->whereNotNull('position');
     @endphp
 
+    @php
+    $user_id=Auth::user()->id;
+      if(auth::user()->role==null){
+        return abort(403);
+    }
+     $role_id=auth::user()->role->id;
+     $main_tous_les_privileges= App\Models\acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
+     $main_acces_gestion_division=App\Models\acces::where('nom_acces','gestion des divisions')->whereRelation('roles','roles.id',$role_id)->get()->first();
+     $main_acces_statistique=App\Models\acces::where('nom_acces','consultation des statistiques')->whereRelation('roles','roles.id',$role_id)->get()->first();
+     $main_acces_gestion_phase=App\Models\acces::where('nom_acces','gestion des phases')->whereRelation('roles','roles.id',$role_id)->get()->first();
+     $main_acces_gestion_role=App\Models\acces::where('nom_acces','gestion des roles')->whereRelation('roles','roles.id',$role_id)->get()->first();
+     $main_acces_gestion_utilisateur=App\Models\acces::where('nom_acces','gestion des utilisateurs')->whereRelation('roles','roles.id',$role_id)->get()->first();
+     $main_acces_creation_projet=App\Models\acces::where('nom_acces','création projet')->whereRelation('roles','roles.id',$role_id)->get()->first();
+
+    @endphp
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -137,7 +152,7 @@
                     <span>Projets archiver</span></a>
             </li>
 
-            @if(Auth::user()->poste=='admin')
+            @if($main_tous_les_privileges!=null||$main_acces_creation_projet!=null)
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('projet/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/projet/create">
@@ -147,11 +162,13 @@
             @endif
 
 
-            @if(Auth::user()->poste=='admin')
+            @if($main_tous_les_privileges!=null||$main_acces_gestion_division!=null||$main_acces_gestion_phase!=null)
             <hr class="sidebar-divider">
             <div class="sidebar-heading "style="color: rgb(34, 33, 33)">
                Gestion Phases/Divisions:
             </div>
+            @if($main_tous_les_privileges!=null||$main_acces_gestion_phase!=null)
+
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('Phase/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/Phase/create">
@@ -159,9 +176,9 @@
                     <span>Modifier Phase</span></a>
             </li>
             @endif
+          
 
-
-            @if(Auth::user()->poste=='admin')
+            @if($main_tous_les_privileges!=null||$main_acces_gestion_division!=null)
             <!-- Nav Item - -->
             <li class="nav-item {{request()->is('Division/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/Division/create">
@@ -169,9 +186,13 @@
                     <span>Modifier Division</span></a>
             </li>
             @endif
+            @endif
 
 
 
+
+
+            @if($main_tous_les_privileges!=null||$main_acces_statistique!=null)
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -187,15 +208,18 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Statistique</span></a>
             </li>
+            @endif
 
+            @if($main_tous_les_privileges!=null||$main_acces_gestion_utilisateur!=null||$main_acces_gestion_role!=null)
             <!-- Divider -->
             <hr class="sidebar-divider">
-            @if(Auth::user()->poste=='admin')
+            
 
 
             <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
               Gestion  Utilisateur:
              </div>
+             @if($main_tous_les_privileges!=null||$main_acces_gestion_utilisateur!=null)
 
             <!-- Nav Item - Tables -->
             <li class="nav-item  {{request()->is('users') ? 'active ' : ''}}">
@@ -207,8 +231,17 @@
             <li class="nav-item {{request()->is('users/create') ? 'active ' : ''}}">
                 <a class="nav-link" href="/users/create">
                     <i class="fas fa-fw fa-plus-circle"></i>
-                    <span>Ajouter Utulisateur</span></a>
+                    <span>Ajouter Utilisateur</span></a>
             </li>
+            @endif
+            @if($main_tous_les_privileges!=null||$main_acces_gestion_role!=null)
+
+            <li class="nav-item {{request()->is('roles') ? 'active ' : ''}}">
+                <a class="nav-link" href="/roles">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>gestion des roles</span></a>
+            </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
