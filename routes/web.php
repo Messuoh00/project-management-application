@@ -83,6 +83,7 @@ Route::middleware(['controle_espace_equipe'])->group(function(){
 });
 
 Route::post('{id}/equipe','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
+Route::view('/equipepublication','projets.equipepub');
 
 
 
