@@ -19,11 +19,13 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800">INFO PROJET N:{{$project->id}}</h1>
 @if ($project->phase_id!=1)
+@if($acces_archivage!=null||$tous_les_privileges!=null)
   <a href="/archive/{{$project->id}}" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm">
     <button type="button" class="btn   " onclick="return confirm('etes vous sur de vouloir archiver ce pojet cette action est definitive?');">
     archiver projet
     </button> <i class="fas fa-download fa-sm text-white-50"></i>
 </a>
+@endif
 @endif
 
 </div>
@@ -458,6 +460,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                               </div>
                                               @endif
+                                              @if($acces_supression!=null||$tous_les_privileges!=null)
                                               <div class="editerbtn"  >
 
                                                 <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal{{$project->id}}supp">
@@ -490,6 +493,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                 </div>
 
                                                 </div>
+                                                @endif
 
 
                                               </div>

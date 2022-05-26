@@ -20,23 +20,28 @@ return new class extends Migration
         });
         $data = [
             [ 'nom_acces' => 'tous les privileges' ],
+            [ 'nom_acces' => 'création projet' ],
+            [ 'nom_acces' => 'lecture de tous les projets' ],
+            [ 'nom_acces' => 'ecriture de tous les projets' ],
             [ 'nom_acces' => 'lecture de projet affecté' ],
             [ 'nom_acces' => 'ecriture de projet affecté' ],
             [ 'nom_acces' => 'ecriture de projet affecté que en etant chef/représentant du projet' ],
-            [ 'nom_acces' => 'lecture de tous les projets' ],
             [ 'nom_acces' => 'lecture de projets de la meme division' ],
             [ 'nom_acces' => 'ecriture de projets de la meme division' ],
-            [ 'nom_acces' => 'ecriture de tous les projets' ],
-            [ 'nom_acces' => 'gérer les fichiers de espace equipe des projets accessibles en lecture' ],
-            [ 'nom_acces' => 'gérer les fichiers des projets affectés(sans pouvoir modifier projet) que en etant chef/représentant du projet'],
+            [ 'nom_acces' => 'suppression projet accessible' ],
+            [ 'nom_acces' => 'archivage projet accessible' ],
             [ 'nom_acces' => 'gérer les fichiers des projets affectés(sans pouvoir modifier projet)'],
+            [ 'nom_acces' => 'gérer les fichiers des projets affectés(sans pouvoir modifier projet) que en etant chef/représentant du projet'],  
+            [ 'nom_acces' => 'gérer les fichiers de espace equipe des projets accessibles en lecture' ],
+            [ 'nom_acces' => 'consultation historique equipe des projets accessibles en lecture' ],
             [ 'nom_acces' => 'consultation des statistiques' ],
             [ 'nom_acces' => 'gestion des utilisateurs' ],
             [ 'nom_acces' => 'gestion des divisions' ],
-            [ 'nom_acces' => 'gestion des phases' ],
-            [ 'nom_acces' => 'consultation historique equipe des projets accessibles en lecture' ],
+            [ 'nom_acces' => 'gestion des phases' ], 
             [ 'nom_acces' => 'gestion des roles' ],
-            [ 'nom_acces' => 'création projet' ],
+           
+            
+
           
          ];
 

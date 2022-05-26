@@ -38,10 +38,18 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('/projet', ProjectController::class)->only(['create','store']);
 
     });
+    Route::middleware(['controle_archivage'])->group(function(){
+        Route::get('/archive/{id}', 'App\Http\Controllers\ProjectController@archive');
 
+    });
+    Route::middleware(['controle_supression'])->group(function(){
+        Route::resource('/projet', ProjectController::class)->only(['destroy']);
+        
+
+    });
 Route::middleware(['projet'])->group(function(){
-    Route::resource('/projet', ProjectController::class)->only(['edit','destroy','update']);
-    Route::get('/archive/{id}', 'App\Http\Controllers\ProjectController@archive');
+    Route::resource('/projet', ProjectController::class)->only(['edit','update']);
+    
 });
 Route::middleware(['projetlecture'])->group(function(){
     Route::resource('/projet', ProjectController::class)->only(['show']);
