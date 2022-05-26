@@ -19,7 +19,11 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800">INFO PROJET N:{{$project->id}}</h1>
 @if ($project->phase_id!=1)
-  <a href="/archive/{{$project->id}}" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm"> <button type="button" class="btn   " onclick="return confirm('etes vous sur de vouloir archiver ce pojet cette action est definitive?');"> archive projet</button> <i class="fas fa-download fa-sm text-white-50"></i> </a>
+  <a href="/archive/{{$project->id}}" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm">
+    <button type="button" class="btn   " onclick="return confirm('etes vous sur de vouloir archiver ce pojet cette action est definitive?');">
+    archiver projet
+    </button> <i class="fas fa-download fa-sm text-white-50"></i>
+</a>
 @endif
 
 </div>

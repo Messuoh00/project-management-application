@@ -65,9 +65,13 @@ Route::view('/coo-E&P-R', 'coo-ep.coo-ep-rapport');
 
 Route::get('/phase', 'App\Http\Controllers\PhaseController@view');
 
-Route::get('/{id}/equipe','App\Http\Controllers\UploadController@team')->where('phase', '(.*)');
-Route::post('{id}/equipe','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
-Route::get('{id}/hequipe','App\Http\Controllers\ProjectController@hist')->where('phase', '(.*)');
+Route::get('/{id}/equipe','App\Http\Controllers\UploadController@team');
+Route::post('/{id}/equipe','App\Http\Controllers\UploadController@store');
+
+Route::view('/equipepublication','projets.equipepub');
+
+
+Route::get('/{id}/hequipe','App\Http\Controllers\ProjectController@hist');
 
 
 

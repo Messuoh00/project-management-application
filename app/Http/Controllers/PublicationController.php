@@ -18,26 +18,29 @@ class PublicationController extends Controller
 
         return view('publication/formulairepublication');
     }
+
+
     function store(Request $request){
+
         $this->validate($request,[
-           
+
             'fichiers' => 'required',
         ]);
-        
-       
+
+
         $publication=Publication::create([
-           
+
             'commentaire' => $request->input('commentaire'),
             'fichiers'=>'',
             'user_id'=>Auth::user()->id,
-        ]); 
-       
-        
+        ]);
 
-        
+
+
+
          if($request->hasFile('fichiers')){
 
-         
+
          $publication->fichiers='publications/publication'.$publication->id;
          $publication->save();
          $routefichier=storage_path('app/'.$publication->fichiers);
@@ -47,30 +50,33 @@ class PublicationController extends Controller
          }
          foreach(($request->file('fichiers')) as $fichier){
 
-             
+
              $nomfichier=time().'.'.$fichier->getClientOriginalName();
-             
+
             $route=$fichier->storeAs('publications/publication'.$publication->id,$nomfichier);
-            
-            
-         }} 
-         
+
+
+         }}
+
         return redirect('publications/create');
     }
+
+
+
     function index(){
        $publications=Publication::orderBy('date_publication','DESC')->get();
-       
-       
-       
-       
+
+
+
+
         return view('publication/listepublications',['publications'=>$publications]);
     }
 
     function telecharger(Request $request,$dossier,$fichier){
-      
+
         $file = storage_path('app/publications/'.$dossier.'/'.$fichier);
-        
-       
+
+
         if (File::exists($file)){
             return response()->download(storage_path('app/publications/'.$dossier.'/'.$fichier));
 
@@ -78,33 +84,33 @@ class PublicationController extends Controller
         else{
             exit('ce fichier existe pas!');
         }
-  
-        
+
+
 
 
 
     }
     function indexprofil($id){
         $user=User::find($id);
-        
+
         $publications=$user->publications->sortByDesc('date_publication');
         $slides=[];
 
         foreach($publications as $pub){
             $slides[]=1;
-            
+
         }
-        
+
          return view('publication/listepublications',['publications'=>$publications,'slides'=>$slides]);
-        
-      
+
+
     }
     function supprimer($id){
        $publication=Publication::find($id);
        $dossier=storage_path('app/'.$publication->fichiers);
-       
+
        File::deleteDirectory($dossier);
-       
+
        $publication->delete();
        return redirect('publications');
 
