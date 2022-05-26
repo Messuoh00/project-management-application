@@ -38,15 +38,17 @@ class ProjectController extends Controller
         $tous_les_privileges=acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
         $acces_lecture_tous_les_projets=acces::where('nom_acces','lecture de tous les projets')->whereRelation('roles','roles.id',$role_id)->get()->first();
 
-
-
-
-
         if ($tous_les_privileges!=null||$acces_lecture_tous_les_projets!=null){
             $projects=Project::latest()->get();
         }
         else {
             $acces_lecture_par_division=acces::where('nom_acces','lecture de projets de la meme division')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            $acces_lecture=acces::where('nom_acces','lecture de projet affecté')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            if($acces_lecture_par_division!=null&&$acces_lecture!=null){
+                $projects=Project::whereRelation('user','id',$user_id)->orWhere('division_id',Auth::user()->division->id)->latest()->get();
+                return view('projets/index', ['projects'=>$projects]);
+
+            }
 
             if($acces_lecture_par_division!=null){
                 $projects=Project::where('division_id',Auth::user()->division->id)->latest()->get();;
@@ -402,6 +404,54 @@ class ProjectController extends Controller
 
         return view('projets/historique_eq',['membres'=> $membre,'chefs'=>$rep,'reps'=> $chef,'id'=>$id]);
     }
+
+    /* fonction de walid*/
+    function indexprofil($id){
+        $user_id=Auth::user()->id;
+        if(auth::user()->role==null){
+            $projects=[];
+            return view('projets/index', ['projects'=>$projects]);
+
+        }
+        $role_id=auth::user()->role->id;
+        $tous_les_privileges=acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
+        $acces_lecture_tous_les_projets=acces::where('nom_acces','lecture de tous les projets')->whereRelation('roles','roles.id',$role_id)->get()->first();
+
+        if ($tous_les_privileges!=null||$acces_lecture_tous_les_projets!=null){
+            $projects=Project::whereRelation('user','id',$id)->latest()->get();
+        }
+        else {
+            $acces_lecture_par_division=acces::where('nom_acces','lecture de projets de la meme division')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            $acces_lecture=acces::where('nom_acces','lecture de projet affecté')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            if($acces_lecture_par_division!=null&&$acces_lecture!=null){
+                $projects=Project::whereRelation('user','id',$id)->where(function($query)use($user_id){$query->whereRelation('user','id',$user_id)->orWhere('division_id',Auth::user()->division->id);})->latest()->get();
+                return view('projets/index', ['projects'=>$projects]);
+
+            }
+
+            if($acces_lecture_par_division!=null){
+                $projects=Project::where('division_id',Auth::user()->division->id)->whereRelation('user','id',$id)->latest()->get();;
+            }
+            else{
+           $acces_lecture=acces::where('nom_acces','lecture de projet affecté')->whereRelation('roles','roles.id',$role_id)->get()->first();
+           if($acces_lecture!=null){
+
+           
+
+            
+          $projects=Project::whereRelation('user','id',$user_id)->whereRelation('user','id',$id)->latest()->get();}
+          else{
+              $projects=[];
+          }
+            }
+
+        }
+
+
+        return view('projets/index', ['projects'=>$projects]);
+        
+    }
+
 
 
 
