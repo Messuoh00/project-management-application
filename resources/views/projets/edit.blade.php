@@ -417,7 +417,7 @@
                                     <a href="/fichier/{{$project->id}}?var=edit">
 
                                         <button type="button" class="btn   btn-warning btn-lg " style="margin-top: 20px">
-                                         <i class="fas fa-fw fa-archive"></i> Modifier fichier du projet
+                                         <i class="fas fa-fw fa-archive"></i> Modifier les fichiers du projet
                                        </button>
                                           </a>
                                 </div>

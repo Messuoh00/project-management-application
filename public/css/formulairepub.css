@@ -99,7 +99,7 @@ hr.stylehr{
     justify-content: center;
 }
 .form-control{
-    border-radius: 1.5rem;
+    border-radius: 1.5rem !important;
 }
 .text-corps{
     border-radius: 1.5 rem !important;

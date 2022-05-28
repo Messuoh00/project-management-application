@@ -4,6 +4,8 @@
 @section('styles')
 
    <link href="{{asset('css/publication.css')}}" rel="stylesheet">
+   <link href="{{asset('css/modalimage.css')}}" rel="stylesheet">
+
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -93,14 +95,16 @@
                                                                         
 
 
-                                                                    
+                                                                    <h6 class="discipline"> discipline:{{$connaissance->discipline}}</h6>
                                                                 </div>
                                                                 <hr class="trait">
                                                                 <div class="publication_contenu">
+                                                                    <h5 class="titre" style="text-align:center;"> {{$connaissance->titre}}</h5>
                                                                 
                                                                     <p class="corps">
-                                                                        {{$connaissance->commentaire}}
+                                                                        {{$connaissance->corps}}
                                                                     </p> 
+                                                                    
                                                                     <div class="slideshow-container">
                                                                          @php 
                                                                          
@@ -128,21 +132,33 @@
                                                                     @php $imagevid = 1; @endphp
                                                                     <div class="mySlides{{$i}} fade">
                                                                         <div class="numbertext">{{$nbr}} /{{$nbrtotal}}</div>
-                                                                        <video controls src="{{asset('storage/'.$connaissance->fichiers.'/'.pathinfo($fichier)['basename'])}}" style="width:100%"></video>
+                                                                        <video onclick="demarragevideo(this,'modal{{$i}}_{{$nbr}}')" controls src="{{asset('storage/'.$connaissance->fichiers.'/'.pathinfo($fichier)['basename'])}}" style="cursor:pointer;width:100%"></video>
                                                                         
-                                                                        <div class="text">Caption Text</div>
+                                                                        
                                                                     </div>
+                                                                    <div id="modal{{$i}}_{{$nbr}}" class="w3-modal" >
+                                                                    <span onclick="fermermodvideo(this)" class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+                                                                    <div class="w3-modal-content w3-animate-zoom">
+                                                                    <video  controls  onclick="this.play()"src="{{asset('storage/'.$connaissance->fichiers.'/'.pathinfo($fichier)['basename'])}}" style="width:100%;margin-bottom:20px;"> </video>
+                                                                    </div>
+                                                                </div>
                                                                     @php
                                                                     $nbr =$nbr+1;
                                                                     @endphp
                                                                     @elseif($ext=='jpg'||$ext=='png'||$ext=='gif'||$ext=='jpeg')
                                                                     @php $imagevid = 1; @endphp
-                                                                    <!-- Full-width images with number and caption text -->
+                                                                    
                                                                     <div class="mySlides{{$i}} fade">
                                                                         <div class="numbertext">{{$nbr}} /{{$nbrtotal}}</div>
-                                                                        <img  src="{{asset('storage/'.$connaissance->fichiers.'/'.pathinfo($fichier)['basename'])}}" style="width:100%">
+                                                                        <img  onclick="demarrageimage(this,'modal{{$i}}_{{$nbr}}')" src="{{asset('storage/'.$connaissance->fichiers.'/'.pathinfo($fichier)['basename'])}}" style="cursor:pointer;width:100%">
                                                                         
                                                                     </div>
+                                                                    <div id="modal{{$i}}_{{$nbr}}" class="w3-modal">
+                                                                    <span  onclick="fermermod(this)"class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+                                                                    <div class="w3-modal-content w3-animate-zoom">
+                                                                    <img  src="{{asset('storage/'.$connaissance->fichiers.'/'.pathinfo($fichier)['basename'])}}" style="width:100%;margin-bottom:20px;">
+                                                                    </div>
+                                                                </div>
                                                                     @php
                                                                     $nbr =$nbr+1;
                                                                     @endphp
@@ -249,9 +265,11 @@ listpublications=document.getElementsByClassName('pubcont');
 for(i=0;i<listpublications.length;i++){
 user=listpublications[i].getElementsByClassName('user');
 corps=listpublications[i].getElementsByClassName('corps');
+discipline=listpublications[i].getElementsByClassName('discipline');
+titre=listpublications[i].getElementsByClassName('titre');
 
 
-if(user[0].innerHTML.search(chaine)<0 && corps[0].innerHTML.search(chaine)<0){
+if(user[0].innerHTML.search(chaine)<0 && corps[0].innerHTML.search(chaine)<0 && titre[0].innerHTML.search(chaine)<0 && discipline[0].innerHTML.search(chaine)<0){
     
     listpublications[i].style.display="none";
     
@@ -261,7 +279,33 @@ if(user[0].innerHTML.search(chaine)<0 && corps[0].innerHTML.search(chaine)<0){
 
 
 }}
+body=document.getElementsByTagName('body');
+    function demarragevideo(caller,id){
+        caller.play();
+        document.getElementById(id).style.display='block';
+       
+        body[0].style.overflow='hidden';
+    }
+    function demarrageimage(caller,id){
+        
+        document.getElementById(id).style.display='block';
+       
+        body[0].style.overflow='hidden';
+    }
+    function fermermod(caller){
+      
+        caller.parentElement.style.display='none';
+        body[0].style.overflow='auto';
+    }
+    function fermermodvideo(caller){
+      
+      caller.parentElement.style.display='none';
+      video=caller.parentElement.getElementsByTagName('video');
+      
+video[0].pause();
+body[0].style.overflow='auto';
 
+  }
     
 </script>
 

@@ -98,8 +98,8 @@
                                                             </div>
 
                                                             <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Feremr</button>
-                                                            <button type="button submit" class="btn btn-warning">ok</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Fermer</button>
+                                                            <button type="button submit" class="btn btn-warning">Confirmer</button>
 
                                                             </div>
                                                         </div>

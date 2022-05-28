@@ -24,7 +24,10 @@ use Illuminate\Support\Facades\Mail;
 
 
 
-
+Route::get('/resetpassword','App\Http\Controllers\Authcontroller@envoiresetpassword');
+Route::post('/resetpassword','App\Http\Controllers\Authcontroller@resetpassword');
+Route::get('/resetpasswordform/{token}','App\Http\Controllers\Authcontroller@resetpasswordform')->name('reset.password.form');
+Route::post('/resetpasswordfinal','App\Http\Controllers\Authcontroller@resetpasswordfinal');
 Route::post('/login', 'App\Http\Controllers\Authcontroller@login');
 Route::get('/log', 'App\Http\Controllers\Authcontroller@log')->name('log');
 Route::get('/', 'App\Http\Controllers\Authcontroller@log')->name('log');

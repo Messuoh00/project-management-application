@@ -42,10 +42,14 @@
                                                     <div class="pere" id="pere">
                                                     <form method="post" action="{{url('/connaissances')}}" enctype="multipart/form-data"  >
                                                         {{csrf_field()}}
+                                                        <label > Titre:</label>
+                                                        <input type="text" class="form-control" name="titre" >
+                                                        <label > Discipline:</label>
+                                                        <input type="text" class="form-control" name="discipline" >
                                                       
                                                         
-                                                        <label  >text de la connaissance(non obligatoire):</label>
-                                                        <textarea class=" text-corps form-control" rows="5" name="commentaire"></textarea>
+                                                        <label  >corps:</label>
+                                                        <textarea class=" text-corps form-control" rows="5" name="corps"></textarea>
                                                        <div id="upload">
             
                                                             <input id='input1'type="file" name='fichiers[]'>

@@ -59,7 +59,7 @@ class PublicationController extends Controller
 
          }}
 
-        return redirect('publications/create');
+        return redirect('publications');
     }
 
 

@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use File;
 use App\Models\Division;
-
-
+use Carbon\Carbon;
 
 class Authcontroller extends Controller
 {    //vue sur le formulaire du login
@@ -231,6 +230,58 @@ class Authcontroller extends Controller
         }else{ return redirect('/coo-E&P');
 
         }
+
+    }
+    function envoiresetpassword(){
+        return view('formulaire_reset_password');
+    }
+    function resetpassword(Request $request){
+        $this->validate($request,[
+            'email' => 'required|email',]);
+            $token=\Str::random(64);
+            DB::table('password_resets')->insert([
+                'email'=>$request->email,
+                'token'=>$token,
+                'created_at'=>Carbon::now(),
+            ]);
+            $actionlink=route('reset.password.form',['token'=>$token,'email'=>$request->email]);
+          
+           
+            $body="nous avons reçu une demande de réinitialisation de mot de passe de l'application gestion des projets R&D pour le compte associé avec l'email".$request->email.". Vous pouvez réinitialiser le mot de passe en cliquant sur le lien en dessous";
+
+            return back()->with('success','nous avons envoyé un mail pour réinitialiser votre mot de passe');
+
+    }
+    function resetpasswordform(Request $request,$token=null){
+        return view('updatepassword_oublié')->with(['token'=>$token,'email'=>$request->email]);
+    }
+    function resetpasswordfinal(Request $request){
+        $this->validate($request, [
+ 
+            'newpassword' => 'required',
+            'newpassword2'=>'required',
+            ]);
+
+            
+            if($request->newpassword != $request->newpassword2){ 
+                
+                return back()->with('error','confirmation du mot de passe incorrect');
+            } else{
+
+                $check_token=DB::table('password_resets')->where(['email'=>$request->email,'token'=>$request->token])->first();
+                if(!$check_token){
+                    return back()->with('error','token non valide');
+
+                }
+                else{
+                   
+                    User::where('email',$request->email)->update([
+                        'password'=>Hash::make($request->newpassword),
+                    ]);
+                    DB::table('password_resets')->where(['email'=>$request->email])->delete();
+                    return redirect('/log')->with('success_reset','votre mot de passe a eté réinitialisé! vous pouvez vous connecter avec.');
+                }
+            }
 
     }
 

@@ -19,14 +19,16 @@ class ConnaissanceController extends Controller
     }
     function store(Request $request){
         $this->validate($request,[
-           
-            'fichiers' => 'required',
+            'titre'=>'required',
+            'corps'=>'required',
+           'fichiers' => 'required',
         ]);
         
        
         $connaissance=Connaissance::create([
-           
-            'commentaire' => $request->input('commentaire'),
+            'titre' => $request->input('titre'),
+            'discipline' => $request->input('discipline'),
+            'corps' => $request->input('corps'),
             'fichiers'=>'',
             'user_id'=>Auth::user()->id,
         ]); 
@@ -51,7 +53,7 @@ class ConnaissanceController extends Controller
             
          }} 
          
-        return redirect('connaissances/create');
+        return redirect('connaissances');
     }
     function index(){
         $connaissances=Connaissance::orderBy('date_publication','DESC')->get();

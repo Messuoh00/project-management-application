@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Connaissance extends Model
 {
-    protected $fillable = ['fichiers','commentaire','date_publication','user_id'];
+    protected $fillable = ['fichiers','corps','date_publication','user_id','titre','discipline'];
     public $timestamps = false;
     function user(){
         return $this->belongsTo(User::class);

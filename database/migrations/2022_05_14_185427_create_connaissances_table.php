@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('connaissances', function (Blueprint $table) {
             $table->id();
-            $table->text('commentaire')->nullable();
+            $table->string('titre');
+            $table->string('discipline')->nullable();
+            $table->text('corps')->nullable();
             $table->string('fichiers');
            
             $table->foreignId('user_id')->constrained();

@@ -19,49 +19,50 @@
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
-                    <h3>Authentification</h3>
+                    <h3 style="text-align:center">réinitialisation du mot de passe</h3>
                     <div class="d-flex justify-content-end social_icon">
                         
                         
-                        <span><img class="logo"src="img/logosonatrach.png" alt=""></span>
+                        
                     </div>
                 </div>
                 <div class="card-body">
-                @if(Session::get('success_reset'))
+                @if(Session::get('success'))
                         <h6 style="color:greenyellow; margin-bottom:20px">
-                        {{Session::get('success_reset')}}
+                        {{Session::get('success')}}
                         </h6>
+
+                        
                         @endif
-                    <form method="post" autocomplete="off" action="{{url('/login')}}" >
+                    <h6 style="color:chocolate; margin-bottom:20px">
+                        veuillez introduire l'email pour vous envoyer un lien pour réinitialiser le mot de passe
+                    </h6>
+                    <form method="post" autocomplete="off" action="{{url('/resetpassword')}}" >
                      {{csrf_field()}}
-                     <div class="input-data">
+                   
+                                    <div class="input-data">
+                                        
+                                   
+                             
+                          
                             <input type="text" id="email" name="email" required>
                             <div class="underline"></div>
                             <label>adresse email</label>
-                        </div>
+                            </div>
+                            
+                        
                         @if($errors->has('email'))
                              <div><span style="color: chocolate">{{$errors->first('email')}}</span></div>
                                      @endif
-                                     <div style="margin-top:30px ;" class="input-data">
-                            <input type="password" id="password" name="password" required>
-                            <div class="underline"></div>
-                            <label>mot de passe</label>
-                        </div>
-                        @if($errors->has('password'))
-                             <div><span style="color: chocolate">veuillez introduire le mot de passe</span></div>
-                                     @endif
-                                     @if($message=Session::get('error'))
-                                     <div><span style="color: chocolate">{{Session::get('error')}}</span></div>
-						  @endif
+                        
                         
                         <div class="form-group">
-                            <input type="submit" style="border-radius:50px;" value="se connecter" class="btn float-right login_btn">
+                            <input type="submit" value="Réinitialiser"  class="btn float-right login_btn">
                         </div>
                         <hr>
+                        </div>
+                        
                     </form>
-                    <h6 style="color:white ;"> mot de passe oublié?  <a class="réinitialiser-a" href="/resetpassword"> réinitialiser le mot de passe</a>
-                           
-                        </h6>
 					
 
                 </div>
