@@ -432,7 +432,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
 
-                                                  <button type="button submit" class="btn btn-warning" style="text-align: center">Confirme </button>
+                                                  <button type="button submit" class="btn btn-warning" style="text-align: center">Confirmer </button>
 
                                                   </form>
 
