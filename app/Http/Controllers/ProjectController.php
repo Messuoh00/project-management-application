@@ -57,9 +57,9 @@ class ProjectController extends Controller
            $acces_lecture=acces::where('nom_acces','lecture de projet affecté')->whereRelation('roles','roles.id',$role_id)->get()->first();
            if($acces_lecture!=null){
 
-           
 
-            
+
+
           $projects=Project::whereRelation('user','id',$user_id)->latest()->get();}
           else{
               $projects=[];
@@ -226,16 +226,16 @@ class ProjectController extends Controller
                 return abort(403);
             }
             $role_id=auth::user()->role->id;
-            
+
             $tous_les_privileges=acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
-            
+
             $acces_ecriture_tous_les_projets=acces::where('nom_acces','ecriture de tous les projets')->whereRelation('roles','roles.id',$role_id)->get()->first();
             $acces_ecriture_par_division=acces::where('nom_acces','ecriture de projets de la meme division')->whereRelation('roles','roles.id',$role_id)->get()->first();
-           
+
             $acces_ecriture=acces::where('nom_acces','ecriture de projet affecté')->whereRelation('roles','roles.id',$role_id)->get()->first();
             $acces_ecriture_chef_rep=acces::where('nom_acces','ecriture de projet affecté que en etant chef/représentant du projet')->whereRelation('roles','roles.id',$role_id)->get()->first();
-            
-            
+
+
 
 
 
@@ -255,13 +255,6 @@ class ProjectController extends Controller
     {
         $project= Project::find($id);
 
-
-
-        if ($request->has('currentphase')) {
-
-             $this->passage($project,$request);
-
-        }else{
 
             $request->validate([
                 'NomProjet'=>'required',
@@ -294,7 +287,7 @@ class ProjectController extends Controller
 
             $project->createvra($request);
 
-        }
+
 
             return redirect('projet/'.$id);
     }
@@ -317,16 +310,22 @@ class ProjectController extends Controller
 
 
 
-    public function passage($project,$request)
+    public function passage(Request $request,$id)
     {
 
+           $project= Project::find($id);
 
-           $phase=DB::table('phases')->get()->where('position','=',$request->input('currentphase')+1)->first();
+           $phase=DB::table('phases')->get()->where('position','=',$project->phase->position+1)->first();
 
-           if (empty($phase)) {
+           if (!empty($phase)) {
 
-              return false;
-           }else{
+
+            $data = [
+                'phase'=>'John',
+                'projet'=>$project,
+                'email'=>'john@doe.com',
+                'password'=>'temp'
+            ];
 
             $va=new Vra();
             $va->project_id=$project->id;
@@ -340,9 +339,10 @@ class ProjectController extends Controller
 
            if ($request->input('sendmail')=='1') {
 
+
             $equipe=DB::select("
 
-            select email from users where  id IN
+            select email  from users where  id IN
 
             (
                 select user_id from project_user
@@ -353,15 +353,16 @@ class ProjectController extends Controller
 
            foreach ( $equipe as  $membre) {
             if ($membre!=null) {
-            Mail::to($membre->email)->send(new SendEmail());
+            Mail::to($membre->email)->send(new SendEmail($project));
                 }
             }
 
             }
 
-            return true;
+
         }
 
+        return redirect('projet/'.$id);
 
     }
 
@@ -436,9 +437,9 @@ class ProjectController extends Controller
            $acces_lecture=acces::where('nom_acces','lecture de projet affecté')->whereRelation('roles','roles.id',$role_id)->get()->first();
            if($acces_lecture!=null){
 
-           
 
-            
+
+
           $projects=Project::whereRelation('user','id',$user_id)->whereRelation('user','id',$id)->latest()->get();}
           else{
               $projects=[];
@@ -449,7 +450,7 @@ class ProjectController extends Controller
 
 
         return view('projets/index', ['projects'=>$projects]);
-        
+
     }
 
 

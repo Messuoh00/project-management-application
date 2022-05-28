@@ -7,21 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendEmail extends Mailable
+class forgotpassword extends Mailable
 {
     use Queueable, SerializesModels;
 
 
+    public $data;
 
-    public $project;
-
-    public function __construct($project)
+    public function __construct($data)
     {
-        $this->project = $project;
+        $this->data = $data;
     }
+
+
 
     public function build()
     {
-        return $this->markdown('email.sendemail')->with('data', $this->project);
+        return $this->view('view.name')->with('data', $this->data);
     }
 }
