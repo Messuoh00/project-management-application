@@ -99,6 +99,8 @@ Route::get('/{id}/publicationequipe','App\Http\Controllers\Publication_projetCon
 Route::post('/{id}/publicationequipe','App\Http\Controllers\Publication_projetController@store');
 
 
+//route passage
+Route::put('/{id}/passagephase','App\Http\Controllers\ProjectController@passage');
 
 
 

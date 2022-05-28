@@ -398,10 +398,18 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 
                                               <div class="modal-body" style="text-align: center">
+                                                <form action="/{{$project->id}}}/passagephase" method="POST">
+
+                                                    @csrf
+                                                    @method('PUT')
+
                                                 <h4 style="color: black">Passer a la phase {{$next->name}} ?</h4>
+
 
                                               <div class="form-group radio" style="    text-align:center ; height:20%">
                                                 <h6 class="mb-0" style="text-align: left; color:black" > Envoyer mail:</h6>
+
+
 
                                                     <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="sendmail" id="sendmail2" value="0">
@@ -418,30 +426,18 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 
 
-                                              <div class="modal-footer">
+                                                    <div class="modal-footer">
 
 
 
                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
 
-
-
-
-
-                                                  <form action="/projet/{{$project->id}}" method="POST">
-                                                  @csrf
-                                                  @method('PUT')
-
-
-                                                  <input type="text" value="{{$project->phase->position}}" name="currentphase" hidden>
-                                                  <button type="button submit" class="btn btn-warning" style="text-align: center">Confirmer </button>
+                                                  <button type="button submit" class="btn btn-warning" style="text-align: center">Confirme </button>
 
                                                   </form>
 
+                                                </div>
 
-
-
-                                              </div>
                                               </div>
                                               </div>
                                               </div>

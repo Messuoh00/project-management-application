@@ -332,7 +332,7 @@
     </style>
   </head>
   <body>
-    <span class="preheader">Notification avancement projet a une nouvelle phase.</span>
+    <span class="preheader">Notification changement de mot de passe</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -349,7 +349,7 @@
                     <tr>
                       <td>
                         <img  src="{{url('/img/logo.png')}}" alt="" style="height:100px;margin:auto">
-                        <p>le projet {{$project->nom_projet}} viens de passer vers la phase {{$project->Phase->name}} pour plus d'information:</p>
+                        <p>  voici le code pour modifier votre mot de passe</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -357,7 +357,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="{{route('projet', ['id' => $project->id])}}" class="button btn-warning">appuier ici</a> </td>
+                                      <td> <h1>code</h1> </td>
                                     </tr>
                                   </tbody>
                                 </table>
