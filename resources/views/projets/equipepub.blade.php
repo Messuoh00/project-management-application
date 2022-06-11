@@ -169,7 +169,7 @@
 
 
                                     <label>text de la publication(non obligatoire):</label>
-                                    <textarea class=" text-corps form-control" rows="5" name="commentaire"></textarea>
+                                    <textarea class=" text-corps form-control" rows="5" name="commentaire" required></textarea>
                                 <div id="upload">
 
                                         <input id='id'type="text" value="{{Request::segment(1)}}" name='id' hidden>
