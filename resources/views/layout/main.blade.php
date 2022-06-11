@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Houssem</title>
+    <title>Sonatrach</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -176,7 +176,7 @@
                     <span>Gérer les Phases</span></a>
             </li>
             @endif
-          
+
 
             @if($main_tous_les_privileges!=null||$main_acces_gestion_division!=null)
             <!-- Nav Item - -->
@@ -213,7 +213,7 @@
             @if($main_tous_les_privileges!=null||$main_acces_gestion_utilisateur!=null||$main_acces_gestion_role!=null)
             <!-- Divider -->
             <hr class="sidebar-divider">
-            
+
 
 
             <div class="sidebar-heading" style="color: rgb(34, 33, 33)">
@@ -238,7 +238,7 @@
 
             <li class="nav-item {{request()->is('roles') ? 'active ' : ''}}">
                 <a class="nav-link" href="/roles">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-fw fa-lock"></i>
                     <span>Gérer les roles</span></a>
             </li>
             @endif

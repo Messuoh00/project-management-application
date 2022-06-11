@@ -30,9 +30,14 @@ class Project extends Model
     public function createvra($request){
 
 
-        $exist=Vra::get()->where('visibilite',$request->input('Visibilite'))->where('reactivite',$request->input('Reactivite'))->where('avancement',$request->input('Avancement'))->where('phase_id',$this->phase_id)->where('project_id',$this->project_id)->first();
+        $exist=Vra::latest()->get()->where('phase_id',$this->phase_id)->where('project_id',$this->id)->first();
 
-        if (empty($exist))
+        $ok=true;
+        if (!empty($exist)&&$exist->visibilite==$request->input('Visibilite') &&$exist->avancement==$request->input('Avancement') &&$exist->reactivite==$request->input('Reactivite')  ) {
+           $ok=false;
+        }
+
+        if ($ok)
         {
 
 

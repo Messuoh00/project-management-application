@@ -115,7 +115,7 @@ class Publication_projetController extends Controller
        File::deleteDirectory($dossier);
 
        $publication->delete();
-       return redirect('publications');
+       return back();
 
     }
 }
