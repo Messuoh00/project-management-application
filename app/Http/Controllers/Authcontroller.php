@@ -23,6 +23,7 @@ class Authcontroller extends Controller
     }
     //traitement du login
     function login(Request $request){
+        
         $this->validate($request,[
         'email' => 'required|email',
         'password' => 'required'
@@ -31,9 +32,12 @@ class Authcontroller extends Controller
         'email' =>$request->get('email'),
         'password' =>$request->get('password')
      );
-     if (Auth::attempt($userdata)){
+     if($request->sesouvenir!=null){
+         $remember=true;
+     } else {$remember=false;}
+     if (Auth::attempt($userdata,$remember)){
        
-        return redirect('/apreslogin');
+        return redirect('/coo-E&P');
      }
      else{ return back()->with('error','adresse email ou mot de passe incorrect');}
     }
@@ -63,7 +67,7 @@ class Authcontroller extends Controller
     //formulaire de creation du user
     function create(){
 
-        $dep=Division::get(); 
+        $dep=Division::get()->where('stat','=',1);
         $roles=Role::all();
         return view('formulaireuser', ['dep'=>$dep,'roles'=>$roles]);
     }
@@ -96,7 +100,7 @@ class Authcontroller extends Controller
             'division_id'=>(int)$request->get('division'),
             'role_id'=>(int)$request->input('role'),
          ]);
-        return redirect('/users/create');}
+        return back()->with('success','utilisateur créé avec succès ');}
     }
 
     function show($id){
@@ -109,7 +113,7 @@ class Authcontroller extends Controller
      //formulaire de modification du user
     function edit($id){
         $user=User::find($id);
-        $dep=Division::get(); 
+        $dep=Division::get()->where('stat','=',1);
         $roles=Role::all();
         return view('formulaireuser_modif', ['dep'=>$dep,'user'=>$user,'roles'=>$roles]);
 
@@ -138,7 +142,7 @@ class Authcontroller extends Controller
         
 
     
-    return redirect("/users/$id/edit");
+    return back()->with('success','vous données ont eté modifié avec succès ');
     }
     
     //formulaire modification du mot de passe
@@ -167,7 +171,7 @@ class Authcontroller extends Controller
                 if (!Hash::check($request->newpassword , $hashedPassword)) {
                 $id=Auth::user()->id;
                 $user=User::where('id',$id)->update([ 'password'=> bcrypt($request->newpassword) ]);
-                return redirect('/apreslogin');
+                return back()->with('success','le mot de passe a eté modifié');
                 } else{
                     
                     return back()->with('error','le nouveau mot de passe ne peut pas rester le meme');
@@ -204,7 +208,7 @@ class Authcontroller extends Controller
 
         
         $user=User::find($id);
-        $dep=Division::get(); 
+        $dep=Division::get()->where('stat','=',1);
         
         return view('formulaireprofil_modif', ['dep'=>$dep,'user'=>$user]);}
         else{
@@ -225,7 +229,7 @@ class Authcontroller extends Controller
         'prenom'=>$request->input('prenom'),
         'email'=>$request->input('email'),
          ]);
-         return redirect('/profil/edit/'.$id);
+         return back()->with('success','vous données ont eté modifié avec succès ');
 
         }else{ return redirect('/coo-E&P');
 
@@ -238,6 +242,12 @@ class Authcontroller extends Controller
     function resetpassword(Request $request){
         $this->validate($request,[
             'email' => 'required|email',]);
+            $user_exist=User::where('email',$request->email)->first();
+            
+            if($user_exist==null){
+                
+                return back()->with('error',"il n'existe pas un utilisateur avec cet email");
+            }
             $token=\Str::random(64);
             DB::table('password_resets')->insert([
                 'email'=>$request->email,

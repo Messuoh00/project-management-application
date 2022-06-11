@@ -1,0 +1,44 @@
+.pubconlink{
+    position: relative;
+    
+    font-weight: 100;
+    text-decoration: none;
+    font-family:'poppins',sans-serif;
+    color: #a0a0a0;;
+    letter-spacing: 0.5px;
+    z-index: 1;
+    margin-right: 10px;
+    padding: 0 10px;
+}
+
+.pubconlink::after{
+
+        content: "";
+        position: absolute;
+        height: 3.5px;
+        
+        width:0;
+        left: 0;
+        bottom: -26px;
+        background-color: orange;
+        border-radius: 50px;
+        transition: 0.4s;
+
+}
+.pubconlink:hover{
+    text-decoration: none;
+    color: orange;
+}
+.pubconlinkactive{
+    text-decoration: none;
+    color: orange;
+}
+.pubconlinkactive::after{
+    width: 100%;
+}
+.pubconlink:hover::after{
+
+   
+    width: 100%;
+    
+}

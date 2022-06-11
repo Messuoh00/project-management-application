@@ -42,6 +42,13 @@
 																																
 																	
 																<div class="container">
+																@if($message=Session::get('success'))
+                                                                                    
+                                                                                    
+                                                                                        
+                                                                                    <div><span style="color: green">{{Session::get('success')}}</span></div>
+                                                                                            @endif
+                                                                            
 																
 																
 																	<hr>

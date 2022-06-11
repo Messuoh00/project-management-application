@@ -20,7 +20,7 @@
 
 
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Statistique:</h1>
+                                <h1 class="h3 mb-0 text-gray-800">Statistiques:</h1>
                                 @if ($errors->any())
                                 <div><h4 style="color: red">{{$errors}}</h4></div>
                                 @endif

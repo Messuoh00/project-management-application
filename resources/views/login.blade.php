@@ -53,6 +53,13 @@
                                      @if($message=Session::get('error'))
                                      <div><span style="color: chocolate">{{Session::get('error')}}</span></div>
 						  @endif
+
+                                 <div style="margin-top:10px ;" class="form-check">
+                                <input class="form-check-input" name="sesouvenir" type="checkbox" id="flexCheckDefault">
+                                <label style="color:white" class="form-check-label" for="flexCheckDefault">
+                                    Se souvenir de moi
+                                </label>
+                                </div>
                         
                         <div class="form-group">
                             <input type="submit" style="border-radius:50px;" value="se connecter" class="btn float-right login_btn">

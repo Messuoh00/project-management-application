@@ -61,6 +61,13 @@ $fichier=File::get(storage_path('app\fichier-excel'.'/'.pathinfo($fichier[0])['b
                                                                                                                                                                 
                                                                                               
                                                                                                 <div class="container">
+                                                                                                @if($message=Session::get('success'))
+                                                                                    
+                                                                                    
+                                                                                        
+                                                                                    <div><span style="color: green">{{Session::get('success')}}</span></div>
+                                                                                            @endif
+                                                                            
                                                               
                                                                                                 
                                                                                                 

@@ -121,8 +121,9 @@
                               filename=filename.substr(0,12)+'...'+filename.split('.').pop();
                             }
                             var template=document.createElement('template');
+                            
                             template.innerHTML=`
-                            <div id="fichiers-selec" data-fich=${file.name}>
+                            <div id="fichiers-selec" data-fich="${file.name}">
                             <i class=" iconefiche fa fa-file" aria-hidden="true"></i>
                             <span class='filename'> ${filename}</span>
                             <i class=" iconetimes fa fa-times" onclick="supprimer(this)" aria-hidden="true"></i> </div>`;
@@ -149,7 +150,9 @@
                         filename=pere.getAttribute('data-fich');
                         
                         for(i=0;i<fichiers.length;i++){
+                          
                             if(fichiers[i].name==filename){
+                              
                                 fichiers.splice(i,1);
                                 break;
                             }
@@ -162,8 +165,9 @@
                                 list.items.add(newfile);
                           
                         }
+                       
                             input1.files=list.files;
-                            console.log(input1.files)
+                            
 
                     }
         

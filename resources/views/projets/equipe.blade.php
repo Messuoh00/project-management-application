@@ -35,7 +35,7 @@
 
 
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">Fichier de  L'equipe <a href="/projet/{{$project->id}}"> {{$project->id}} </a> </h1>
+                                <h1 class="h3 mb-0 text-gray-800">Fichiers de  L'equipe <a href="/projet/{{$project->id}}"> {{$project->id}} </a> </h1>
 
 
                                 <a href="/{{$project->id}}/publicationequipe" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm">
@@ -58,7 +58,7 @@
                                                    <div class="col ">
 
 
-                                                   <h5>ficher:</h5>
+                                                   <h5>fichiers:</h5>
                                                    @php
                                                        $filename="fichier_equipe";
 

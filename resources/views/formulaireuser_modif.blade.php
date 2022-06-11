@@ -42,6 +42,13 @@
 																																
 																	
 																<div class="container">
+                                                                @if($message=Session::get('success'))
+                                                                                    
+                                                                                    
+                                                                                        
+                                                                                    <div><span style="color: green">{{Session::get('success')}}</span></div>
+                                                                                            @endif
+                                                                            
 																
 																
 																	<hr>
@@ -92,7 +99,7 @@
 																			<span class="input-group-text"> <i class="fa fa-building"></i> </span>
 																		</div>
 																		<select class="form-control form-select" name="division" id="division">
-																			<option value="{{ $user->division->id}}" selected  hidden>{{ $user->division->nomdep}}</option>	
+																			<option value="{{ $user->division->id}}" selected  >{{ $user->division->nomdep}}</option>	
 																			
 																			@foreach ($dep as $d)
 						

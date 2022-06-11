@@ -149,7 +149,7 @@
             <li class="nav-item {{request()->input('phase')=='archive' ? 'active ' : ''}}">
                 <a class="nav-link "  href="/projet?phase=archive">
                     <i class="fas fa-fw fa-book"></i>
-                    <span>Projets archiver</span></a>
+                    <span>Projets archivés</span></a>
             </li>
 
             @if($main_tous_les_privileges!=null||$main_acces_creation_projet!=null)
@@ -173,7 +173,7 @@
             <li class="nav-item {{request()->is('Phase/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/Phase/create">
                     <i class="fas fa-fw fa-th-list"></i>
-                    <span>Modifier Phase</span></a>
+                    <span>Gérer les Phases</span></a>
             </li>
             @endif
           
@@ -183,7 +183,7 @@
             <li class="nav-item {{request()->is('Division/create') ? 'active ' : ''}}">
                 <a class="nav-link "  href="/Division/create">
                     <i class="fas fa-fw  fa-building"></i>
-                    <span>Modifier Division</span></a>
+                    <span>Gérer les divisions</span></a>
             </li>
             @endif
             @endif
@@ -206,7 +206,7 @@
             <li class="nav-item">
                 <a class="nav-link {{request()->is('') ? 'active ' : ''}}" href="/stat">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Statistique</span></a>
+                    <span>Statistiques</span></a>
             </li>
             @endif
 
@@ -225,13 +225,13 @@
             <li class="nav-item  {{request()->is('users') ? 'active ' : ''}}">
                 <a class="nav-link " href="/users">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>List Utulisateur</span></a>
+                    <span>Liste des utilisateurs</span></a>
             </li>
 
             <li class="nav-item {{request()->is('users/create') ? 'active ' : ''}}">
                 <a class="nav-link" href="/users/create">
                     <i class="fas fa-fw fa-plus-circle"></i>
-                    <span>Ajouter Utilisateur</span></a>
+                    <span>Ajouter un utilisateur</span></a>
             </li>
             @endif
             @if($main_tous_les_privileges!=null||$main_acces_gestion_role!=null)
@@ -239,7 +239,7 @@
             <li class="nav-item {{request()->is('roles') ? 'active ' : ''}}">
                 <a class="nav-link" href="/roles">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>gestion des roles</span></a>
+                    <span>Gérer les roles</span></a>
             </li>
             @endif
 
@@ -281,9 +281,9 @@
 
 
                                                      <div></div>
-                       <a href="/publications" style="color: orange"> <i class="fas fa-fw fa-lg fa-home" style="margin-right: 60px;margin-left: 132px"></i></a>
+                                                     <a id="publinknav" class="pubconlink" style=" margin-right:20px;" href="/publications" > Publications</a>
 
-                       <a href="/publications/create" style="color: orange"> <i class="fas fa-fw fa-lg  fa-plus-circle" style="margin-left: 60px"> </i></a>
+                                                     <a id="conlinknav"  class="pubconlink"   href="/connaissances" > Connaissances</a>
 
 
 
@@ -314,15 +314,11 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/users/{{Auth::user()->id}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Profil
                                 </a>
                                 <a class="dropdown-item" href="/profil/edit/{{Auth::user()->id}}">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    modifier informations personnelles
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
+                                    modification des informations personnelles
                                 </a>
                                 <a class="dropdown-item" href="{{ url('/passwordedit')}}">
                                     <i class="fas fa-list fa-lock fa-fw mr-2 text-gray-400"></i>
@@ -331,7 +327,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ url('/logout')}}" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Se déconnecter
                                 </a>
                             </div>
                         </li>
@@ -379,15 +375,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Déconnexion</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">êtes-vous sûr de vouloir vous déconnecter</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ url('/logout')}}">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-primary" href="{{ url('/logout')}}">Se déconneter</a>
                 </div>
             </div>
         </div>

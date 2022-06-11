@@ -22,7 +22,7 @@
 
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Publication  de  L'equipe  </h1>
+    <h1 class="h3 mb-0 text-gray-800">Publications de l'espace equipe du projet  </h1>
 
 
     <a href="/{{Request::segment(1)}}/equipe" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm">
@@ -175,7 +175,7 @@
                                         <input id='id'type="text" value="{{Request::segment(1)}}" name='id' hidden>
 
                                         <input id='input1'type="file" name='fichiers[]'>
-                                        <span class="text"> veuillez inserer un fichier:</span>
+                                        <span class="text_form"> veuillez inserer un fichier:</span>
                                         <hr class="stylehr">
 
                                         <div id="iconupload"><i class="fa fa-download" aria-hidden="true"></i></div>
@@ -239,7 +239,7 @@
                     }
                     var template=document.createElement('template');
                     template.innerHTML=`
-                    <div id="fichiers-selec" data-fich=${file.name}>
+                    <div id="fichiers-selec" data-fich="${file.name}">
                     <i class=" iconefiche fa fa-file" aria-hidden="true"></i>
                     <span class='filename'> ${filename}</span>
                     <i class=" iconetimes fa fa-times" onclick="supprimer(this)" aria-hidden="true"></i> </div>`;

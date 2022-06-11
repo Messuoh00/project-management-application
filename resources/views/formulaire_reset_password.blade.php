@@ -54,6 +54,12 @@
                         @if($errors->has('email'))
                              <div><span style="color: chocolate">{{$errors->first('email')}}</span></div>
                                      @endif
+                                     @if(Session::get('error'))
+                        <h6 style="color:chocolate; margin-bottom:20px">
+                        {{Session::get('error')}}
+                        </h6>
+                        @endif
+
                         
                         
                         <div class="form-group">

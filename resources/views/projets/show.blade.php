@@ -17,7 +17,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">INFO PROJET N:{{$project->id}}</h1>
+  <h1 class="h3 mb-0 text-gray-800">INFORMATIONS DU PROJET N:{{$project->id}}</h1>
 @if ($project->phase_id!=1)
 @if($acces_archivage!=null||$tous_les_privileges!=null)
   <a href="/archive/{{$project->id}}" onclick="return confirm('etes vous sur de vouloir archiver ce pojet cette action est definitive?');" class="d-none d-sm-inline-block btn btn-sm  btn-warning shadow-sm">

@@ -129,7 +129,7 @@
                             }
                             var template=document.createElement('template');
                             template.innerHTML=`
-                            <div id="fichiers-selec" data-fich=${file.name}>
+                            <div id="fichiers-selec" data-fich="${file.name}">
                             <i class=" iconefiche fa fa-file" aria-hidden="true"></i>
                             <span class='filename'> ${filename}</span>
                             <i class=" iconetimes fa fa-times" onclick="supprimer(this)" aria-hidden="true"></i> </div>`;
