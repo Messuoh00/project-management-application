@@ -13,15 +13,15 @@ class SendEmail extends Mailable
 
 
 
-    public $project;
+    public $data;
 
-    public function __construct($project)
+    public function __construct($data)
     {
-        $this->project = $project;
+        $this->data = $data;
     }
 
     public function build()
     {
-        return $this->markdown('email.sendemail')->with('data', $this->project);
+        return $this->markdown('email.sendemail')->with('data', $this->data);
     }
 }
