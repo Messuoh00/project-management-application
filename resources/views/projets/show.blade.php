@@ -256,7 +256,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
                                                 <!-- Button trigger modal -->
                                                 <div>
                                                 <a href="/fichier/{{$project->id}}?var=show"> <button type="button" class="btn   btn-warning btn-lg " >
-                                                    <i class="fas fa-fw fa-print"></i> fichier du projet
+                                                    <i class="fas fa-fw fa-print"></i> fichiers du projet
                                                 </a>
                                                 </div>
 
@@ -365,6 +365,8 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
                                             @if ((!empty($next)))
 
+                                            @if($acces_phase_suivante!=null||$tous_les_privileges!=null)
+
 
                                                 <div class="editerbtn" >
 
@@ -446,6 +448,7 @@ $nomphase = array("Idee R/D Non Valider", "Idee R/D", "Maturation", "Recherche(E
 
 
                                               </div>
+                                              @endif
 
                                               @endif
 

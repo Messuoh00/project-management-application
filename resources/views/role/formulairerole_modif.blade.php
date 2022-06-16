@@ -135,7 +135,7 @@
                                                                                                                                     @foreach($acces as $unacces)
                                                                                                                                         <tr>
 
-                                                                                                                                        <td > <div style="width:100%;padding:25px;cursor:pointer" onclick="ajouteracces({{$unacces->id}})"  > {{$unacces->nom_acces}} </div></td>
+                                                                                                                                        <td > <div style="width:100%;padding:25px;cursor:pointer" onclick="ajouteracces({{$unacces->id}},this)"  > {{$unacces->nom_acces}} </div></td>
 
  
                                                                                                                                         </tr>
@@ -180,9 +180,11 @@
                             <script>
                                 input=document.getElementById('acces_id');
                                 form=document.getElementById('form_acces');
-                                function ajouteracces(id){
+                                function ajouteracces(id,caller){
                                     input.value=id;
+                                  
                                   form.submit();
+                                  caller.onclick=null;
 
                                 }
                             </script>

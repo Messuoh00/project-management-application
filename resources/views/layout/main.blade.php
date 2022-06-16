@@ -39,9 +39,13 @@
     @php
     $user_id=Auth::user()->id;
       if(auth::user()->role==null){
-        return abort(403);
+        $role_id=0;
     }
+    else{
+
+    
      $role_id=auth::user()->role->id;
+    }
      $main_tous_les_privileges= App\Models\acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
      $main_acces_gestion_division=App\Models\acces::where('nom_acces','gestion des divisions')->whereRelation('roles','roles.id',$role_id)->get()->first();
      $main_acces_statistique=App\Models\acces::where('nom_acces','consultation des statistiques')->whereRelation('roles','roles.id',$role_id)->get()->first();
@@ -49,7 +53,7 @@
      $main_acces_gestion_role=App\Models\acces::where('nom_acces','gestion des roles')->whereRelation('roles','roles.id',$role_id)->get()->first();
      $main_acces_gestion_utilisateur=App\Models\acces::where('nom_acces','gestion des utilisateurs')->whereRelation('roles','roles.id',$role_id)->get()->first();
      $main_acces_creation_projet=App\Models\acces::where('nom_acces','création projet')->whereRelation('roles','roles.id',$role_id)->get()->first();
-
+    
     @endphp
     <!-- Page Wrapper -->
     <div id="wrapper">

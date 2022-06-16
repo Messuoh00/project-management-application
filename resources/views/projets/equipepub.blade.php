@@ -66,7 +66,7 @@
                                                                     <span class="icone">
                                                                     <i class="fa  fa-2x fa-user"></i>
                                                                     </span>
-                                                                <i class="user"> <a href="publications/profil/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
+                                                                <i class="user"> <a href="/publications/profil/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
                                                                 @if(Auth::user()->id==$publication->user->id)
                                                                 <a class='supp-public' href="/publications/supprimer/{{$publication->id}}" onclick="return confirm('etes vous sur de vouloir supprimer cette publication?');" >
                                                                 <i class=" iconex fa  fa-2x fa-times"></i>

@@ -386,9 +386,9 @@ function importercontact(caller){
     email=document.getElementById('email');
     
     colonnes=caller.parentNode.parentNode.getElementsByClassName('row-contact');
-    nom.value=colonnes[0].innerHTML;
-    prenom.value=colonnes[1].innerHTML;
-    email.value=colonnes[2].innerHTML;
+    nom.value=colonnes[0].innerHTML.trim();
+    prenom.value=colonnes[1].innerHTML.trim();
+    email.value=colonnes[2].innerHTML.trim();
 
     
     

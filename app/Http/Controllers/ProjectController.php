@@ -174,6 +174,7 @@ class ProjectController extends Controller
             $tous_les_privileges=acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
             $acces_supression=acces::where('nom_acces','suppression projet accessible')->whereRelation('roles','roles.id',$role_id)->get()->first();
             $acces_archivage=acces::where('nom_acces','archivage projet accessible')->whereRelation('roles','roles.id',$role_id)->get()->first();
+            $acces_phase_suivante=acces::where('nom_acces','faire passer projet accessible a la phase suivante')->whereRelation('roles','roles.id',$role_id)->get()->first();
 
 
 
@@ -181,7 +182,8 @@ class ProjectController extends Controller
 
 
 
-            return view('projets/show',  ['project'=>$project ,'users'=>$users,'chef'=>$result[0],'rep'=>$result[1],'equipe'=>$result[2],'acces_espace_equipe'=> $acces_espace_equipe,'acces_historique_equipe'=>$acces_historique,'tous_les_privileges'=>$tous_les_privileges,'acces_statistique'=>$acces_statistique,'acces_supression'=>$acces_supression,'acces_archivage'=>$acces_archivage]);
+
+            return view('projets/show',  ['project'=>$project ,'users'=>$users,'chef'=>$result[0],'rep'=>$result[1],'equipe'=>$result[2],'acces_espace_equipe'=> $acces_espace_equipe,'acces_historique_equipe'=>$acces_historique,'tous_les_privileges'=>$tous_les_privileges,'acces_statistique'=>$acces_statistique,'acces_supression'=>$acces_supression,'acces_archivage'=>$acces_archivage,'acces_phase_suivante'=>$acces_phase_suivante]);
         }
     }
 

@@ -38,6 +38,12 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col ">
+                                                @if($message=Session::get('erreursup'))
+                                                                                    
+                                                                                    
+                                                                                        
+                                                                                    <div><span style="color: red">{{Session::get('erreursup')}}</span></div>
+                                                                                            @endif
                                                 @if($errors->has('nom_role'))
                                                                                                                         <div><span style="color: red">{{$errors->first('nom_role')}}</span></div>
                                                                                                                                 @endif

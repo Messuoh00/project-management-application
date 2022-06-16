@@ -68,7 +68,11 @@
                                                             <td > <div style="width:100%;padding:25px;cursor:pointer" onclick="link('/users/{{$user->id}}')" > {{$user->role->nom_role}}  </div></td>
                                                             <td > <div style="width:100%;padding:25px;cursor:pointer" onclick="link('/users/{{$user->id}}')" > {{$user->division->nomdep}}  </div> </td>
                                                             <td> <a class="btn btn-warning" href="/users/{{$user->id}}/edit">modifier</a>  </td>
-                                                            <td> <a class="btn btn-danger" href="/users/{{$user->id}}/edit">supprimer</a>  </td>
+                                                            <td>
+                                                            <form style="margin-bottom:0;" action="/users/{{$user->id}}" method="POST">
+                                                                                @csrf
+                                                                                @method('delete')
+                                                                 <button type="button submit" class="btn btn-danger" onclick="return confirm('etes vous sur de vouloir supprimer cet utilisateur');">supprimer</button> </form> </td>
 
                                                             
 

@@ -1,27 +1,13 @@
-html{
-    height: 100%;
-}
 
-*{
-  
-    box-sizing: border-box;
     
-}
-body{
-  
-    
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  background-color: #ffac81 !important;
-background-image: linear-gradient(315deg, #ffac81 0%, #ff928b 74%) !important;
-background-size: cover;
+ 
 
 
     
     
 
 
-}
+
 .container{
    
  height: 100%;
@@ -61,7 +47,7 @@ background-size: cover;
 .btnfich{
   margin-top: 10px;
     width: 100%;
-    height: 70px;
+    min-height: 70px;
     background-color: #eeeeee0b;
     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 
@@ -132,19 +118,19 @@ background-size: cover;
     }
   }
   @media (max-width: 350px){
-p{
+.col p{
   font-size: 11px !important;
 }
-h5{
+.col h5{
   font-size: 12px !important;
 }
-h6{
+.col h6{
   font-size: 10px !important;
 }
-h8{
+.col h8{
   font-size: 10px !important;
 }
-h5{
+.col h5{
   font-size: 12px !important;
 }
 .publication{
@@ -203,24 +189,13 @@ h5{
     top: 0;
   }
   
-  /* The dots/bullets/indicators */
-  .dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-  }
   
-  .active, .dot:hover {
+  .col .active, .dot:hover {
     background-color: #717171;
   }
   
   /* Fading animation */
-  .fade {
+  .col .fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
     animation-name: fade;
@@ -236,11 +211,11 @@ h5{
     from {opacity: .4}
     to {opacity: 1}
   }
-  .fade:not(show){
+  .col .fade:not(show){
       opacity:100% !important;
   }
 
-h8{
+  .col h8{
   color: #999;
   
 }

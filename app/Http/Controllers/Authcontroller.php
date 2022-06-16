@@ -142,7 +142,7 @@ class Authcontroller extends Controller
         
 
     
-    return back()->with('success','vous données ont eté modifié avec succès ');
+    return back()->with('success','les données ont eté modifié avec succès ');
     }
     
     //formulaire modification du mot de passe

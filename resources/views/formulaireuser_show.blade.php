@@ -41,9 +41,10 @@
 												@php
     $user_id=Auth::user()->id;
       if(auth::user()->role==null){
-        return abort(403);
+        $role_id=0;
     }
-     $role_id=auth::user()->role->id;
+	else{
+     $role_id=auth::user()->role->id;}
      $main_tous_les_privileges= App\Models\acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
      $main_acces_gestion_utilisateur=App\Models\acces::where('nom_acces','gestion des utilisateurs')->whereRelation('roles','roles.id',$role_id)->get()->first();
 

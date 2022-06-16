@@ -30,8 +30,11 @@
 
 
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            @if (!isset($profil))
                                 <h1 class="h3 mb-0 text-gray-800">Liste des publications</h1>
-
+                                @else
+                                <h1 class="h3 mb-0 text-gray-800">Liste des publications de {{$profil[0]}} {{$profil[1]}}</h1>
+                            @endif
                             </div>
 
                             <!-- Content Row -->
@@ -43,6 +46,7 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col ">
+                                                    @if (!isset($profil))
                                                 <div style=" margin-bottom:10px; display:flex; align-items:center; justify-content:center">
                                                     <a data-toggle="modal" href="#myModal3"  class="btn btn-warning" style="border-radius:50px;padding:15px;" href="/publications/create"> ajouter une publication</a>
                                                     </div>
@@ -118,7 +122,7 @@
 </div>
 
 
-       
+       @endif
              
 
 
@@ -144,7 +148,7 @@
                                                                         <span class="icone">
                                                                         <i class="fa  fa-2x fa-user"></i>
                                                                         </span>
-                                                                    <i class="user"> <a href="publications/profil/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
+                                                                    <i class="user"> <a href="/publications/profil/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
                                                                     @if(Auth::user()->id==$publication->user->id)
                                                                     <a class='supp-public' href="/publications/supprimer/{{$publication->id}}" onclick="return confirm('etes vous sur de vouloir supprimer cette publication?');" >
                                                                     <i class=" iconex fa  fa-2x fa-times"></i>
@@ -180,8 +184,9 @@
                                                                         <span>
                                                                         <i class="fa fa-3x fa-file"></i>
                                                                         </span>
+                                                                        <span style="margin-bottom:5px ;">
 
-                                                                        {{explode('.',pathinfo($fichier)['basename'],2)[1]}} </a>
+                                                                        {{explode('.',pathinfo($fichier)['basename'],2)[1]}}</span> </a>
 
 
 

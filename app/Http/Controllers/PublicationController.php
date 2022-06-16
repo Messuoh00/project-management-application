@@ -79,9 +79,9 @@ class PublicationController extends Controller
        $publications=Publication::orderBy('date_publication','DESC')->whereNotIn('id',$test)->get();
 
 
+     
 
-
-        return view('publication/listepublications',['publications'=>$publications]);
+        return view('publication/listepublications',['publications'=>$publications,]);
     }
 
     function telecharger(Request $request,$dossier,$fichier){
@@ -106,14 +106,11 @@ class PublicationController extends Controller
         $user=User::find($id);
 
         $publications=$user->publications->sortByDesc('date_publication');
-        $slides=[];
+       
 
-        foreach($publications as $pub){
-            $slides[]=1;
+        $profil=[$user->nom,$user->prenom];
 
-        }
-
-         return view('publication/listepublications',['publications'=>$publications,'slides'=>$slides]);
+         return view('publication/listepublications',['publications'=>$publications,'profil'=>$profil]);
 
 
     }

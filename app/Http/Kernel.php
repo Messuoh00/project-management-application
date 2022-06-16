@@ -75,5 +75,6 @@ class Kernel extends HttpKernel
         'controle_statistique'=>\App\Http\Middleware\ControleStatistique::class,
         'controle_archivage'=>\App\Http\Middleware\ControleProjetarchivage::class,
         'controle_supression'=>\App\Http\Middleware\ControleProjetsupression::class,
+        'controle_passer_phase_projet'=>\App\Http\Middleware\ControleProjetPhaseSuivante::class,
     ];
 }

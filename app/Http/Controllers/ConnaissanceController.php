@@ -21,6 +21,7 @@ class ConnaissanceController extends Controller
         $this->validate($request,[
             'titre'=>'required',
             'corps'=>'required',
+            'discipline'=>'required',
            'fichiers' => 'required',
         ]);
         
@@ -91,8 +92,8 @@ class ConnaissanceController extends Controller
             $slides[]=1;
             
         }
-        
-         return view('connaissance/listeconnaissances',['connaissances'=>$connaissances,'slides'=>$slides]);
+        $profil=[$user->nom,$user->prenom];
+         return view('connaissance/listeconnaissances',['connaissances'=>$connaissances,'slides'=>$slides,'profil'=>$profil]);
         
       
     }

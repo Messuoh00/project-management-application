@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('commentaire')->nullable();
             $table->string('fichiers');
 
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete("cascade");
 
             $table->timestamp('date_publication')->useCurrent();
             

@@ -47,8 +47,11 @@
 
   
                             <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            @if (!isset($profil))
                                 <h1 class="h3 mb-0 text-gray-800">Liste des connaissances</h1>
-                                
+                                @else
+                                <h1 class="h3 mb-0 text-gray-800">Liste des connaissances de {{$profil[0]}} {{$profil[1]}}</h1>
+                                @endif
                             </div>
 
                             <!-- Content Row -->
@@ -60,6 +63,7 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col ">
+                                                @if (!isset($profil))
                                                 <div style=" margin-bottom:10px; display:flex; align-items:center; justify-content:center">
                                                     <a  id="btnajoutecon" class="btn btn-warning" style="border-radius:50px;padding:15px;" data-toggle="modal" href="#myModal3" > ajouter une connaissance</a>
                                                     </div>
@@ -82,12 +86,21 @@
                                                         {{csrf_field()}}
                                                         <label > Titre:</label>
                                                         <input type="text" class="form-control" name="titre" >
+                                                        @if($errors->has('titre'))
+                                                             <div><span style="color: red">{{$errors->first('titre')}}</span></div>
+                                                        @endif
                                                         <label > Discipline:</label>
                                                         <input type="text" class="form-control" name="discipline" >
+                                                        @if($errors->has('discipline'))
+                                                             <div><span style="color: red">{{$errors->first('discipline')}}</span></div>
+                                                        @endif
                                                       
                                                         
                                                         <label  >corps:</label>
                                                         <textarea class=" text-corps form-control" rows="5" name="corps"></textarea>
+                                                        @if($errors->has('corps'))
+                                                             <div><span style="color: red">{{$errors->first('corps')}}</span></div>
+                                                        @endif
                                                        <div id="upload">
             
                                                             <input id='input1'type="file" name='fichiers[]'>
@@ -133,7 +146,7 @@
     </div>
     </div>
 </div>
-
+@endif
                                                     
                                                                 
 
@@ -162,7 +175,7 @@
                                                                         <span class="icone">
                                                                         <i class="fa  fa-2x fa-user"></i> 
                                                                         </span>
-                                                                    <i class="user"> <a href="connaissances/profil/{{$connaissance->user->id}}">{{$connaissance->user->nom}} {{$connaissance->user->prenom}} </a> </i>
+                                                                    <i class="user"> <a href="/connaissances/profil/{{$connaissance->user->id}}">{{$connaissance->user->nom}} {{$connaissance->user->prenom}} </a> </i>
                                                                     @if(Auth::user()->id==$connaissance->user->id)
                                                                     <a class='supp-public' href="/connaissances/supprimer/{{$connaissance->id}}" onclick="return confirm('etes vous sur de vouloir supprimer cette connaissance?');" >
                                                                     <i class=" iconex fa  fa-2x fa-times"></i> 
@@ -193,7 +206,7 @@
                                                                         if (file_exists($routefichier)){$fichiers = \File::allFiles($routefichier);}}
                                                                         $nbrtotal=0;
                                                                         foreach($fichiers as $fichier){
-                                                                        $ext=pathinfo($fichier, PATHINFO_EXTENSION);
+                                                                        $ext=strtolower(pathinfo($fichier, PATHINFO_EXTENSION));
                                                                         if($ext=='mp4'||$ext=='jpg'||$ext=='png'||$ext=='gif'||$ext=='jpeg'){
                                                                         $nbrtotal=$nbrtotal+1;}
                                                                          }
@@ -202,7 +215,7 @@
                                                                         @endphp  
                                                                     @forelse($fichiers as $fichier)
                                                                     @php
-                                                                    $ext=pathinfo($fichier, PATHINFO_EXTENSION);
+                                                                    $ext=strtolower(pathinfo($fichier, PATHINFO_EXTENSION));
                                                                     
 
                                                                    

@@ -90,17 +90,19 @@ Route::middleware(['controle_historique_equipe'])->group(function(){
 });
 Route::middleware(['controle_espace_equipe'])->group(function(){
     Route::get('/{id}/equipe','App\Http\Controllers\UploadController@team')->where('phase', '(.*)');
+    Route::get('/{id}/publicationequipe','App\Http\Controllers\Publication_projetController@index');
+Route::post('/{id}/publicationequipe','App\Http\Controllers\Publication_projetController@store');
 
 });
 
 Route::post('{id}/equipe','App\Http\Controllers\UploadController@store')->where('phase', '(.*)');
 
-Route::get('/{id}/publicationequipe','App\Http\Controllers\Publication_projetController@index');
-Route::post('/{id}/publicationequipe','App\Http\Controllers\Publication_projetController@store');
+
 
 
 //route passage
-Route::put('/{id}/passagephase','App\Http\Controllers\ProjectController@passage');
+Route::middleware(['controle_passer_phase_projet'])->group(function(){
+Route::put('/{id}/passagephase','App\Http\Controllers\ProjectController@passage'); });
 
 
 
@@ -122,7 +124,7 @@ Route::get('/supprimeracces/{id}/{accesid}','App\Http\Controllers\RoleController
 Route::resource('users',Authcontroller::class);
 Route::middleware(['controle_gestion_utilisateur'])->group(function(){
 
-    Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store']);
+    Route::resource('users',Authcontroller::class)->only(['edit','create','index','update','store','destroy']);
     Route::post('/importexcel','App\Http\Controllers\Authcontroller@importerfichierexcel');
 
  });

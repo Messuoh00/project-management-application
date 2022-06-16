@@ -12,6 +12,9 @@ class Role extends Model
         return  $this->belongsToMany(acces::class);
 
     }
+    public function users(){
+        return $this->hasMany(User::class);
+    }
     use HasFactory;
     protected $fillable = ['nom_role'];
     

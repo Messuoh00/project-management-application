@@ -39,6 +39,8 @@
                     </h6>
                     <form method="post" autocomplete="off" action="{{url('/resetpassword')}}" >
                      {{csrf_field()}}
+                         <input autocomplete="false" name="hidden" type="text" style="display:none;">
+
                    
                                     <div class="input-data">
                                         

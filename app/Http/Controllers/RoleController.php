@@ -75,6 +75,10 @@ class RoleController extends Controller
     function destroy($id){
         
         $role=Role::find($id);
+       
+        if($role->users->first()!=null){
+            return back()->with('erreursup','vous nous pouvez pas supprimer ce role car il est affecté a un employé'); 
+        }
         $role->delete();
         return redirect('roles');
     }
