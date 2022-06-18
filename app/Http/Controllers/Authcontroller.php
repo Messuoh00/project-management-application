@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role;
 
+use App\Mail\forgotpassword;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use File;
@@ -18,12 +21,12 @@ class Authcontroller extends Controller
 {    //vue sur le formulaire du login
     function log(){
 
-      
-     return view('login');        
+
+     return view('login');
     }
     //traitement du login
     function login(Request $request){
-        
+
         $this->validate($request,[
         'email' => 'required|email',
         'password' => 'required'
@@ -36,7 +39,7 @@ class Authcontroller extends Controller
          $remember=true;
      } else {$remember=false;}
      if (Auth::attempt($userdata,$remember)){
-       
+
         return redirect('/coo-E&P');
      }
      else{ return back()->with('error','adresse email ou mot de passe incorrect');}
@@ -56,10 +59,10 @@ class Authcontroller extends Controller
 
      //listes des users
     function index(){
-       
+
         $users=User::all();
 
-       
+
         return view('listeusers',['users'=>$users]);
     }
 
@@ -75,9 +78,9 @@ class Authcontroller extends Controller
 
     //creation du user
     function store(Request $request){
-        
-       
-       
+
+
+
         $this->validate($request,[
             'email' => 'required|email|unique:users',
             'password' => 'required',
@@ -87,11 +90,11 @@ class Authcontroller extends Controller
             'password2'=>'required',
             'role'=>'required'
    ]);
-   if($request->password != $request->password2){ 
-                
+   if($request->password != $request->password2){
+
     return back()->with('error','confirmation du mot de passe incorrect');
 } else{
-   
+
     $user=User::create([
             'nom'=>$request->input('nom'),
             'prenom'=>$request->input('prenom'),
@@ -105,10 +108,10 @@ class Authcontroller extends Controller
 
     function show($id){
         $user=User::find($id);
-       
+
 
         return view('formulaireuser_show')->with('user',$user);
-        
+
     }
      //formulaire de modification du user
     function edit($id){
@@ -121,17 +124,17 @@ class Authcontroller extends Controller
     }
     //modification du user
     function update($id,Request $request){
-        
+
         $this->validate($request,[
             'email' => 'required|email|unique:users,email,'.$id,
             'nom' => 'required',
             'prenom' => 'required',
             'division' => 'required',
             'role'=>'required',
-            
+
    ]);
 
-   
+
         $user=User::where('id',$id)->update([
             'nom'=>$request->input('nom'),
             'prenom'=>$request->input('prenom'),
@@ -139,12 +142,12 @@ class Authcontroller extends Controller
             'division_id'=>(int)$request->get('division'),
             'role_id'=>(int)$request->input('role'),
              ]);
-        
 
-    
+
+
     return back()->with('success','les données ont eté modifié avec succès ');
     }
-    
+
     //formulaire modification du mot de passe
     function editpassword(){
         return view('updatepassword');
@@ -153,30 +156,30 @@ class Authcontroller extends Controller
     //modification du mot de passe
     function updatepassword(Request $request){
         $this->validate($request, [
- 
+
             'oldpassword' => 'required',
             'newpassword' => 'required',
             'newpassword2'=>'required',
             ]);
-            if($request->newpassword != $request->newpassword2){ 
-                
+            if($request->newpassword != $request->newpassword2){
+
                 return back()->with('error','confirmation du mot de passe incorrect');
             } else{
 
-            
-         
-            $hashedPassword = Auth::user()->password;    
+
+
+            $hashedPassword = Auth::user()->password;
             if (Hash::check($request->oldpassword , $hashedPassword )) {
-                  
+
                 if (!Hash::check($request->newpassword , $hashedPassword)) {
                 $id=Auth::user()->id;
                 $user=User::where('id',$id)->update([ 'password'=> bcrypt($request->newpassword) ]);
                 return back()->with('success','le mot de passe a eté modifié');
                 } else{
-                    
+
                     return back()->with('error','le nouveau mot de passe ne peut pas rester le meme');
                   }
-            }else{  
+            }else{
                 return back()->with('error','ancien mot de passe incorrect ');
               } }
 
@@ -188,15 +191,15 @@ class Authcontroller extends Controller
         return redirect('users');
 
     }
-    
+
     function importerfichierexcel(Request $request){
-        
+
         if($request->hasFile('fichier')){
-           
+
             $routedossier=storage_path('app\fichier-excel');
             File::cleanDirectory($routedossier);
             $nomfichier=$request->file('fichier')->getClientOriginalName();
-             
+
             $route=$request->file('fichier')->storeAs('fichier-excel',$nomfichier);
         }
 
@@ -206,10 +209,10 @@ class Authcontroller extends Controller
     function editprofil($id ){
         if(Auth::user()->id==$id){
 
-        
+
         $user=User::find($id);
         $dep=Division::get()->where('stat','=',1);
-        
+
         return view('formulaireprofil_modif', ['dep'=>$dep,'user'=>$user]);}
         else{
             return redirect('/coo-E&P');
@@ -221,8 +224,8 @@ class Authcontroller extends Controller
                 'email' => 'required|email|unique:users,email,'.$id,
                 'nom' => 'required',
                 'prenom' => 'required',
-                
-                
+
+
        ]);
        $user=User::where('id',$id)->update([
         'nom'=>$request->input('nom'),
@@ -243,9 +246,9 @@ class Authcontroller extends Controller
         $this->validate($request,[
             'email' => 'required|email',]);
             $user_exist=User::where('email',$request->email)->first();
-            
+
             if($user_exist==null){
-                
+
                 return back()->with('error',"il n'existe pas un utilisateur avec cet email");
             }
             $token=\Str::random(64);
@@ -255,9 +258,19 @@ class Authcontroller extends Controller
                 'created_at'=>Carbon::now(),
             ]);
             $actionlink=route('reset.password.form',['token'=>$token,'email'=>$request->email]);
-          
-           
+
+
             $body="nous avons reçu une demande de réinitialisation de mot de passe de l'application gestion des projets R&D pour le compte associé avec l'email".$request->email.". Vous pouvez réinitialiser le mot de passe en cliquant sur le lien en dessous";
+
+            //houssem
+
+            $data=array($body,$actionlink);
+
+
+
+            Mail::to($user_exist->email)->send(new forgotpassword($data));
+
+            //houssem
 
             return back()->with('success','nous avons envoyé un mail pour réinitialiser votre mot de passe');
 
@@ -267,14 +280,14 @@ class Authcontroller extends Controller
     }
     function resetpasswordfinal(Request $request){
         $this->validate($request, [
- 
+
             'newpassword' => 'required',
             'newpassword2'=>'required',
             ]);
 
-            
-            if($request->newpassword != $request->newpassword2){ 
-                
+
+            if($request->newpassword != $request->newpassword2){
+
                 return back()->with('error','confirmation du mot de passe incorrect');
             } else{
 
@@ -284,7 +297,7 @@ class Authcontroller extends Controller
 
                 }
                 else{
-                   
+
                     User::where('email',$request->email)->update([
                         'password'=>Hash::make($request->newpassword),
                     ]);

@@ -349,7 +349,7 @@
                     <tr>
                       <td>
                         <img  src="{{url('/img/logo.png')}}" alt="" style="height:100px;margin:auto">
-                        <p>  voici le code pour modifier votre mot de passe</p>
+                        <p>  {{$data[0]}}</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -357,7 +357,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <h1>code</h1> </td>
+                                      <td> <a href="{{$data[1]}}" class="button btn-warning">appuier ici</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
