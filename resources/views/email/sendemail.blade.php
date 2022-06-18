@@ -349,7 +349,7 @@
                     <tr>
                       <td>
                         <img  src="{{url('/img/logo.png')}}" alt="" style="height:100px;margin:auto">
-                        <p>le projet {{$data->nom_projet}} viens de passer vers la phase {{$data->Phase}} pour plus d'information:</p>
+                        <p>le projet {{$data->nom_projet}} viens de passer vers la phase {{$data->Phase->name}} pour plus d'information:</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -357,7 +357,8 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="{{'projet/'.$data->id}}" class="button btn-warning">appuier ici</a> </td>
+
+                                      <td> <a href=" {{ route('projet.show',['projet'=>$data->id])}} " class="button btn-warning">appuier ici</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
