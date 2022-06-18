@@ -260,12 +260,11 @@ class Authcontroller extends Controller
             $actionlink=route('reset.password.form',['token'=>$token,'email'=>$request->email]);
 
 
-            $body="nous avons reçu une demande de réinitialisation de mot de passe de l'application gestion des projets R&D pour le compte associé avec l'email".$request->email.". Vous pouvez réinitialiser le mot de passe en cliquant sur le lien en dessous";
+            $body="nous avons reçu une demande de réinitialisation du mot de passe de l'application gestion des projets R&D pour le compte associé avec l'email ".$request->email.". Vous pouvez réinitialiser le mot de passe en cliquant sur le lien en dessous";
 
             //houssem
 
             $data=array($body,$actionlink);
-
 
 
             Mail::to($user_exist->email)->send(new forgotpassword($data));

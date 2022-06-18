@@ -14,12 +14,12 @@
     }
     else{
 
-    
+
      $role_id=auth::user()->role->id;
     }
     $tous_les_privileges= App\Models\acces::where('nom_acces','tous les privileges')->whereRelation('roles','roles.id',$role_id)->get()->first();
     $publier_rapport= App\Models\acces::where('nom_acces','publier les rapports R&D')->whereRelation('roles','roles.id',$role_id)->get()->first();
- 
+
 
     @endphp
 
@@ -70,7 +70,7 @@
                                       <div style="float: right">
                                            <a href="/download/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}"> <button type="button" class="btn  btn-info  "><i class="fas fa-fw fa-download"></i> download</button></a>
 
-                                           <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/0/0"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete </button></a>
+                                           <a href="/delete/{{$file_path}}/{{pathinfo($pdffilename)['basename']}}/0"> <button type="button" class="btn   btn-danger " onclick="return confirm('etes vous sur de vouloir supprimer ce fichierr?');"><i class="fas fa-fw fa-times"></i> delete </button></a>
 
                                        </div>
 

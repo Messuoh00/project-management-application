@@ -28,7 +28,7 @@ class VraController extends Controller
             $counts1[$p->name]=0;
          }
 
-        $projets=Project::latest()->get();
+        $projets=Project::latest()->whereRelation('phase','position','!=',null)->get();
 
         $temp=array();
 
@@ -98,7 +98,7 @@ class VraController extends Controller
 
 
         foreach ($temp as $t) {
-            $names[]=$t->project->nom_projet;
+            $names[]=$t->project->abreviation;
 
             $vis[]=$t->visibilite;
 
