@@ -449,22 +449,25 @@ if(user[0].innerHTML.search(chaine)<0 && corps[0].innerHTML.search(chaine)<0 && 
 
 }}
 body=document.getElementsByTagName('body');
+html=document.getElementsByTagName('html');
+console.log(html);
     function demarragevideo(caller,id){
         caller.play();
         document.getElementById(id).style.display='block';
        
-        body[0].style.overflow='hidden';
+        html[0].style.overflow='hidden';
     }
     function demarrageimage(caller,id){
+        console.log("bkr");
         
         document.getElementById(id).style.display='block';
        
-        body[0].style.overflow='hidden';
+        html[0].style.overflow='hidden';
     }
     function fermermod(caller){
       
         caller.parentElement.style.display='none';
-        body[0].style.overflow='auto';
+        html[0].style.overflow='auto';
     }
     function fermermodvideo(caller){
       
@@ -472,7 +475,7 @@ body=document.getElementsByTagName('body');
       video=caller.parentElement.getElementsByTagName('video');
       
 video[0].pause();
-body[0].style.overflow='auto';
+html[0].style.overflow='auto';
 
   }
     

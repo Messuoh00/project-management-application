@@ -21,6 +21,9 @@ return new class extends Migration
 
         $data = [
             [ 'nom_role' => 'administrateur'],
+            [ 'nom_role' => 'vice president'],
+            [ 'nom_role' => 'divisionnaire'],
+            [ 'nom_role' => 'employé'],
           
          ];
 

@@ -24,6 +24,19 @@ return new class extends Migration
         });
         $data = [
             [ 'role_id' => 1,'acces_id' => 1 ],
+            [ 'role_id' => 2,'acces_id' => 3 ],
+            [ 'role_id' => 2,'acces_id' => 15 ],
+            [ 'role_id' => 2,'acces_id' => 17 ],
+            [ 'role_id' => 2,'acces_id' => 14 ],
+            [ 'role_id' => 3,'acces_id' => 8 ],
+            [ 'role_id' => 3,'acces_id' => 5 ],
+            [ 'role_id' => 3,'acces_id' => 14 ],
+            [ 'role_id' => 3,'acces_id' => 15 ],
+            [ 'role_id' => 3,'acces_id' => 17 ],
+            [ 'role_id' => 4,'acces_id' => 5 ],
+            [ 'role_id' => 4,'acces_id' => 14 ],
+            [ 'role_id' => 4,'acces_id' => 15 ],
+            [ 'role_id' => 4,'acces_id' => 17 ],
           
          ];
 
