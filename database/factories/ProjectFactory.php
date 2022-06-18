@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use App\Models\Departement;
+use App\Models\Division;
 use App\Models\Phase;
 use App\Models\Vra;
 
@@ -20,19 +20,19 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
-        $x=Departement::all()->random();
+        $x=Division::all()->random();
 
         $z=Phase::all()->random();
 
+
+
         return [
 
+               'nom_projet'=> $this->faker->catchPhrase,
+               'abreviation' => $randomletter = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),3,4),
+               'thematique'=>$randomletter = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),3,4),
 
-
-               'nom_projet'=> $this->faker->title,
-               'abreviation' => $this->faker->title,
-               'thematique'=> $this->faker->title,
-
-               'departement_id'=>$x->id,
+               'division_id'=>$x->id,
                'files'=>'/fichier-projet/fichier-projet-'.$this->id,
                'phase_id'=>$z->id,
 
@@ -45,7 +45,6 @@ class ProjectFactory extends Factory
 
                'date_deb'=> now(),
                'date_fin'=>  now()->addDays(5),
-
 
 
                'etude_echo' => $this->faker->randomElement(['oui','non', 'na']),

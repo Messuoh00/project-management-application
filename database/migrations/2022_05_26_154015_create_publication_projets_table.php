@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->foreignId('publication_id')->constrained()->onDelete("cascade");
 
-            $table->foreignId('project_id')->constrained();
+            $table->foreignId('project_id')->constrained()->onDelete("cascade");
 
         });
     }
