@@ -47,7 +47,7 @@
                                                 <div class="col " style="max-width:1400px; margin:auto">
 
 
-                                                    <p class="test">La Coordination E&P collabore avec la Direction Centrale R&D pour matérialiser les
+                                                    <p class="test"> La Coordination E&P collabore avec la Direction Centrale R&D pour matérialiser les
                                                         circuits de collaboration dans le domaine de la recherche et de l’innovation, en aidant
                                                         dans l’identification des problèmes à caractère scientifique et technique relevés par
                                                         les structures E&P et l’initiation des projets de recherche nécessaires à leur résolution
