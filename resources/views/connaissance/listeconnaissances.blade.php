@@ -177,10 +177,14 @@
                                                                         </span>
                                                                     <i class="user"> <a href="/connaissances/profil/{{$connaissance->user->id}}">{{$connaissance->user->nom}} {{$connaissance->user->prenom}} </a> </i>
                                                                     @if(Auth::user()->id==$connaissance->user->id)
-                                                                    <a class='supp-public' href="/connaissances/supprimer/{{$connaissance->id}}" onclick="return confirm('etes vous sur de vouloir supprimer cette connaissance?');" >
+                                                                    <form action="/connaissances/{{$connaissance->id}}" method="POST">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                    <a class='supp-public' href="javascript:{}" onclick="supprimerconpub()" >
                                                                     <i class=" iconex fa  fa-2x fa-times"></i> 
 
                                                                         </a>
+                                                                    </form>
                                                                          @endif
                                                                   </div>
                                                                     <h8> {{$connaissance->date_publication}}</h8>
@@ -345,6 +349,16 @@
                                 
     
                                 <script>
+                                      function supprimerconpub(){
+                                        if(confirm('etes vous sur de vouloir supprimer cette connaissance?')){
+                                       parent=event.target.parentNode;
+                                       if(parent.tagName.toUpperCase()=='A'){
+                                        parent=parent.parentNode;
+                                       }
+                                       
+
+                                       parent.submit();}
+                                    }
                         var fichiers=[]
                     var input1=document.getElementById('input1');
                     var btn=document.getElementById('file-upload-btn');
@@ -422,6 +436,7 @@
 
 
                                 <script>
+                                  
 
 function search(event){
 event.preventDefault();

@@ -68,10 +68,14 @@
                                                                     </span>
                                                                 <i class="user"> <a href="/publications/profil/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
                                                                 @if(Auth::user()->id==$publication->user->id)
-                                                                <a class='supp-public' href="/publications/supprimer/{{$publication->id}}" onclick="return confirm('etes vous sur de vouloir supprimer cette publication?');" >
-                                                                <i class=" iconex fa  fa-2x fa-times"></i>
+                                                                <form action="/publications/{{$publication->id}}" method="POST">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                <a class='supp-public' href="javascript:{}" onclick="supprimerconpub()" >
+                                                                <i class=" iconex fa  fa-2x fa-times"></i> 
 
                                                                     </a>
+                                                                </form>
                                                                      @endif
                                                               </div>
                                                                 <h8> {{$publication->date_publication}}</h8>
@@ -206,6 +210,16 @@
 
 
         <script>
+            function supprimerconpub(){
+                                        if(confirm('etes vous sur de vouloir supprimer cette publication?')){
+                                       parent=event.target.parentNode;
+                                       if(parent.tagName.toUpperCase()=='A'){
+                                        parent=parent.parentNode;
+                                       }
+                                       
+
+                                       parent.submit();}
+                                    }
             var fichiers=[]
             var input1=document.getElementById('input1');
             var btn=document.getElementById('file-upload-btn');

@@ -114,14 +114,14 @@ class PublicationController extends Controller
 
 
     }
-    function supprimer($id){
+    function destroy(Request $request,$id){
        $publication=Publication::find($id);
        $dossier=storage_path('app/'.$publication->fichiers);
 
        File::deleteDirectory($dossier);
 
        $publication->delete();
-       return redirect('publications');
+       return back();
 
     }
 }

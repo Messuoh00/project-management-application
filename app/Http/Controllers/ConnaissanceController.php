@@ -97,7 +97,7 @@ class ConnaissanceController extends Controller
         
       
     }
-    function supprimer($id){
+    function destroy(Request $request,$id){
         $connaissance=Connaissance::find($id);
         $dossier=storage_path('app/public/'.$connaissance->fichiers);
         

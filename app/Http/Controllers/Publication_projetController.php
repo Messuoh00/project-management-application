@@ -108,7 +108,7 @@ class Publication_projetController extends Controller
 
 
 
-    function supprimer($id){
+    function destroy(Request $request,$id){
        $publication=Publication::find($id);
        $dossier=storage_path('app/'.$publication->fichiers);
 
