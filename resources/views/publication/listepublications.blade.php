@@ -148,7 +148,7 @@
                                                                         <span class="icone">
                                                                         <i class="fa  fa-2x fa-user"></i>
                                                                         </span>
-                                                                    <i class="user"> <a href="/publications/profil/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
+                                                                    <i class="user"> <a href="/users/{{$publication->user->id}}">{{$publication->user->nom}} {{$publication->user->prenom}} </a> </i>
                                                                     @if(Auth::user()->id==$publication->user->id)
                                               
                                                                         <form action="/publications/{{$publication->id}}" method="POST">

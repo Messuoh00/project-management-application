@@ -175,7 +175,7 @@
                                                                         <span class="icone">
                                                                         <i class="fa  fa-2x fa-user"></i> 
                                                                         </span>
-                                                                    <i class="user"> <a href="/connaissances/profil/{{$connaissance->user->id}}">{{$connaissance->user->nom}} {{$connaissance->user->prenom}} </a> </i>
+                                                                    <i class="user"> <a href="/users/{{$connaissance->user->id}}">{{$connaissance->user->nom}} {{$connaissance->user->prenom}} </a> </i>
                                                                     @if(Auth::user()->id==$connaissance->user->id)
                                                                     <form action="/connaissances/{{$connaissance->id}}" method="POST">
                                                                         @csrf

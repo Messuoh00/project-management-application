@@ -104,8 +104,23 @@ class PublicationController extends Controller
     }
     function indexprofil($id){
         $user=User::find($id);
+        $pub=Publication_projet::get();
+
+        $test=array();
+        $test2=array();
+
+        foreach ($pub as $p ) {
+        $test[]=$p->publication_id;
+        }
 
         $publications=$user->publications->sortByDesc('date_publication');
+        foreach($publications as $pb){
+            if (!in_array($pb->id, $test)) {
+                $test2[]=$pb;
+            }
+
+        }
+        $publications=$test2;
        
 
         $profil=[$user->nom,$user->prenom];
