@@ -2,6 +2,7 @@
 
 This repository contains the source code for a web-based project management application designed to streamline the management of research and development (R&D) projects. The application automates workflows, centralizes project data, and facilitates collaboration within teams.
 
+![image](https://github.com/user-attachments/assets/1d3c60d2-d900-4a1a-ba80-aea937b4fb23)
 ## Features
 
 - **User Authentication:** Secure login system with roles for administrators, employees, division managers, and vice presidents.
@@ -71,7 +72,6 @@ The complete documentation, including the application's purpose, architecture, a
 ## Screenshots
 
 
-![image](https://github.com/user-attachments/assets/1d3c60d2-d900-4a1a-ba80-aea937b4fb23)
 ![image](https://github.com/user-attachments/assets/a073b1b4-3ab1-493a-b808-03bf0bc20ba8)
 ![image](https://github.com/user-attachments/assets/35e1f8a8-c392-4d1f-9dba-f32551d0b0ad)
 ![image](https://github.com/user-attachments/assets/c7aded2b-fb3f-4a9a-9ca9-773b9bb936a3)
